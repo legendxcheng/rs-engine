@@ -27,5 +27,5 @@ bool PixelShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* 
 
 void PixelShaderClass::ShutdownShader()
 {
-	
+
 }

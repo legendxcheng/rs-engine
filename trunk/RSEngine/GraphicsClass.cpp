@@ -2,15 +2,17 @@
 // Filename: graphicsclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "graphicsclass.h"
-
+#include "RenderObjectManager.h"
+#include "TextureManager.h"
+#include "ShaderManager.h"
 
 GraphicsClass::GraphicsClass()
 {
 	m_D3D = 0;
 	m_Camera = 0;
-// 	m_Model = 0;
-// 	m_Shader = 0;
-// 	m_Bitmap = 0;
+	m_shaderMgr = 0;
+	m_renderObjMgr = 0;
+	m_textrueMgr = 0;
 }
 
 
@@ -53,52 +55,24 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 	// Set the initial position of the camera.
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
-// 
-// 	// Create the model object.
-// 	m_Model = new ModelClass;
-// 	if(!m_Model)
-// 	{
-// 		return false;
-// 	}
-// 
-// 	// Initialize the model object.
-// 	result = m_Model->Initialize(m_D3D->GetDevice());
-// 	if(!result)
-// 	{
-// 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
-// 		return false;
-// 	}
-// 
-// 	// Create the color shader object.
-// 	m_Shader = new ShaderClass;
-// 	if(!m_Shader)
-// 	{
-// 		return false;
-// 	}
-// 
-// 	// Initialize the color shader object.
-// 	result = m_Shader->Initialize(m_D3D->GetDevice(), hwnd);
-// 	if(!result)
-// 	{
-// 		MessageBox(hwnd, L"Could not initialize the color shader object.", L"Error", MB_OK);
-// 		return false;
-// 	}
-// 	
-// 	// Create the bitmap object.
-// 	m_Bitmap = new BitmapClass;
-// 	if(!m_Bitmap)
-// 	{
-// 		return false;
-// 	}
 
-// 	// Initialize the bitmap object.
-// 	result = m_Bitmap->Initialize(m_D3D->GetDevice(), screenWidth, screenHeight, L"../RSEngine/seafloor.dds", 256, 256);
-// 	if(!result)
-// 	{
-// 		MessageBox(hwnd, L"Could not initialize the bitmap object.", L"Error", MB_OK);
-// 		return false;
-// 	}
+	m_renderObjMgr = new RenderObjectManager();
+	if (!m_renderObjMgr)
+	{
+		return false;
+	}
 
+	m_textrueMgr = new TextureManager();
+	if (!m_textrueMgr)
+	{
+		return false;
+	}
+
+	m_shaderMgr = new ShaderManager();
+	if (!m_shaderMgr)
+	{
+		return false;
+	}
 
 	return true;
 }
@@ -106,29 +80,6 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 void GraphicsClass::Shutdown()
 {
-// 	if(m_Bitmap)
-// 	{
-// 		m_Bitmap->Shutdown();
-// 		delete m_Bitmap;
-// 		m_Bitmap = 0;
-// 	}
-// 
-// 	// Release the color shader object.
-// 	if(m_Shader)
-// 	{
-// 		m_Shader->Shutdown();
-// 		delete m_Shader;
-// 		m_Shader = 0;
-// 	}
-// 
-// 	// Release the model object.
-// 	if(m_Model)
-// 	{
-// 		m_Model->Shutdown();
-// 		delete m_Model;
-// 		m_Model = 0;
-// 	}
-
 	// Release the camera object.
 	if(m_Camera)
 	{
@@ -141,6 +92,27 @@ void GraphicsClass::Shutdown()
 		m_D3D->Shutdown();
 		delete m_D3D;
 		m_D3D = 0;
+	}
+
+	if (m_textrueMgr)
+	{
+		m_textrueMgr->Shutdown();
+		delete m_textrueMgr;
+		m_textrueMgr = 0;
+	}
+
+	if (m_shaderMgr)
+	{
+		m_shaderMgr->Shutdown();
+		delete m_shaderMgr;
+		m_shaderMgr = 0;
+	}
+
+	if (m_renderObjMgr)
+	{
+		m_renderObjMgr->Shutdown();
+		delete m_renderObjMgr;
+		m_renderObjMgr = 0;
 	}
 	return;
 }
@@ -178,6 +150,8 @@ bool GraphicsClass::Render()
 	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
+
+	m_renderObjMgr->Render();
 	// Turn off the Z buffer to begin all 2D rendering.
 // 	m_D3D->TurnZBufferOff();
 // 	// Put the bitmap vertex and index buffers on the graphics pipeline to prepare them for drawing.
