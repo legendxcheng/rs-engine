@@ -37,4 +37,5 @@ bool ShaderManager::InsertShader(unsigned int stype, ShaderClass* sc)
 		m_VSList.push_back((VertexShaderClass*)sc);	
 		break;
 	}
+	return true;
 }

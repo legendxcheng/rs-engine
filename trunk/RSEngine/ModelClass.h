@@ -33,27 +33,27 @@ public:
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
-	bool Initialize(ID3D11Device*);
-	bool Initialize(ID3D11Device* device, WCHAR* textureFilename);
+	virtual bool Initialize(ID3D11Device*);
+	//virtual bool Initialize(ID3D11Device* device, WCHAR* textureFilename);
 	virtual void Shutdown();
-	void Render(ID3D11DeviceContext*);
+	virtual void Render(ID3D11DeviceContext*);
 	
-	int GetIndexCount();
-	bool IsTextured();
-	ID3D11ShaderResourceView* GetTexture();
+	virtual int GetIndexCount();
+	virtual bool IsTextured();
+	//ID3D11ShaderResourceView* GetTexture();
 
 
 private:
-	bool InitializeBuffers(ID3D11Device*);
-	void ShutdownBuffers();
-	void RenderBuffers(ID3D11DeviceContext*);
-	bool LoadTexture(ID3D11Device*, WCHAR*);
-	void ReleaseTexture();
+	virtual bool InitializeBuffers(ID3D11Device*);
+	virtual void ShutdownBuffers();
+	virtual void RenderBuffers(ID3D11DeviceContext*);
+	virtual bool LoadTexture(ID3D11Device*);
+	virtual void ReleaseTexture();//call texture manager to release
 
-private:
-	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
-	int m_vertexCount, m_indexCount;
-	TextureClass* m_Texture;
+protected:
+// 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
+// 	int m_vertexCount, m_indexCount;
+// 	TextureClass* m_Texture;
 	bool hasTexture;
 };
 

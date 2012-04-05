@@ -36,29 +36,29 @@ public:
 	BitmapClass(const BitmapClass&);
 	~BitmapClass();
 
-	bool Initialize(ID3D11Device*, int, int, WCHAR*, int, int);
+	virtual bool Initialize(ID3D11Device*, int, int);
 	virtual void Shutdown();
 	virtual bool Render(ID3D11DeviceContext*, int, int);
 
-	int GetIndexCount();
-	ID3D11ShaderResourceView* GetTexture();
+	virtual int GetIndexCount();
+	//ID3D11ShaderResourceView* GetTexture();
 
 private:
-	bool InitializeBuffers(ID3D11Device*);
-	void ShutdownBuffers();
-	bool UpdateBuffers(ID3D11DeviceContext*, int, int);
-	void RenderBuffers(ID3D11DeviceContext*);
+	virtual bool InitializeBuffers(ID3D11Device*);
+	virtual void ShutdownBuffers();
+	virtual bool UpdateBuffers(ID3D11DeviceContext*, int, int);
+	virtual void RenderBuffers(ID3D11DeviceContext*);
 
-	bool LoadTexture(ID3D11Device*, WCHAR*);
-	void ReleaseTexture();
+	virtual bool LoadTexture(ID3D11Device*);
+	virtual void ReleaseTexture();
 
 private:
-	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
-	int m_vertexCount, m_indexCount;
-	TextureClass* m_Texture;
-	int m_screenWidth, m_screenHeight;
-	int m_bitmapWidth, m_bitmapHeight;
-	int m_previousPosX, m_previousPosY;
+// 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
+// 	int m_vertexCount, m_indexCount;
+// 	TextureClass* m_Texture;
+// 	int m_screenWidth, m_screenHeight;
+// 	int m_bitmapWidth, m_bitmapHeight;
+// 	int m_previousPosX, m_previousPosY;
 };
 
 #endif

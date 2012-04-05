@@ -17,7 +17,7 @@ public:
 
 
 private:
-	std::vector<RenderObject*> renderObjList;
+	std::vector<RenderObject*> m_renderObjList;
 
 
 };
