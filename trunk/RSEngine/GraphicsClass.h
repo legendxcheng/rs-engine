@@ -22,6 +22,7 @@ const bool VSYNC_ENABLED = true;
 const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
 
+class RenderObjectManager;
 
 class GraphicsClass
 {
@@ -40,9 +41,10 @@ private:
 private:
 	D3DClass* m_D3D;
 	CameraClass* m_Camera; 
-	ModelClass* m_Model;// THIS IS GOING TO BE REPLACED BY MODEL MANAGER
-	ShaderClass* m_Shader;
-	BitmapClass* m_Bitmap;
+	//ModelClass* m_Model;// THIS IS GOING TO BE REPLACED BY MODEL MANAGER
+	//ShaderClass* m_Shader;
+	//BitmapClass* m_Bitmap;
+	RenderObjectManager* m_renderObjMgr;
 
 };
 
