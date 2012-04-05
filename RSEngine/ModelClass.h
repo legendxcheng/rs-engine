@@ -35,7 +35,7 @@ public:
 
 	bool Initialize(ID3D11Device*);
 	bool Initialize(ID3D11Device* device, WCHAR* textureFilename);
-	void Shutdown();
+	virtual void Shutdown();
 	void Render(ID3D11DeviceContext*);
 	
 	int GetIndexCount();

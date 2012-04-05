@@ -13,6 +13,7 @@ ModelClass::ModelClass()
 
 ModelClass::ModelClass(const ModelClass& other)
 {
+	m_visible = false;
 }
 
 
