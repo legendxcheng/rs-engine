@@ -45,7 +45,8 @@ private:
 	//ShaderClass* m_Shader;
 	//BitmapClass* m_Bitmap;
 	RenderObjectManager* m_renderObjMgr;
-
+	TextureManager* m_textrueMgr;
+	ShaderManager* m_shaderMgr;
 };
 
 #endif
