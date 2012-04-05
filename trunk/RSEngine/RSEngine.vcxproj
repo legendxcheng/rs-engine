@@ -76,6 +76,7 @@
   <ItemGroup>
     <ClCompile Include="BitmapClass.cpp" />
     <ClCompile Include="CameraClass.cpp" />
+    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="ComputeShaderClass.cpp" />
     <ClCompile Include="GeometryShaderClass.cpp" />
     <ClCompile Include="PixelShaderClass.cpp" />
@@ -96,6 +97,7 @@
   <ItemGroup>
     <ClInclude Include="BitmapClass.h" />
     <ClInclude Include="CameraClass.h" />
+    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="ComputeShaderClass.h" />
     <ClInclude Include="GeometryShaderClass.h" />
     <ClInclude Include="PixelShaderClass.h" />
