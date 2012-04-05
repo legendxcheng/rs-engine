@@ -23,6 +23,8 @@ const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
 
 class RenderObjectManager;
+class TextureManager;
+class ShaderManager;
 
 class GraphicsClass
 {
