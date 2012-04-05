@@ -6,6 +6,7 @@
 #include <windows.h>
 #include "InputClass.h"
 #include "GraphicsClass.h"
+#include "SoundClass.h"
 
 class SystemClass
 {
@@ -31,6 +32,7 @@ private:
 	HWND m_hwnd;
 	InputClass* m_Input;
 	GraphicsClass* m_Graphics;
+	SoundClass* m_Sound;
 };
 
 /////////////////////////
