@@ -24,8 +24,17 @@ public:
 	bool InsertShader(unsigned int stype, ShaderClass* sc);
 	void Shutdown();
 
+	static ShaderManager* GetInstance()
+	{
+		if (!m_instance)
+		{
+			m_instance = new ShaderManager();
+		}
+		return m_instance;
+	}
 
 private:
+	static ShaderManager* m_instance;
 	std::vector<VertexShaderClass*> m_VSList;
 	std::vector<PixelShaderClass*> m_PSList;
 	std::vector<GeometryShaderClass*> m_GSList;

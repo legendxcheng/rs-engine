@@ -4,6 +4,8 @@
 #include "VertexShaderClass.h"
 #include "GeometryShaderClass.h"
 
+ShaderManager* ShaderManager::m_instance = 0;
+
 ShaderManager::ShaderManager(void)
 {
 }
