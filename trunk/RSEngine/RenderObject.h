@@ -3,7 +3,7 @@ class RenderObject
 {
 public:
 	RenderObject(void);
-	~RenderObject(void);
+	virtual ~RenderObject(void);
 
 	void SetVisible(bool v);
 	bool IsVisible();

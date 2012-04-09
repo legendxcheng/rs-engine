@@ -26,7 +26,7 @@ private:
 public:
 	ShaderClass();
 	ShaderClass(const ShaderClass&);
-	~ShaderClass();
+	virtual ~ShaderClass();
 	virtual bool Initialize(ID3D11Device*, HWND);
 	virtual void Shutdown();
 	//bool Render(ID3D11DeviceContext*, int, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, ID3D11ShaderResourceView*);

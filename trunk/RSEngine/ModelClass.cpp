@@ -21,22 +21,22 @@ ModelClass::~ModelClass()
 {
 }
 
-//color version
-bool ModelClass::Initialize(ID3D11Device* device)
-{
-	bool result;
-	hasTexture = false;
-
-	// Initialize the vertex and index buffer that hold the geometry for the triangle.
-	result = InitializeBuffers(device);
-	if(!result)
-	{
-		return false;
-	}
-
-	return true;
-}
-
+// color version
+// bool ModelClass::Initialize(ID3D11Device* device)
+// {
+// 	bool result;
+// 	hasTexture = false;
+// 
+// 	// Initialize the vertex and index buffer that hold the geometry for the triangle.
+// 	result = InitializeBuffers(device);
+// 	if(!result)
+// 	{
+// 		return false;
+// 	}
+// 
+// 	return true;
+// }
+// 
 // texture version
 // bool ModelClass::Initialize(ID3D11Device* device, WCHAR* textureFilename)
 // {
@@ -57,43 +57,43 @@ bool ModelClass::Initialize(ID3D11Device* device)
 // 
 // 	return true;
 // }
-
+// 
 // ID3D11ShaderResourceView* ModelClass::GetTexture()
 // {
 // 	return m_Texture->GetTexture();
 // }
-
-void ModelClass::Shutdown()
-{
-	if (hasTexture)
-		// Release the model texture.
-		ReleaseTexture();
-
-	// Release the vertex and index buffers.
-	ShutdownBuffers();
-
-	return;
-}
-
-void ModelClass::Render(ID3D11DeviceContext* deviceContext)
-{
-	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
-	RenderBuffers(deviceContext);
-
-	return;
-}
-
-int ModelClass::GetIndexCount()
-{
-	return 0;
-}
-
+// 
+// void ModelClass::Shutdown()
+// {
+// 	if (hasTexture)
+// 		// Release the model texture.
+// 		ReleaseTexture();
+// 
+// 	// Release the vertex and index buffers.
+// 	ShutdownBuffers();
+// 
+// 	return;
+// }
+// 
+// void ModelClass::Render(ID3D11DeviceContext* deviceContext)
+// {
+// 	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
+// 	RenderBuffers(deviceContext);
+// 
+// 	return;
+// }
+// 
+// int ModelClass::GetIndexCount()
+// {
+// 	return 0;
+// }
+// 
 // Initialize the buffers
 // In future work, i will change it into being able to load model class from file
 // now i have to divide it into more sophisticated parts
 // subclass of MoedelClass must override this function
-bool ModelClass::InitializeBuffers(ID3D11Device* device)
-{
+// bool ModelClass::InitializeBuffers(ID3D11Device* device)
+// {
 // 	ColorVertexType* vertices;
 // 	unsigned long* indices;
 // 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
@@ -176,13 +176,13 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 // 
 // 	delete [] indices;
 // 	indices = 0;
-
-	return true;
-}
-
-void ModelClass::ShutdownBuffers()
-{
-	// Release the index buffer.
+// 
+// 	return true;
+// }
+// 
+// void ModelClass::ShutdownBuffers()
+// {
+// 	// Release the index buffer.
 // 	if(m_indexBuffer)
 // 	{
 // 		m_indexBuffer->Release();
@@ -195,12 +195,12 @@ void ModelClass::ShutdownBuffers()
 // 		m_vertexBuffer->Release();
 // 		m_vertexBuffer = 0;
 // 	}
-
-	return;
-}
-
-void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
-{
+// 
+// 	return;
+// }
+// 
+// void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
+// {
 // 	unsigned int stride;
 // 	unsigned int offset;
 // 
@@ -217,20 +217,20 @@ void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 // 
 // 	// Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.
 // 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	return;
-}
-
+// 
+// 	return;
+// }
+// 
 bool ModelClass::IsTextured()
 {
 	return hasTexture;
 }
-
-bool ModelClass::LoadTexture(ID3D11Device* device)
-{
-	bool result;
-
-
+// 
+// bool ModelClass::LoadTexture(ID3D11Device* device)
+// {
+// 	bool result;
+// 
+// 
 // 	Create the texture object.
 // 	m_Texture = new TextureClass;
 // 	if(!m_Texture)
@@ -244,19 +244,19 @@ bool ModelClass::LoadTexture(ID3D11Device* device)
 // 	{
 // 		return false;
 // 	}
-
-	return true;
-}
-
-void ModelClass::ReleaseTexture()
-{
-	// Release the texture object.
+// 
+// 	return true;
+// }
+// 
+// void ModelClass::ReleaseTexture()
+// {
+// 	// Release the texture object.
 // 	if(m_Texture)
 // 	{
 // 		m_Texture->Shutdown();
 // 		delete m_Texture;
 // 		m_Texture = 0;
 // 	}
-
-	return;
-}
+// 
+// 	return;
+// }

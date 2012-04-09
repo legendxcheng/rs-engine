@@ -18,3 +18,10 @@ struct VertexTextureType
 	D3DXVECTOR3 position;
 	D3DXVECTOR2 texture;
 };	
+
+struct VertexType
+{
+	D3DXVECTOR3 position;
+	D3DXVECTOR4 color;
+};
+

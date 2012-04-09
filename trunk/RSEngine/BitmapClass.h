@@ -34,7 +34,7 @@ private:
 public:
 	BitmapClass();
 	BitmapClass(const BitmapClass&);
-	~BitmapClass();
+	virtual ~BitmapClass();
 
 	virtual bool Initialize(ID3D11Device*, int, int);
 	virtual void Shutdown();

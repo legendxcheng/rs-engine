@@ -1,5 +1,5 @@
 #include "PixelShaderClass.h"
-
+#include "ShaderManager.h"
 
 PixelShaderClass::PixelShaderClass(void)
 {
@@ -10,22 +10,11 @@ PixelShaderClass::~PixelShaderClass(void)
 {
 }
 
-bool PixelShaderClass::Initialize(ID3D11Device*, HWND)
+
+bool PixelShaderClass::Register()
 {
+	ShaderManager* sm = ShaderManager::GetInstance();
+	sm->InsertShader(SHADER_TYPE_PS, this);
 	return true;
 }
 
-bool PixelShaderClass::InitializeConstantBuffer(ID3D11Device*)
-{
-	return true;
-}
-
-bool PixelShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFilename, WCHAR* entryFuncName)
-{
-	return true;
-}
-
-void PixelShaderClass::ShutdownShader()
-{
-
-}
