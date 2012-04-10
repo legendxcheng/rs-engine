@@ -54,9 +54,6 @@
     <ClCompile Include="InputClass.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
-    <ClCompile Include="ModelClass.cpp">
-      <Filter>Source Files\Base</Filter>
-    </ClCompile>
     <ClCompile Include="PixelShaderClass.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
@@ -84,14 +81,17 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
-    <ClCompile Include="SquareTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TestVS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPS.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelClass.cpp">
+      <Filter>Source Files\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,9 +120,6 @@
       <Filter>Header Files\Base</Filter>
     </ClInclude>
     <ClInclude Include="InputClass.h">
-      <Filter>Header Files\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelClass.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
     <ClInclude Include="PixelShaderClass.h">
@@ -155,14 +152,17 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
-    <ClInclude Include="SquareTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TestVS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestPS.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelClass.h">
+      <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

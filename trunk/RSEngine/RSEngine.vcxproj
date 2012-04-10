@@ -90,7 +90,7 @@
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="SoundClass.cpp" />
-    <ClCompile Include="SquareTest.cpp" />
+    <ClCompile Include="TriangleTest.cpp" />
     <ClCompile Include="SystemClass.cpp" />
     <ClCompile Include="TestPS.cpp" />
     <ClCompile Include="TestVS.cpp" />
@@ -114,7 +114,7 @@
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="SoundClass.h" />
-    <ClInclude Include="SquareTest.h" />
+    <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="Structures.h" />
     <ClInclude Include="SystemClass.h" />
     <ClInclude Include="TestPS.h" />

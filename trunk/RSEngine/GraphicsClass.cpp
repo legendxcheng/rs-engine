@@ -5,7 +5,7 @@
 #include "RenderObjectManager.h"
 #include "TextureManager.h"
 #include "ShaderManager.h"
-#include "SquareTest.h"
+#include "TriangleTest.h"
 
 GraphicsClass::GraphicsClass()
 {
@@ -167,7 +167,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	// TestVS
 	// TestPS
 	// SquareTest
-	SquareTest* sqtest = new SquareTest();
+	TriangleTest* sqtest = new TriangleTest();
 	sqtest->Initialize(device);
 	RenderObjectManager* rom = RenderObjectManager::GetInstance();
 	rom->InsertRenderObject((RenderObject*) sqtest);
