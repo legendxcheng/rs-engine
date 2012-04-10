@@ -2,6 +2,8 @@
 #include "Structures.h"
 #include "TestPS.h";
 #include "TestVS.h";
+#include "SystemClass.h"
+#include "ShaderManager.h"
 
 SquareTest::SquareTest(void)
 {
@@ -213,5 +215,11 @@ void  SquareTest::ReleaseTexture()
 
 bool SquareTest::InitializeShaders(ID3D11Device* device)
 {
+	m_vs = new TestVS();
+	m_vs->Initialize(device, SystemClass::GetWindowHandler());
+	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_VS, m_vs);
+	m_ps = new TestPS();
+	m_ps->Initialize(device, SystemClass::GetWindowHandler());
+	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_PS, m_ps);
 	return true;
 }

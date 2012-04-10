@@ -17,7 +17,7 @@ class ShaderClass;
 class ShaderManager
 {
 public:
-	ShaderManager(void);
+	
 	~ShaderManager(void);
 
 	void Initialize();
@@ -32,6 +32,9 @@ public:
 		}
 		return m_instance;
 	}
+
+private:
+	ShaderManager(void);
 
 private:
 	static ShaderManager* m_instance;

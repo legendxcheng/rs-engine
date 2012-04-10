@@ -5,6 +5,7 @@
 #include "RenderObjectManager.h"
 #include "TextureManager.h"
 #include "ShaderManager.h"
+#include "SquareTest.h"
 
 GraphicsClass::GraphicsClass()
 {
@@ -56,23 +57,25 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Set the initial position of the camera.
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
 
-	m_renderObjMgr = new RenderObjectManager();
+	m_renderObjMgr = RenderObjectManager::GetInstance();
 	if (!m_renderObjMgr)
 	{
 		return false;
 	}
 
-	m_textrueMgr = new TextureManager();
+	m_textrueMgr = TextureManager::GetInstance();
 	if (!m_textrueMgr)
 	{
 		return false;
 	}
 
-	m_shaderMgr = new ShaderManager();
+	m_shaderMgr = ShaderManager::GetInstance();
 	if (!m_shaderMgr)
 	{
 		return false;
 	}
+
+	InitializeResource(m_D3D->GetDevice());
 
 	return true;
 }
@@ -152,35 +155,21 @@ bool GraphicsClass::Render()
 	m_D3D->GetOrthoMatrix(orthoMatrix);
 
 	m_renderObjMgr->Render();
-	// Turn off the Z buffer to begin all 2D rendering.
-// 	m_D3D->TurnZBufferOff();
-// 	// Put the bitmap vertex and index buffers on the graphics pipeline to prepare them for drawing.
-// 	result = m_Bitmap->Render(m_D3D->GetDeviceContext(), 100, 100);
-// 	if(!result)
-// 	{
-// 		return false;
-// 	}
-// 	// Render the bitmap with the texture shader.
-// 	result = m_Shader->Render(m_D3D->GetDeviceContext(), m_Bitmap->GetIndexCount(), worldMatrix, viewMatrix, orthoMatrix, m_Bitmap->GetTexture());
-// 	if(!result)
-// 	{
-// 		return false;
-// 	}
-// 	// Turn the Z buffer back on now that all 2D rendering has completed.
-// 	m_D3D->TurnZBufferOn();
-// 
-// 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
-// 	m_Model->Render(m_D3D->GetDeviceContext());
-// 
-// 	// Render the model using the color shader.
-// 	result = m_Shader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, NULL);
-// 	if(!result)
-// 	{
-// 		return false;
-// 	}
-
-	// Present the rendered scene to the screen.
+	
 	m_D3D->EndScene();
 
 	return true;
+}
+
+// temp function to load detailed resources into the 
+void GraphicsClass::InitializeResource(ID3D11Device* device)
+{
+	// TestVS
+	// TestPS
+	// SquareTest
+	SquareTest* sqtest = new SquareTest();
+	sqtest->Initialize(device);
+	RenderObjectManager* rom = RenderObjectManager::GetInstance();
+	rom->InsertRenderObject((RenderObject*) sqtest);
+
 }

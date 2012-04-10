@@ -38,14 +38,11 @@ public:
 	bool Frame();
 	bool Render();
 private:
-
+	void InitializeResource(ID3D11Device*);
 
 private:
 	D3DClass* m_D3D;
 	CameraClass* m_Camera; 
-	//ModelClass* m_Model;// THIS IS GOING TO BE REPLACED BY MODEL MANAGER
-	//ShaderClass* m_Shader;
-	//BitmapClass* m_Bitmap;
 	RenderObjectManager* m_renderObjMgr;
 	TextureManager* m_textrueMgr;
 	ShaderManager* m_shaderMgr;
