@@ -64,12 +64,17 @@ bool TestVS::Initialize(ID3D11Device* device, HWND hwnd)
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"../Color.vs", "ColorVertexShader");
+	result = InitializeShader(device, hwnd, L"Color.vs", "ColorVertexShader");
 	if(!result)
 	{
 		return false;
 	}
 
+	result = InitializeConstantBuffer(device);
+	if(!result)
+	{
+		return false;
+	}
 	return true;
 
 

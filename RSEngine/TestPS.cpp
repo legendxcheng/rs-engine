@@ -16,7 +16,7 @@ bool TestPS::Initialize(ID3D11Device* device, HWND hwnd)
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"../color.vs", "ColorPixelShader");
+	result = InitializeShader(device, hwnd, L"color.ps", "ColorPixelShader");
 	if(!result)
 	{
 		return false;

@@ -26,6 +26,12 @@ bool SquareTest::Initialize(ID3D11Device* device)
 	{
 		return false;
 	}
+
+	result = InitializeShaders(device);
+	if (!result)
+	{
+		return false;
+	}
 	return true;
 }
 

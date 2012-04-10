@@ -1,5 +1,6 @@
 #pragma once
-
+#include <d3d11.h>
+#include <D3DX10math.h>
 #include <vector>
 class RenderObject;
 
@@ -10,7 +11,8 @@ public:
 	~RenderObjectManager(void);
 	
 	void InsertRenderObject(RenderObject* rob);
-	void Render();
+	void Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, 
+		D3DXMATRIX projMatrix);
 	void Initialize();
 	void Shutdown();
 	void RemoveRenderObject(RenderObject* rob);

@@ -12,14 +12,15 @@ RenderObjectManager::~RenderObjectManager(void)
 {
 }
 
-void RenderObjectManager::Render()
+void RenderObjectManager::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, 
+	D3DXMATRIX projMatrix)
 {
 	for (std::vector<RenderObject*>::iterator iter = this->m_renderObjList.begin(); iter != this->m_renderObjList.end(); ++iter)
 	{
 		RenderObject* rob = *iter;
 		if (rob->IsVisible())
 		{
-			rob->Render();
+			rob->Render(deviceContext, worldMatrix, viewMatrix, projMatrix);
 		}
 	}
 }
