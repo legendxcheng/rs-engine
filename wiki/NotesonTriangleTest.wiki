@@ -4,6 +4,8 @@
 
 Here is TriangleTest.h
 {{{
+#!cplusplus
+
 #pragma once
 #include "modelclass.h"
 
@@ -49,6 +51,8 @@ private:
 
 And here is TriangleTest.cpp
 {{{
+#!cplusplus
+
 #include "TriangleTest.h"
 #include "Structures.h"
 #include "TestPS.h";
