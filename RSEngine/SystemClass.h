@@ -18,6 +18,11 @@ public:
 	bool Initialize();
 	void Shutdown();
 	void Run();
+	static HWND GetWindowHandler()
+	{
+		return m_hwnd;
+	};
+
 
 	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
@@ -29,7 +34,7 @@ private:
 private:
 	LPCWSTR m_applicationName;
 	HINSTANCE m_hinstance;
-	HWND m_hwnd;
+	static HWND m_hwnd;
 	InputClass* m_Input;
 	GraphicsClass* m_Graphics;
 	SoundClass* m_Sound;

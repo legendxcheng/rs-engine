@@ -1,4 +1,7 @@
 #include "SystemClass.h"
+
+HWND SystemClass::m_hwnd = 0;
+
 SystemClass::SystemClass()
 {
 	m_Input = 0;

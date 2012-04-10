@@ -1,6 +1,8 @@
 #include "RenderObjectManager.h"
 #include "RenderObject.h"
 
+RenderObjectManager* RenderObjectManager::m_instance = 0;
+
 RenderObjectManager::RenderObjectManager(void)
 {
 }
