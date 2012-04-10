@@ -289,8 +289,8 @@ bool TriangleTest::InitializeShaders(ID3D11Device* device)
 
 = Details =
 
-The TriangleTest class does a simple thing, that is, draw a green triangle on the screen.<<BR>>
-The class is the subclass of class RenderObject.<<BR>>
-There is about 2 jobs the TriangleTest class mainly takes.<<BR>>
-Initialization<<BR>>
-Render<<BR>>
+The TriangleTest class does a simple thing, that is, draw a green triangle on the screen.<BR>
+The class is the subclass of class RenderObject.<BR>
+There is about 2 jobs the TriangleTest class mainly takes.<BR>
+Initialization<BR>
+Render<BR>
