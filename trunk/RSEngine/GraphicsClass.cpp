@@ -154,7 +154,7 @@ bool GraphicsClass::Render()
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
 
-	m_renderObjMgr->Render();
+	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), worldMatrix, viewMatrix, projectionMatrix);
 	
 	m_D3D->EndScene();
 
