@@ -43,7 +43,7 @@ public:
 	//ID3D11ShaderResourceView* GetTexture();
 
 
-private:
+protected:
 	virtual bool InitializeBuffers(ID3D11Device*) = 0;
 	virtual bool InitializeShaders(ID3D11Device*) = 0;
 	virtual void ShutdownBuffers() = 0;
