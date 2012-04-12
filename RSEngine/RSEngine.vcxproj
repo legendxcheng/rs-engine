@@ -79,6 +79,7 @@
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="ComputeShaderClass.cpp" />
     <ClCompile Include="GeometryShaderClass.cpp" />
+    <ClCompile Include="ObjLoader.cpp" />
     <ClCompile Include="PixelShaderClass.cpp" />
     <ClCompile Include="RenderObject.cpp" />
     <ClCompile Include="RenderObjectManager.cpp" />
@@ -90,6 +91,7 @@
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="SoundClass.cpp" />
+    <ClCompile Include="TokenStream.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
     <ClCompile Include="SystemClass.cpp" />
     <ClCompile Include="TestPS.cpp" />
@@ -104,6 +106,7 @@
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="ComputeShaderClass.h" />
     <ClInclude Include="GeometryShaderClass.h" />
+    <ClInclude Include="ObjLoader.h" />
     <ClInclude Include="PixelShaderClass.h" />
     <ClInclude Include="RenderObject.h" />
     <ClInclude Include="RenderObjectManager.h" />
@@ -114,6 +117,7 @@
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="SoundClass.h" />
+    <ClInclude Include="TokenStream.h" />
     <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="Structures.h" />
     <ClInclude Include="SystemClass.h" />
