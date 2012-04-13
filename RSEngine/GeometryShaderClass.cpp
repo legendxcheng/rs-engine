@@ -16,3 +16,10 @@ bool GeometryShaderClass::Register()
 	sm->InsertShader(SHADER_TYPE_GS, this);
 	return true;
 }
+
+bool GeometryShaderClass::Unregister()
+{
+	ShaderManager* sm = ShaderManager::GetInstance();
+	sm->RemoveShader(SHADER_TYPE_GS, this);
+	return true;
+}

@@ -92,6 +92,10 @@
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="SoundClass.cpp" />
+    <ClCompile Include="SphereClass.cpp" />
+    <ClCompile Include="SpherePS.cpp" />
+    <ClCompile Include="SphereTexture.cpp" />
+    <ClCompile Include="SphereVS.cpp" />
     <ClCompile Include="TokenStream.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
     <ClCompile Include="SystemClass.cpp" />
@@ -119,6 +123,10 @@
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="SoundClass.h" />
+    <ClInclude Include="SphereClass.h" />
+    <ClInclude Include="SpherePS.h" />
+    <ClInclude Include="SphereTexture.h" />
+    <ClInclude Include="SphereVS.h" />
     <ClInclude Include="TokenStream.h" />
     <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="Structures.h" />
@@ -132,6 +140,7 @@
   <ItemGroup>
     <None Include="Color.ps" />
     <None Include="Color.vs" />
+    <None Include="Sphere.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

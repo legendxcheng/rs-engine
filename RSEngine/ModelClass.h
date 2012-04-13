@@ -40,6 +40,7 @@ public:
 	
 	virtual int GetIndexCount() = 0;
 	bool IsTextured();
+	virtual void Update() = 0;
 	//ID3D11ShaderResourceView* GetTexture();
 
 
@@ -52,9 +53,6 @@ protected:
 	virtual void ReleaseTexture() = 0;//call texture manager to release
 
 protected:
-// 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
-// 	int m_vertexCount, m_indexCount;
-// 	TextureClass* m_Texture;
 	bool hasTexture;
 };
 

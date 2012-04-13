@@ -13,6 +13,7 @@ public:
 	virtual bool InitializeConstantBuffer(ID3D11Device*) = 0;
 	virtual void Shutdown() = 0;
 	bool Register();// register the shader in vertex shader manager
+	bool Unregister();
 protected:
 	virtual void ShutdownShader() = 0;
 };

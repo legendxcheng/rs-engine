@@ -17,3 +17,10 @@ bool VertexShaderClass::Register()
 	sm->InsertShader(SHADER_TYPE_VS, this);
 	return true;
 }
+
+bool VertexShaderClass::Unregister()
+{
+	ShaderManager* sm = ShaderManager::GetInstance();
+	sm->RemoveShader(SHADER_TYPE_VS, this);
+	return true;
+}

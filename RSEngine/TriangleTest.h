@@ -26,6 +26,7 @@ private:
 	virtual void RenderBuffers(ID3D11DeviceContext*);
 	virtual bool LoadTexture(ID3D11Device*);
 	virtual void ReleaseTexture();//call texture manager to release
+	virtual void Update();
 private:
 	ID3D11Buffer* m_vertexBuffer;
 	ID3D11Buffer* m_indexBuffer;

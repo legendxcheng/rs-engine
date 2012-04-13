@@ -31,7 +31,7 @@ public:
 	virtual void Shutdown();
 	//bool Render(ID3D11DeviceContext*, int, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, ID3D11ShaderResourceView*);
 
-private:
+protected:
 	virtual bool InitializeShader(ID3D11Device*, HWND, WCHAR*, WCHAR*);//first wchar is the file path, 
 																	//second is entry function
 	virtual bool InitializeConstantBuffer(ID3D11Device*);// subclass must override this function
