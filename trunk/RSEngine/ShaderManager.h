@@ -23,7 +23,7 @@ public:
 	void Initialize();
 	bool InsertShader(unsigned int stype, ShaderClass* sc);
 	void Shutdown();
-
+	bool RemoveShader(unsigned int stype, ShaderClass* sc);
 	static ShaderManager* GetInstance()
 	{
 		if (!m_instance)

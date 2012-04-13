@@ -10,23 +10,91 @@ SpherePS::~SpherePS(void)
 {
 }
 
-bool Initialize(ID3D11Device*, HWND)
+bool SpherePS::Initialize(ID3D11Device* device, HWND hwnd)
+{
+	bool result;
+
+
+	// Initialize the vertex and pixel shaders.
+	result = InitializeShader(device, hwnd, L"color.ps", "ColorPixelShader");
+	if(!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+bool SpherePS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHAR* entryFuncName)
+{
+	HRESULT result;
+	ID3D10Blob* errorMessage;
+	ID3D10Blob* vertexShaderBuffer;
+	ID3D10Blob* pixelShaderBuffer;
+	D3D11_INPUT_ELEMENT_DESC polygonLayout[2];
+	unsigned int numElements;
+	D3D11_BUFFER_DESC matrixBufferDesc;
+
+
+	// Initialize the pointers this function will use to null.
+	errorMessage = 0;
+	vertexShaderBuffer = 0;
+	pixelShaderBuffer = 0;
+
+	// Compile the pixel shader code.
+	result = D3DX11CompileFromFile(psFilename, NULL, NULL, entryFuncName, "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL, 
+		&pixelShaderBuffer, &errorMessage, NULL);
+	if(FAILED(result))
+	{
+		// If the shader failed to compile it should have writen something to the error message.
+		if(errorMessage)
+		{
+			OutputShaderErrorMessage(errorMessage, hwnd, psFilename);
+		}
+		// If there was  nothing in the error message then it simply could not find the file itself.
+		else
+		{
+			MessageBox(hwnd, psFilename, L"Missing Shader File", MB_OK);
+		}
+
+		return false;
+	}
+	// Create the vertex shader from the buffer.
+
+	// Create the pixel shader from the buffer.
+	result = device->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(), pixelShaderBuffer->GetBufferSize(), NULL, &m_pixelShader);
+	if(FAILED(result))
+	{
+		return false;
+	}
+
+	pixelShaderBuffer->Release();
+	pixelShaderBuffer = 0;
+	// Setup the description of the dynamic matrix constant buffer that is in the vertex shader.
+
+	return true;
+
+}
+bool SpherePS::InitializeConstantBuffer(ID3D11Device*)
+{
+
+	
+
+	return true;	
+}
+void SpherePS::Shutdown()
+{
+	ShutdownShader();
+
+	return;
+}
+void SpherePS::ShutdownShader()
 {
 
 }
-bool InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFilename, CHAR* entryFuncName)
-{
 
-}
-bool InitializeConstantBuffer(ID3D11Device*)
+bool SpherePS::SetShaderParameters(ID3D11DeviceContext* deviceContext)
 {
+	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 
-}
-void Shutdown()
-{
-
-}
-void ShutdownShader()
-{
-
+	return true;
 }

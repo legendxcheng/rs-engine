@@ -45,6 +45,54 @@ bool ShaderManager::InsertShader(unsigned int stype, ShaderClass* sc)
 	return true;
 }
 
+bool ShaderManager::RemoveShader(unsigned int stype, ShaderClass* sc)
+{
+	switch (stype)
+	{
+	case SHADER_TYPE_CS:
+		for (std::vector<ComputeShaderClass*>::iterator iter = this->m_CSList.begin(); iter != this->m_CSList.end(); ++iter)
+		{
+			ComputeShaderClass* csc = *iter;
+			if (csc == (ComputeShaderClass*)sc)
+			{
+				m_CSList.erase(iter);
+			}
+		}
+		break;
+	case SHADER_TYPE_PS:
+		for (std::vector<PixelShaderClass*>::iterator iter = this->m_PSList.begin(); iter != this->m_PSList.end(); ++iter)
+		{
+			PixelShaderClass* csc = *iter;
+			if (csc == (PixelShaderClass*)sc)
+			{
+				m_PSList.erase(iter);
+			}
+		}
+		break;
+	case SHADER_TYPE_VS:
+		for (std::vector<VertexShaderClass*>::iterator iter = this->m_VSList.begin(); iter != this->m_VSList.end(); ++iter)
+		{
+			VertexShaderClass* csc = *iter;
+			if (csc == (VertexShaderClass*)sc)
+			{
+				m_VSList.erase(iter);
+			}
+		}
+		break;
+	case SHADER_TYPE_GS:
+		for (std::vector<GeometryShaderClass*>::iterator iter = this->m_GSList.begin(); iter != this->m_GSList.end(); ++iter)
+		{
+			GeometryShaderClass* csc = *iter;
+			if (csc == (GeometryShaderClass*)sc)
+			{
+				m_GSList.erase(iter);
+			}
+		}
+		break;
+	}
+	return true;
+}
+
 void ShaderManager::Shutdown()
 {
 	//release all 4 kinds of shaders

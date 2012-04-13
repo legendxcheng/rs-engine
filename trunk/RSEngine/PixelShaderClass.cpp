@@ -18,3 +18,10 @@ bool PixelShaderClass::Register()
 	return true;
 }
 
+bool PixelShaderClass::Unregister()
+{
+	ShaderManager* sm = ShaderManager::GetInstance();
+	sm->RemoveShader(SHADER_TYPE_PS, this);
+	return true;
+}
+

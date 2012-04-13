@@ -13,6 +13,7 @@ public:
 	virtual void Shutdown(){};
 	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX) = 0;// just one call to handle all the render related logic
 	virtual void Initialize(){};
+	virtual void Update() = 0;
 
 protected:
 	bool m_visible;

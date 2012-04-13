@@ -41,6 +41,11 @@ void TriangleTest::Shutdown()
 	return;
 }
 
+void TriangleTest::Update()
+{
+
+}
+
 void TriangleTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatix, 
 	D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
 {
@@ -50,9 +55,6 @@ void TriangleTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMa
 	m_vs->SetRenderParameters(deviceContext, worldMatix, viewMatrix, projectionMatrix);
 	m_ps->SetShaderParameters(deviceContext);
 	deviceContext->DrawIndexed(m_indexCount, 0, 0);
-	
-	
-
 }
 
 int TriangleTest::GetIndexCount()
