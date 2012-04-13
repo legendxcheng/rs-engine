@@ -7,6 +7,7 @@
 #include "ShaderManager.h"
 #include "TriangleTest.h"
 #include "SphereClass.h"
+#include <DxErr.h>
 
 GraphicsClass::GraphicsClass()
 {
@@ -42,7 +43,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 	// Initialize the Direct3D object.
 	result = m_D3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_DEPTH, SCREEN_NEAR);
-	if(FAILED(result))
+	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize Direct3D", L"Error", MB_OK);
 		return false;
@@ -129,7 +130,7 @@ bool GraphicsClass::Frame()
 
 	// Render the graphics scene.
 	result = Render();
-	if(FAILED(result))
+	if(!result)
 	{
 		return false;
 	}
@@ -174,7 +175,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	*/
 // 	TriangleTest* sqtest = new TriangleTest();
 // 	sqtest->Initialize(device);
-// 	RenderObjectManager* rom = RenderObjectManager::GetInstance();
+	RenderObjectManager* rom = RenderObjectManager::GetInstance();
 // 	rom->InsertRenderObject((RenderObject*) sqtest);
 
 	/*
@@ -183,7 +184,6 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 
 	SphereClass* omc = new SphereClass("sphere.obj");
 	omc->Initialize(device);
-	RenderObjectManager* rom = RenderObjectManager::GetInstance();
 	rom->InsertRenderObject((RenderObject*) omc);
 
 
