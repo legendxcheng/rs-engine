@@ -27,7 +27,7 @@ public:
 
 private:
 	ID3D11ShaderResourceView* m_texture;
-	ID3D11SamplerState* m_colorState;
+	
 	char* m_textureFileName;
 };
 

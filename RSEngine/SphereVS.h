@@ -14,9 +14,13 @@ public:
 protected:
 	
 	virtual void ShutdownShader();
+	virtual void ShutdownConstantBuffer();
 private:
 	ID3D11VertexShader* m_vertexShader;
 	ID3D11InputLayout* m_layout;
 	ID3D11Buffer* m_matrixBuffer;
+	ID3D11Buffer* viewCB_;
+	ID3D11Buffer* projCB_;
+	ID3D11Buffer* worldCB_;
 };
 

@@ -4,12 +4,12 @@
 
 CameraClass::CameraClass()
 {
-	m_positionX = 0.0f;
-	m_positionY = 0.0f;
+	m_positionX = 0.5f;
+	m_positionY = 0.2f;
 	m_positionZ = 0.0f;
 
 	m_rotationX = 0.0f;
-	m_rotationY = 0.0f;
+	m_rotationY = 0.2f;
 	m_rotationZ = 0.0f;
 }
 
@@ -70,7 +70,7 @@ void CameraClass::Render()
 
 	// Setup where the camera is looking by default.
 	lookAt.x = 0.0f;
-	lookAt.y = 0.0f;
+	lookAt.y = 0.1f;
 	lookAt.z = 1.0f;
 
 	// Set the yaw (Y axis), pitch (X axis), and roll (Z axis) rotations in radians.

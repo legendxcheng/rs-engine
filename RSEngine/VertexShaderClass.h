@@ -16,6 +16,7 @@ public:
 	bool Unregister();
 protected:
 	virtual void ShutdownShader() = 0;
+	virtual void ShutdownConstantBuffer() = 0;
 
 
 

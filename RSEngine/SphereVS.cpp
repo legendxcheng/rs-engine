@@ -113,15 +113,54 @@ bool SphereVS::InitializeConstantBuffer(ID3D11Device* device)
 		return false;
 	}
 
+	D3D11_BUFFER_DESC constDesc;
+	ZeroMemory( &constDesc, sizeof( constDesc ) );
+	constDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	constDesc.ByteWidth = sizeof( D3DXMATRIX );
+	constDesc.Usage = D3D11_USAGE_DEFAULT;
+
+	result = device->CreateBuffer( &constDesc, 0, &viewCB_ );
+
+	if( FAILED( result ) )
+	{
+		return false;
+	}
+
+	result = device->CreateBuffer( &constDesc, 0, &projCB_ );
+
+	if( FAILED( result ) )
+	{
+		return false;
+	}
+
+	result = device->CreateBuffer( &constDesc, 0, &worldCB_ );
+
+	if( FAILED( result ) )
+	{
+		return false;
+	}
+
 	return true;
 }
 void SphereVS::Shutdown()
 {
-
+	this->ShutdownShader();
+	this->ShutdownConstantBuffer();
 }
 void SphereVS::ShutdownShader()
 {
+	if(m_layout)
+	{
+		m_layout->Release();
+		m_layout = 0;
+	}
 
+	// Release the vertex shader.
+	if(m_vertexShader)
+	{
+		m_vertexShader->Release();
+		m_vertexShader = 0;
+	}
 }
 
 bool SphereVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, 
@@ -138,32 +177,44 @@ bool SphereVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRI
 	D3DXMatrixTranspose(&projectionMatrix, &projectionMatrix);
 
 	// Lock the constant buffer so it can be written to.
-	result = deviceContext->Map(m_matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
-	if(FAILED(result))
-	{
-		return false;
-	}
 
-	// Get a pointer to the data in the constant buffer.
-	dataPtr = (MatrixBufferType*)mappedResource.pData;
+	deviceContext->UpdateSubresource( worldCB_, 0, 0, &worldMatrix, 0, 0 );
+	deviceContext->UpdateSubresource( viewCB_, 0, 0, &viewMatrix, 0, 0 );
+	deviceContext->UpdateSubresource( projCB_, 0, 0, &projectionMatrix, 0, 0 );
 
-	// Copy the matrices into the constant buffer.
-	dataPtr->world = worldMatrix;
-	dataPtr->view = viewMatrix;
-	dataPtr->projection = projectionMatrix;
+	deviceContext->VSSetConstantBuffers( 0, 1, &worldCB_ );
+	deviceContext->VSSetConstantBuffers( 1, 1, &viewCB_ );
+	deviceContext->VSSetConstantBuffers( 2, 1, &projCB_ );
 
 	// Unlock the constant buffer.
-	deviceContext->Unmap(m_matrixBuffer, 0);
-
-	// Set the position of the constant buffer in the vertex shader.
-	bufferNumber = 0;
-
-	// Finanly set the constant buffer in the vertex shader with the updated values.
-	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_matrixBuffer);
 
 	deviceContext->IASetInputLayout(m_layout);
 	deviceContext->VSSetShader(m_vertexShader, NULL, 0);
 
 
 	return true;
+}
+
+void SphereVS::ShutdownConstantBuffer()
+{
+	if (m_matrixBuffer)
+	{
+		m_matrixBuffer->Release();
+		m_matrixBuffer = 0;
+	}
+	if (viewCB_)
+	{
+		viewCB_->Release();
+		viewCB_ = 0;
+	}
+	if (projCB_)
+	{
+		projCB_->Release();
+		projCB_ = 0;
+	}
+	if (worldCB_)
+	{
+		worldCB_->Release();
+		worldCB_= 0;
+	}
 }
