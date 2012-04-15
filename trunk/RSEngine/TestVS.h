@@ -15,6 +15,7 @@ public:
 
 private:
 	virtual void ShutdownShader();
+	virtual void ShutdownConstantBuffer(){};
 
 private:
 	ID3D11VertexShader* m_vertexShader;

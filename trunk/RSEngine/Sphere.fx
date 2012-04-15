@@ -50,5 +50,13 @@ PS_Input VS_Main( VS_Input vertex )
 
 float4 PS_Main( PS_Input frag ) : SV_TARGET
 {
+/*
+	float4 ret;
+	ret.x = 1.0f;
+	ret.y = 0.0f;
+	ret.z = 0.0f;
+	ret.w = 1.0f;
+	return  ret;
+*/
     return colorMap.Sample( colorSampler, frag.tex0 );
 }

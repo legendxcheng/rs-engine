@@ -16,5 +16,6 @@ private:
 
 private:
 	ID3D11PixelShader* m_pixelShader;
+	
 };
 

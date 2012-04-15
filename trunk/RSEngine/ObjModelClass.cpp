@@ -99,6 +99,11 @@ bool ObjModelClass::InitializeBuffers(ID3D11Device* device)
 
 	delete[] vertices;
 	objModel.Release( );
+
+	
+
+	
+
 	return true;
 }
 
@@ -108,7 +113,7 @@ bool ObjModelClass::InitializeShaders(ID3D11Device*)
 }
 void ObjModelClass::ShutdownBuffers()
 {
-
+	
 }
 void ObjModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
@@ -117,7 +122,7 @@ void ObjModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 
 
 	// Set vertex buffer stride and offset.
-	stride = sizeof(VertexType); 
+	stride = sizeof(VertexTextureType); 
 	offset = 0;
 
 	// Set the vertex buffer to active in the input assembler so it can be rendered.

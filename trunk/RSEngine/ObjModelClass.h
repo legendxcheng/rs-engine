@@ -32,5 +32,6 @@ protected:
 	ID3D11Buffer* m_vertexBuffer;
 	ID3D11Buffer* m_indexBuffer;
 	char* m_objFileName;
+
 };
 
