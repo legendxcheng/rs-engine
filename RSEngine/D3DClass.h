@@ -28,10 +28,17 @@
 class D3DClass
 {
 public:
-	D3DClass();
-	D3DClass(const D3DClass&);
-	~D3DClass();
 
+	~D3DClass();
+	static D3DClass* GetInstance()
+	{
+		if (!m_Instance)
+		{
+			m_Instance = new D3DClass();
+		}
+		return m_Instance;
+
+	}
 	bool Initialize(int, int, bool, HWND, bool, float, float);
 	void Shutdown();
 
@@ -66,6 +73,11 @@ private:
 	D3DXMATRIX m_projectionMatrix;
 	D3DXMATRIX m_worldMatrix;
 	D3DXMATRIX m_orthoMatrix;
+
+private:
+	static D3DClass* m_Instance;
+	D3DClass();
+	D3DClass(const D3DClass&);
 };
 
 #endif

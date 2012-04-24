@@ -41,9 +41,9 @@ void TriangleTest::Shutdown()
 	return;
 }
 
-void TriangleTest::Update()
+bool TriangleTest::Update()
 {
-
+	return true;
 }
 
 void TriangleTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatix, 

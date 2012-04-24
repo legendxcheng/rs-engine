@@ -18,8 +18,9 @@ void ObjModelClass::Shutdown()
 	return;
 }
 
-void ObjModelClass::Update()
+bool ObjModelClass::Update()
 {
+	return true;
 
 }
 

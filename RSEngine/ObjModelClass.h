@@ -16,7 +16,7 @@ public:
 	virtual void Shutdown();
 	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX) = 0;
 	virtual int GetIndexCount();
-	virtual void Update();
+	virtual bool Update();
 protected:
 	virtual bool InitializeBuffers(ID3D11Device*);
 	virtual bool InitializeShaders(ID3D11Device*);
