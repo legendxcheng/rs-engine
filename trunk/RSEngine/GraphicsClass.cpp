@@ -35,7 +35,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 
 	// Create the Direct3D object.
-	m_D3D = new D3DClass();
+	m_D3D = D3DClass::GetInstance();
 	if(!m_D3D)
 	{
 		return false;
@@ -142,7 +142,7 @@ bool GraphicsClass::Render()
 {
 	D3DXMATRIX worldMatrix, viewMatrix, projectionMatrix, orthoMatrix;
 	bool result;
-
+	static float xr = 0.0f;
 
 	// Clear the buffers to begin the scene.
 	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
@@ -152,7 +152,8 @@ bool GraphicsClass::Render()
 
 	// Get the world, view, and projection matrices from the camera and d3d objects.
 	m_Camera->GetViewMatrix(viewMatrix);
-	m_Camera->SetRotation(0, 0, 0);
+	m_Camera->SetRotation(0, 0, xr);
+	xr += 0.1f;
 	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
@@ -174,10 +175,10 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	/*
 		Triangle Example
 	*/
-	TriangleTest* sqtest = new TriangleTest();
-	sqtest->Initialize(device);
+// 	TriangleTest* sqtest = new TriangleTest();
+// 	sqtest->Initialize(device);
 	RenderObjectManager* rom = RenderObjectManager::GetInstance();
-	rom->InsertRenderObject((RenderObject*) sqtest);
+// 	rom->InsertRenderObject((RenderObject*) sqtest);
 
 	/*
 		Sphere Example

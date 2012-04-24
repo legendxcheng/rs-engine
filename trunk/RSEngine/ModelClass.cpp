@@ -23,3 +23,4 @@ bool ModelClass::IsTextured()
 {
 	return hasTexture;
 }
+
