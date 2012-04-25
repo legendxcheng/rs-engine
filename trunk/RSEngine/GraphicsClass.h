@@ -12,7 +12,7 @@
 #include "cameraclass.h"
 #include "modelclass.h"
 #include "shaderclass.h"
-#include "bitmapclass.h"
+#include "spriteclass.h"
 
 /////////////
 // GLOBALS //
