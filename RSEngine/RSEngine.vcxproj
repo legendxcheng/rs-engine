@@ -74,7 +74,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BitmapClass.cpp" />
+    <ClCompile Include="SpriteClass.cpp" />
     <ClCompile Include="CameraClass.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="ComputeShaderClass.cpp" />
@@ -96,6 +96,8 @@
     <ClCompile Include="SpherePS.cpp" />
     <ClCompile Include="SphereTexture.cpp" />
     <ClCompile Include="SphereVS.cpp" />
+    <ClCompile Include="SpritePS.cpp" />
+    <ClCompile Include="SpriteVS.cpp" />
     <ClCompile Include="TokenStream.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
     <ClCompile Include="SystemClass.cpp" />
@@ -106,7 +108,7 @@
     <ClCompile Include="VertexShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BitmapClass.h" />
+    <ClInclude Include="SpriteClass.h" />
     <ClInclude Include="CameraClass.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="ComputeShaderClass.h" />
@@ -127,6 +129,8 @@
     <ClInclude Include="SpherePS.h" />
     <ClInclude Include="SphereTexture.h" />
     <ClInclude Include="SphereVS.h" />
+    <ClInclude Include="SpritePS.h" />
+    <ClInclude Include="SpriteVS.h" />
     <ClInclude Include="TokenStream.h" />
     <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="Structures.h" />
@@ -141,6 +145,7 @@
     <None Include="Color.ps" />
     <None Include="Color.vs" />
     <None Include="Sphere.fx" />
+    <None Include="Sprite.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
