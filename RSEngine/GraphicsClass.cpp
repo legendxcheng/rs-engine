@@ -176,10 +176,10 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	/*
 		Triangle Example
 	*/
-// 	TriangleTest* sqtest = new TriangleTest();
-// 	sqtest->Initialize(device);
+	TriangleTest* sqtest = new TriangleTest();
+	sqtest->Initialize(device);
 	RenderObjectManager* rom = RenderObjectManager::GetInstance();
-/*	rom->InsertRenderObject((RenderObject*) sqtest);*/
+	//rom->InsertRenderObject((RenderObject*) sqtest);
 
 	/*
 		Sphere Example

@@ -98,7 +98,7 @@ bool ObjModelClass::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
-	delete[] vertices;
+	//delete[] vertices;
 	objModel.Release( );
 
 	
