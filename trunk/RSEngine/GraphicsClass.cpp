@@ -176,27 +176,27 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	/*
 		Triangle Example
 	*/
-	TriangleTest* sqtest = new TriangleTest();
-	sqtest->Initialize(device);
+// 	TriangleTest* sqtest = new TriangleTest();
+// 	sqtest->Initialize(device);
 	RenderObjectManager* rom = RenderObjectManager::GetInstance();
-	//rom->InsertRenderObject((RenderObject*) sqtest);
+//	rom->InsertRenderObject((RenderObject*) sqtest);
 
 	/*
 		Sphere Example
 	*/
 
-	SphereClass* omc = new SphereClass("sphere.obj");
-	omc->Initialize(device);
-	rom->InsertRenderObject((RenderObject*) omc);
+// 	SphereClass* omc = new SphereClass("sphere.obj");
+// 	omc->Initialize(device);
+// 	rom->InsertRenderObject((RenderObject*) omc);
 
-// 	SpriteClass* sc = new SpriteClass();
-// 	sc->Initialize(device);
-// 	sc->LoadTexture(device, L"decal.dds");
-// 	sc->SetAttributes(800, 600,  800, 600);
-// 	ID3D11DeviceContext* dc;
-// 	device->GetImmediateContext(&dc);
-// 	sc->Update(dc, 0, 0);
-// 	rom->InsertRenderObject((RenderObject*)sc);
+	SpriteClass* sc = new SpriteClass();
+	sc->Initialize(device);
+	sc->LoadTexture(device, L"dd.jpg");
+	sc->SetAttributes(800, 600,  800, 600);
+	ID3D11DeviceContext* dc;
+	device->GetImmediateContext(&dc);
+	sc->Update(dc, 0, 0);
+	rom->InsertRenderObject((RenderObject*)sc);
 
 
 
