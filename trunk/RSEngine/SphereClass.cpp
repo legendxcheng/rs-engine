@@ -81,5 +81,5 @@ void SphereClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMat
 	// Render the model using the color shader.
 	m_vs->SetRenderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix);
 	m_ps->SetShaderParameters(deviceContext, m_texture->GetTexture());
-	deviceContext->DrawIndexed(m_vertextCount, 0, 0);
+	deviceContext->Draw(m_vertextCount, 0);
 }
