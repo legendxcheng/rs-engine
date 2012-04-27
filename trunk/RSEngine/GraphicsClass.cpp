@@ -146,7 +146,7 @@ bool GraphicsClass::Render()
 	static float xr = 0.0f;
 
 	// Clear the buffers to begin the scene.
-	m_D3D->BeginScene(1.0f, 1.0f, 1.0f, 1.0f);
+	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 0.0f);
 
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
@@ -159,7 +159,7 @@ bool GraphicsClass::Render()
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
 
-	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), worldMatrix, viewMatrix, orthoMatrix);
+	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), worldMatrix, viewMatrix, projectionMatrix);
 	
 	m_D3D->EndScene();
 
@@ -185,18 +185,18 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 		Sphere Example
 	*/
 
-// 	SphereClass* omc = new SphereClass("sphere.obj");
-// 	omc->Initialize(device);
-// 	rom->InsertRenderObject((RenderObject*) omc);
+	SphereClass* omc = new SphereClass("sphere.obj");
+	omc->Initialize(device);
+	rom->InsertRenderObject((RenderObject*) omc);
 
-	SpriteClass* sc = new SpriteClass();
-	sc->Initialize(device);
-	sc->LoadTexture(device, L"decal.dds");
-	sc->SetAttributes(800, 600,  800, 600);
-	ID3D11DeviceContext* dc;
-	device->GetImmediateContext(&dc);
-	sc->Update(dc, 0, 0);
-	rom->InsertRenderObject((RenderObject*)sc);
+// 	SpriteClass* sc = new SpriteClass();
+// 	sc->Initialize(device);
+// 	sc->LoadTexture(device, L"decal.dds");
+// 	sc->SetAttributes(800, 600,  800, 600);
+// 	ID3D11DeviceContext* dc;
+// 	device->GetImmediateContext(&dc);
+// 	sc->Update(dc, 0, 0);
+// 	rom->InsertRenderObject((RenderObject*)sc);
 
 
 
