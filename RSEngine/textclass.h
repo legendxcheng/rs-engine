@@ -1,19 +1,17 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: textclass.h
-////////////////////////////////////////////////////////////////////////////////
 #ifndef _TEXTCLASS_H_
 #define _TEXTCLASS_H_
 
-///////////////////////
-// MY CLASS INCLUDES //
-///////////////////////
 #include "fontclass.h"
 #include "fontshaderclass.h"
 #include "RenderObject.h"
+#include <vector>
 
-////////////////////////////////////////////////////////////////////////////////
-// Class name: TextClass
-////////////////////////////////////////////////////////////////////////////////
+
+/*
+	class for handling text
+	supports add\delete\find\edit strings
+*/
+
 class TextClass : public RenderObject
 {
 private:
@@ -28,18 +26,30 @@ public:
 	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX);
 
 private:
-	bool InitializeSentence(SentenceType**, int, ID3D11Device*);
+	bool InitializeSentence(SentenceType**, std::string, unsigned int, ID3D11Device*);
 	bool UpdateSentence(SentenceType*, char*, int, int, float, float, float, ID3D11DeviceContext*);
 	void ReleaseSentence(SentenceType**);
 	bool RenderSentence(ID3D11DeviceContext*, SentenceType*, D3DXMATRIX, D3DXMATRIX);
+
+
+// for high engine invoke
+public:
+
+	bool AddText(ID3D11Device* device, std::string tag, unsigned int positionX, unsigned int positionY, unsigned int red,
+		unsigned int green, unsigned int blue);
+	bool DeleteText(std::string tag);
+	// can only change the text content
+	bool EditText(ID3D11Device* device, std::string tag, std::string newText, unsigned int positionX, unsigned int positionY, float red,
+		float green, float blue);
 
 private:
 	FontClass* m_Font;
 	FontShaderClass* m_FontShader;
 	int m_screenWidth, m_screenHeight;
 	D3DXMATRIX m_baseViewMatrix;
-	SentenceType* m_sentence1;
-	SentenceType* m_sentence2;
+	std::vector<SentenceType*> m_sentenceList;
+	//SentenceType* m_sentence1;
+	//SentenceType* m_sentence2;
 };
 
 #endif
