@@ -2,7 +2,7 @@
 // Filename: fontshaderclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "fontshaderclass.h"
-
+#include "SystemClass.h"
 
 FontShaderClass::FontShaderClass()
 {
@@ -25,13 +25,13 @@ FontShaderClass::~FontShaderClass()
 }
 
 
-bool FontShaderClass::Initialize(ID3D11Device* device, HWND hwnd)
+bool FontShaderClass::Initialize(ID3D11Device* device)
 {
 	bool result;
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"../Engine/font.vs", L"../Engine/font.ps");
+	result = InitializeShader(device, SystemClass::GetWindowHandler(), L"font.vs", L"font.ps");
 	if(!result)
 	{
 		return false;

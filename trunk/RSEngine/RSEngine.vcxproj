@@ -74,6 +74,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fontclass.cpp" />
+    <ClCompile Include="fontshaderclass.cpp" />
     <ClCompile Include="GameGlobalData.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -105,6 +107,7 @@
     <ClCompile Include="SphereVS.cpp" />
     <ClCompile Include="SpritePS.cpp" />
     <ClCompile Include="SpriteVS.cpp" />
+    <ClCompile Include="textclass.cpp" />
     <ClCompile Include="TokenStream.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
     <ClCompile Include="SystemClass.cpp" />
@@ -116,6 +119,8 @@
     <ClCompile Include="VertexShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="fontclass.h" />
+    <ClInclude Include="fontshaderclass.h" />
     <ClInclude Include="GameGlobalData.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="InputManager.h" />
@@ -146,6 +151,7 @@
     <ClInclude Include="SphereVS.h" />
     <ClInclude Include="SpritePS.h" />
     <ClInclude Include="SpriteVS.h" />
+    <ClInclude Include="textclass.h" />
     <ClInclude Include="TokenStream.h" />
     <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="Structures.h" />
@@ -160,6 +166,8 @@
   <ItemGroup>
     <None Include="Color.ps" />
     <None Include="Color.vs" />
+    <None Include="font.ps" />
+    <None Include="font.vs" />
     <None Include="Sphere.fx" />
     <None Include="Sprite.fx" />
   </ItemGroup>

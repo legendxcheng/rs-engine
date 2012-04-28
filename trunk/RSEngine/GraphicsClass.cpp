@@ -8,6 +8,8 @@
 #include "TriangleTest.h"
 #include "SpriteClass.h"
 #include "SphereClass.h"
+#include "textclass.h"
+
 #include <DxErr.h>
 
 GraphicsClass::GraphicsClass()
@@ -185,9 +187,9 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 		Sphere Example
 	*/
 
-	SphereClass* omc = new SphereClass("sphere.obj");
-	omc->Initialize(device);
-	rom->InsertRenderObject((RenderObject*) omc);
+// 	SphereClass* omc = new SphereClass("sphere.obj");
+// 	omc->Initialize(device);
+// 	rom->InsertRenderObject((RenderObject*) omc);
 
 // 	SpriteClass* sc = new SpriteClass();
 // 	sc->Initialize(device);
@@ -198,7 +200,13 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 // 	sc->Update(dc, 0, 0);
 // 	rom->InsertRenderObject((RenderObject*)sc);
 
-
-
-
+	/*
+		text example
+	*/
+	TextClass* tc = new TextClass();
+	tc->Initialize(device);
+	D3DXMATRIX baseViewMatrix;
+	m_Camera->GetViewMatrix(baseViewMatrix);
+	tc->SetAttributes(800, 600, baseViewMatrix);
+	rom->InsertRenderObject(tc);
 }

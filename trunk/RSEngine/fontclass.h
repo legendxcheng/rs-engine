@@ -23,6 +23,8 @@ using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: FontClass
 ////////////////////////////////////////////////////////////////////////////////
+#include "Structures.h"
+
 class FontClass
 {
 private:
@@ -30,12 +32,6 @@ private:
 	{
 		float left, right;
 		int size;
-	};
-
-	struct VertexType
-	{
-		D3DXVECTOR3 position;
-	    D3DXVECTOR2 texture;
 	};
 
 public:
