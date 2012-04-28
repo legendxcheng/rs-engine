@@ -10,8 +10,7 @@ TextClass::TextClass()
 	m_Font = 0;
 	m_FontShader = 0;
 
-	m_sentence1 = 0;
-	m_sentence2 = 0;
+	m_sentenceList.clear();
 }
 
 
@@ -70,37 +69,44 @@ bool TextClass::Initialize(ID3D11Device* device)
 		//MessageBox(hwnd, L"Could not initialize the font shader object.", L"Error", MB_OK);
 		return false;
 	}
+	
+	this->AddText(device, "123", 100, 100, 200, 200, 200);
+	this->EditText(device, "123", "fuck you!", 100, 100, 0.5f, 0.5f, 0.5f);
 
-	// Initialize the first sentence.
-	result = InitializeSentence(&m_sentence1, 16, device);
-	if(!result)
-	{
-		return false;
-	}
+	this->AddText(device, "1232", 100, 100, 200, 200, 200);
+	this->EditText(device, "1232", "I love you, so I wanna fuck you!", 100, 300, 1.0f, 1.0f, 0.5f);
 
-	ID3D11DeviceContext* deviceContext;
-	device->GetImmediateContext(&deviceContext);
-
-	// Now update the sentence vertex buffer with the new string information.
-	result = UpdateSentence(m_sentence1, "Hello", 100, 100, 1.0f, 1.0f, 1.0f, deviceContext);
-	if(!result)
-	{
-		return false;
-	}
-
-	// Initialize the first sentence.
-	result = InitializeSentence(&m_sentence2, 16, device);
-	if(!result)
-	{
-		return false;
-	}
-
-	// Now update the sentence vertex buffer with the new string information.
-	result = UpdateSentence(m_sentence2, "Goodbye", 100, 200, 1.0f, 1.0f, 0.0f, deviceContext);
-	if(!result)
-	{
-		return false;
-	}
+// 
+// 	// Initialize the first sentence.
+// 	result = InitializeSentence(&m_sentence1, 16, device);
+// 	if(!result)
+// 	{
+// 		return false;
+// 	}
+// 
+// 	ID3D11DeviceContext* deviceContext;
+// 	device->GetImmediateContext(&deviceContext);
+// 
+// 	// Now update the sentence vertex buffer with the new string information.
+// 	result = UpdateSentence(m_sentence1, "Hello", 100, 100, 1.0f, 1.0f, 1.0f, deviceContext);
+// 	if(!result)
+// 	{
+// 		return false;
+// 	}
+// 
+// 	// Initialize the first sentence.
+// 	result = InitializeSentence(&m_sentence2, 16, device);
+// 	if(!result)
+// 	{
+// 		return false;
+// 	}
+// 
+// 	// Now update the sentence vertex buffer with the new string information.
+// 	result = UpdateSentence(m_sentence2, "Goodbye", 100, 200, 1.0f, 1.0f, 0.0f, deviceContext);
+// 	if(!result)
+// 	{
+// 		return false;
+// 	}
 
 	return true;
 }
@@ -108,12 +114,14 @@ bool TextClass::Initialize(ID3D11Device* device)
 
 void TextClass::Shutdown()
 {
-	// Release the first sentence.
-	ReleaseSentence(&m_sentence1);
-
-	// Release the second sentence.
-	ReleaseSentence(&m_sentence2);
-
+	// Release all sentence.
+	for (std::vector<SentenceType*>::iterator iter = m_sentenceList.begin(); iter != m_sentenceList.end();
+		++iter)
+	{
+		ReleaseSentence(&(*iter));
+	}
+	m_sentenceList.clear();
+	
 	// Release the font shader object.
 	if(m_FontShader)
 	{
@@ -140,27 +148,20 @@ void TextClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix
 
 	D3DClass::GetInstance()->TurnZBufferOff();
 	D3DClass::GetInstance()->TurnOnAlphaBlending();
-	// Draw the first sentence.
-	result = RenderSentence(deviceContext, m_sentence1, m_worldMatrix, orthoMatrix);
-// 	if(!result)
-// 	{
-// 		return 
-// 	}
+	// Draw all sentences in the list.
+	for (std::vector<SentenceType*>::iterator iter = m_sentenceList.begin(); iter != m_sentenceList.end();
+		++iter)
+	{
+		result = RenderSentence(deviceContext, *iter, m_worldMatrix, orthoMatrix);
+	}
+	
 
-	// Draw the second sentence.
-	result = RenderSentence(deviceContext, m_sentence2, m_worldMatrix, orthoMatrix);
-// 	if(!result)
-// 	{
-// 		return false;
-// 	}
-// 
-// 	return true;
 	D3DClass::GetInstance()->TurnZBufferOn();
 	D3DClass::GetInstance()->TurnOffAlphaBlending();
 }
 
 
-bool TextClass::InitializeSentence(SentenceType** sentence, int maxLength, ID3D11Device* device)
+bool TextClass::InitializeSentence(SentenceType** sentence, std::string tag, unsigned int maxLength, ID3D11Device* device)
 {
 	VertexTextureType* vertices;
 	unsigned long* indices;
@@ -172,6 +173,7 @@ bool TextClass::InitializeSentence(SentenceType** sentence, int maxLength, ID3D1
 
 	// Create a new sentence object.
 	*sentence = new SentenceType;
+	(*sentence)->tag = tag;
 	if(!*sentence)
 	{
 		return false;
@@ -215,7 +217,7 @@ bool TextClass::InitializeSentence(SentenceType** sentence, int maxLength, ID3D1
 
 	// Set up the description of the dynamic vertex buffer.
     vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-    vertexBufferDesc.ByteWidth = sizeof(VertexType) * (*sentence)->vertexCount;
+    vertexBufferDesc.ByteWidth = sizeof(VertexTextureType) * (*sentence)->vertexCount;
     vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     vertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
     vertexBufferDesc.MiscFlags = 0;
@@ -392,3 +394,50 @@ bool TextClass::RenderSentence(ID3D11DeviceContext* deviceContext, SentenceType*
 
 	return true;
 }
+
+bool TextClass::AddText(ID3D11Device* device, std::string tag, unsigned int positionX, unsigned int positionY, unsigned int red, unsigned int green, unsigned int blue)
+{
+	SentenceType* newSt;
+	InitializeSentence(&newSt, tag, 200, device);
+	m_sentenceList.push_back(newSt);
+	return true;
+}
+
+bool TextClass::DeleteText(std::string tag)
+{
+	/* find the text */
+	for (std::vector<SentenceType*>::iterator iter = m_sentenceList.begin(); iter != m_sentenceList.end();
+		++iter)
+	{
+		if ((*iter)->tag.compare(tag) == 0)
+		{
+			// found
+			m_sentenceList.erase(iter);
+			return true;
+		}
+	}
+	// not found, return false
+	return false;
+}
+
+bool TextClass::EditText(ID3D11Device* device, std::string tag, std::string newText, unsigned int positionX, unsigned int positionY, 
+	float red, float green, float blue)
+{
+	for (std::vector<SentenceType*>::iterator iter = m_sentenceList.begin(); iter != m_sentenceList.end();
+		++iter)
+	{
+		if ((*iter)->tag.compare(tag) == 0)
+		{
+			// found
+			ID3D11DeviceContext* deviceContext;
+			device->GetImmediateContext(&deviceContext);
+			UpdateSentence(*iter, (char*)newText.c_str(), positionX, positionY, red, green, blue, deviceContext);
+			return true;
+		}
+	}
+
+	// not found
+	return false;
+}
+
+
