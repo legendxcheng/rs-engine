@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
 ////////////////////////////////////////////////////////////////////////////////
-class ModelClass:RenderObject
+class ModelClass:public RenderObject
 {
 private:
 	// for model with no texture
@@ -36,7 +36,7 @@ public:
 	virtual bool Initialize(ID3D11Device*) = 0;
 	//virtual bool Initialize(ID3D11Device* device, WCHAR* textureFilename);
 	virtual void Shutdown() = 0;
-	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX) = 0;
+	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX) = 0;
 	
 	virtual int GetIndexCount() = 0;
 	bool IsTextured();

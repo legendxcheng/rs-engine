@@ -6,7 +6,8 @@ class VertexShaderClass :
 	public ShaderClass
 {
 public:
-	VertexShaderClass(void);
+	VertexShaderClass();
+	VertexShaderClass(string tag);
 	virtual ~VertexShaderClass(void);
 	virtual bool Initialize(ID3D11Device*, HWND) = 0;
 	virtual bool InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFilename, CHAR* entryFuncName) = 0;

@@ -129,6 +129,7 @@ bool GraphicsClass::Frame()
 	bool result;
 
 
+
 	// Render the graphics scene.
 	result = Render();
 	if(!result)
@@ -141,7 +142,7 @@ bool GraphicsClass::Frame()
 
 bool GraphicsClass::Render()
 {
-	D3DXMATRIX worldMatrix, viewMatrix, projectionMatrix, orthoMatrix;
+	D3DXMATRIX viewMatrix, projectionMatrix, orthoMatrix;
 	bool result;
 	static float xr = 0.0f;
 
@@ -155,11 +156,10 @@ bool GraphicsClass::Render()
 	m_Camera->GetViewMatrix(viewMatrix);
 	//m_Camera->SetRotation(0, 0, xr);
 	xr += 0.1f;
-	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
 
-	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), worldMatrix, viewMatrix, projectionMatrix);
+	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix, orthoMatrix);
 	
 	m_D3D->EndScene();
 
@@ -185,18 +185,18 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 		Sphere Example
 	*/
 
-// 	SphereClass* omc = new SphereClass("sphere.obj");
-// 	omc->Initialize(device);
-// 	rom->InsertRenderObject((RenderObject*) omc);
+	SphereClass* omc = new SphereClass("sphere.obj");
+	omc->Initialize(device);
+	rom->InsertRenderObject((RenderObject*) omc);
 
-	SpriteClass* sc = new SpriteClass();
-	sc->Initialize(device);
-	sc->LoadTexture(device, L"dd.jpg");
-	sc->SetAttributes(800, 600,  800, 600);
-	ID3D11DeviceContext* dc;
-	device->GetImmediateContext(&dc);
-	sc->Update(dc, 0, 0);
-	rom->InsertRenderObject((RenderObject*)sc);
+// 	SpriteClass* sc = new SpriteClass();
+// 	sc->Initialize(device);
+// 	sc->LoadTexture(device, L"dd.jpg");
+// 	sc->SetAttributes(800, 600,  800, 600);
+// 	ID3D11DeviceContext* dc;
+// 	device->GetImmediateContext(&dc);
+// 	sc->Update(dc, 0, 0);
+// 	rom->InsertRenderObject((RenderObject*)sc);
 
 
 

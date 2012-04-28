@@ -12,7 +12,7 @@ public:
 	SpriteClass(void);
 	~SpriteClass(void);
 	virtual void Shutdown();
-	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX);// just one call to handle all the render related logic
+	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX);// just one call to handle all the render related logic
 	virtual bool Initialize(ID3D11Device*);
 	virtual bool Update(ID3D11DeviceContext* deviceContext, int positionX, int positionY, int frame = -1);
 	void SetAttributes(int screenWidth, int screenHeight, int bitmapWidth, int bitmapHeight);

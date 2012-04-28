@@ -5,6 +5,10 @@ SpriteVS::SpriteVS(void)
 {
 }
 
+SpriteVS::SpriteVS(string tag)
+{
+	m_tag = tag;
+}
 
 SpriteVS::~SpriteVS(void)
 {
@@ -174,8 +178,7 @@ void SpriteVS::ShutdownShader()
 	}
 }
 
-bool SpriteVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, 
-	D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
+bool SpriteVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;

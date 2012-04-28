@@ -53,7 +53,7 @@ void TriangleTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMa
 	RenderBuffers(deviceContext);
 	// Render the model using the color shader.
 	m_vs->SetRenderParameters(deviceContext, worldMatix, viewMatrix, projectionMatrix);
-	m_ps->SetShaderParameters(deviceContext);
+	m_ps->SetRenderParameters(deviceContext, NULL);
 	deviceContext->DrawIndexed(m_indexCount, 0, 0);
 }
 
@@ -223,7 +223,7 @@ void  TriangleTest::ReleaseTexture()
 
 bool TriangleTest::InitializeShaders(ID3D11Device* device)
 {
-	m_vs = new TestVS();
+	m_vs = new TestVS("TriangleTestVS");
 	m_vs->Initialize(device, SystemClass::GetWindowHandler());
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_VS, m_vs);
 	m_ps = new TestPS();

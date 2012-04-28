@@ -56,6 +56,7 @@ bool ShaderManager::RemoveShader(unsigned int stype, ShaderClass* sc)
 			if (csc == (ComputeShaderClass*)sc)
 			{
 				m_CSList.erase(iter);
+				break;
 			}
 		}
 		break;
@@ -66,6 +67,7 @@ bool ShaderManager::RemoveShader(unsigned int stype, ShaderClass* sc)
 			if (csc == (PixelShaderClass*)sc)
 			{
 				m_PSList.erase(iter);
+				break;
 			}
 		}
 		break;
@@ -76,6 +78,7 @@ bool ShaderManager::RemoveShader(unsigned int stype, ShaderClass* sc)
 			if (csc == (VertexShaderClass*)sc)
 			{
 				m_VSList.erase(iter);
+				break;
 			}
 		}
 		break;
@@ -86,6 +89,7 @@ bool ShaderManager::RemoveShader(unsigned int stype, ShaderClass* sc)
 			if (csc == (GeometryShaderClass*)sc)
 			{
 				m_GSList.erase(iter);
+				break;
 			}
 		}
 		break;
@@ -124,4 +128,56 @@ void ShaderManager::Shutdown()
 		csc->Shutdown();
 	}
 	this->m_VSList.clear();
+}
+
+VertexShaderClass* ShaderManager::GetVS(string tag)
+{
+	for (std::vector<VertexShaderClass*>::iterator iter = this->m_VSList.begin(); iter != this->m_VSList.end(); ++iter)
+	{
+		VertexShaderClass* csc = *iter;
+		if (tag.compare(csc->GetTag()) == 0)
+		{
+			return csc;
+		}
+	}
+	return NULL;
+}
+
+PixelShaderClass* ShaderManager::GetPS(string tag)
+{
+	for (std::vector<PixelShaderClass*>::iterator iter = this->m_PSList.begin(); iter != this->m_PSList.end(); ++iter)
+	{
+		PixelShaderClass* csc = *iter;
+		if (tag.compare(csc->GetTag()) == 0)
+		{
+			return csc;
+		}
+	}
+	return NULL;
+}
+
+ComputeShaderClass* ShaderManager::GetCS(string tag)
+{
+	for (std::vector<ComputeShaderClass*>::iterator iter = this->m_CSList.begin(); iter != this->m_CSList.end(); ++iter)
+	{
+		ComputeShaderClass* csc = *iter;
+		if (tag.compare(csc->GetTag()) == 0)
+		{
+			return csc;
+		}
+	}
+	return NULL;
+}
+
+GeometryShaderClass* ShaderManager::GetGS(string tag)
+{
+	for (std::vector<GeometryShaderClass*>::iterator iter = this->m_GSList.begin(); iter != this->m_GSList.end(); ++iter)
+	{
+		GeometryShaderClass* csc = *iter;
+		if (tag.compare(csc->GetTag()) == 0)
+		{
+			return csc;
+		}
+	}
+	return NULL;
 }

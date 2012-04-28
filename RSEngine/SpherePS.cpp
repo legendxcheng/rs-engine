@@ -112,7 +112,7 @@ void SpherePS::ShutdownShader()
 
 }
 
-bool SpherePS::SetShaderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* texture)
+bool SpherePS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* texture)
 {
 	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 	deviceContext->PSSetShaderResources( 0, 1, &texture);

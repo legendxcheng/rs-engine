@@ -1,10 +1,14 @@
 #include "VertexShaderClass.h"
 #include "ShaderManager.h"
 
-VertexShaderClass::VertexShaderClass(void)
+VertexShaderClass::VertexShaderClass(string tag)
 {
+	m_tag = tag;
 }
 
+VertexShaderClass::VertexShaderClass()
+{
+}
 
 VertexShaderClass::~VertexShaderClass(void)
 {

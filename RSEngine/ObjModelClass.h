@@ -14,7 +14,7 @@ public:
 	virtual bool Initialize(ID3D11Device*);
 	//virtual bool Initialize(ID3D11Device* device, WCHAR* textureFilename);
 	virtual void Shutdown();
-	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX) = 0;
+	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX) = 0;
 	virtual int GetIndexCount();
 	virtual bool Update();
 protected:

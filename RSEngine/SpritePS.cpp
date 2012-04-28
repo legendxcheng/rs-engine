@@ -1,7 +1,12 @@
 #include "SpritePS.h"
 
 
-SpritePS::SpritePS(void)
+SpritePS::SpritePS(string tag)
+{
+	m_tag = tag;
+}
+
+SpritePS::SpritePS()
 {
 }
 
@@ -112,7 +117,7 @@ void SpritePS::ShutdownShader()
 
 }
 
-bool SpritePS::SetShaderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* texture)
+bool SpritePS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* texture)
 {
 	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 	deviceContext->PSSetShaderResources( 0, 1, &texture);

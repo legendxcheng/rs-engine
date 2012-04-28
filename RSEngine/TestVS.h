@@ -4,7 +4,8 @@ class TestVS :
 	public VertexShaderClass
 {
 public:
-	TestVS(void);
+	TestVS();
+	TestVS(string tag);
 	virtual ~TestVS(void);
 
 	virtual bool Initialize(ID3D11Device*, HWND);

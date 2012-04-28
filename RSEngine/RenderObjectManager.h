@@ -11,8 +11,8 @@ public:
 	~RenderObjectManager(void);
 	
 	void InsertRenderObject(RenderObject* rob);
-	void Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, 
-		D3DXMATRIX projMatrix);
+	void Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix, 
+		D3DXMATRIX projMatrix, D3DXMATRIX orthoMatrix);
 	void Initialize();
 	void Shutdown();
 	void RemoveRenderObject(RenderObject* rob);

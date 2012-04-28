@@ -1,10 +1,15 @@
 #include "ComputeShaderClass.h"
 #include "ShaderManager.h"
 
-ComputeShaderClass::ComputeShaderClass(void)
+ComputeShaderClass::ComputeShaderClass(string tag)
 {
+	m_tag = tag;
 }
 
+ComputeShaderClass::ComputeShaderClass()
+{
+
+}
 
 ComputeShaderClass::~ComputeShaderClass(void)
 {

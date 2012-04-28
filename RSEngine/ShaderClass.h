@@ -15,6 +15,7 @@
 using namespace std;
 
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ShaderClass
 ////////////////////////////////////////////////////////////////////////////////
@@ -25,10 +26,16 @@ private:
 
 public:
 	ShaderClass();
+	ShaderClass(string tag);
 	ShaderClass(const ShaderClass&);
 	virtual ~ShaderClass();
 	virtual bool Initialize(ID3D11Device*, HWND);
 	virtual void Shutdown();
+
+	string GetTag();
+
+
+
 	//bool Render(ID3D11DeviceContext*, int, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, ID3D11ShaderResourceView*);
 
 protected:
@@ -39,11 +46,12 @@ protected:
 	virtual void ShutdownShader();
 	
 
-	virtual bool SetShaderParameters();
+	virtual bool SetRenderParameters();
 	//void RenderShader(ID3D11DeviceContext*, int);
 
 protected:
 	void OutputShaderErrorMessage(ID3D10Blob*, HWND, WCHAR*);
+	string m_tag;
 
 private:
 // 	ID3D11VertexShader* m_vertexShader;

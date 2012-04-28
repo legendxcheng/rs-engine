@@ -4,6 +4,7 @@ class SpriteVS :
 	public VertexShaderClass
 {
 public:
+	SpriteVS(string tag);
 	SpriteVS(void);
 	~SpriteVS(void);
 public:
