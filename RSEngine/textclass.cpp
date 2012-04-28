@@ -6,6 +6,7 @@
 
 TextClass::TextClass()
 {
+	D3DXMatrixIdentity(&m_worldMatrix);
 	m_Font = 0;
 	m_FontShader = 0;
 
@@ -382,7 +383,7 @@ bool TextClass::RenderSentence(ID3D11DeviceContext* deviceContext, SentenceType*
 	pixelColor = D3DXVECTOR4(sentence->red, sentence->green, sentence->blue, 1.0f);
 
 	// Render the text using the font shader.
-	result = m_FontShader->Render(deviceContext, sentence->indexCount, worldMatrix, m_baseViewMatrix, orthoMatrix, m_Font->GetTexture(), 
+	result = m_FontShader->Render(deviceContext, sentence->indexCount, m_worldMatrix, m_baseViewMatrix, orthoMatrix, m_Font->GetTexture(), 
 								  pixelColor);
 	if(!result)
 	{
