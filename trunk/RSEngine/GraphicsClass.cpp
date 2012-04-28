@@ -204,9 +204,11 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 		text example
 	*/
 	TextClass* tc = new TextClass();
-	tc->Initialize(device);
+	
 	D3DXMATRIX baseViewMatrix;
+	m_Camera->Render();
 	m_Camera->GetViewMatrix(baseViewMatrix);
 	tc->SetAttributes(800, 600, baseViewMatrix);
+	tc->Initialize(device);
 	rom->InsertRenderObject(tc);
 }
