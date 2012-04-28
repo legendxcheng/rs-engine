@@ -36,6 +36,9 @@
     <Filter Include="Source Files\RsEnginePrimitive\Object">
       <UniqueIdentifier>{50734a61-65fb-4146-91ae-6bd6ee6074bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\RsEnginePrimitive\FontDisplay">
+      <UniqueIdentifier>{b65f42d2-5cec-4b3c-8baa-7bc661bd5b2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SphereVS.cpp">
@@ -158,6 +161,15 @@
     <ClCompile Include="SpriteClass.cpp">
       <Filter>Source Files\RsEnginePrimitive\Object</Filter>
     </ClCompile>
+    <ClCompile Include="fontclass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="fontshaderclass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="textclass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SphereClass.h">
@@ -188,9 +200,6 @@
       <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="ShaderManager.h">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClInclude>
-    <ClInclude Include="Structures.h">
       <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="TextureClass.h">
@@ -280,6 +289,18 @@
     <ClInclude Include="SpriteClass.h">
       <Filter>Source Files\RsEnginePrimitive\Object</Filter>
     </ClInclude>
+    <ClInclude Include="textclass.h">
+      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="fontclass.h">
+      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="fontshaderclass.h">
+      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Structures.h">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Color.vs">
@@ -292,6 +313,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Sprite.fx">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="font.ps">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="font.vs">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

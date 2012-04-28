@@ -5,7 +5,7 @@
 
 SphereClass::SphereClass(char* objFileName) : ObjModelClass(objFileName)
 {
-
+	m_is2D = false;
 }
 
 

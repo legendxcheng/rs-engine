@@ -161,12 +161,12 @@ ID3D11ShaderResourceView* FontClass::GetTexture()
 
 void FontClass::BuildVertexArray(void* vertices, char* sentence, float drawX, float drawY)
 {
-	VertexType* vertexPtr;
+	VertexTextureType* vertexPtr;
 	int numLetters, index, i, letter;
 
 
 	// Coerce the input vertices into a VertexType structure.
-	vertexPtr = (VertexType*)vertices;
+	vertexPtr = (VertexTextureType*)vertices;
 
 	// Get the number of letters in the sentence.
 	numLetters = (int)strlen(sentence);

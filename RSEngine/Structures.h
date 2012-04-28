@@ -25,3 +25,9 @@ struct VertexType
 	D3DXVECTOR4 color;
 };
 
+struct SentenceType
+{
+	ID3D11Buffer *vertexBuffer, *indexBuffer;
+	int vertexCount, indexCount, maxLength;
+	float red, green, blue;
+};

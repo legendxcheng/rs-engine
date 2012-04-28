@@ -2,7 +2,7 @@
 // Filename: textclass.cpp
 ///////////////////////////////////////////////////////////////////////////////
 #include "textclass.h"
-
+#include "D3DClass.h"
 
 TextClass::TextClass()
 {
@@ -23,47 +23,50 @@ TextClass::~TextClass()
 {
 }
 
-
-bool TextClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, HWND hwnd, int screenWidth, int screenHeight, 
-						   D3DXMATRIX baseViewMatrix)
+void TextClass::SetAttributes(int screenWidth, int screenHeight, D3DXMATRIX baseViewMatrix)
 {
-	bool result;
-
-
-	// Store the screen width and height.
 	m_screenWidth = screenWidth;
 	m_screenHeight = screenHeight;
 
 	// Store the base view matrix.
 	m_baseViewMatrix = baseViewMatrix;
+}
+
+bool TextClass::Initialize(ID3D11Device* device)
+{
+	bool result;
+
+
+	// Store the screen width and height.
+	
 
 	// Create the font object.
-	m_Font = new FontClass;
+	m_Font = new FontClass();
 	if(!m_Font)
 	{
 		return false;
 	}
 
 	// Initialize the font object.
-	result = m_Font->Initialize(device, "../Engine/data/fontdata.txt", L"../Engine/data/font.dds");
+	result = m_Font->Initialize(device, "fontdata.txt", L"font.dds");
 	if(!result)
 	{
-		MessageBox(hwnd, L"Could not initialize the font object.", L"Error", MB_OK);
+		//MessageBox(hwnd, L"Could not initialize the font object.", L"Error", MB_OK);
 		return false;
 	}
 
 	// Create the font shader object.
-	m_FontShader = new FontShaderClass;
+	m_FontShader = new FontShaderClass();
 	if(!m_FontShader)
 	{
 		return false;
 	}
 
 	// Initialize the font shader object.
-	result = m_FontShader->Initialize(device, hwnd);
+	result = m_FontShader->Initialize(device);
 	if(!result)
 	{
-		MessageBox(hwnd, L"Could not initialize the font shader object.", L"Error", MB_OK);
+		//MessageBox(hwnd, L"Could not initialize the font shader object.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -73,6 +76,9 @@ bool TextClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCont
 	{
 		return false;
 	}
+
+	ID3D11DeviceContext* deviceContext;
+	device->GetImmediateContext(&deviceContext);
 
 	// Now update the sentence vertex buffer with the new string information.
 	result = UpdateSentence(m_sentence1, "Hello", 100, 100, 1.0f, 1.0f, 1.0f, deviceContext);
@@ -127,32 +133,35 @@ void TextClass::Shutdown()
 }
 
 
-bool TextClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX orthoMatrix)
+void TextClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix, D3DXMATRIX orthoMatrix)
 {
 	bool result;
 
-
+	D3DClass::GetInstance()->TurnZBufferOff();
+	D3DClass::GetInstance()->TurnOnAlphaBlending();
 	// Draw the first sentence.
-	result = RenderSentence(deviceContext, m_sentence1, worldMatrix, orthoMatrix);
-	if(!result)
-	{
-		return false;
-	}
+	result = RenderSentence(deviceContext, m_sentence1, m_worldMatrix, orthoMatrix);
+// 	if(!result)
+// 	{
+// 		return 
+// 	}
 
 	// Draw the second sentence.
-	result = RenderSentence(deviceContext, m_sentence2, worldMatrix, orthoMatrix);
-	if(!result)
-	{
-		return false;
-	}
-
-	return true;
+	result = RenderSentence(deviceContext, m_sentence2, m_worldMatrix, orthoMatrix);
+// 	if(!result)
+// 	{
+// 		return false;
+// 	}
+// 
+// 	return true;
+	D3DClass::GetInstance()->TurnZBufferOn();
+	D3DClass::GetInstance()->TurnOffAlphaBlending();
 }
 
 
 bool TextClass::InitializeSentence(SentenceType** sentence, int maxLength, ID3D11Device* device)
 {
-	VertexType* vertices;
+	VertexTextureType* vertices;
 	unsigned long* indices;
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
     D3D11_SUBRESOURCE_DATA vertexData, indexData;
@@ -181,7 +190,7 @@ bool TextClass::InitializeSentence(SentenceType** sentence, int maxLength, ID3D1
 	(*sentence)->indexCount = (*sentence)->vertexCount;
 
 	// Create the vertex array.
-	vertices = new VertexType[(*sentence)->vertexCount];
+	vertices = new VertexTextureType[(*sentence)->vertexCount];
 	if(!vertices)
 	{
 		return false;
@@ -195,7 +204,7 @@ bool TextClass::InitializeSentence(SentenceType** sentence, int maxLength, ID3D1
 	}
 
 	// Initialize vertex array to zeros at first.
-	memset(vertices, 0, (sizeof(VertexType) * (*sentence)->vertexCount));
+	memset(vertices, 0, (sizeof(VertexTextureType) * (*sentence)->vertexCount));
 
 	// Initialize the index array.
 	for(i=0; i<(*sentence)->indexCount; i++)
@@ -259,11 +268,11 @@ bool TextClass::UpdateSentence(SentenceType* sentence, char* text, int positionX
 							   ID3D11DeviceContext* deviceContext)
 {
 	int numLetters;
-	VertexType* vertices;
+	VertexTextureType* vertices;
 	float drawX, drawY;
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
-	VertexType* verticesPtr;
+	VertexTextureType* verticesPtr;
 
 
 	// Store the color of the sentence.
@@ -281,14 +290,14 @@ bool TextClass::UpdateSentence(SentenceType* sentence, char* text, int positionX
 	}
 
 	// Create the vertex array.
-	vertices = new VertexType[sentence->vertexCount];
+	vertices = new VertexTextureType[sentence->vertexCount];
 	if(!vertices)
 	{
 		return false;
 	}
 
 	// Initialize vertex array to zeros at first.
-	memset(vertices, 0, (sizeof(VertexType) * sentence->vertexCount));
+	memset(vertices, 0, (sizeof(VertexTextureType) * sentence->vertexCount));
 
 	// Calculate the X and Y pixel position on the screen to start drawing to.
 	drawX = (float)(((m_screenWidth / 2) * -1) + positionX);
@@ -305,10 +314,10 @@ bool TextClass::UpdateSentence(SentenceType* sentence, char* text, int positionX
 	}
 
 	// Get a pointer to the data in the vertex buffer.
-	verticesPtr = (VertexType*)mappedResource.pData;
+	verticesPtr = (VertexTextureType*)mappedResource.pData;
 
 	// Copy the data into the vertex buffer.
-	memcpy(verticesPtr, (void*)vertices, (sizeof(VertexType) * sentence->vertexCount));
+	memcpy(verticesPtr, (void*)vertices, (sizeof(VertexTextureType) * sentence->vertexCount));
 
 	// Unlock the vertex buffer.
 	deviceContext->Unmap(sentence->vertexBuffer, 0);
@@ -357,7 +366,7 @@ bool TextClass::RenderSentence(ID3D11DeviceContext* deviceContext, SentenceType*
 
 
 	// Set vertex buffer stride and offset.
-    stride = sizeof(VertexType); 
+    stride = sizeof(VertexTextureType); 
 	offset = 0;
 
 	// Set the vertex buffer to active in the input assembler so it can be rendered.
