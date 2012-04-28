@@ -1,5 +1,5 @@
 #include "SystemClass.h"
-
+#include "RSTimer.h"
 HWND SystemClass::m_hwnd = 0;
 
 SystemClass::SystemClass()
@@ -20,29 +20,7 @@ SystemClass::~SystemClass()
 
 
 
-bool SystemClass::Frame()
-{
-	bool result;
-	int mouseX, mouseY;
-	result = m_Input->Frame();
-	if (!result)
-	{
-		return false;
-	}
 
-	result = m_Graphics->Frame();
-	if (!result)
-	{
-		return false;
-	}
-
-	result = m_Graphics->Render();
-	if (!result)
-	{
-		return false;
-	}
-	return true;
-}
 
 LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)
 {
@@ -119,6 +97,12 @@ bool SystemClass::Initialize()
 		return false;
 	}
 
+	m_timer = new RSTimer();
+	if (!m_timer)
+	{
+		return false;
+	}
+
 	// Initialize the sound object.
 // 	result = m_Sound->Initialize(m_hwnd);
 // 	if(!result)
@@ -176,7 +160,7 @@ void SystemClass::Run()
 
 	// Loop until there is a quit message from the window or the user.
 	done = false;
-	while(!done)
+	while(true)
 	{
 		// Handle the windows messages.
 		if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -188,24 +172,32 @@ void SystemClass::Run()
 		// If windows signals to end the application then exit out.
 		if(msg.message == WM_QUIT)
 		{
-			done = true;
+			break;
 		}
-		else
+
+		/*
+			here is the timer structure
+			the graphics are rendered as often as possible
+			but the game state is updated in a steady rate
+		*/
+		while (m_timer->NeedUpdate())
 		{
-			// Otherwise do the frame processing.
-			result = Frame();
-			if(!result)
+			/*
+				calc next frame
+			*/
+			result = Update();
+			if (!result)
 			{
-				done = true;
+
+				return;
 			}
 		}
 
-		// Check if the user pressed escape and wants to quit.
-		if(m_Input->IsEscapePressed())
+		result = Render(m_timer->GetInterpolation());
+		if(!result)
 		{
-			done = true;
+			break;
 		}
-
 	}
 
 	return;
@@ -346,4 +338,42 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 			return ApplicationHandle->MessageHandler(hwnd, umessage, wparam, lparam);
 		}
 	}
+}
+
+bool SystemClass::Update()
+{
+	bool result;
+	int mouseX, mouseY;
+	/*
+		get new input state
+	*/
+	result = m_Input->Update();
+	if (!result)
+	{
+		return false;
+	}
+
+
+	// TODO: update the game state
+	// maybe call class GameLogic's function
+
+	return true;
+}
+
+/*
+	use the stored velocity value to calc the new world matrix of each obj
+*/
+bool SystemClass::Render(float interpolation)
+{
+	bool result;
+
+	// TODO: use the GameLogic's UpdateByInterpolation() function to recalc the world matrix of each obj
+
+	// render graphics
+	result = m_Graphics->Frame();
+	if (!result)
+	{
+		return false;
+	}
+	return true;
 }

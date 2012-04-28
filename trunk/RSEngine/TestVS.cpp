@@ -1,13 +1,20 @@
 #include "TestVS.h"
 #include "Structures.h"
 
-TestVS::TestVS(void)
+TestVS::TestVS(string tag)
 {
+	m_tag = tag;
 	m_vertexShader = 0;
 	m_layout = 0;
 
 }
 
+TestVS::TestVS()
+{
+	m_vertexShader = 0;
+	m_layout = 0;
+
+}
 
 TestVS::~TestVS(void)
 {

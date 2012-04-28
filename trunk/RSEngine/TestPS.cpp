@@ -98,7 +98,7 @@ void TestPS::ShutdownShader()
 
 }
 
-bool TestPS::SetShaderParameters(ID3D11DeviceContext* deviceContext)
+bool TestPS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView*)
 {
 	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 

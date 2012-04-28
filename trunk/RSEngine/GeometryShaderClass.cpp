@@ -1,8 +1,9 @@
 #include "GeometryShaderClass.h"
 #include "ShaderManager.h"
 
-GeometryShaderClass::GeometryShaderClass(void)
+GeometryShaderClass::GeometryShaderClass(string tag)
 {
+	m_tag = tag;
 }
 
 

@@ -3,15 +3,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "shaderclass.h"
 #include "Structures.h"
+
 ShaderClass::ShaderClass()
 {
-// 	m_vertexShader = 0;
-// 	m_pixelShader = 0;
-// 	m_layout = 0;
-// 	m_matrixBuffer = 0;
-// 	m_sampleState = 0;
 }
 
+ShaderClass::ShaderClass(string tag)
+{
+	m_tag = tag;
+}
 
 ShaderClass::ShaderClass(const ShaderClass& other)
 {
@@ -94,7 +94,7 @@ void ShaderClass::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND hwnd, 
 	return;
 }
 
-bool ShaderClass::SetShaderParameters()
+bool ShaderClass::SetRenderParameters()
 {
 
 
@@ -102,4 +102,7 @@ bool ShaderClass::SetShaderParameters()
 }
 
 
-	
+string ShaderClass::GetTag()
+{
+	return m_tag;
+}

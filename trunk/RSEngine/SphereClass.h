@@ -7,7 +7,7 @@ public:
 	SphereClass(char* objFileName);
 	~SphereClass(void);
 	virtual void Shutdown();
-	virtual void Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix,
+	virtual void Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix,
 		D3DXMATRIX projectionMatrix);
 protected:
 	virtual bool InitializeShaders(ID3D11Device*);

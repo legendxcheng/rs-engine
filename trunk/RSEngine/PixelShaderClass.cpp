@@ -1,10 +1,14 @@
 #include "PixelShaderClass.h"
 #include "ShaderManager.h"
 
-PixelShaderClass::PixelShaderClass(void)
+PixelShaderClass::PixelShaderClass(string tag)
 {
+	m_tag = tag;
 }
 
+PixelShaderClass::PixelShaderClass()
+{
+}
 
 PixelShaderClass::~PixelShaderClass(void)
 {

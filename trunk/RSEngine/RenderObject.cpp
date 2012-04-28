@@ -19,3 +19,8 @@ bool RenderObject::IsVisible()
 {
 	return m_visible;
 }
+
+bool RenderObject::Is2D()
+{
+	return m_is2D;
+}

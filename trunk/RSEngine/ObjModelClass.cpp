@@ -6,10 +6,12 @@
 ObjModelClass::ObjModelClass(char* objFileName)
 {
 	m_objFileName = objFileName;
+	D3DXMatrixIdentity(&m_worldMatrix);
 }
 
 ObjModelClass::ObjModelClass()
 {
+	D3DXMatrixIdentity(&m_worldMatrix);
 }
 
 void ObjModelClass::Shutdown()

@@ -287,7 +287,7 @@ void SpriteClass::ShutdownBuffers()
 }
 
 
-void SpriteClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix)
+void SpriteClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix)
 {
 	/*
 		the world view project matrix has no use!
@@ -297,8 +297,8 @@ void SpriteClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMat
 	bool result;
 	D3DClass::GetInstance()->TurnZBufferOff();
 	RenderBuffers(deviceContext);
-	m_vs->SetRenderParameters(deviceContext, worldMatrix, viewMatrix, projMatrix);
-	m_ps->SetShaderParameters(deviceContext, m_Texture->GetTexture());
+	m_vs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projMatrix);
+	m_ps->SetRenderParameters(deviceContext, m_Texture->GetTexture());
 	deviceContext->DrawIndexed(m_indexCount, 0, 0);
 	D3DClass::GetInstance()->TurnZBufferOn();
 }

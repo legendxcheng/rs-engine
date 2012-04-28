@@ -10,6 +10,8 @@
 #include "GraphicsClass.h"
 #include "SoundClass.h"
 
+class RSTimer;
+
 class SystemClass
 {
 public:
@@ -29,7 +31,16 @@ public:
 	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
 private:
-	bool Frame();
+	/*
+		update by a frame
+		just update data, not including the graphics
+	*/
+	bool Update();
+	/*
+		just render with the param interpolation
+		the interpolation is the time in ms elapsed since last frame
+	*/
+	bool Render(float interpolation);
 	void InitializeWindows(int&, int&);
 	void ShutdownWindows();
 
@@ -40,6 +51,7 @@ private:
 	InputClass* m_Input;
 	GraphicsClass* m_Graphics;
 	SoundClass* m_Sound;
+	RSTimer* m_timer;
 };
 
 /////////////////////////

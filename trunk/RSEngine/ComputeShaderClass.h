@@ -4,7 +4,8 @@ class ComputeShaderClass :
 	public ShaderClass
 {
 public:
-	ComputeShaderClass(void);
+	ComputeShaderClass();
+	ComputeShaderClass(string tag);
 	virtual ~ComputeShaderClass(void);
 
 public:

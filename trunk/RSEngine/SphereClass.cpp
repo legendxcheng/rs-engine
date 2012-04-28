@@ -3,9 +3,9 @@
 #include "SphereVS.h"
 #include "SystemClass.h"
 
-SphereClass::SphereClass(char* objFileName)
+SphereClass::SphereClass(char* objFileName) : ObjModelClass(objFileName)
 {
-	m_objFileName = objFileName;
+
 }
 
 
@@ -71,7 +71,7 @@ void SphereClass::ShutdownBuffers()
 	return;
 }
 
-void SphereClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix,
+void SphereClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix,
 	D3DXMATRIX projectionMatrix)
 {
 	// do ALL the render works
@@ -79,7 +79,7 @@ void SphereClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMat
 
 	RenderBuffers(deviceContext);
 	// Render the model using the color shader.
-	m_vs->SetRenderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix);
-	m_ps->SetShaderParameters(deviceContext, m_texture->GetTexture());
+	m_vs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projectionMatrix);
+	m_ps->SetRenderParameters(deviceContext, m_texture->GetTexture());
 	deviceContext->Draw(m_vertextCount, 0);
 }

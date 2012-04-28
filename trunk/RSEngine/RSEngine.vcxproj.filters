@@ -12,213 +12,273 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{8d4ab1fc-0723-467f-a068-3c65bfbe0e5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core">
-      <UniqueIdentifier>{27a6ecf3-d58e-4b41-93eb-9ad1c260f68a}</UniqueIdentifier>
+    <Filter Include="Source Files\Example">
+      <UniqueIdentifier>{e57594cd-ad79-4c1c-998a-fa491b3e2665}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\SphereClass">
-      <UniqueIdentifier>{f34839c4-ec7c-4bc8-8d21-df7d43cabcbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\TriangleExample">
+    <Filter Include="Source Files\Example\TriangleExample">
       <UniqueIdentifier>{9451cef7-e0c6-4c24-9552-278b6a708c63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\BitmapClass">
-      <UniqueIdentifier>{da793fec-ec62-4886-aeb7-0d4894237359}</UniqueIdentifier>
+    <Filter Include="Source Files\Example\SphereClass">
+      <UniqueIdentifier>{f34839c4-ec7c-4bc8-8d21-df7d43cabcbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{11b6f78a-d47b-4ad1-a559-3d4659dbd7f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RsEnginePrimitive">
+      <UniqueIdentifier>{27a6ecf3-d58e-4b41-93eb-9ad1c260f68a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RsEnginePrimitive\BaseShaderClass">
+      <UniqueIdentifier>{ad6161f0-53a3-4fe8-acfb-49aa05d4f15e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RsEnginePrimitive\Core">
+      <UniqueIdentifier>{7aee3db2-d767-4171-9551-548edad95922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RsEnginePrimitive\Object">
+      <UniqueIdentifier>{50734a61-65fb-4146-91ae-6bd6ee6074bb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SphereVS.cpp">
-      <Filter>Source Files\SphereClass</Filter>
+      <Filter>Source Files\Example\SphereClass</Filter>
     </ClCompile>
     <ClCompile Include="SpherePS.cpp">
-      <Filter>Source Files\SphereClass</Filter>
+      <Filter>Source Files\Example\SphereClass</Filter>
     </ClCompile>
     <ClCompile Include="TestPS.cpp">
-      <Filter>Source Files\TriangleExample</Filter>
+      <Filter>Source Files\Example\TriangleExample</Filter>
     </ClCompile>
     <ClCompile Include="TriangleTest.cpp">
-      <Filter>Source Files\TriangleExample</Filter>
+      <Filter>Source Files\Example\TriangleExample</Filter>
     </ClCompile>
     <ClCompile Include="TestVS.cpp">
-      <Filter>Source Files\TriangleExample</Filter>
+      <Filter>Source Files\Example\TriangleExample</Filter>
     </ClCompile>
     <ClCompile Include="SphereTexture.cpp">
-      <Filter>Source Files\SphereClass</Filter>
+      <Filter>Source Files\Example\SphereClass</Filter>
     </ClCompile>
     <ClCompile Include="SphereClass.cpp">
-      <Filter>Source Files\SphereClass</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraClass.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\Example\SphereClass</Filter>
     </ClCompile>
     <ClCompile Include="CameraManager.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputeShaderClass.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="D3DClass.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineMain.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="GeometryShaderClass.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsClass.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="InputClass.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClCompile>
     <ClCompile Include="ModelClass.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjLoader.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjModelClass.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="PixelShaderClass.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderObject.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderObjectManager.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderClass.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClCompile>
     <ClCompile Include="ShaderManager.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundClass.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemClass.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClCompile>
     <ClCompile Include="TextureClass.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClCompile>
     <ClCompile Include="TokenStream.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexShaderClass.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteClass.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClCompile>
     <ClCompile Include="SpritePS.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClCompile>
     <ClCompile Include="SpriteVS.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputeShaderClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryShaderClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelShaderClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexShaderClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineMain.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="InputClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="RSTimer.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameGlobalData.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Spaceship.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLoader.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjModelClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderObject.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderObjectManager.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteClass.cpp">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SphereClass.h">
-      <Filter>Source Files\SphereClass</Filter>
+      <Filter>Source Files\Example\SphereClass</Filter>
     </ClInclude>
     <ClInclude Include="SphereVS.h">
-      <Filter>Source Files\SphereClass</Filter>
+      <Filter>Source Files\Example\SphereClass</Filter>
     </ClInclude>
     <ClInclude Include="SpherePS.h">
-      <Filter>Source Files\SphereClass</Filter>
+      <Filter>Source Files\Example\SphereClass</Filter>
     </ClInclude>
     <ClInclude Include="SphereTexture.h">
-      <Filter>Source Files\SphereClass</Filter>
+      <Filter>Source Files\Example\SphereClass</Filter>
     </ClInclude>
     <ClInclude Include="TestPS.h">
-      <Filter>Source Files\TriangleExample</Filter>
+      <Filter>Source Files\Example\TriangleExample</Filter>
     </ClInclude>
     <ClInclude Include="TestVS.h">
-      <Filter>Source Files\TriangleExample</Filter>
+      <Filter>Source Files\Example\TriangleExample</Filter>
     </ClInclude>
     <ClInclude Include="TriangleTest.h">
-      <Filter>Source Files\TriangleExample</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexShaderClass.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraClass.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\Example\TriangleExample</Filter>
     </ClInclude>
     <ClInclude Include="CameraManager.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputeShaderClass.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="D3DClass.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="GeometryShaderClass.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsClass.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="InputClass.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="ModelClass.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjLoader.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjModelClass.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="PixelShaderClass.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderObject.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderObjectManager.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderClass.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="ShaderManager.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundClass.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="Structures.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemClass.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="TextureClass.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="TokenStream.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteClass.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="SpriteVS.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
     </ClInclude>
     <ClInclude Include="SpritePS.h">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\RsEnginePrimitive</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShaderClass.h">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeShaderClass.h">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryShaderClass.h">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShaderClass.h">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderClass.h">
+      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DClass.h">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsClass.h">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="InputClass.h">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClass.h">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="RSTimer.h">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemClass.h">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Spaceship.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameGlobalData.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraClass.h">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLoader.h">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjModelClass.h">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderObject.h">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderObjectManager.h">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteClass.h">
+      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

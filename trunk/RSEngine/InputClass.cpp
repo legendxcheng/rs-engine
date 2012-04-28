@@ -121,7 +121,7 @@ void InputClass::Shutdown()
 	return;
 }
 
-bool InputClass::Frame()
+bool InputClass::Update()
 {
 	bool result;
 
