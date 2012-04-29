@@ -2,6 +2,9 @@
 // Filename: inputclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "inputclass.h"
+
+
+
 InputClass::InputClass()
 {
 	m_directInput = 0;
@@ -93,6 +96,7 @@ bool InputClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidth, int
 
 	return true;
 }
+
 void InputClass::Shutdown()
 {
 	// Release the mouse.
@@ -211,7 +215,7 @@ void InputClass::ProcessInput()
 bool InputClass::IsEscapePressed()
 {
 	// Do a bitwise and on the keyboard state to check if the escape key is currently being pressed.
-	if(m_keyboardState[DIK_ESCAPE] & 0x80)
+	if(KEYDOWN(DIK_ESCAPE))
 	{
 		return true;
 	}
@@ -224,4 +228,9 @@ void InputClass::GetMouseLocation(int& mouseX, int& mouseY)
 	mouseX = m_mouseX;
 	mouseY = m_mouseY;
 	return;
+}
+
+bool InputClass::IsKeyDown(unsigned int key)
+{
+	return KEYDOWN(key);
 }

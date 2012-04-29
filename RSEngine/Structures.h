@@ -1,4 +1,6 @@
+
 #include <d3dx10math.h>
+#include <string>
 
 struct MatrixBufferType
 {
@@ -31,4 +33,5 @@ struct SentenceType
 	int vertexCount, indexCount, maxLength;
 	float red, green, blue;
 	std::string tag;// string for search
+	int positionX, positionY;
 };

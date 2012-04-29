@@ -9,7 +9,7 @@
 #include "SpriteClass.h"
 #include "SphereClass.h"
 #include "textclass.h"
-
+#include "GameLogic.h"
 #include <DxErr.h>
 
 GraphicsClass::GraphicsClass()
@@ -203,12 +203,14 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	/*
 		text example
 	*/
-	TextClass* tc = new TextClass();
+	m_textClass = new TextClass();
+
 	
 	D3DXMATRIX baseViewMatrix;
 	m_Camera->Render();
 	m_Camera->GetViewMatrix(baseViewMatrix);
-	tc->SetAttributes(800, 600, baseViewMatrix);
-	tc->Initialize(device);
-	rom->InsertRenderObject(tc);
+	m_textClass->SetAttributes(800, 600, baseViewMatrix);
+	m_textClass->Initialize(device);
+	GameLogic::GetInstance()->InitUIMgr(m_textClass);
+	rom->InsertRenderObject(m_textClass);
 }

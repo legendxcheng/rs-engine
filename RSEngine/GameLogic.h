@@ -5,6 +5,8 @@ class UIManager;
 class Spaceship;
 class InputManager;
 class GameGlobalData;
+class TextClass;
+class InputClass;
 
 class GameLogic
 {
@@ -28,5 +30,16 @@ private:
 	InputManager* m_inputMgr;
 	UIManager* m_uiMgr;
 	GameGlobalData* m_gameGD;
+
+// for input mgr
+public:
+	void InitInputMgr(InputClass* ic);
+private:
+	
+// for ui mgr
+public:
+	void InitUIMgr(TextClass* tc);
+private:
+
 };
 

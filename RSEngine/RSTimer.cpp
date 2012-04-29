@@ -6,14 +6,17 @@ RSTimer::RSTimer(void)
 	Reset();
 }
 
+unsigned int RSTimer::m_totFrame = 0;
 
 RSTimer::~RSTimer(void)
 {
+	
 }
 
 void RSTimer::Reset()
 {
 	m_nextGameTick = GetTickCount();
+	m_totFrame = 0;
 
 }
 
@@ -33,7 +36,8 @@ bool RSTimer::NeedUpdate()
 {
 	if (GetTickCount() > m_nextGameTick)
 	{
-		m_nextGameTick += m_gameSpeed;
+		m_nextGameTick += m_skipTick;
+		++m_totFrame;
 		return true;
 	}
 	return false;
