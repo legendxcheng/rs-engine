@@ -17,6 +17,8 @@
 //////////////
 #include <dinput.h>
 
+// Util Macro
+#define KEYDOWN(key) (m_keyboardState[key] & 0x80)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: InputClass
@@ -34,7 +36,7 @@ public:
 
 	bool IsEscapePressed();
 	void GetMouseLocation(int&, int&);
-
+	bool IsKeyDown(unsigned int key);
 private:
 	bool ReadKeyboard();
 	bool ReadMouse();

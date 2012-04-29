@@ -5,6 +5,9 @@
 #include "Spaceship.h"
 #include "UIManager.h"
 #include "GameGlobalData.h"
+#include "textclass.h"
+#include "InputClass.h"
+#include "RSTimer.h"
 
 GameLogic::GameLogic(void)
 {
@@ -32,6 +35,9 @@ GameLogic* GameLogic::GetInstance()
 void GameLogic::UpdateFrame()
 {
 	// TODO: fill
+	m_uiMgr->UpdateFrameCount(50, RSTimer::m_totFrame);
+	
+	m_uiMgr->UpdateKeyboardInput(m_inputMgr->GetKeyBoardState());
 }
 
 void GameLogic::UpdateInterpolate(float interpoloate)
@@ -39,3 +45,12 @@ void GameLogic::UpdateInterpolate(float interpoloate)
 	// TODO: fill
 }
 
+void GameLogic::InitInputMgr(InputClass* ic)
+{
+	m_inputMgr->Initialize(ic);
+}
+
+void GameLogic::InitUIMgr(TextClass* tc)
+{
+	m_uiMgr->Initialize(tc);
+}

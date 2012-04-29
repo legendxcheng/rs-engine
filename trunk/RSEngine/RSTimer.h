@@ -26,6 +26,8 @@ private:
 	unsigned int m_gameSpeed;
 	unsigned int m_sysStartTime;
 	unsigned int m_lastTime;
+public:
+	static unsigned int m_totFrame;
 
 };
 

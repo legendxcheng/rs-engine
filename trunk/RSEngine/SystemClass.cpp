@@ -1,5 +1,7 @@
 #include "SystemClass.h"
 #include "RSTimer.h"
+#include "GameLogic.h"
+
 HWND SystemClass::m_hwnd = 0;
 
 SystemClass::SystemClass()
@@ -102,7 +104,7 @@ bool SystemClass::Initialize()
 	{
 		return false;
 	}
-
+	m_timer->SetGameSpeed(60);
 	// Initialize the sound object.
 // 	result = m_Sound->Initialize(m_hwnd);
 // 	if(!result)
@@ -110,6 +112,14 @@ bool SystemClass::Initialize()
 // 		MessageBox(m_hwnd, L"Could not initialize Direct Sound.", L"Error", MB_OK);
 // 		return false;
 // 	}
+
+	/*
+		Initialize of GameLogic
+		Initialize each component of GameLogic
+	*/
+	GameLogic* gl = GameLogic::GetInstance();
+	gl->InitInputMgr(m_Input);
+	
 
 
 	return true;
@@ -356,6 +366,7 @@ bool SystemClass::Update()
 
 	// TODO: update the game state
 	// maybe call class GameLogic's function
+	GameLogic::GetInstance()->UpdateFrame();
 
 	return true;
 }

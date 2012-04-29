@@ -9,7 +9,7 @@ TextClass::TextClass()
 	D3DXMatrixIdentity(&m_worldMatrix);
 	m_Font = 0;
 	m_FontShader = 0;
-
+	
 	m_sentenceList.clear();
 }
 
@@ -36,7 +36,7 @@ bool TextClass::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-
+	m_device = device;
 	// Store the screen width and height.
 	
 
@@ -48,7 +48,7 @@ bool TextClass::Initialize(ID3D11Device* device)
 	}
 
 	// Initialize the font object.
-	result = m_Font->Initialize(device, "fontdata.txt", L"font.dds");
+	result = m_Font->Initialize(m_device, "fontdata.txt", L"font.dds");
 	if(!result)
 	{
 		//MessageBox(hwnd, L"Could not initialize the font object.", L"Error", MB_OK);
@@ -63,50 +63,14 @@ bool TextClass::Initialize(ID3D11Device* device)
 	}
 
 	// Initialize the font shader object.
-	result = m_FontShader->Initialize(device);
+	result = m_FontShader->Initialize(m_device);
 	if(!result)
 	{
 		//MessageBox(hwnd, L"Could not initialize the font shader object.", L"Error", MB_OK);
 		return false;
 	}
 	
-	this->AddText(device, "123", 100, 100, 200, 200, 200);
-	this->EditText(device, "123", "fuck you!", 100, 100, 0.5f, 0.5f, 0.5f);
-
-	this->AddText(device, "1232", 100, 100, 200, 200, 200);
-	this->EditText(device, "1232", "I love you, so I wanna fuck you!", 100, 300, 1.0f, 1.0f, 0.5f);
-
-// 
-// 	// Initialize the first sentence.
-// 	result = InitializeSentence(&m_sentence1, 16, device);
-// 	if(!result)
-// 	{
-// 		return false;
-// 	}
-// 
-// 	ID3D11DeviceContext* deviceContext;
-// 	device->GetImmediateContext(&deviceContext);
-// 
-// 	// Now update the sentence vertex buffer with the new string information.
-// 	result = UpdateSentence(m_sentence1, "Hello", 100, 100, 1.0f, 1.0f, 1.0f, deviceContext);
-// 	if(!result)
-// 	{
-// 		return false;
-// 	}
-// 
-// 	// Initialize the first sentence.
-// 	result = InitializeSentence(&m_sentence2, 16, device);
-// 	if(!result)
-// 	{
-// 		return false;
-// 	}
-// 
-// 	// Now update the sentence vertex buffer with the new string information.
-// 	result = UpdateSentence(m_sentence2, "Goodbye", 100, 200, 1.0f, 1.0f, 0.0f, deviceContext);
-// 	if(!result)
-// 	{
-// 		return false;
-// 	}
+	
 
 	return true;
 }
@@ -283,6 +247,10 @@ bool TextClass::UpdateSentence(SentenceType* sentence, char* text, int positionX
 	sentence->green = green;
 	sentence->blue = blue;
 
+	// Store the position of the sentence
+	sentence->positionX = positionX;
+	sentence->positionY = positionY;
+
 	// Get the number of letters in the sentence.
 	numLetters = (int)strlen(text);
 
@@ -305,6 +273,64 @@ bool TextClass::UpdateSentence(SentenceType* sentence, char* text, int positionX
 	// Calculate the X and Y pixel position on the screen to start drawing to.
 	drawX = (float)(((m_screenWidth / 2) * -1) + positionX);
 	drawY = (float)((m_screenHeight / 2) - positionY);
+
+	// Use the font class to build the vertex array from the sentence text and sentence draw location.
+	m_Font->BuildVertexArray((void*)vertices, text, drawX, drawY);
+
+	// Lock the vertex buffer so it can be written to.
+	result = deviceContext->Map(sentence->vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if(FAILED(result))
+	{
+		return false;
+	}
+
+	// Get a pointer to the data in the vertex buffer.
+	verticesPtr = (VertexTextureType*)mappedResource.pData;
+
+	// Copy the data into the vertex buffer.
+	memcpy(verticesPtr, (void*)vertices, (sizeof(VertexTextureType) * sentence->vertexCount));
+
+	// Unlock the vertex buffer.
+	deviceContext->Unmap(sentence->vertexBuffer, 0);
+
+	// Release the vertex array as it is no longer needed.
+	delete [] vertices;
+	vertices = 0;
+
+	return true;
+}
+
+bool TextClass::UpdateSentence(SentenceType* sentence, char* text, ID3D11DeviceContext* deviceContext)
+{
+	int numLetters;
+	VertexTextureType* vertices;
+	float drawX, drawY;
+	HRESULT result;
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	VertexTextureType* verticesPtr;
+
+	// Get the number of letters in the sentence.
+	numLetters = (int)strlen(text);
+
+	// Check for possible buffer overflow.
+	if(numLetters > sentence->maxLength)
+	{
+		return false;
+	}
+
+	// Create the vertex array.
+	vertices = new VertexTextureType[sentence->vertexCount];
+	if(!vertices)
+	{
+		return false;
+	}
+
+	// Initialize vertex array to zeros at first.
+	memset(vertices, 0, (sizeof(VertexTextureType) * sentence->vertexCount));
+
+	// Calculate the X and Y pixel position on the screen to start drawing to.
+	drawX = (float)(((m_screenWidth / 2) * -1) + sentence->positionX);
+	drawY = (float)((m_screenHeight / 2) - sentence->positionY);
 
 	// Use the font class to build the vertex array from the sentence text and sentence draw location.
 	m_Font->BuildVertexArray((void*)vertices, text, drawX, drawY);
@@ -395,10 +421,15 @@ bool TextClass::RenderSentence(ID3D11DeviceContext* deviceContext, SentenceType*
 	return true;
 }
 
-bool TextClass::AddText(ID3D11Device* device, std::string tag, unsigned int positionX, unsigned int positionY, unsigned int red, unsigned int green, unsigned int blue)
+bool TextClass::AddText(std::string tag, unsigned int positionX, unsigned int positionY, unsigned int red, unsigned int green, unsigned int blue)
 {
 	SentenceType* newSt;
-	InitializeSentence(&newSt, tag, 200, device);
+	InitializeSentence(&newSt, tag, 200, m_device);
+	newSt->positionX = positionX;
+	newSt->positionY = positionY;
+	newSt->red = red;
+	newSt->green = green;
+	newSt->blue = blue;
 	m_sentenceList.push_back(newSt);
 	return true;
 }
@@ -420,7 +451,7 @@ bool TextClass::DeleteText(std::string tag)
 	return false;
 }
 
-bool TextClass::EditText(ID3D11Device* device, std::string tag, std::string newText, unsigned int positionX, unsigned int positionY, 
+bool TextClass::EditText(std::string tag, std::string newText, unsigned int positionX, unsigned int positionY, 
 	float red, float green, float blue)
 {
 	for (std::vector<SentenceType*>::iterator iter = m_sentenceList.begin(); iter != m_sentenceList.end();
@@ -430,7 +461,7 @@ bool TextClass::EditText(ID3D11Device* device, std::string tag, std::string newT
 		{
 			// found
 			ID3D11DeviceContext* deviceContext;
-			device->GetImmediateContext(&deviceContext);
+			m_device->GetImmediateContext(&deviceContext);
 			UpdateSentence(*iter, (char*)newText.c_str(), positionX, positionY, red, green, blue, deviceContext);
 			return true;
 		}
@@ -439,5 +470,28 @@ bool TextClass::EditText(ID3D11Device* device, std::string tag, std::string newT
 	// not found
 	return false;
 }
+
+
+bool TextClass::EditText(std::string tag, std::string newText)
+{
+	for (std::vector<SentenceType*>::iterator iter = m_sentenceList.begin(); iter != m_sentenceList.end();
+		++iter)
+	{
+		if ((*iter)->tag.compare(tag) == 0)
+		{
+			// found
+			ID3D11DeviceContext* deviceContext;
+			m_device->GetImmediateContext(&deviceContext);
+			UpdateSentence(*iter, (char*)newText.c_str(), deviceContext);
+			return true;
+		}
+	}
+
+	// not found
+	return false;
+}
+
+
+
 
 
