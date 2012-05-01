@@ -187,9 +187,9 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 		Sphere Example
 	*/
 
-// 	SphereClass* omc = new SphereClass("sphere.obj");
-// 	omc->Initialize(device);
-// 	rom->InsertRenderObject((RenderObject*) omc);
+	SphereClass* omc = new SphereClass("sphere.obj");
+	omc->Initialize(device);
+	rom->InsertRenderObject((RenderObject*) omc);
 
 // 	SpriteClass* sc = new SpriteClass();
 // 	sc->Initialize(device);

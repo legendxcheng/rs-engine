@@ -32,11 +32,10 @@ GameLogic* GameLogic::GetInstance()
 	return m_instance;
 }
 
-void GameLogic::UpdateFrame()
+void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 {
 	// TODO: fill
-	m_uiMgr->UpdateFrameCount(50, RSTimer::m_totFrame);
-	
+	m_uiMgr->UpdateFrameCount(fps, totFrame);
 	m_uiMgr->UpdateKeyboardInput(m_inputMgr->GetKeyBoardState());
 }
 

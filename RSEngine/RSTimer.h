@@ -14,6 +14,11 @@ public:
 	unsigned int GetGameSpeed();
 	// check if game state updating is needed
 	bool NeedUpdate();
+
+	unsigned int GetTotalFrame();
+	// just touch the timer to calc real fps
+	void RenderTouch();
+	float GetFPS();
 	// check if rendering is needed
 
 	/*
@@ -26,8 +31,9 @@ private:
 	unsigned int m_gameSpeed;
 	unsigned int m_sysStartTime;
 	unsigned int m_lastTime;
-public:
-	static unsigned int m_totFrame;
+	unsigned int m_totFrame;
+	float m_fps;
+	unsigned int m_lastRenderTick;
 
 };
 

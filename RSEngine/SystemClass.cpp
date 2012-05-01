@@ -204,6 +204,7 @@ void SystemClass::Run()
 		}
 
 		result = Render(m_timer->GetInterpolation());
+		m_timer->RenderTouch();
 		if(!result)
 		{
 			break;
@@ -366,7 +367,7 @@ bool SystemClass::Update()
 
 	// TODO: update the game state
 	// maybe call class GameLogic's function
-	GameLogic::GetInstance()->UpdateFrame();
+	GameLogic::GetInstance()->UpdateFrame(m_timer->GetTotalFrame(), (unsigned int)m_timer->GetFPS());
 
 	return true;
 }
