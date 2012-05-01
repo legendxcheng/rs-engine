@@ -74,6 +74,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BulletStorm.cpp" />
+    <ClCompile Include="BulletStrip.cpp" />
     <ClCompile Include="fontclass.cpp" />
     <ClCompile Include="fontshaderclass.cpp" />
     <ClCompile Include="GameGlobalData.cpp" />
@@ -119,6 +121,8 @@
     <ClCompile Include="VertexShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BulletStorm.h" />
+    <ClInclude Include="BulletStrip.h" />
     <ClInclude Include="fontclass.h" />
     <ClInclude Include="fontshaderclass.h" />
     <ClInclude Include="GameGlobalData.h" />

@@ -6,7 +6,6 @@ RSTimer::RSTimer(void)
 	Reset();
 }
 
-unsigned int RSTimer::m_totFrame = 0;
 
 RSTimer::~RSTimer(void)
 {
@@ -16,6 +15,7 @@ RSTimer::~RSTimer(void)
 void RSTimer::Reset()
 {
 	m_nextGameTick = GetTickCount();
+	m_lastRenderTick = m_nextGameTick;
 	m_totFrame = 0;
 
 }
@@ -47,4 +47,21 @@ float RSTimer::GetInterpolation()
 {
 	return float( GetTickCount() + m_skipTick - m_nextGameTick )
 		/ float( m_skipTick );
+}
+
+unsigned int RSTimer::GetTotalFrame()
+{
+	return m_totFrame;
+}
+
+float RSTimer::GetFPS()
+{
+	return m_fps;
+}
+
+void RSTimer::RenderTouch()
+{
+	unsigned int tmp = GetTickCount();
+	m_fps = 1000 / (float)(tmp - m_lastRenderTick);
+	m_lastRenderTick = tmp;
 }

@@ -15,7 +15,7 @@ public:
 	~GameLogic(void);
 	static GameLogic* GetInstance();
 	// clac the next key frame
-	void UpdateFrame();
+	void UpdateFrame(unsigned int, unsigned int);
 	// update interpolate
 	void UpdateInterpolate(float interpoloate);
 

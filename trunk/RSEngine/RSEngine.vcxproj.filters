@@ -39,6 +39,9 @@
     <Filter Include="Source Files\RsEnginePrimitive\FontDisplay">
       <UniqueIdentifier>{b65f42d2-5cec-4b3c-8baa-7bc661bd5b2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\BulletSystem">
+      <UniqueIdentifier>{b3c193f1-ac42-4653-9b72-36a577687ab8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SphereVS.cpp">
@@ -170,6 +173,12 @@
     <ClCompile Include="textclass.cpp">
       <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
     </ClCompile>
+    <ClCompile Include="BulletStorm.cpp">
+      <Filter>Source Files\Game\BulletSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletStrip.cpp">
+      <Filter>Source Files\Game\BulletSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SphereClass.h">
@@ -300,6 +309,12 @@
     </ClInclude>
     <ClInclude Include="Structures.h">
       <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletStorm.h">
+      <Filter>Source Files\Game\BulletSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletStrip.h">
+      <Filter>Source Files\Game\BulletSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
