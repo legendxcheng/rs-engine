@@ -1,6 +1,10 @@
 #include "BulletStorm.h"
 #include "BulletStrip.h"
 #include "Structures.h"
+#include "lua_head.h"
+
+#pragma comment(lib,"lua.lib")
+
 
 BulletStorm::BulletStorm(void)
 {
@@ -40,5 +44,11 @@ void BulletStorm::UpdateInterpolation(float delta)
 
 void BulletStorm::UpdateFrame()
 {
+
+}
+
+void BulletStorm::LoadBulletStorm(char* fileName)
+{
+	lua_State *L;
 
 }

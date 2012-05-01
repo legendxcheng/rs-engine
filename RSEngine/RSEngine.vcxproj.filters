@@ -316,6 +316,9 @@
     <ClInclude Include="BulletStrip.h">
       <Filter>Source Files\Game\BulletSystem</Filter>
     </ClInclude>
+    <ClInclude Include="lua_head.h">
+      <Filter>Source Files\Game\BulletSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Color.vs">
