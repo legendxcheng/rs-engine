@@ -47,8 +47,25 @@ void BulletStorm::UpdateFrame()
 
 }
 
+float GetField (lua_State* L, const char *key) 
+{
+	float result = 0.0f;
+	lua_pushstring(L, key);
+	lua_gettable(L, -2);
+	result = (float)lua_tonumber(L, -1);
+	lua_pop(L, 1);
+	return result;
+}
+
 void BulletStorm::LoadBulletStorm(char* fileName)
 {
+	// now just test lua
+	int rett;
 	lua_State *L;
-
+	L = luaL_newstate();
+	luaL_openlibs (L);
+	rett = luaL_loadfile(L, fileName);
+	rett = lua_pcall(L, 0, 0, 0);
+	lua_getglobal(L, "background");
+	int outputd = (int)GetField(L, "b");
 }
