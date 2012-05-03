@@ -81,7 +81,7 @@
     <ClCompile Include="GameGlobalData.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="BulletSystem.cpp" />
     <ClCompile Include="RSTimer.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spaceship.cpp" />
@@ -129,7 +129,7 @@
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="lua_head.h" />
-    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="BulletSystem.h" />
     <ClInclude Include="RSTimer.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spaceship.h" />

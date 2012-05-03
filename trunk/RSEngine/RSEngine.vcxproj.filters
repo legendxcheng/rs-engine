@@ -128,9 +128,6 @@
     <ClCompile Include="GameLogic.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleSystem.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
@@ -177,6 +174,9 @@
       <Filter>Source Files\Game\BulletSystem</Filter>
     </ClCompile>
     <ClCompile Include="BulletStrip.cpp">
+      <Filter>Source Files\Game\BulletSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletSystem.cpp">
       <Filter>Source Files\Game\BulletSystem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -262,9 +262,6 @@
     <ClInclude Include="GameLogic.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
@@ -275,9 +272,6 @@
       <Filter>Source Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundManager.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="CameraClass.h">
@@ -318,6 +312,12 @@
     </ClInclude>
     <ClInclude Include="lua_head.h">
       <Filter>Source Files\Game\BulletSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletSystem.h">
+      <Filter>Source Files\Game\BulletSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

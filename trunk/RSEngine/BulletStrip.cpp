@@ -1,5 +1,5 @@
 #include "BulletStrip.h"
-
+// deprecated!
 
 BulletStrip::BulletStrip(void)
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-class ParticleSystem;
+class BulletSystem;
 class UIManager;
 class Spaceship;
 class InputManager;
@@ -25,7 +25,7 @@ private:
 	
 
 private:
-	ParticleSystem* m_particleSys;
+	BulletSystem* m_bulletSys;
 	Spaceship* m_spaceship;
 	InputManager* m_inputMgr;
 	UIManager* m_uiMgr;
@@ -39,7 +39,13 @@ private:
 // for ui mgr
 public:
 	void InitUIMgr(TextClass* tc);
-private:
 
+
+// game data
+private:
+	float m_totTime;
+	unsigned int m_score;
+	float m_cameraAngle;// along the axi
+	unsigned int m_screenBullet;// totnumber of bullets in screen
 };
 

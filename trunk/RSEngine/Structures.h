@@ -35,3 +35,8 @@ struct SentenceType
 	std::string tag;// string for search
 	int positionX, positionY;
 };
+
+struct BulletType
+{
+	D3DXVECTOR3 position;
+};

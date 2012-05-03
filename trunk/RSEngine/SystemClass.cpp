@@ -54,7 +54,7 @@ bool SystemClass::Initialize()
 {
 	// test basic lua
 	BulletStorm* bs = new BulletStorm();
-	bs->LoadBulletStorm("test.lua");
+	bs->LoadBulletStorm("BulletScript\\test.lua");
 
 	int screenWidth, screenHeight;
 	bool result;
