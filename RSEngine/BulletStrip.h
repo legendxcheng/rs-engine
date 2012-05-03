@@ -1,4 +1,5 @@
 #pragma once
+// deprecated!
 class BulletStrip
 {
 public:

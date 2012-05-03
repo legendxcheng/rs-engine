@@ -1,7 +1,7 @@
 #include "GameLogic.h"
 
 #include "InputManager.h"
-#include "ParticleSystem.h"
+#include "BulletSystem.h"
 #include "Spaceship.h"
 #include "UIManager.h"
 #include "GameGlobalData.h"
@@ -15,7 +15,7 @@ GameLogic::GameLogic(void)
 	m_uiMgr = new UIManager();
 	m_inputMgr = new InputManager();
 	m_spaceship = new Spaceship();
-	m_particleSys = new ParticleSystem();
+	m_bulletSys = new BulletSystem();
 	m_gameGD = new GameGlobalData();
 }
 
