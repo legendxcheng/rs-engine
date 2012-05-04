@@ -6,6 +6,7 @@
 SphereClass::SphereClass(char* objFileName) : ObjModelClass(objFileName)
 {
 	m_is2D = false;
+	D3DXMatrixScaling(&m_worldMatrix, 5.0f, 5.0f, 5.0f);
 }
 
 
@@ -17,7 +18,6 @@ bool SphereClass::LoadTexture(ID3D11Device* device)
 {
 	m_texture = new TextureClass();
 	m_texture->Initialize(device, L"decal.dds");
-
 	return true;
 }
 

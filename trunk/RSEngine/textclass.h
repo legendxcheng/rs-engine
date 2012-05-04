@@ -30,7 +30,7 @@ private:
 	bool UpdateSentence(SentenceType*, char*, int, int, float, float, float, ID3D11DeviceContext*);
 	bool UpdateSentence(SentenceType*, char*, ID3D11DeviceContext*);
 	void ReleaseSentence(SentenceType**);
-	bool RenderSentence(ID3D11DeviceContext*, SentenceType*, D3DXMATRIX, D3DXMATRIX);
+	bool RenderSentence(ID3D11DeviceContext*, SentenceType*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX);
 
 
 // for high engine invoke

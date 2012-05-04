@@ -7,6 +7,8 @@
 
 TriangleTest::TriangleTest(void)
 {
+	D3DXMatrixIdentity(&m_worldMatrix);
+	
 	m_indexBuffer = 0;
 	m_vertexBuffer = 0;
 }
@@ -46,13 +48,12 @@ bool TriangleTest::Update()
 	return true;
 }
 
-void TriangleTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatix, 
-	D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
+void TriangleTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
 {
 	// do ALL the render works
 	RenderBuffers(deviceContext);
 	// Render the model using the color shader.
-	m_vs->SetRenderParameters(deviceContext, worldMatix, viewMatrix, projectionMatrix);
+	m_vs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projectionMatrix);
 	m_ps->SetRenderParameters(deviceContext, NULL);
 	deviceContext->DrawIndexed(m_indexCount, 0, 0);
 }
@@ -90,14 +91,14 @@ bool TriangleTest::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
-	vertices[0].position = D3DXVECTOR3(-1.0f, -1.0f, 0.0f);  // Bottom left.
+	vertices[0].position = D3DXVECTOR3(-400.0f, -300.0f, 0.0f);  // Bottom left.
 	vertices[0].color = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[1].position = D3DXVECTOR3(0.0f, 1.0f, 0.0f);  // Top middle.
- 	vertices[1].color = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
+	vertices[1].position = D3DXVECTOR3(0.0f, 300.0f, 0.0f);  // Top middle.
+ 	vertices[1].color = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
 
-	vertices[2].position = D3DXVECTOR3(1.0f, -1.0f, 0.0f);  // Bottom right.
-	vertices[2].color = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
+	vertices[2].position = D3DXVECTOR3(400.0f, -300.0f, 0.0f);  // Bottom right.
+	vertices[2].color = D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f);
 
 	// Load the index array with data.
 	indices[0] = 0;  // Bottom left.

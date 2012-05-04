@@ -47,7 +47,8 @@ void BulletStorm::UpdateInterpolation(float delta)
 void BulletStorm::UpdateFrame()
 {
 	lua_getglobal(m_luaState, "updateFrame");
-	lua_pcall(m_luaState, 0, 0, 0);
+	int rett = lua_pcall(m_luaState, 0, 0, 0);
+	const char* error = lua_tostring(m_luaState, -1);//打印错误结果
 
 }
 
@@ -65,10 +66,14 @@ void BulletStorm::LoadBulletStorm(char* fileName)
 {
 	// now just test lua
 	int rett;
-	lua_State *L = m_luaState;
-	L = luaL_newstate();
+	lua_State *L = luaL_newstate();
+	m_luaState = L;
 	luaL_openlibs (L);
 	rett = luaL_loadfile(L, fileName);
+	rett = lua_pcall(L, 0, 0, 0);
+	lua_getglobal(m_luaState, "initialize");
+	rett = lua_pcall(m_luaState, 0, 0, 0);
+	const char* error = lua_tostring(L, -1);//打印错误结果
 // 	rett = lua_pcall(L, 0, 0, 0);
 // 	lua_getglobal(L, "background");
 // 	int outputd = (int)GetField(L, "b");
@@ -112,14 +117,17 @@ void BulletStorm::FetchBullets()
 	int stripCount = (int)lua_tonumber(m_luaState, -1);
 	lua_pop(m_luaState, 1);
 
-	lua_getglobal(m_luaState, "vetxCount");
+	
 	int totId = 1;
 	for (int i = 0; i < stripCount; ++i)
 	{
-		
+		lua_getglobal(m_luaState, "vetxCount");	
 		int stripSize = (int)getNumber(m_luaState, i + 1);
+		lua_pop(m_luaState, 1);
+
 		lua_getglobal(m_luaState, "vetx");
-		while (true)
+		int tcount = 0;
+		while (tcount < stripSize)
 		{
 			BulletType tmp;
 			tmp.position.x = getNumber(m_luaState, totId);
@@ -128,12 +136,13 @@ void BulletStorm::FetchBullets()
 			++totId;
 			tmp.position.z = getNumber(m_luaState, totId);
 			++totId;
+
 			m_vertexList.push_back(tmp);
+
+			++tcount;
 		}
 		lua_pop(m_luaState, 1);// pop the vetx table
-
 	}
-	lua_pop(m_luaState, 1);// pop the vetxCount
 }
 
 bool BulletStorm::IsDone()

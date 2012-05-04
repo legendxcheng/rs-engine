@@ -339,5 +339,8 @@
     <None Include="font.vs">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="BulletStorm.hlsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

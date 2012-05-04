@@ -23,6 +23,7 @@ TextClass::~TextClass()
 {
 }
 
+
 void TextClass::SetAttributes(int screenWidth, int screenHeight, D3DXMATRIX baseViewMatrix)
 {
 	m_screenWidth = screenWidth;
@@ -116,7 +117,7 @@ void TextClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix
 	for (std::vector<SentenceType*>::iterator iter = m_sentenceList.begin(); iter != m_sentenceList.end();
 		++iter)
 	{
-		result = RenderSentence(deviceContext, *iter, m_worldMatrix, orthoMatrix);
+		result = RenderSentence(deviceContext, *iter, m_worldMatrix, m_baseViewMatrix, orthoMatrix);
 	}
 	
 
@@ -386,8 +387,8 @@ void TextClass::ReleaseSentence(SentenceType** sentence)
 }
 
 
-bool TextClass::RenderSentence(ID3D11DeviceContext* deviceContext, SentenceType* sentence, D3DXMATRIX worldMatrix, 
-							   D3DXMATRIX orthoMatrix)
+bool TextClass::RenderSentence(ID3D11DeviceContext* deviceContext, SentenceType* sentence, D3DXMATRIX worldMatrix,
+								D3DXMATRIX viewMatrix, D3DXMATRIX orthoMatrix)
 {
 	unsigned int stride, offset;
 	D3DXVECTOR4 pixelColor;
