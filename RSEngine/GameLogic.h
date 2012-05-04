@@ -7,6 +7,7 @@ class InputManager;
 class GameGlobalData;
 class TextClass;
 class InputClass;
+class CameraClass;
 
 class GameLogic
 {
@@ -19,6 +20,8 @@ public:
 	// update interpolate
 	void UpdateInterpolate(float interpoloate);
 
+	void RotateCamera(float angle);
+
 private:
 	GameLogic(void);
 	static GameLogic* m_instance;
@@ -30,6 +33,7 @@ private:
 	InputManager* m_inputMgr;
 	UIManager* m_uiMgr;
 	GameGlobalData* m_gameGD;
+	CameraClass* m_camera;
 
 // for input mgr
 public:
@@ -40,6 +44,8 @@ private:
 public:
 	void InitUIMgr(TextClass* tc);
 
+public:
+	void InitCamera(CameraClass* cc);
 
 // game data
 private:

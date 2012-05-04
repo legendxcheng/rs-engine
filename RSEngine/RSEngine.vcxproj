@@ -169,6 +169,7 @@
     <ClInclude Include="VertexShaderClass.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BulletStorm.hlsl" />
     <None Include="Color.ps" />
     <None Include="Color.vs" />
     <None Include="font.ps" />

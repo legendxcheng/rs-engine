@@ -53,8 +53,7 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam
 bool SystemClass::Initialize()
 {
 	// test basic lua
-	BulletStorm* bs = new BulletStorm();
-	bs->LoadBulletStorm("BulletScript\\test.lua");
+	
 
 	int screenWidth, screenHeight;
 	bool result;

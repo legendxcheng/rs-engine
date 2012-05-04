@@ -58,9 +58,11 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	{
 		return false;
 	}
+	GameLogic::GetInstance()->InitCamera(m_Camera);
 
 	// Set the initial position of the camera.
-	m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
+	m_Camera->SetPosition(0.0f, 0.0f, -100.0f);
+	
 
 	m_renderObjMgr = RenderObjectManager::GetInstance();
 	if (!m_renderObjMgr)
@@ -81,7 +83,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	InitializeResource(m_D3D->GetDevice());
-
+	//m_Camera->SetRotation(30, 0, 0);
 	return true;
 }
 
@@ -150,8 +152,10 @@ bool GraphicsClass::Render()
 
 	// Clear the buffers to begin the scene.
 	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 0.0f);
-
-	// Generate the view matrix based on the camera's position.
+// 	m_Camera->SetRotation(-xr / 3.1415926f * 180, 0, 0);
+// 	m_Camera->SetPosition(0,  -100.0f * sin(xr), -100.0f * cos(xr));
+// 	xr += 0.0000001f;
+// 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
 
 	// Get the world, view, and projection matrices from the camera and d3d objects.
@@ -178,10 +182,10 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	/*
 		Triangle Example
 	*/
-// 	TriangleTest* sqtest = new TriangleTest();
-// 	sqtest->Initialize(device);
+	TriangleTest* sqtest = new TriangleTest();
+	sqtest->Initialize(device);
 	RenderObjectManager* rom = RenderObjectManager::GetInstance();
-//	rom->InsertRenderObject((RenderObject*) sqtest);
+	rom->InsertRenderObject((RenderObject*) sqtest);
 
 	/*
 		Sphere Example

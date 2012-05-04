@@ -8,6 +8,8 @@
 #include "textclass.h"
 #include "InputClass.h"
 #include "RSTimer.h"
+#include "BulletStorm.h"
+#include "CameraClass.h"
 
 GameLogic::GameLogic(void)
 {
@@ -17,6 +19,14 @@ GameLogic::GameLogic(void)
 	m_spaceship = new Spaceship();
 	m_bulletSys = new BulletSystem();
 	m_gameGD = new GameGlobalData();
+
+	// test
+	// add bulletstorm into bulletsystem
+	BulletStorm* bs = new BulletStorm();
+	bs->LoadBulletStorm("BulletScript\\script_template.lua");
+
+	m_bulletSys->InsertBulletStorm(bs);
+
 }
 
 GameLogic* GameLogic::m_instance = 0;
@@ -37,11 +47,13 @@ void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 	// TODO: fill
 	m_uiMgr->UpdateFrameCount(fps, totFrame);
 	m_uiMgr->UpdateKeyboardInput(m_inputMgr->GetKeyBoardState());
+	m_bulletSys->UpdateFrame();
 }
 
 void GameLogic::UpdateInterpolate(float interpoloate)
 {
 	// TODO: fill
+	m_bulletSys->UpdateInterpolate(interpoloate);
 }
 
 void GameLogic::InitInputMgr(InputClass* ic)
@@ -52,4 +64,15 @@ void GameLogic::InitInputMgr(InputClass* ic)
 void GameLogic::InitUIMgr(TextClass* tc)
 {
 	m_uiMgr->Initialize(tc);
+}
+
+void GameLogic::RotateCamera(float angle)
+{
+	m_camera->SetRotation(angle / 3.1415926f * 180, 0, 0);
+	m_camera->SetPosition(0,  -100.0f * sin(angle), -100.0f * cos(angle));
+}
+
+void GameLogic::InitCamera(CameraClass* cc)
+{
+	m_camera = cc;
 }

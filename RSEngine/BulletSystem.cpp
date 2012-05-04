@@ -49,6 +49,11 @@ void BulletSystem::UpdateFrame()
 	{
 		m_bulletStorms.erase((*iteriter));
 	}
+
+	for (std::vector<BulletStorm*>::iterator iter = m_bulletStorms.begin(); iter < m_bulletStorms.end(); ++iter)
+	{
+		(*iter)->FetchBullets();
+	}
 }
 
 void BulletSystem::UpdateInterpolate(float interpoloate)
