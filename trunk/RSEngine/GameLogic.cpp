@@ -19,7 +19,7 @@ GameLogic::GameLogic(void)
 	m_spaceship = new Spaceship();
 	m_bulletSys = new BulletSystem();
 	m_gameGD = new GameGlobalData();
-
+	m_cameraAngle = 0.0f;
 	// test
 	// add bulletstorm into bulletsystem
 	BulletStorm* bs = new BulletStorm();
@@ -48,6 +48,24 @@ void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 	m_uiMgr->UpdateFrameCount(fps, totFrame);
 	m_uiMgr->UpdateKeyboardInput(m_inputMgr->GetKeyBoardState());
 	m_bulletSys->UpdateFrame();
+
+
+	//test input mgr
+	if (m_inputMgr->IsKeyDown(DIK_Z))
+	{
+		if (m_inputMgr->IsKeyDown(DIK_LCONTROL))
+			m_cameraAngle += 0.008;
+		m_cameraAngle += 0.008;
+		RotateCamera(m_cameraAngle);
+	}
+
+	if (m_inputMgr->IsKeyDown(DIK_X))
+	{
+		if (m_inputMgr->IsKeyDown(DIK_LCONTROL))
+			m_cameraAngle -= 0.008;
+		m_cameraAngle -= 0.008;
+		RotateCamera(m_cameraAngle);
+	}
 }
 
 void GameLogic::UpdateInterpolate(float interpoloate)
@@ -68,7 +86,7 @@ void GameLogic::InitUIMgr(TextClass* tc)
 
 void GameLogic::RotateCamera(float angle)
 {
-	m_camera->SetRotation(angle / 3.1415926f * 180, 0, 0);
+	m_camera->SetRotation(-angle / 3.1415926f * 180, 0, 0);
 	m_camera->SetPosition(0,  -100.0f * sin(angle), -100.0f * cos(angle));
 }
 

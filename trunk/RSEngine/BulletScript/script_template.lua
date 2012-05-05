@@ -3,7 +3,7 @@
 -- rsengine calls updateInterpoloation() to work out the current position of vertexes with interpolation
 -- rsengine get strip count and vetxCount to featch vertexes in vetx 
 
-
+-- the start coordination is 0, and bullets go to -x direction
 
 
 -- the template implements a simple bullet storm
@@ -36,7 +36,7 @@ function updateFrame()
 		tmpt = tmpt + 1
 		vetx[tmpt] = 100 * math.cos(currentFrame - i)
 		tmpt = tmpt + 1
-		vetx[tmpt] = currentFrame - i
+		vetx[tmpt] = - currentFrame + i
 		tmpt = tmpt + 1
 	end
 end
@@ -50,7 +50,7 @@ function updateInterpolation(intp)
 		tmpt = tmpt + 1
 		vetx[tmpt] = 100 * math.cos(currentFrame - i + intp)
 		tmpt = tmpt + 1
-		vetx[tmpt] = currentFrame - i - intp
+		vetx[tmpt] = - currentFrame + i + intp
 		tmpt = tmpt + 1
 	end
 end
