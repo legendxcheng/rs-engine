@@ -42,6 +42,9 @@
     <Filter Include="Source Files\Game\BulletSystem">
       <UniqueIdentifier>{b3c193f1-ac42-4653-9b72-36a577687ab8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Example\BulletStormExample">
+      <UniqueIdentifier>{7864adfc-5286-4066-b58e-f82589c67e1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SphereVS.cpp">
@@ -178,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="BulletSystem.cpp">
       <Filter>Source Files\Game\BulletSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletStormTest.cpp">
+      <Filter>Source Files\Example\BulletStormExample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +324,9 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletStormTest.h">
+      <Filter>Source Files\Example\BulletStormExample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

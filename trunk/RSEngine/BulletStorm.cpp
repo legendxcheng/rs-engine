@@ -19,9 +19,19 @@ BulletStorm::~BulletStorm(void)
 {
 }
 
-void BulletStorm::GetVertexes(void* dest)
+int BulletStorm::GetVertexes(void* dest)
 {
+	int bytesCopy = 0;
 	//memcpy(dest, m_vertexList, sizeof(VertexType) * m_vertexCount);
+	for (std::vector<BulletType>::iterator iter = m_vertexList.begin();
+			iter != m_vertexList.end(); ++iter)
+	{
+		memcpy(dest, &(*iter), sizeof(BulletType));
+		dest = (void*)((char*)dest + sizeof(BulletType));
+		bytesCopy += sizeof(BulletType);
+	}
+	
+	return bytesCopy;
 }
 
 void BulletStorm::GetLines(void* dest)

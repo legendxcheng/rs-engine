@@ -49,6 +49,7 @@ void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 	m_uiMgr->UpdateKeyboardInput(m_inputMgr->GetKeyBoardState());
 	m_bulletSys->UpdateFrame();
 
+	
 
 	//test input mgr
 	if (m_inputMgr->IsKeyDown(DIK_Z))
@@ -66,6 +67,8 @@ void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 		m_cameraAngle -= 0.008;
 		RotateCamera(m_cameraAngle);
 	}
+
+
 }
 
 void GameLogic::UpdateInterpolate(float interpoloate)
@@ -93,4 +96,9 @@ void GameLogic::RotateCamera(float angle)
 void GameLogic::InitCamera(CameraClass* cc)
 {
 	m_camera = cc;
+}
+
+void GameLogic::FillBulletBuffer(void* vb)
+{
+	m_bulletSys->FillVertexBuffer(vb);
 }

@@ -46,6 +46,11 @@ public:
 
 public:
 	void InitCamera(CameraClass* cc);
+//bullet
+public:
+	void FillBulletBuffer(void* vb);
+
+
 
 // game data
 private:

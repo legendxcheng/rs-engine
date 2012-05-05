@@ -18,6 +18,7 @@ void RenderObjectManager::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX 
 	for (std::vector<RenderObject*>::iterator iter = this->m_renderObjList.begin(); iter != this->m_renderObjList.end(); ++iter)
 	{
 		RenderObject* rob = *iter;
+		rob->Update();
 		if (rob->IsVisible())
 		{
 			if (!rob->Is2D())

@@ -24,6 +24,7 @@ public:
 	bool Initialize(ID3D11Device* device);
 	virtual void Shutdown();
 	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX);
+	virtual bool Update();
 
 private:
 	bool InitializeSentence(SentenceType**, std::string, unsigned int, ID3D11Device*);

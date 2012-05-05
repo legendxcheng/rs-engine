@@ -11,7 +11,7 @@ public:
 	~BulletStorm(void);
 
 public:
-	void GetVertexes(void* dest);
+	int GetVertexes(void* dest);
 	void GetLines(void* dest);
 	//load .lua file and initialize the bullet storm
 	void LoadBulletStorm(char* fileName);
