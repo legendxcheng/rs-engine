@@ -1,12 +1,12 @@
 #pragma once
 #include "vertexshaderclass.h"
-class TestVS :
+class BSTestVS :
 	public VertexShaderClass
 {
 public:
-	TestVS();
-	TestVS(string tag);
-	virtual ~TestVS(void);
+	BSTestVS();
+	BSTestVS(string tag);
+	virtual ~BSTestVS(void);
 
 	virtual bool Initialize(ID3D11Device*, HWND);
 	virtual bool InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFileName, CHAR* entryFuncName);

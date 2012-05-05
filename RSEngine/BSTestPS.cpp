@@ -1,16 +1,16 @@
-#include "TestPS.h"
+#include "BSTestPS.h"
 
 
-TestPS::TestPS(void)
+BSTestPS::BSTestPS(void)
 {
 }
 
 
-TestPS::~TestPS(void)
+BSTestPS::~BSTestPS(void)
 {
 }
 
-bool TestPS::Initialize(ID3D11Device* device, HWND hwnd)
+bool BSTestPS::Initialize(ID3D11Device* device, HWND hwnd)
 {
 	bool result;
 
@@ -26,7 +26,7 @@ bool TestPS::Initialize(ID3D11Device* device, HWND hwnd)
 
 }
 
-bool TestPS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHAR* entryFuncName)
+bool BSTestPS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHAR* entryFuncName)
 {
 	HRESULT result;
 	ID3D10Blob* errorMessage;
@@ -80,12 +80,12 @@ bool TestPS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilename
 
 }
 
-bool TestPS::InitializeConstantBuffer(ID3D11Device*)
+bool BSTestPS::InitializeConstantBuffer(ID3D11Device*)
 {
 	return true;
 }
 
-void TestPS::Shutdown()
+void BSTestPS::Shutdown()
 {
 	ShutdownShader();
 
@@ -93,12 +93,12 @@ void TestPS::Shutdown()
 
 }
 
-void TestPS::ShutdownShader()
+void BSTestPS::ShutdownShader()
 {
 
 }
 
-bool TestPS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView*)
+bool BSTestPS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView*)
 {
 	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 
