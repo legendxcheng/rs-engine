@@ -54,6 +54,8 @@ bool SystemClass::Initialize()
 {
 	// test basic lua
 	
+	lua_State *L = luaL_newstate();
+	luaL_openlibs(L);
 
 	int screenWidth, screenHeight;
 	bool result;
