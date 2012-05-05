@@ -178,22 +178,22 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	// TestVS
 	// TestPS
 	// SquareTest
-
+	RenderObjectManager* rom = RenderObjectManager::GetInstance();
 	/*
 		Triangle Example
 	*/
 	TriangleTest* sqtest = new TriangleTest();
 	sqtest->Initialize(device);
-	RenderObjectManager* rom = RenderObjectManager::GetInstance();
+	
 	rom->InsertRenderObject((RenderObject*) sqtest);
 
 	/*
 		Sphere Example
 	*/
 
-	SphereClass* omc = new SphereClass("sphere.obj");
-	omc->Initialize(device);
-	rom->InsertRenderObject((RenderObject*) omc);
+// 	SphereClass* omc = new SphereClass("sphere.obj");
+// 	omc->Initialize(device);
+// 	rom->InsertRenderObject((RenderObject*) omc);
 
 // 	SpriteClass* sc = new SpriteClass();
 // 	sc->Initialize(device);
