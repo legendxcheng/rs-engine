@@ -1,7 +1,7 @@
-#include "TestVS.h"
+#include "BSTestVS.h"
 #include "Structures.h"
 
-TestVS::TestVS(string tag)
+BSTestVS::BSTestVS(string tag)
 {
 	m_tag = tag;
 	m_vertexShader = 0;
@@ -9,18 +9,18 @@ TestVS::TestVS(string tag)
 
 }
 
-TestVS::TestVS()
+BSTestVS::BSTestVS()
 {
 	m_vertexShader = 0;
 	m_layout = 0;
 
 }
 
-TestVS::~TestVS(void)
+BSTestVS::~BSTestVS(void)
 {
 }
 
-bool TestVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
+bool BSTestVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -65,7 +65,7 @@ bool TestVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRIX 
 
 }
 
-bool TestVS::Initialize(ID3D11Device* device, HWND hwnd)
+bool BSTestVS::Initialize(ID3D11Device* device, HWND hwnd)
 {
 	bool result;
 
@@ -86,7 +86,7 @@ bool TestVS::Initialize(ID3D11Device* device, HWND hwnd)
 
 
 }
-bool TestVS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFileName, CHAR* entryFuncName)
+bool BSTestVS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFileName, CHAR* entryFuncName)
 {
 	HRESULT result;
 	ID3D10Blob* errorMessage;
@@ -165,7 +165,7 @@ bool TestVS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFileName
 
 }
 
-bool TestVS::InitializeConstantBuffer(ID3D11Device* device)
+bool BSTestVS::InitializeConstantBuffer(ID3D11Device* device)
 {
 	HRESULT result;
 	D3D11_BUFFER_DESC matrixBufferDesc;
@@ -187,13 +187,13 @@ bool TestVS::InitializeConstantBuffer(ID3D11Device* device)
 
 }
 
-void TestVS::Shutdown()
+void BSTestVS::Shutdown()
 {
 	ShutdownShader();
 	return;
 }
 
-void TestVS::ShutdownShader()
+void BSTestVS::ShutdownShader()
 {
 	// Release the matrix constant buffer.
 	if(m_matrixBuffer)
