@@ -1,8 +1,8 @@
 #pragma once
 #include "modelclass.h"
 
-class TestVS;
-class TestPS;
+class BSTestVS;
+class BSTestPS;
 
 class BulletStormTest :
 	public ModelClass
@@ -36,7 +36,7 @@ private:
 
 private:
 	//shaders
-	TestVS* m_vs;
-	TestPS* m_ps;
+	BSTestVS* m_vs;
+	BSTestPS* m_ps;
 };
 

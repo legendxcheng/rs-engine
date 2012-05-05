@@ -74,6 +74,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BSTestPS.cpp" />
+    <ClCompile Include="BSTestVS.cpp" />
     <ClCompile Include="BulletStorm.cpp" />
     <ClCompile Include="BulletStormTest.cpp" />
     <ClCompile Include="BulletStrip.cpp" />
@@ -122,6 +124,8 @@
     <ClCompile Include="VertexShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BSTestPS.h" />
+    <ClInclude Include="BSTestVS.h" />
     <ClInclude Include="BulletStorm.h" />
     <ClInclude Include="BulletStormTest.h" />
     <ClInclude Include="BulletStrip.h" />
@@ -171,6 +175,7 @@
     <ClInclude Include="VertexShaderClass.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bstest.hlsl" />
     <None Include="BulletStorm.hlsl" />
     <None Include="Color.ps" />
     <None Include="Color.vs" />
