@@ -1,7 +1,7 @@
 #include "BulletStormTest.h"
 #include "Structures.h"
-#include "TestPS.h";
-#include "TestVS.h";
+#include "BSTestPS.h";
+#include "BSTestVS.h";
 #include "SystemClass.h"
 #include "ShaderManager.h"
 #include "GameLogic.h"
@@ -85,7 +85,6 @@ int BulletStormTest::GetIndexCount()
 
 bool BulletStormTest::InitializeBuffers(ID3D11Device* device)
 {
-	VertexType* vertices;
 	unsigned long* indices;
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
@@ -99,10 +98,6 @@ bool BulletStormTest::InitializeBuffers(ID3D11Device* device)
 	vertexBufferDesc.MiscFlags = 0;
 	vertexBufferDesc.StructureByteStride = 0;
 
-	// Give the subresource structure a pointer to the vertex data.
-	vertexData.pSysMem = vertices;
-	vertexData.SysMemPitch = 0;
-	vertexData.SysMemSlicePitch = 0;
 
 	// Now create the vertex buffer.
 	result = device->CreateBuffer(&vertexBufferDesc, NULL, &m_vertexBuffer);
@@ -154,7 +149,7 @@ void BulletStormTest::RenderBuffers(ID3D11DeviceContext* deviceContext)
 
 
 	// Set vertex buffer stride and offset.
-	stride = sizeof(VertexType); 
+	stride = sizeof(BulletType); 
 	offset = 0;
 
 	// Set the vertex buffer to active in the input assembler so it can be rendered.
@@ -181,10 +176,10 @@ void  BulletStormTest::ReleaseTexture()
 
 bool BulletStormTest::InitializeShaders(ID3D11Device* device)
 {
-	m_vs = new TestVS("BulletStormTestVS");
+	m_vs = new BSTestVS("BulletStormTestVS");
 	m_vs->Initialize(device, SystemClass::GetWindowHandler());
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_VS, m_vs);
-	m_ps = new TestPS();
+	m_ps = new BSTestPS();
 	m_ps->Initialize(device, SystemClass::GetWindowHandler());
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_PS, m_ps);
 	return true;

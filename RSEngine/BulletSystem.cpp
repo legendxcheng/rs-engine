@@ -86,8 +86,3 @@ bool BulletSystem::FillVertexBuffer(void* vb)
 	}
 	return true;
 }
-
-// Lock the constant buffer so it can be written to.
-/*
-
-*/

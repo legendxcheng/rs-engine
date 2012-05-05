@@ -81,19 +81,7 @@ bool SystemClass::Initialize()
 		return false;
 	}
 
-	// Create the graphics object.  This object will handle rendering all the graphics for this application.
-	m_Graphics = new GraphicsClass;
-	if(!m_Graphics)
-	{
-		return false;
-	}
 
-	// Initialize the graphics object.
-	result = m_Graphics->Initialize(screenWidth, screenHeight, m_hwnd);
-	if(!result)
-	{
-		return false;
-	}
 
 	// Create the sound object.
 	m_Sound = new SoundClass;
@@ -120,6 +108,21 @@ bool SystemClass::Initialize()
 		Initialize of GameLogic
 		Initialize each component of GameLogic
 	*/
+
+	// Create the graphics object.  This object will handle rendering all the graphics for this application.
+	m_Graphics = new GraphicsClass;
+	if(!m_Graphics)
+	{
+		return false;
+	}
+
+	// Initialize the graphics object.
+	result = m_Graphics->Initialize(screenWidth, screenHeight, m_hwnd);
+	if(!result)
+	{
+		return false;
+	}
+
 	GameLogic* gl = GameLogic::GetInstance();
 	gl->InitInputMgr(m_Input);
 	

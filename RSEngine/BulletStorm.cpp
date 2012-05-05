@@ -78,7 +78,7 @@ void BulletStorm::LoadBulletStorm(char* fileName)
 	int rett;
 	lua_State *L = luaL_newstate();
 	m_luaState = L;
-	luaL_openlibs (L);
+	luaL_openlibs(L);
 	rett = luaL_loadfile(L, fileName);
 	rett = lua_pcall(L, 0, 0, 0);
 	lua_getglobal(m_luaState, "initialize");

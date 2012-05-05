@@ -185,6 +185,12 @@
     <ClCompile Include="BulletStormTest.cpp">
       <Filter>Source Files\Example\BulletStormExample</Filter>
     </ClCompile>
+    <ClCompile Include="BSTestPS.cpp">
+      <Filter>Source Files\Example\BulletStormExample</Filter>
+    </ClCompile>
+    <ClCompile Include="BSTestVS.cpp">
+      <Filter>Source Files\Example\BulletStormExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SphereClass.h">
@@ -328,6 +334,12 @@
     <ClInclude Include="BulletStormTest.h">
       <Filter>Source Files\Example\BulletStormExample</Filter>
     </ClInclude>
+    <ClInclude Include="BSTestVS.h">
+      <Filter>Source Files\Example\BulletStormExample</Filter>
+    </ClInclude>
+    <ClInclude Include="BSTestPS.h">
+      <Filter>Source Files\Example\BulletStormExample</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Color.vs">
@@ -349,6 +361,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="BulletStorm.hlsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="bstest.hlsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
