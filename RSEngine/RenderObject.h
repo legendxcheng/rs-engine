@@ -17,7 +17,7 @@ public:
 
 	virtual bool Initialize(ID3D11Device*) = 0;
 	//virtual bool Update() = 0;
-
+	virtual bool Update() = 0;
 	bool Is2D();
 
 protected:

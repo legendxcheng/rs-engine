@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BulletStorm.cpp" />
+    <ClCompile Include="BulletStormTest.cpp" />
     <ClCompile Include="BulletStrip.cpp" />
     <ClCompile Include="fontclass.cpp" />
     <ClCompile Include="fontshaderclass.cpp" />
@@ -122,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BulletStorm.h" />
+    <ClInclude Include="BulletStormTest.h" />
     <ClInclude Include="BulletStrip.h" />
     <ClInclude Include="fontclass.h" />
     <ClInclude Include="fontshaderclass.h" />

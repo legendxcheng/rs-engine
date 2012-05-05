@@ -73,3 +73,21 @@ bool BulletSystem::IsCollided(float cameraAngle, float shipx, float shipy, float
 	}
 	return false;
 }
+
+bool BulletSystem::FillVertexBuffer(void* vb)
+{
+	int bytesCopy = 0;
+	for (std::vector<BulletStorm*>::iterator iter = m_bulletStorms.begin();
+			iter != m_bulletStorms.end(); ++iter)
+	{
+		(*iter)->FetchBullets();
+		bytesCopy += (*iter)->GetVertexes((void*)((int)vb + bytesCopy));
+		vb = (void*)((char*)vb + bytesCopy);
+	}
+	return true;
+}
+
+// Lock the constant buffer so it can be written to.
+/*
+
+*/

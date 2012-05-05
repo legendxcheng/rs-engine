@@ -1,11 +1,12 @@
-#include "TriangleTest.h"
+#include "BulletStormTest.h"
 #include "Structures.h"
 #include "TestPS.h";
 #include "TestVS.h";
 #include "SystemClass.h"
 #include "ShaderManager.h"
+#include "GameLogic.h"
 
-TriangleTest::TriangleTest(void)
+BulletStormTest::BulletStormTest(void)
 {
 	D3DXMatrixIdentity(&m_worldMatrix);
 	
@@ -14,11 +15,11 @@ TriangleTest::TriangleTest(void)
 }
 
 
-TriangleTest::~TriangleTest(void)
+BulletStormTest::~BulletStormTest(void)
 {
 }
 
-bool TriangleTest::Initialize(ID3D11Device* device)
+bool BulletStormTest::Initialize(ID3D11Device* device)
 {
 	bool result;
 	hasTexture = false;
@@ -34,21 +35,40 @@ bool TriangleTest::Initialize(ID3D11Device* device)
 	{
 		return false;
 	}
+	device->GetImmediateContext(&m_deviceContext);
 	return true;
 }
 
-void TriangleTest::Shutdown()
+void BulletStormTest::Shutdown()
 {
 	ShutdownBuffers();
 	return;
 }
 
-bool TriangleTest::Update()
+bool BulletStormTest::Update()
 {
+	HRESULT result;
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	BulletType* dataPtr;
+
+	m_deviceContext->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if(FAILED(result))
+	{
+		return false;
+	}
+
+	// Get a pointer to the data in the constant buffer.
+	dataPtr = (BulletType*)mappedResource.pData;
+
+	// Copy the matrices into the constant buffer.
+	GameLogic::GetInstance()->FillBulletBuffer(dataPtr);
+
+	// Unlock the constant buffer.
+	m_deviceContext->Unmap(m_vertexBuffer, 0);
 	return true;
 }
 
-void TriangleTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
+void BulletStormTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
 {
 	// do ALL the render works
 	RenderBuffers(deviceContext);
@@ -58,12 +78,12 @@ void TriangleTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMat
 	deviceContext->DrawIndexed(m_indexCount, 0, 0);
 }
 
-int TriangleTest::GetIndexCount()
+int BulletStormTest::GetIndexCount()
 {
 	return m_indexCount;
 }
 
-bool TriangleTest::InitializeBuffers(ID3D11Device* device)
+bool BulletStormTest::InitializeBuffers(ID3D11Device* device)
 {
 	VertexType* vertices;
 	unsigned long* indices;
@@ -71,43 +91,9 @@ bool TriangleTest::InitializeBuffers(ID3D11Device* device)
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
 
-	// Set the number of vertices in the vertex array.
-	m_vertexCount = 3;
-
-	// Set the number of indices in the index array.
-	m_indexCount = 3;
-
-	// Create the vertex array.
-	vertices = new VertexType[m_vertexCount];
-	if(!vertices)
-	{
-		return false;
-	}
-
-	// Create the index array.
-	indices = new unsigned long[m_indexCount];
-	if(!indices)
-	{
-		return false;
-	}
-
-	vertices[0].position = D3DXVECTOR3(-40.0f, -30.0f, 0.0f);  // Bottom left.
-	vertices[0].color = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
-
-	vertices[1].position = D3DXVECTOR3(0.0f, 30.0f, 0.0f);  // Top middle.
- 	vertices[1].color = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
-
-	vertices[2].position = D3DXVECTOR3(40.0f, -30.0f, 0.0f);  // Bottom right.
-	vertices[2].color = D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f);
-
-	// Load the index array with data.
-	indices[0] = 0;  // Bottom left.
-	indices[1] = 1;  // Top middle.
-	indices[2] = 2;  // Bottom right.
-
 	// Set up the description of the static vertex buffer.
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
+	vertexBufferDesc.ByteWidth = sizeof(BulletType) * 1000;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	vertexBufferDesc.CPUAccessFlags = 0;
 	vertexBufferDesc.MiscFlags = 0;
@@ -119,45 +105,16 @@ bool TriangleTest::InitializeBuffers(ID3D11Device* device)
 	vertexData.SysMemSlicePitch = 0;
 
 	// Now create the vertex buffer.
-	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_vertexBuffer);
+	result = device->CreateBuffer(&vertexBufferDesc, NULL, &m_vertexBuffer);
 	if(FAILED(result))
 	{
 		return false;
 	}
-
-	// Set up the description of the static index buffer.
-	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	indexBufferDesc.ByteWidth = sizeof(unsigned long) * m_indexCount;
-	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	indexBufferDesc.CPUAccessFlags = 0;
-	indexBufferDesc.MiscFlags = 0;
-	indexBufferDesc.StructureByteStride = 0;
-
-	// Give the subresource structure a pointer to the index data.
-	indexData.pSysMem = indices;
-	indexData.SysMemPitch = 0;
-	indexData.SysMemSlicePitch = 0;
-
-	// Create the index buffer.
-	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_indexBuffer);
-	if(FAILED(result))
-	{
-		return false;
-	}
-
-	// Release the arrays now that the vertex and index buffers have been created and loaded.
-	delete [] vertices;
-	vertices = 0;
-
-	delete [] indices;
-	indices = 0;
 
 	return true;
-
-
 }
 
-void TriangleTest::ShutdownBuffers()
+void BulletStormTest::ShutdownBuffers()
 {
 	// Release the index buffer.
 	if(m_indexBuffer)
@@ -190,7 +147,7 @@ void TriangleTest::ShutdownBuffers()
 	return;
 }
 
-void TriangleTest::RenderBuffers(ID3D11DeviceContext* deviceContext)
+void BulletStormTest::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
 	unsigned int stride;
 	unsigned int offset;
@@ -212,19 +169,19 @@ void TriangleTest::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	return;
 }
 
-bool TriangleTest::LoadTexture(ID3D11Device*)
+bool BulletStormTest::LoadTexture(ID3D11Device*)
 {
 	return true;
 }
 
-void  TriangleTest::ReleaseTexture()
+void  BulletStormTest::ReleaseTexture()
 {
 
 }
 
-bool TriangleTest::InitializeShaders(ID3D11Device* device)
+bool BulletStormTest::InitializeShaders(ID3D11Device* device)
 {
-	m_vs = new TestVS("TriangleTestVS");
+	m_vs = new TestVS("BulletStormTestVS");
 	m_vs->Initialize(device, SystemClass::GetWindowHandler());
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_VS, m_vs);
 	m_ps = new TestPS();

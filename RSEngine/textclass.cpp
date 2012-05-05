@@ -493,6 +493,9 @@ bool TextClass::EditText(std::string tag, std::string newText)
 }
 
 
-
+bool TextClass::Update()
+{
+	return true;
+}
 
 

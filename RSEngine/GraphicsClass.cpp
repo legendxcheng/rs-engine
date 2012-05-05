@@ -10,6 +10,7 @@
 #include "SphereClass.h"
 #include "textclass.h"
 #include "GameLogic.h"
+#include "BulletStormTest.h"
 #include <DxErr.h>
 
 GraphicsClass::GraphicsClass()
@@ -62,7 +63,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 	// Set the initial position of the camera.
 	m_Camera->SetPosition(0.0f, 0.0f, -100.0f);
-	
+
 
 	m_renderObjMgr = RenderObjectManager::GetInstance();
 	if (!m_renderObjMgr)
@@ -184,8 +185,16 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	*/
 	TriangleTest* sqtest = new TriangleTest();
 	sqtest->Initialize(device);
-	
 	rom->InsertRenderObject((RenderObject*) sqtest);
+
+
+	/*
+		bullet storm test
+	*/
+	BulletStormTest* bst = new BulletStormTest();
+	bst->Initialize(device);
+	rom->InsertRenderObject((RenderObject*)bst);
+
 
 	/*
 		Sphere Example
