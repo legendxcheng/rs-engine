@@ -51,7 +51,7 @@ bool BulletStormTest::Update()
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	BulletType* dataPtr;
 
-	m_deviceContext->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	result = m_deviceContext->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if(FAILED(result))
 	{
 		return false;

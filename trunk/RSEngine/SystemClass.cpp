@@ -53,9 +53,6 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam
 bool SystemClass::Initialize()
 {
 	// test basic lua
-	
-	lua_State *L = luaL_newstate();
-	luaL_openlibs(L);
 
 	int screenWidth, screenHeight;
 	bool result;
