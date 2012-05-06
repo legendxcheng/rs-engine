@@ -75,7 +75,8 @@ void BulletStormTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX view
 	// Render the model using the color shader.
 	m_vs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projectionMatrix);
 	m_ps->SetRenderParameters(deviceContext, NULL);
-	deviceContext->DrawIndexed(m_indexCount, 0, 0);
+	// TODO: Change
+	deviceContext->Draw(500, 0);
 }
 
 int BulletStormTest::GetIndexCount()
@@ -91,10 +92,10 @@ bool BulletStormTest::InitializeBuffers(ID3D11Device* device)
 	HRESULT result;
 
 	// Set up the description of the static vertex buffer.
-	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	vertexBufferDesc.ByteWidth = sizeof(BulletType) * 1000;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vertexBufferDesc.CPUAccessFlags = 0;
+	vertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	vertexBufferDesc.MiscFlags = 0;
 	vertexBufferDesc.StructureByteStride = 0;
 

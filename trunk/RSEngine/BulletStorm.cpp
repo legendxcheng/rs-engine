@@ -127,7 +127,7 @@ void BulletStorm::FetchBullets()
 	int stripCount = (int)lua_tonumber(m_luaState, -1);
 	lua_pop(m_luaState, 1);
 
-	
+	m_vertexList.clear();
 	int totId = 1;
 	for (int i = 0; i < stripCount; ++i)
 	{

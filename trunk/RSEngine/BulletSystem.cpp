@@ -81,7 +81,7 @@ bool BulletSystem::FillVertexBuffer(void* vb)
 			iter != m_bulletStorms.end(); ++iter)
 	{
 		(*iter)->FetchBullets();
-		bytesCopy += (*iter)->GetVertexes((void*)((int)vb + bytesCopy));
+		bytesCopy += (*iter)->GetVertexes((void*)((char*)vb + bytesCopy));
 		vb = (void*)((char*)vb + bytesCopy);
 	}
 	return true;

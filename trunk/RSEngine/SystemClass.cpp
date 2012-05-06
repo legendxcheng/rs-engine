@@ -385,7 +385,7 @@ bool SystemClass::Render(float interpolation)
 	bool result;
 
 	// TODO: use the GameLogic's UpdateByInterpolation() function to recalc the world matrix of each obj
-
+	GameLogic::GetInstance()->UpdateInterpolate(interpolation);
 	// render graphics
 	result = m_Graphics->Frame();
 	if (!result)

@@ -24,34 +24,36 @@ function initialize()
 	lineUpdated = 0 -- 0 for not updated since last call 1 for updated since last call
 
 	stripCount = 1
-	vetxCount[1] = 50
+	vetxCount[1] = 500
 end
 
 function updateFrame()
 	currentFrame = currentFrame + 1
 	local tmpt = 1
-	for i=1, 50 do
+	for i=1, 500 do
 		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
+		vetx[tmpt] = 400 - currentFrame + i
+		tmpt = tmpt + 1
 		vetx[tmpt] = 100 * math.sin(currentFrame - i)
 		tmpt = tmpt + 1
 		vetx[tmpt] = 100 * math.cos(currentFrame - i)
 		tmpt = tmpt + 1
-		vetx[tmpt] = - currentFrame + i
-		tmpt = tmpt + 1
+
 	end
 end
 
 function updateInterpolation(intp)
 	--vetx = {} -- empty array
 	local tmpt = 1
-	for i=1, 50 do
+	for i=1, 500 do
 		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
+		vetx[tmpt] = 400 - currentFrame + i + intp
+		tmpt = tmpt + 1
 		vetx[tmpt] = 100 * math.sin(currentFrame - i + intp)
 		tmpt = tmpt + 1
 		vetx[tmpt] = 100 * math.cos(currentFrame - i + intp)
 		tmpt = tmpt + 1
-		vetx[tmpt] = - currentFrame + i + intp
-		tmpt = tmpt + 1
+
 	end
 end
 
