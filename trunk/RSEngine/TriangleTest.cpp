@@ -91,13 +91,13 @@ bool TriangleTest::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
-	vertices[0].position = D3DXVECTOR3(-40.0f, -30.0f, 0.0f);  // Bottom left.
+	vertices[0].position = D3DXVECTOR3(-40.0f, 0.0f, -30.0f);  // Bottom left.
 	vertices[0].color = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[1].position = D3DXVECTOR3(0.0f, 30.0f, 0.0f);  // Top middle.
+	vertices[1].position = D3DXVECTOR3(0.0f, 0.0f, 30.0f);  // Top middle.
  	vertices[1].color = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
 
-	vertices[2].position = D3DXVECTOR3(40.0f, -30.0f, 0.0f);  // Bottom right.
+	vertices[2].position = D3DXVECTOR3(40.0f, 0.0f, -30.0f);  // Bottom right.
 	vertices[2].color = D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f);
 
 	// Load the index array with data.
@@ -207,7 +207,7 @@ void TriangleTest::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	// Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.
-	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	return;
 }

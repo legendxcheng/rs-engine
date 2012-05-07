@@ -34,9 +34,9 @@ function updateFrame()
 		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
 		vetx[tmpt] = 400 - currentFrame + i
 		tmpt = tmpt + 1
-		vetx[tmpt] = 100 * math.sin(currentFrame - i)
+		vetx[tmpt] = 300 * math.sin(currentFrame / 3 - i)
 		tmpt = tmpt + 1
-		vetx[tmpt] = 100 * math.cos(currentFrame - i)
+		vetx[tmpt] = 200 * math.cos(currentFrame / 3 - i)
 		tmpt = tmpt + 1
 
 	end
@@ -49,9 +49,9 @@ function updateInterpolation(intp)
 		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
 		vetx[tmpt] = 400 - currentFrame + i + intp
 		tmpt = tmpt + 1
-		vetx[tmpt] = 100 * math.sin(currentFrame - i + intp)
+		vetx[tmpt] = 100 * math.sin(currentFrame / 3 - i + intp / 3)
 		tmpt = tmpt + 1
-		vetx[tmpt] = 100 * math.cos(currentFrame - i + intp)
+		vetx[tmpt] = 200 * math.cos(currentFrame / 3 - i + intp / 3)
 		tmpt = tmpt + 1
 
 	end
