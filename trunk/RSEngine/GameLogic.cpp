@@ -90,7 +90,7 @@ void GameLogic::InitUIMgr(TextClass* tc)
 void GameLogic::RotateCamera(float angle)
 {
 	m_camera->SetRotation(-angle / 3.1415926f * 180, 0, 0);
-	m_camera->SetPosition(0,  -100.0f * sin(angle), -100.0f * cos(angle));
+	m_camera->SetPosition(0,  -500.0f * sin(angle), -500.0f * cos(angle));
 }
 
 void GameLogic::InitCamera(CameraClass* cc)

@@ -32,11 +32,11 @@ function updateFrame()
 	local tmpt = 1
 	for i=1, 500 do
 		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-		vetx[tmpt] = 400 - currentFrame + i
+		vetx[tmpt] = 400 - currentFrame / 5 + i
 		tmpt = tmpt + 1
-		vetx[tmpt] = 300 * math.sin(currentFrame / 3 - i)
+		vetx[tmpt] = 300 * math.sin(currentFrame / 200 - i)
 		tmpt = tmpt + 1
-		vetx[tmpt] = 200 * math.cos(currentFrame / 3 - i)
+		vetx[tmpt] = 300 * math.cos(currentFrame / 200 - i)
 		tmpt = tmpt + 1
 
 	end
@@ -47,11 +47,11 @@ function updateInterpolation(intp)
 	local tmpt = 1
 	for i=1, 500 do
 		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-		vetx[tmpt] = 400 - currentFrame + i + intp
+		vetx[tmpt] = 400 - (currentFrame + intp) / 5 + i 
 		tmpt = tmpt + 1
-		vetx[tmpt] = 100 * math.sin(currentFrame / 3 - i + intp / 3)
+		vetx[tmpt] = 300 * math.sin(currentFrame / 200 - i + intp / 200)
 		tmpt = tmpt + 1
-		vetx[tmpt] = 200 * math.cos(currentFrame / 3 - i + intp / 3)
+		vetx[tmpt] = 300 * math.cos(currentFrame / 200 - i + intp / 200)
 		tmpt = tmpt + 1
 
 	end

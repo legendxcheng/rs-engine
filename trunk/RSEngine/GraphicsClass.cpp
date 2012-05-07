@@ -62,7 +62,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	GameLogic::GetInstance()->InitCamera(m_Camera);
 
 	// Set the initial position of the camera.
-	m_Camera->SetPosition(0.0f, 0.0f, -100.0f);
+	m_Camera->SetPosition(0.0f, 0.0f, -500.0f);
 
 
 	m_renderObjMgr = RenderObjectManager::GetInstance();
