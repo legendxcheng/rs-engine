@@ -48,7 +48,7 @@ float4 ColorPixelShader(PixelInputType input) : SV_TARGET
 {
     float4 ret;
 	ret.x = 1.0f;
-	ret.y = 0.0f;
+	ret.y = 1.0f;
 	ret.z = 1.0f;
 	ret.w = 1.0f;
     return ret;
