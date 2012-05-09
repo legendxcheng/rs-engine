@@ -1,370 +1,356 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{8d4ab1fc-0723-467f-a068-3c65bfbe0e5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Example">
-      <UniqueIdentifier>{e57594cd-ad79-4c1c-998a-fa491b3e2665}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Example\TriangleExample">
-      <UniqueIdentifier>{9451cef7-e0c6-4c24-9552-278b6a708c63}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Example\SphereClass">
-      <UniqueIdentifier>{f34839c4-ec7c-4bc8-8d21-df7d43cabcbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game">
-      <UniqueIdentifier>{11b6f78a-d47b-4ad1-a559-3d4659dbd7f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\RsEnginePrimitive">
-      <UniqueIdentifier>{27a6ecf3-d58e-4b41-93eb-9ad1c260f68a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\RsEnginePrimitive\BaseShaderClass">
-      <UniqueIdentifier>{ad6161f0-53a3-4fe8-acfb-49aa05d4f15e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\RsEnginePrimitive\Core">
-      <UniqueIdentifier>{7aee3db2-d767-4171-9551-548edad95922}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\RsEnginePrimitive\Object">
-      <UniqueIdentifier>{50734a61-65fb-4146-91ae-6bd6ee6074bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\RsEnginePrimitive\FontDisplay">
-      <UniqueIdentifier>{b65f42d2-5cec-4b3c-8baa-7bc661bd5b2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\BulletSystem">
-      <UniqueIdentifier>{b3c193f1-ac42-4653-9b72-36a577687ab8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Example\BulletStormExample">
-      <UniqueIdentifier>{7864adfc-5286-4066-b58e-f82589c67e1e}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="SphereVS.cpp">
-      <Filter>Source Files\Example\SphereClass</Filter>
-    </ClCompile>
-    <ClCompile Include="SpherePS.cpp">
-      <Filter>Source Files\Example\SphereClass</Filter>
-    </ClCompile>
-    <ClCompile Include="TestPS.cpp">
-      <Filter>Source Files\Example\TriangleExample</Filter>
-    </ClCompile>
-    <ClCompile Include="TriangleTest.cpp">
-      <Filter>Source Files\Example\TriangleExample</Filter>
-    </ClCompile>
-    <ClCompile Include="TestVS.cpp">
-      <Filter>Source Files\Example\TriangleExample</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereTexture.cpp">
-      <Filter>Source Files\Example\SphereClass</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereClass.cpp">
-      <Filter>Source Files\Example\SphereClass</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderManager.cpp">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClCompile>
-    <ClCompile Include="TokenStream.cpp">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClCompile>
-    <ClCompile Include="SpritePS.cpp">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteVS.cpp">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputeShaderClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClCompile>
-    <ClCompile Include="GeometryShaderClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClCompile>
-    <ClCompile Include="PixelShaderClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexShaderClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClCompile>
     <ClCompile Include="D3DClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="EngineMain.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="InputClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="RSTimer.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLogic.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="UIManager.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="GameGlobalData.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Spaceship.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjLoader.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjModelClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="RenderObject.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="RenderObjectManager.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteClass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    <ClCompile Include="SoundClass.cpp">
+      <Filter>Low Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemClass.cpp">
+      <Filter>Low Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraClass.cpp">
+      <Filter>Low Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsClass.cpp">
+      <Filter>Low Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Low Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureClass.cpp">
+      <Filter>Low Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryShaderClass.cpp">
+      <Filter>Low Engine\ShaderBase</Filter>
     </ClCompile>
     <ClCompile Include="fontclass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+      <Filter>Low Engine\Font</Filter>
     </ClCompile>
     <ClCompile Include="fontshaderclass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+      <Filter>Low Engine\Font</Filter>
     </ClCompile>
     <ClCompile Include="textclass.cpp">
-      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+      <Filter>Low Engine\Font</Filter>
     </ClCompile>
-    <ClCompile Include="BulletStorm.cpp">
-      <Filter>Source Files\Game\BulletSystem</Filter>
+    <ClCompile Include="ComputeShaderClass.cpp">
+      <Filter>Low Engine\ShaderBase</Filter>
     </ClCompile>
-    <ClCompile Include="BulletStrip.cpp">
-      <Filter>Source Files\Game\BulletSystem</Filter>
+    <ClCompile Include="ShaderClass.cpp">
+      <Filter>Low Engine\ShaderBase</Filter>
     </ClCompile>
-    <ClCompile Include="BulletSystem.cpp">
-      <Filter>Source Files\Game\BulletSystem</Filter>
+    <ClCompile Include="VertexShaderClass.cpp">
+      <Filter>Low Engine\ShaderBase</Filter>
     </ClCompile>
-    <ClCompile Include="BulletStormTest.cpp">
-      <Filter>Source Files\Example\BulletStormExample</Filter>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Low Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Low Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameGlobalData.cpp">
+      <Filter>High Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>High Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>High Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Spaceship.cpp">
+      <Filter>High Engine</Filter>
     </ClCompile>
     <ClCompile Include="BSTestPS.cpp">
-      <Filter>Source Files\Example\BulletStormExample</Filter>
+      <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="BSTestVS.cpp">
-      <Filter>Source Files\Example\BulletStormExample</Filter>
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletStormTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletStrip.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletStorm.cpp">
+      <Filter>High Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletSystem.cpp">
+      <Filter>High Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelClass.cpp">
+      <Filter>Low Engine\ModelLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLoader.cpp">
+      <Filter>Low Engine\ModelLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjModelClass.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SpherePS.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereClass.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereTexture.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelShaderClass.cpp">
+      <Filter>Low Engine\ShaderBase</Filter>
+    </ClCompile>
+    <ClCompile Include="RSTimer.cpp">
+      <Filter>Low Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereVS.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPS.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TestVS.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>High Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>High Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteClass.cpp">
+      <Filter>Low Engine\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SpritePS.cpp">
+      <Filter>Low Engine\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteVS.cpp">
+      <Filter>Low Engine\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="TokenStream.cpp">
+      <Filter>Low Engine\ModelLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SphereClass.h">
-      <Filter>Source Files\Example\SphereClass</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereVS.h">
-      <Filter>Source Files\Example\SphereClass</Filter>
-    </ClInclude>
-    <ClInclude Include="SpherePS.h">
-      <Filter>Source Files\Example\SphereClass</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereTexture.h">
-      <Filter>Source Files\Example\SphereClass</Filter>
-    </ClInclude>
-    <ClInclude Include="TestPS.h">
-      <Filter>Source Files\Example\TriangleExample</Filter>
-    </ClInclude>
-    <ClInclude Include="TestVS.h">
-      <Filter>Source Files\Example\TriangleExample</Filter>
-    </ClInclude>
-    <ClInclude Include="TriangleTest.h">
-      <Filter>Source Files\Example\TriangleExample</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelClass.h">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManager.h">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureClass.h">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClInclude>
-    <ClInclude Include="TokenStream.h">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteVS.h">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClInclude>
-    <ClInclude Include="SpritePS.h">
-      <Filter>Source Files\RsEnginePrimitive</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexShaderClass.h">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputeShaderClass.h">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClInclude>
-    <ClInclude Include="GeometryShaderClass.h">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClInclude>
-    <ClInclude Include="PixelShaderClass.h">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderClass.h">
-      <Filter>Source Files\RsEnginePrimitive\BaseShaderClass</Filter>
-    </ClInclude>
     <ClInclude Include="D3DClass.h">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsClass.h">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="InputClass.h">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundClass.h">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="RSTimer.h">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemClass.h">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLogic.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="UIManager.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Spaceship.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="GameGlobalData.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraClass.h">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjLoader.h">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjModelClass.h">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="RenderObject.h">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="RenderObjectManager.h">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteClass.h">
-      <Filter>Source Files\RsEnginePrimitive\Object</Filter>
+    <ClInclude Include="SoundClass.h">
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="textclass.h">
-      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
-    </ClInclude>
-    <ClInclude Include="fontclass.h">
-      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
-    </ClInclude>
-    <ClInclude Include="fontshaderclass.h">
-      <Filter>Source Files\RsEnginePrimitive\FontDisplay</Filter>
+    <ClInclude Include="SystemClass.h">
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="Structures.h">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="BulletStorm.h">
-      <Filter>Source Files\Game\BulletSystem</Filter>
+    <ClInclude Include="CameraClass.h">
+      <Filter>Low Engine</Filter>
     </ClInclude>
-    <ClInclude Include="BulletStrip.h">
-      <Filter>Source Files\Game\BulletSystem</Filter>
+    <ClInclude Include="GraphicsClass.h">
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="lua_head.h">
-      <Filter>Source Files\Game\BulletSystem</Filter>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="BulletSystem.h">
-      <Filter>Source Files\Game\BulletSystem</Filter>
+    <ClInclude Include="TextureClass.h">
+      <Filter>Low Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="SoundManager.h">
-      <Filter>Source Files\RsEnginePrimitive\Core</Filter>
+    <ClInclude Include="GeometryShaderClass.h">
+      <Filter>Low Engine\ShaderBase</Filter>
     </ClInclude>
-    <ClInclude Include="BulletStormTest.h">
-      <Filter>Source Files\Example\BulletStormExample</Filter>
+    <ClInclude Include="fontclass.h">
+      <Filter>Low Engine\Font</Filter>
     </ClInclude>
-    <ClInclude Include="BSTestVS.h">
-      <Filter>Source Files\Example\BulletStormExample</Filter>
+    <ClInclude Include="fontshaderclass.h">
+      <Filter>Low Engine\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="textclass.h">
+      <Filter>Low Engine\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Low Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeShaderClass.h">
+      <Filter>Low Engine\ShaderBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderClass.h">
+      <Filter>Low Engine\ShaderBase</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShaderClass.h">
+      <Filter>Low Engine\ShaderBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Low Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameGlobalData.h">
+      <Filter>High Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>High Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>High Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Spaceship.h">
+      <Filter>High Engine</Filter>
     </ClInclude>
     <ClInclude Include="BSTestPS.h">
-      <Filter>Source Files\Example\BulletStormExample</Filter>
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="BSTestVS.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletStormTest.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletStrip.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletStorm.h">
+      <Filter>High Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletSystem.h">
+      <Filter>High Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelClass.h">
+      <Filter>Low Engine\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLoader.h">
+      <Filter>Low Engine\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjModelClass.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="SpherePS.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereClass.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereTexture.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_head.h">
+      <Filter>Low Engine\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShaderClass.h">
+      <Filter>Low Engine\ShaderBase</Filter>
+    </ClInclude>
+    <ClInclude Include="RSTimer.h">
+      <Filter>Low Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereVS.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPS.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TestVS.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleTest.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>High Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>High Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteClass.h">
+      <Filter>Low Engine\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="SpritePS.h">
+      <Filter>Low Engine\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteVS.h">
+      <Filter>Low Engine\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="TokenStream.h">
+      <Filter>Low Engine\ModelLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Color.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Color.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Sphere.fx">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Sprite.fx">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="font.ps">
-      <Filter>Shaders</Filter>
+    <None Include="bstest.hlsl">
+      <Filter>Low Engine\Shader</Filter>
     </None>
     <None Include="font.vs">
-      <Filter>Shaders</Filter>
+      <Filter>Low Engine\Shader</Filter>
     </None>
     <None Include="BulletStorm.hlsl">
-      <Filter>Shaders</Filter>
+      <Filter>Low Engine\Shader</Filter>
     </None>
-    <None Include="bstest.hlsl">
-      <Filter>Shaders</Filter>
+    <None Include="Color.ps">
+      <Filter>Low Engine\Shader</Filter>
     </None>
+    <None Include="Color.vs">
+      <Filter>Low Engine\Shader</Filter>
+    </None>
+    <None Include="font.ps">
+      <Filter>Low Engine\Shader</Filter>
+    </None>
+    <None Include="Sprite.fx">
+      <Filter>Low Engine\Shader</Filter>
+    </None>
+    <None Include="Sphere.fx">
+      <Filter>Low Engine\Shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Low Engine">
+      <UniqueIdentifier>{137b551d-e69c-4009-9571-05f8eeb5347b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Core">
+      <UniqueIdentifier>{12241171-d853-4e3b-be02-913015d66c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\ShaderBase">
+      <UniqueIdentifier>{b9ff8d4c-bd6b-4721-8346-86f7f7a8cca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Font">
+      <UniqueIdentifier>{eb8f3903-ce1d-4ac1-9cc1-ab41a805d443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Engine">
+      <UniqueIdentifier>{9be73051-216d-4c29-bc10-1cea3c459cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{667a005b-f7de-469a-b923-5749d5df8d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\ModelLoader">
+      <UniqueIdentifier>{27db66b0-db11-4680-b529-22cdc6ad28ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Shader">
+      <UniqueIdentifier>{08f20c01-202e-48d3-8693-551dbb259a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Script">
+      <UniqueIdentifier>{97dc639c-cd41-48cb-8c3f-2f31ff8e1c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Sprite">
+      <UniqueIdentifier>{5c53d639-af59-425a-b965-40fd929f7864}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
