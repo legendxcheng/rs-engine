@@ -78,6 +78,14 @@ bool ObjModelClass::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
+	// load textures
+	TextureManager* tm = TextureManager::GetInstance();
+	for (int i = 0; i < subsetTextureFileName.size(); ++i)
+	{
+		if (subsetTextureFileName[i] != "")
+			tm->CreateAndInsertTexture(subsetTextureFileName[i].c_str());
+	}
+
 	objModel.GetObjInfo(&m_triangleCount, &m_totalVerts, &m_meshTriangles, &m_subsetCount);
 
 	D3D11_BUFFER_DESC vertexDesc;
@@ -117,10 +125,6 @@ bool ObjModelClass::InitializeBuffers(ID3D11Device* device)
 	return true;
 }
 
-bool ObjModelClass::InitializeShaders(ID3D11Device*)
-{
-	return true;
-}
 
 void ObjModelClass::ShutdownBuffers()
 {

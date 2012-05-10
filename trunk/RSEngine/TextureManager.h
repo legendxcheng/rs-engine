@@ -13,6 +13,7 @@ public:
 	void InsertTexture(TextureClass* tc);
 	void RemoveTexture(TextureClass* tc);
 	TextureClass* GetTexture(const char* textureName);
+	void CreateAndInsertTexture(const char* fileName);
 
 	static TextureManager* GetInstance()
 	{

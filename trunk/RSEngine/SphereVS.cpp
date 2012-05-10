@@ -10,13 +10,13 @@ SphereVS::~SphereVS(void)
 {
 }
 
-bool SphereVS::Initialize(ID3D11Device* device, HWND hwnd)
+bool SphereVS::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* fileName, CHAR* entryFuncName)
 {
 	bool result;
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"Sphere.fx", "VS_Main");
+	result = InitializeShader(device, hwnd, fileName, entryFuncName);
 	if(!result)
 	{
 		return false;
@@ -29,6 +29,7 @@ bool SphereVS::Initialize(ID3D11Device* device, HWND hwnd)
 	}
 	return true;
 }
+
 bool SphereVS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFileName, CHAR* entryFuncName)
 {
 	HRESULT result;

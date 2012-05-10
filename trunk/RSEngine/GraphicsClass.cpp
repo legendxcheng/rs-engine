@@ -13,6 +13,8 @@
 #include "BulletStormTest.h"
 #include <DxErr.h>
 
+D3DClass* GraphicsClass::m_D3D = 0;
+
 GraphicsClass::GraphicsClass()
 {
 	m_D3D = 0;
@@ -183,9 +185,9 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	/*
 		Triangle Example
 	*/
-	TriangleTest* sqtest = new TriangleTest();
-	sqtest->Initialize(device);
-	rom->InsertRenderObject((RenderObject*) sqtest);
+// 	TriangleTest* sqtest = new TriangleTest();
+// 	sqtest->Initialize(device);
+// 	rom->InsertRenderObject((RenderObject*) sqtest);
 
 
 	/*
@@ -226,4 +228,22 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	m_textClass->Initialize(device);
 	GameLogic::GetInstance()->InitUIMgr(m_textClass);
 	rom->InsertRenderObject(m_textClass);
+
+	//////////////////////////////////////////////////////////////////////////
+	// This is the initialization of all resources
+	//////////////////////////////////////////////////////////////////////////
+	// Initialize Texture
+	//////////////////////////////////////////////////////////////////////////
+
+
+
+
+	// Initialize Shader
+	//////////////////////////////////////////////////////////////////////////
+
+
+
+	// Initialize RenderObject
+	//////////////////////////////////////////////////////////////////////////
+
 }

@@ -19,7 +19,8 @@ public:
 
 protected:
 	virtual bool InitializeBuffers(ID3D11Device*);
-	virtual bool InitializeShaders(ID3D11Device*);
+	// every model has to implement this function
+	virtual bool InitializeShaders(ID3D11Device*) = 0;
 	virtual void ShutdownBuffers();
 	virtual void RenderBuffers(ID3D11DeviceContext*);
 	virtual bool LoadTexture(ID3D11Device*);

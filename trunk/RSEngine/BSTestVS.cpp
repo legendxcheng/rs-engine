@@ -65,13 +65,13 @@ bool BSTestVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRI
 
 }
 
-bool BSTestVS::Initialize(ID3D11Device* device, HWND hwnd)
+bool BSTestVS::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* fileName, CHAR* entryFuncName)
 {
 	bool result;
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"bstest.hlsl", "ColorVertexShader");
+	result = InitializeShader(device, hwnd, fileName, entryFuncName);
 	if(!result)
 	{
 		return false;
