@@ -22,17 +22,11 @@
     <ClCompile Include="SystemClass.cpp">
       <Filter>Low Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="CameraClass.cpp">
-      <Filter>Low Engine</Filter>
-    </ClCompile>
     <ClCompile Include="GraphicsClass.cpp">
       <Filter>Low Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Low Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureClass.cpp">
-      <Filter>Low Engine</Filter>
     </ClCompile>
     <ClCompile Include="GeometryShaderClass.cpp">
       <Filter>Low Engine\ShaderBase</Filter>
@@ -55,9 +49,6 @@
     <ClCompile Include="VertexShaderClass.cpp">
       <Filter>Low Engine\ShaderBase</Filter>
     </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>Low Engine</Filter>
-    </ClCompile>
     <ClCompile Include="ShaderManager.cpp">
       <Filter>Low Engine\Core</Filter>
     </ClCompile>
@@ -74,9 +65,6 @@
       <Filter>High Engine</Filter>
     </ClCompile>
     <ClCompile Include="BSTestPS.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="BSTestVS.cpp">
       <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="BulletStormTest.cpp">
@@ -97,13 +85,7 @@
     <ClCompile Include="ObjLoader.cpp">
       <Filter>Low Engine\ModelLoader</Filter>
     </ClCompile>
-    <ClCompile Include="ObjModelClass.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
     <ClCompile Include="SpherePS.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereClass.cpp">
       <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="SphereTexture.cpp">
@@ -145,6 +127,21 @@
     <ClCompile Include="TokenStream.cpp">
       <Filter>Low Engine\ModelLoader</Filter>
     </ClCompile>
+    <ClCompile Include="TextureClass.cpp">
+      <Filter>Low Engine\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraClass.cpp">
+      <Filter>Low Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Low Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjModelClass.cpp">
+      <Filter>Low Engine\ModelLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="BSTestVS.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -168,16 +165,10 @@
     <ClInclude Include="Structures.h">
       <Filter>Low Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="CameraClass.h">
-      <Filter>Low Engine</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicsClass.h">
       <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Low Engine\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureClass.h">
       <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="GeometryShaderClass.h">
@@ -191,9 +182,6 @@
     </ClInclude>
     <ClInclude Include="textclass.h">
       <Filter>Low Engine\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>Low Engine</Filter>
     </ClInclude>
     <ClInclude Include="ComputeShaderClass.h">
       <Filter>Low Engine\ShaderBase</Filter>
@@ -243,13 +231,7 @@
     <ClInclude Include="ObjLoader.h">
       <Filter>Low Engine\ModelLoader</Filter>
     </ClInclude>
-    <ClInclude Include="ObjModelClass.h">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="SpherePS.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereClass.h">
       <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="SphereTexture.h">
@@ -293,6 +275,18 @@
     </ClInclude>
     <ClInclude Include="TokenStream.h">
       <Filter>Low Engine\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraClass.h">
+      <Filter>Low Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Low Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjModelClass.h">
+      <Filter>Low Engine\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureClass.h">
+      <Filter>Low Engine\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +345,12 @@
     </Filter>
     <Filter Include="Low Engine\Sprite">
       <UniqueIdentifier>{5c53d639-af59-425a-b965-40fd929f7864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Texture">
+      <UniqueIdentifier>{940df26d-1f90-4165-b054-d38ebadce2c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Camera">
+      <UniqueIdentifier>{1d4a772c-08b0-4360-917d-0695719f9c15}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

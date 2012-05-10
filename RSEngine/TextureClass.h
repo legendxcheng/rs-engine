@@ -24,10 +24,9 @@ public:
 	bool Initialize(ID3D11Device*, WCHAR*);
 	void Shutdown();
 	ID3D11ShaderResourceView* GetTexture();
-
+	bool NameEqual(const char* name);
 private:
 	ID3D11ShaderResourceView* m_texture;
-	
 	char* m_textureFileName;
 };
 

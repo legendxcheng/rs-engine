@@ -106,7 +106,6 @@
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="SoundClass.cpp" />
-    <ClCompile Include="SphereClass.cpp" />
     <ClCompile Include="SpherePS.cpp" />
     <ClCompile Include="SphereTexture.cpp" />
     <ClCompile Include="SphereVS.cpp" />
@@ -156,7 +155,6 @@
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="SoundClass.h" />
-    <ClInclude Include="SphereClass.h" />
     <ClInclude Include="SpherePS.h" />
     <ClInclude Include="SphereTexture.h" />
     <ClInclude Include="SphereVS.h" />

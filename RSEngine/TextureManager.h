@@ -12,6 +12,7 @@ public:
 	void Shutdown();
 	void InsertTexture(TextureClass* tc);
 	void RemoveTexture(TextureClass* tc);
+	TextureClass* GetTexture(const char* textureName);
 
 	static TextureManager* GetInstance()
 	{
