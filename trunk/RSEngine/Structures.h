@@ -40,3 +40,10 @@ struct BulletType
 {
 	D3DXVECTOR3 position;
 };
+
+struct ObjVertex
+{
+	D3DXVECTOR3 pos;
+	D3DXVECTOR2 texCoord;
+	D3DXVECTOR3 normal;
+};

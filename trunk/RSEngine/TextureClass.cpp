@@ -44,3 +44,11 @@ ID3D11ShaderResourceView* TextureClass::GetTexture()
 {
 	return m_texture;
 }
+
+
+bool TextureClass::NameEqual(const char* name)
+{
+	if (strcmp(name, m_textureFileName) == 0)
+		return true;
+	return false;
+}

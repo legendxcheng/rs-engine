@@ -45,3 +45,14 @@ void TextureManager::RemoveTexture(TextureClass* rob)
 	}
 }
 
+TextureClass* TextureManager::GetTexture(const char* textureName)
+{
+	for (std::vector<TextureClass*>::iterator iter = this->m_textureList.begin(); iter != this->m_textureList.end(); ++iter)
+	{
+		if ((*iter)->NameEqual(textureName))
+		{
+			return (*iter);
+		}
+	}
+	return NULL;
+}

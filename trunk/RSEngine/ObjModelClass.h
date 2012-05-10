@@ -1,9 +1,7 @@
 #pragma once
 // class for .obj format model
 #include "modelclass.h"
-class SpherePS;
-class SphereVS;
-
+#include <vector>
 class ObjModelClass :
 	public ModelClass
 {
@@ -14,9 +12,11 @@ public:
 	virtual bool Initialize(ID3D11Device*);
 	//virtual bool Initialize(ID3D11Device* device, WCHAR* textureFilename);
 	virtual void Shutdown();
-	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX) = 0;
+	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX);
 	virtual int GetIndexCount();
 	virtual bool Update();
+	void SetModelAttribute(bool isRH, bool computeNorm);
+
 protected:
 	virtual bool InitializeBuffers(ID3D11Device*);
 	virtual bool InitializeShaders(ID3D11Device*);
@@ -26,12 +26,23 @@ protected:
 	virtual void ReleaseTexture();//call texture manager to release
 
 protected:
-	SpherePS* m_ps;
-	SphereVS* m_vs;
+	// vs and ps by subset order
+	std::vector<std::string> m_psList;
+	std::vector<std::string> m_vsList;
 	unsigned int m_vertextCount;
 	ID3D11Buffer* m_vertexBuffer;
 	ID3D11Buffer* m_indexBuffer;
 	char* m_objFileName;
+	bool m_isRHCoorSys;
+	bool m_computeNormals;
 
+	int m_triangleCount;	//Total Triangles
+	int m_totalVerts;
+	int m_meshTriangles;
+	int m_subsetCount;
+
+
+	std::vector<int> subsetIndexStart;
+	std::vector<std::string> subsetTextureFileName;
 };
 
