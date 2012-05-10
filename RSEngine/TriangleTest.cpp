@@ -222,7 +222,7 @@ void  TriangleTest::ReleaseTexture()
 
 }
 
-bool TriangleTest::InitializeShaders(ID3D11Device* device)
+bool TriangleTest::InitializeShaders(ID3D11Device* device, WCHAR* fileName, CHAR* entryFuncName)
 {
 	m_vs = new TestVS("TriangleTestVS");
 	m_vs->Initialize(device, SystemClass::GetWindowHandler());

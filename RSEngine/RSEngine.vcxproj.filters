@@ -29,25 +29,25 @@
       <Filter>Low Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="GeometryShaderClass.cpp">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClCompile>
     <ClCompile Include="fontclass.cpp">
-      <Filter>Low Engine\Font</Filter>
+      <Filter>Low Engine\Core\Font</Filter>
     </ClCompile>
     <ClCompile Include="fontshaderclass.cpp">
-      <Filter>Low Engine\Font</Filter>
+      <Filter>Low Engine\Core\Font</Filter>
     </ClCompile>
     <ClCompile Include="textclass.cpp">
-      <Filter>Low Engine\Font</Filter>
+      <Filter>Low Engine\Core\Font</Filter>
     </ClCompile>
     <ClCompile Include="ComputeShaderClass.cpp">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClCompile>
     <ClCompile Include="ShaderClass.cpp">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClCompile>
     <ClCompile Include="VertexShaderClass.cpp">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClCompile>
     <ClCompile Include="ShaderManager.cpp">
       <Filter>Low Engine\Core</Filter>
@@ -80,10 +80,10 @@
       <Filter>High Engine</Filter>
     </ClCompile>
     <ClCompile Include="ModelClass.cpp">
-      <Filter>Low Engine\ModelLoader</Filter>
+      <Filter>Low Engine\Core\ModelLoader</Filter>
     </ClCompile>
     <ClCompile Include="ObjLoader.cpp">
-      <Filter>Low Engine\ModelLoader</Filter>
+      <Filter>Low Engine\Core\ModelLoader</Filter>
     </ClCompile>
     <ClCompile Include="SpherePS.cpp">
       <Filter>Test</Filter>
@@ -92,21 +92,12 @@
       <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="PixelShaderClass.cpp">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClCompile>
     <ClCompile Include="RSTimer.cpp">
       <Filter>Low Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="SphereVS.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TestPS.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TestVS.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TriangleTest.cpp">
       <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
@@ -116,31 +107,34 @@
       <Filter>High Engine</Filter>
     </ClCompile>
     <ClCompile Include="SpriteClass.cpp">
-      <Filter>Low Engine\Sprite</Filter>
+      <Filter>Low Engine\Core\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="SpritePS.cpp">
-      <Filter>Low Engine\Sprite</Filter>
+      <Filter>Low Engine\Core\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="SpriteVS.cpp">
-      <Filter>Low Engine\Sprite</Filter>
+      <Filter>Low Engine\Core\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="TokenStream.cpp">
-      <Filter>Low Engine\ModelLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureClass.cpp">
-      <Filter>Low Engine\Texture</Filter>
+      <Filter>Low Engine\Core\ModelLoader</Filter>
     </ClCompile>
     <ClCompile Include="CameraClass.cpp">
-      <Filter>Low Engine\Camera</Filter>
+      <Filter>Low Engine\Core\Camera</Filter>
     </ClCompile>
     <ClCompile Include="CameraManager.cpp">
-      <Filter>Low Engine\Camera</Filter>
+      <Filter>Low Engine\Core\Camera</Filter>
     </ClCompile>
     <ClCompile Include="ObjModelClass.cpp">
-      <Filter>Low Engine\ModelLoader</Filter>
+      <Filter>Low Engine\Core\ModelLoader</Filter>
     </ClCompile>
     <ClCompile Include="BSTestVS.cpp">
       <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureClass.cpp">
+      <Filter>Low Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="RSObjVS.cpp">
+      <Filter>Low Engine\Shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,25 +166,25 @@
       <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="GeometryShaderClass.h">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClInclude>
     <ClInclude Include="fontclass.h">
-      <Filter>Low Engine\Font</Filter>
+      <Filter>Low Engine\Core\Font</Filter>
     </ClInclude>
     <ClInclude Include="fontshaderclass.h">
-      <Filter>Low Engine\Font</Filter>
+      <Filter>Low Engine\Core\Font</Filter>
     </ClInclude>
     <ClInclude Include="textclass.h">
-      <Filter>Low Engine\Font</Filter>
+      <Filter>Low Engine\Core\Font</Filter>
     </ClInclude>
     <ClInclude Include="ComputeShaderClass.h">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClInclude>
     <ClInclude Include="ShaderClass.h">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClInclude>
     <ClInclude Include="VertexShaderClass.h">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClInclude>
     <ClInclude Include="ShaderManager.h">
       <Filter>Low Engine\Core</Filter>
@@ -226,10 +220,10 @@
       <Filter>High Engine</Filter>
     </ClInclude>
     <ClInclude Include="ModelClass.h">
-      <Filter>Low Engine\ModelLoader</Filter>
+      <Filter>Low Engine\Core\ModelLoader</Filter>
     </ClInclude>
     <ClInclude Include="ObjLoader.h">
-      <Filter>Low Engine\ModelLoader</Filter>
+      <Filter>Low Engine\Core\ModelLoader</Filter>
     </ClInclude>
     <ClInclude Include="SpherePS.h">
       <Filter>Test</Filter>
@@ -238,24 +232,15 @@
       <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="lua_head.h">
-      <Filter>Low Engine\Script</Filter>
+      <Filter>Low Engine\Core\Script</Filter>
     </ClInclude>
     <ClInclude Include="PixelShaderClass.h">
-      <Filter>Low Engine\ShaderBase</Filter>
+      <Filter>Low Engine\Core\ShaderBase</Filter>
     </ClInclude>
     <ClInclude Include="RSTimer.h">
       <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="SphereVS.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="TestPS.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="TestVS.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="TriangleTest.h">
       <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
@@ -265,54 +250,57 @@
       <Filter>High Engine</Filter>
     </ClInclude>
     <ClInclude Include="SpriteClass.h">
-      <Filter>Low Engine\Sprite</Filter>
+      <Filter>Low Engine\Core\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="SpritePS.h">
-      <Filter>Low Engine\Sprite</Filter>
+      <Filter>Low Engine\Core\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="SpriteVS.h">
-      <Filter>Low Engine\Sprite</Filter>
+      <Filter>Low Engine\Core\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="TokenStream.h">
-      <Filter>Low Engine\ModelLoader</Filter>
+      <Filter>Low Engine\Core\ModelLoader</Filter>
     </ClInclude>
     <ClInclude Include="CameraClass.h">
-      <Filter>Low Engine\Camera</Filter>
+      <Filter>Low Engine\Core\Camera</Filter>
     </ClInclude>
     <ClInclude Include="CameraManager.h">
-      <Filter>Low Engine\Camera</Filter>
+      <Filter>Low Engine\Core\Camera</Filter>
     </ClInclude>
     <ClInclude Include="ObjModelClass.h">
-      <Filter>Low Engine\ModelLoader</Filter>
+      <Filter>Low Engine\Core\ModelLoader</Filter>
     </ClInclude>
     <ClInclude Include="TextureClass.h">
-      <Filter>Low Engine\Texture</Filter>
+      <Filter>Low Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="RSObjVS.h">
+      <Filter>Low Engine\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bstest.hlsl">
-      <Filter>Low Engine\Shader</Filter>
+      <Filter>Low Engine\Core\HLSL</Filter>
     </None>
     <None Include="font.vs">
-      <Filter>Low Engine\Shader</Filter>
+      <Filter>Low Engine\Core\HLSL</Filter>
     </None>
     <None Include="BulletStorm.hlsl">
-      <Filter>Low Engine\Shader</Filter>
+      <Filter>Low Engine\Core\HLSL</Filter>
     </None>
     <None Include="Color.ps">
-      <Filter>Low Engine\Shader</Filter>
+      <Filter>Low Engine\Core\HLSL</Filter>
     </None>
     <None Include="Color.vs">
-      <Filter>Low Engine\Shader</Filter>
+      <Filter>Low Engine\Core\HLSL</Filter>
     </None>
     <None Include="font.ps">
-      <Filter>Low Engine\Shader</Filter>
+      <Filter>Low Engine\Core\HLSL</Filter>
     </None>
     <None Include="Sprite.fx">
-      <Filter>Low Engine\Shader</Filter>
+      <Filter>Low Engine\Core\HLSL</Filter>
     </None>
     <None Include="Sphere.fx">
-      <Filter>Low Engine\Shader</Filter>
+      <Filter>Low Engine\Core\HLSL</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -322,35 +310,38 @@
     <Filter Include="Low Engine\Core">
       <UniqueIdentifier>{12241171-d853-4e3b-be02-913015d66c3b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Low Engine\ShaderBase">
-      <UniqueIdentifier>{b9ff8d4c-bd6b-4721-8346-86f7f7a8cca4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Low Engine\Font">
-      <UniqueIdentifier>{eb8f3903-ce1d-4ac1-9cc1-ab41a805d443}</UniqueIdentifier>
-    </Filter>
     <Filter Include="High Engine">
       <UniqueIdentifier>{9be73051-216d-4c29-bc10-1cea3c459cff}</UniqueIdentifier>
     </Filter>
     <Filter Include="Test">
       <UniqueIdentifier>{667a005b-f7de-469a-b923-5749d5df8d52}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Low Engine\ModelLoader">
+    <Filter Include="Low Engine\RShooterObj">
+      <UniqueIdentifier>{9826c107-cc9b-4087-9806-38930d5d709c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Core\Font">
+      <UniqueIdentifier>{eb8f3903-ce1d-4ac1-9cc1-ab41a805d443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Core\ModelLoader">
       <UniqueIdentifier>{27db66b0-db11-4680-b529-22cdc6ad28ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Low Engine\Shader">
-      <UniqueIdentifier>{08f20c01-202e-48d3-8693-551dbb259a15}</UniqueIdentifier>
+    <Filter Include="Low Engine\Core\Camera">
+      <UniqueIdentifier>{1d4a772c-08b0-4360-917d-0695719f9c15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Low Engine\Script">
+    <Filter Include="Low Engine\Core\Script">
       <UniqueIdentifier>{97dc639c-cd41-48cb-8c3f-2f31ff8e1c85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Low Engine\Sprite">
+    <Filter Include="Low Engine\Core\ShaderBase">
+      <UniqueIdentifier>{b9ff8d4c-bd6b-4721-8346-86f7f7a8cca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Core\Sprite">
       <UniqueIdentifier>{5c53d639-af59-425a-b965-40fd929f7864}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Low Engine\Texture">
-      <UniqueIdentifier>{940df26d-1f90-4165-b054-d38ebadce2c8}</UniqueIdentifier>
+    <Filter Include="Low Engine\Shaders">
+      <UniqueIdentifier>{2168a4ca-e9f2-4356-a3ee-6d4d3cf2fdb8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Low Engine\Camera">
-      <UniqueIdentifier>{1d4a772c-08b0-4360-917d-0695719f9c15}</UniqueIdentifier>
+    <Filter Include="Low Engine\Core\HLSL">
+      <UniqueIdentifier>{08f20c01-202e-48d3-8693-551dbb259a15}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

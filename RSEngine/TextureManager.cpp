@@ -1,6 +1,6 @@
 #include "TextureManager.h"
 #include "TextureClass.h"
-
+#include "GraphicsClass.h"
 TextureManager* TextureManager::m_instance = 0;
 
 TextureManager::TextureManager(void)
@@ -55,4 +55,26 @@ TextureClass* TextureManager::GetTexture(const char* textureName)
 		}
 	}
 	return NULL;
+}
+
+/*
+	create a texture from file
+	or if the texture already exists
+	just return
+*/
+void TextureManager::CreateAndInsertTexture(const char* fileName)
+{
+	for (std::vector<TextureClass*>::iterator iter = this->m_textureList.begin(); iter != this->m_textureList.end(); ++iter)
+	{
+		if ((*iter)->NameEqual(fileName))
+		{
+			return;// already exists
+		}
+	}
+
+	//else create
+	TextureClass* tc = new TextureClass();
+	WCHAR fn[200];
+	wsprintf(fn, L"%s", fileName);
+	tc->Initialize(GraphicsClass::m_D3D->GetDevice(), fn);
 }

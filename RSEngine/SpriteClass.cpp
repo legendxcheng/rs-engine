@@ -331,7 +331,7 @@ bool SpriteClass::LoadTexture(ID3D11Device* device, WCHAR* fileName)
 bool SpriteClass::InitializeShaders(ID3D11Device* device)
 {
 	m_vs = new SpriteVS();
-	m_vs->Initialize(device, SystemClass::GetWindowHandler());
+	m_vs->Initialize(device, SystemClass::GetWindowHandler(), L"Sprete.fx", "TextureVertexShader");
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_VS, m_vs);
 	m_ps = new SpritePS();
 	m_ps->Initialize(device, SystemClass::GetWindowHandler());

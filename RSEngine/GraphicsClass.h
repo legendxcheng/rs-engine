@@ -38,11 +38,13 @@ public:
 	void Shutdown();
 	bool Frame();
 	bool Render();
+
+	static D3DClass* m_D3D;// TODO:coupling!!!
 private:
 	void InitializeResource(ID3D11Device*);
 
 private:
-	D3DClass* m_D3D;
+	
 	CameraClass* m_Camera; 
 	RenderObjectManager* m_renderObjMgr;
 	TextureManager* m_textrueMgr;

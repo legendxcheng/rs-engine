@@ -178,7 +178,7 @@ void  BulletStormTest::ReleaseTexture()
 bool BulletStormTest::InitializeShaders(ID3D11Device* device)
 {
 	m_vs = new BSTestVS("BulletStormTestVS");
-	m_vs->Initialize(device, SystemClass::GetWindowHandler());
+	m_vs->Initialize(device, SystemClass::GetWindowHandler(), L"bstest.hlsl", "ColorVertexShader");
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_VS, m_vs);
 	m_ps = new BSTestPS();
 	m_ps->Initialize(device, SystemClass::GetWindowHandler());
