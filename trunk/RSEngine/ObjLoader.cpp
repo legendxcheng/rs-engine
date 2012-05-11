@@ -222,6 +222,7 @@ bool ObjLoader::LoadRSObjModel(std::string fileName, bool isRHCoordSys, bool com
 	std::string face;		//Holds the string containing our face vertices
 	int vIndex = 0;			//Keep track of our vertex index count
 
+	subsetCount = 0;
 	triangleCount = 0;	//Total Triangles
 	totalVerts = 0;
 	meshTriangles = 0;

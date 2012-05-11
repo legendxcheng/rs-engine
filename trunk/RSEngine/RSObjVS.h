@@ -5,6 +5,7 @@ class RSObjVS :
 	public VertexShaderClass
 {
 public:
+	RSObjVS(string tag);
 	RSObjVS(void);
 	~RSObjVS(void);
 	virtual bool Initialize(ID3D11Device*, HWND, WCHAR*, CHAR*);

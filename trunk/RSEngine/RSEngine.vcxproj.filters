@@ -139,6 +139,9 @@
     <ClCompile Include="RSObjPS.cpp">
       <Filter>Low Engine\Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="SpaceshipModel.cpp">
+      <Filter>Low Engine\RShooterObj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -282,6 +285,12 @@
     <ClInclude Include="RSObjPS.h">
       <Filter>Low Engine\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="SpaceshipModel.h">
+      <Filter>Low Engine\RShooterObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bstest.hlsl">
@@ -351,6 +360,9 @@
     </Filter>
     <Filter Include="Low Engine\Core\HLSL">
       <UniqueIdentifier>{08f20c01-202e-48d3-8693-551dbb259a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{92788405-0ead-4271-989e-730ce9e50edf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

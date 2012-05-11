@@ -13,6 +13,13 @@
 #include "BulletStormTest.h"
 #include <DxErr.h>
 
+
+#include "SpaceshipModel.h"
+#include "RSObjPS.h"
+#include "RSObjVS.h"
+#include "ShaderManager.h"
+#include "SystemClass.h"
+
 D3DClass* GraphicsClass::m_D3D = 0;
 
 GraphicsClass::GraphicsClass()
@@ -182,6 +189,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	// TestPS
 	// SquareTest
 	RenderObjectManager* rom = RenderObjectManager::GetInstance();
+	ShaderManager* shaderMgr = ShaderManager::GetInstance();
 	/*
 		Triangle Example
 	*/
@@ -240,10 +248,20 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 
 	// Initialize Shader
 	//////////////////////////////////////////////////////////////////////////
+	// rsobj shader ps vs
+	RSObjPS* rsps = new RSObjPS("RSObjPS");
+	rsps->Initialize(device, SystemClass::GetWindowHandler(), L"rsobjtest.fx", "PS");
+	shaderMgr->InsertShader(SHADER_TYPE_PS, rsps);
 
-
+	RSObjVS* rsvs = new RSObjVS("RSObjVS");
+	rsvs->Initialize(device, SystemClass::GetWindowHandler(), L"rsobjtest.fx", "VS");
+	shaderMgr->InsertShader(SHADER_TYPE_VS, rsvs);
 
 	// Initialize RenderObject
 	//////////////////////////////////////////////////////////////////////////
+	SpaceshipModel* sm = new SpaceshipModel("sphere.obj");
+	sm->Initialize(device);
+	rom->InsertRenderObject(sm);
+
 
 }

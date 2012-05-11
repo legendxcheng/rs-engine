@@ -304,7 +304,7 @@ void SpriteClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatr
 }
 
 
-bool SpriteClass::LoadTexture(ID3D11Device* device, WCHAR* fileName)
+bool SpriteClass::LoadTexture(ID3D11Device* device, char* fileName)
 {
 	bool result;
 

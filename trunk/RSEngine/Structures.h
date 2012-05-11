@@ -1,3 +1,5 @@
+#pragma  once 
+
 #include <d3d11.h>
 #include <d3dx10math.h>
 #include <string>
@@ -14,7 +16,6 @@ struct RSObjBufferType
 	D3DXMATRIX world;
 	D3DXMATRIX view;
 	D3DXMATRIX projection;
-	bool hasTexture;
 };
 
 struct BasicLightType

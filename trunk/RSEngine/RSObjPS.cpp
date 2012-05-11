@@ -1,5 +1,9 @@
 #include "RSObjPS.h"
 
+RSObjPS::RSObjPS(std::string tag) : PixelShaderClass(tag)
+{
+
+}
 
 RSObjPS::RSObjPS(void)
 {
