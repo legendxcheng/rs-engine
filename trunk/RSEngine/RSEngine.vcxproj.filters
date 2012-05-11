@@ -136,6 +136,9 @@
     <ClCompile Include="RSObjVS.cpp">
       <Filter>Low Engine\Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="RSObjPS.cpp">
+      <Filter>Low Engine\Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -276,6 +279,9 @@
     <ClInclude Include="RSObjVS.h">
       <Filter>Low Engine\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="RSObjPS.h">
+      <Filter>Low Engine\Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bstest.hlsl">
@@ -300,6 +306,9 @@
       <Filter>Low Engine\Core\HLSL</Filter>
     </None>
     <None Include="Sphere.fx">
+      <Filter>Low Engine\Core\HLSL</Filter>
+    </None>
+    <None Include="rsobjtest.fx">
       <Filter>Low Engine\Core\HLSL</Filter>
     </None>
   </ItemGroup>

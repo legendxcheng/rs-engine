@@ -1,5 +1,6 @@
 #pragma once
 #include "vertexshaderclass.h"
+#include "Structures.h"
 class RSObjVS :
 	public VertexShaderClass
 {
@@ -20,8 +21,6 @@ private:
 private:
 	ID3D11VertexShader* m_vertexShader;
 	ID3D11InputLayout* m_layout;
-	ID3D11Buffer* viewCB_;
-	ID3D11Buffer* projCB_;
-	ID3D11Buffer* worldCB_;
+	ID3D11Buffer* m_rsObjBuffer;
 };
 

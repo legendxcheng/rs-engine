@@ -1,30 +1,28 @@
-#include "SpherePS.h"
+#include "RSObjPS.h"
 
 
-SpherePS::SpherePS(void)
+RSObjPS::RSObjPS(void)
 {
 }
 
 
-SpherePS::~SpherePS(void)
+RSObjPS::~RSObjPS(void)
 {
 }
 
-bool SpherePS::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* vsFilename, CHAR* entryFuncName)
+bool RSObjPS::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHAR* entryFuncName)
 {
-	bool result;
-
-
-	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, vsFilename, entryFuncName);
+	HRESULT result;
+	result = InitializeShader(device, hwnd, psFilename, entryFuncName);
 	if(!result)
 	{
 		return false;
 	}
 
+
 	return true;
 }
-bool SpherePS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHAR* entryFuncName)
+bool RSObjPS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHAR* entryFuncName)
 {
 	HRESULT result;
 	ID3D10Blob* errorMessage;
@@ -82,7 +80,7 @@ bool SpherePS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilena
 	colorMapDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	colorMapDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
-	result = device->CreateSamplerState( &colorMapDesc, &m_colorState );
+	result = device->CreateSamplerState( &colorMapDesc, &m_samplerState );
 
 	if( FAILED( result ) )
 	{
@@ -90,32 +88,21 @@ bool SpherePS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilena
 		return false;
 	}
 
-
 	return true;
-
 }
-bool SpherePS::InitializeConstantBuffer(ID3D11Device*)
+bool RSObjPS::InitializeConstantBuffer(ID3D11Device*)
 {
-
-
-
-	return true;	
-}
-void SpherePS::Shutdown()
-{
-	ShutdownShader();
-
-	return;
-}
-void SpherePS::ShutdownShader()
-{
-
-}
-
-bool SpherePS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* texture)
-{
-	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
-	deviceContext->PSSetShaderResources( 0, 1, &texture);
-	deviceContext->PSSetSamplers( 0, 1, &m_colorState );
 	return true;
+}
+bool RSObjPS::SetRenderParameters(ID3D11DeviceContext*, ID3D11ShaderResourceView*)
+{
+	return true;
+}
+void RSObjPS::Shutdown()
+{
+
+}
+void RSObjPS::ShutdownShader()
+{
+
 }

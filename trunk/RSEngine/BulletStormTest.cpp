@@ -181,7 +181,7 @@ bool BulletStormTest::InitializeShaders(ID3D11Device* device)
 	m_vs->Initialize(device, SystemClass::GetWindowHandler(), L"bstest.hlsl", "ColorVertexShader");
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_VS, m_vs);
 	m_ps = new BSTestPS();
-	m_ps->Initialize(device, SystemClass::GetWindowHandler());
+	m_ps->Initialize(device, SystemClass::GetWindowHandler(), L"bstest.hlsl", "ColorPixelShader");
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_PS, m_ps);
 	return true;
 }

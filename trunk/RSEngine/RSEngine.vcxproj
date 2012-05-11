@@ -85,6 +85,7 @@
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="BulletSystem.cpp" />
+    <ClCompile Include="RSObjPS.cpp" />
     <ClCompile Include="RSObjVS.cpp" />
     <ClCompile Include="RSTimer.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="lua_head.h" />
     <ClInclude Include="BulletSystem.h" />
+    <ClInclude Include="RSObjPS.h" />
     <ClInclude Include="RSObjVS.h" />
     <ClInclude Include="RSTimer.h" />
     <ClInclude Include="SoundManager.h" />
@@ -175,6 +177,7 @@
     <None Include="Color.vs" />
     <None Include="font.ps" />
     <None Include="font.vs" />
+    <None Include="rsobjtest.fx" />
     <None Include="Sphere.fx" />
     <None Include="Sprite.fx" />
   </ItemGroup>
