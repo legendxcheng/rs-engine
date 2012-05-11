@@ -9,6 +9,26 @@ struct MatrixBufferType
 	D3DXMATRIX projection;
 };
 
+struct RSObjBufferType
+{
+	D3DXMATRIX world;
+	D3DXMATRIX view;
+	D3DXMATRIX projection;
+	bool hasTexture;
+};
+
+struct BasicLightType
+{
+
+	D3DXVECTOR3 pos;
+	float  range;
+	D3DXVECTOR3 dir;
+	float cone;
+	D3DXVECTOR3 att;
+	D3DXVECTOR4 ambient;
+	D3DXVECTOR4 diffuse;
+};
+
 struct ColorVertexType
 {
 	D3DXVECTOR3 position;

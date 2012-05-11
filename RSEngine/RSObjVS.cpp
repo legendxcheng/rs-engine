@@ -1,6 +1,5 @@
 #include "RSObjVS.h"
 
-
 RSObjVS::RSObjVS(void)
 {
 }
@@ -75,7 +74,7 @@ bool RSObjVS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFileNam
 	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20, D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 
 	unsigned int totalLayoutElements = ARRAYSIZE( ObjVertexLayout );
@@ -98,29 +97,17 @@ bool RSObjVS::InitializeConstantBuffer(ID3D11Device* device)
 {
 	HRESULT result;
 
-	D3D11_BUFFER_DESC constDesc;
-	ZeroMemory( &constDesc, sizeof( constDesc ) );
-	constDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	constDesc.ByteWidth = sizeof( D3DXMATRIX );
-	constDesc.Usage = D3D11_USAGE_DEFAULT;
+	D3D11_BUFFER_DESC matrixBufferDesc;
+	matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+	matrixBufferDesc.ByteWidth = sizeof(RSObjBufferType);
+	matrixBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	matrixBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	matrixBufferDesc.MiscFlags = 0;
+	matrixBufferDesc.StructureByteStride = 0;
 
-	result = device->CreateBuffer( &constDesc, 0, &viewCB_ );
-
-	if( FAILED( result ) )
-	{
-		return false;
-	}
-
-	result = device->CreateBuffer( &constDesc, 0, &projCB_ );
-
-	if( FAILED( result ) )
-	{
-		return false;
-	}
-
-	result = device->CreateBuffer( &constDesc, 0, &worldCB_ );
-
-	if( FAILED( result ) )
+	// Create the constant buffer pointer so we can access the vertex shader constant buffer from within this class.
+	result = device->CreateBuffer(&matrixBufferDesc, NULL, &m_rsObjBuffer);
+	if(FAILED(result))
 	{
 		return false;
 	}
@@ -133,6 +120,7 @@ bool RSObjVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRIX
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	MatrixBufferType* dataPtr;
 	unsigned int bufferNumber;
 
 	// Transpose the matrices to prepare them for the shader.
@@ -141,33 +129,64 @@ bool RSObjVS::SetRenderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRIX
 	D3DXMatrixTranspose(&projectionMatrix, &projectionMatrix);
 
 	// Lock the constant buffer so it can be written to.
+	result = deviceContext->Map(m_rsObjBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if(FAILED(result))
+	{
+		return false;
+	}
 
-	deviceContext->UpdateSubresource( worldCB_, 0, 0, &worldMatrix, 0, 0 );
-	deviceContext->UpdateSubresource( viewCB_, 0, 0, &viewMatrix, 0, 0 );
-	deviceContext->UpdateSubresource( projCB_, 0, 0, &projectionMatrix, 0, 0 );
+	// Get a pointer to the data in the constant buffer.
+	dataPtr = (MatrixBufferType*)mappedResource.pData;
 
-	deviceContext->VSSetConstantBuffers( 0, 1, &worldCB_ );
-	deviceContext->VSSetConstantBuffers( 1, 1, &viewCB_ );
-	deviceContext->VSSetConstantBuffers( 2, 1, &projCB_ );
+	// Copy the matrices into the constant buffer.
+	dataPtr->world = worldMatrix;
+	dataPtr->view = viewMatrix;
+	dataPtr->projection = projectionMatrix;
 
 	// Unlock the constant buffer.
+	deviceContext->Unmap(m_rsObjBuffer, 0);
+
+	// Set the position of the constant buffer in the vertex shader.
+	bufferNumber = 0;
+
+	// Finanly set the constant buffer in the vertex shader with the updated values.
+	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_rsObjBuffer);
 
 	deviceContext->IASetInputLayout(m_layout);
 	deviceContext->VSSetShader(m_vertexShader, NULL, 0);
+
+
+
 	return true;
 }
 
 void RSObjVS::Shutdown()
 {
-
+	ShutdownShader();
+	ShutdownConstantBuffer();
 }
 
 void RSObjVS::ShutdownConstantBuffer()
 {
-
+	if (m_rsObjBuffer)
+	{
+		m_rsObjBuffer->Release();
+		m_rsObjBuffer = 0;
+	}
 }
 
 void RSObjVS::ShutdownShader()
 {
+	if(m_layout)
+	{
+		m_layout->Release();
+		m_layout = 0;
+	}
 
+	// Release the vertex shader.
+	if(m_vertexShader)
+	{
+		m_vertexShader->Release();
+		m_vertexShader = 0;
+	}
 }

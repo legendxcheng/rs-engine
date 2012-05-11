@@ -10,13 +10,13 @@ BSTestPS::~BSTestPS(void)
 {
 }
 
-bool BSTestPS::Initialize(ID3D11Device* device, HWND hwnd)
+bool BSTestPS::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHAR* entryFuncName)
 {
 	bool result;
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"bstest.hlsl", "ColorPixelShader");
+	result = InitializeShader(device, hwnd, psFilename, entryFuncName);
 	if(!result)
 	{
 		return false;

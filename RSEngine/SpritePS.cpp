@@ -15,13 +15,13 @@ SpritePS::~SpritePS(void)
 {
 }
 
-bool SpritePS::Initialize(ID3D11Device* device, HWND hwnd)
+bool SpritePS::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* vsFilename, CHAR* entryFuncName)
 {
 	bool result;
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"Sprite.fx", "TexturePixelShader");
+	result = InitializeShader(device, hwnd, vsFilename, entryFuncName);
 	if(!result)
 	{
 		return false;
