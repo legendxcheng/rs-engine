@@ -17,7 +17,7 @@ public:
 	virtual bool Update(ID3D11DeviceContext* deviceContext, int positionX, int positionY, int frame = -1);
 	void SetAttributes(int screenWidth, int screenHeight, int bitmapWidth, int bitmapHeight);
 	void SetTexture(TextureClass* texture); // set texture and load texture are 2 alternative choice to bind texture onto the sprite
-	virtual bool LoadTexture(ID3D11Device* device, WCHAR* fileName);
+	virtual bool LoadTexture(ID3D11Device* device, char* fileName);
 private:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();

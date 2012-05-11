@@ -1,8 +1,10 @@
+#include "Utils.h"
 #include "TextureClass.h"
 
 TextureClass::TextureClass()
 {
-	m_texture = 0;}
+	m_texture = 0;
+}
 
 
 TextureClass::TextureClass(const TextureClass& other)
@@ -14,13 +16,18 @@ TextureClass::~TextureClass()
 {
 }
 
-bool TextureClass::Initialize(ID3D11Device* device, WCHAR* filename)
+bool TextureClass::Initialize(ID3D11Device* device, char* filename)
 {
 	
 
 	HRESULT result;
 	// Load the texture in.
-	result = D3DX11CreateShaderResourceViewFromFile(device, filename, NULL, NULL, &m_texture, NULL);
+	WCHAR fn[200];
+	c2w(fn, 200, filename);
+	memcpy(m_textureFileName, filename, 200);
+
+
+	result = D3DX11CreateShaderResourceViewFromFile(device, fn, NULL, NULL, &m_texture, NULL);
 	if(FAILED(result))
 	{
 		return false;

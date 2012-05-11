@@ -1,3 +1,4 @@
+
 #include "TextureManager.h"
 #include "TextureClass.h"
 #include "GraphicsClass.h"
@@ -73,8 +74,9 @@ void TextureManager::CreateAndInsertTexture(const char* fileName)
 	}
 
 	//else create
+
 	TextureClass* tc = new TextureClass();
-	WCHAR fn[200];
-	wsprintf(fn, L"%s", fileName);
-	tc->Initialize(GraphicsClass::m_D3D->GetDevice(), fn);
+
+	tc->Initialize(GraphicsClass::m_D3D->GetDevice(), (char*)fileName);
+	m_textureList.push_back(tc);
 }

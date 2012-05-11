@@ -92,10 +92,11 @@ bool ObjModelClass::InitializeBuffers(ID3D11Device* device)
 	ZeroMemory( &vertexDesc, sizeof( vertexDesc ) );
 	vertexDesc.Usage = D3D11_USAGE_DEFAULT;
 	vertexDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vertexDesc.ByteWidth = sizeof( ObjVertex ) * objModel.GetTotVertexes();
+	vertexDesc.ByteWidth = sizeof( ObjVertex ) * m_totalVerts;
 
 	D3D11_SUBRESOURCE_DATA resourceData;
 	ZeroMemory( &resourceData, sizeof( resourceData ) );
+
 	resourceData.pSysMem = objModel.GetVetexes();
 
 	HRESULT result;

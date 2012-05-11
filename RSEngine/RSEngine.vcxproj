@@ -90,6 +90,7 @@
     <ClCompile Include="RSTimer.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spaceship.cpp" />
+    <ClCompile Include="SpaceshipModel.cpp" />
     <ClCompile Include="SpriteClass.cpp" />
     <ClCompile Include="CameraClass.cpp" />
     <ClCompile Include="CameraManager.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="RSTimer.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spaceship.h" />
+    <ClInclude Include="SpaceshipModel.h" />
     <ClInclude Include="SpriteClass.h" />
     <ClInclude Include="CameraClass.h" />
     <ClInclude Include="CameraManager.h" />
@@ -168,6 +170,7 @@
     <ClInclude Include="TextureClass.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="VertexShaderClass.h" />
   </ItemGroup>
   <ItemGroup>

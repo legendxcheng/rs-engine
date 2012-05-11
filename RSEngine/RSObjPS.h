@@ -4,6 +4,7 @@ class RSObjPS :
 	public PixelShaderClass
 {
 public:
+	RSObjPS(std::string tag);
 	RSObjPS(void);
 	~RSObjPS(void);
 	virtual bool Initialize(ID3D11Device*, HWND, WCHAR* vsFilename, CHAR* entryFuncName);
