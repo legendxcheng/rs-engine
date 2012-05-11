@@ -98,8 +98,11 @@ bool RSObjPS::InitializeConstantBuffer(ID3D11Device*)
 {
 	return true;
 }
-bool RSObjPS::SetRenderParameters(ID3D11DeviceContext*, ID3D11ShaderResourceView*)
+bool RSObjPS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* texture)
 {
+	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
+	deviceContext->PSSetShaderResources( 0, 1, &texture);
+	deviceContext->PSSetSamplers( 0, 1, &m_samplerState);
 	return true;
 }
 void RSObjPS::Shutdown()

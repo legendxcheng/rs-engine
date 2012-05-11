@@ -259,7 +259,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 
 	// Initialize RenderObject
 	//////////////////////////////////////////////////////////////////////////
-	SpaceshipModel* sm = new SpaceshipModel("sphere.obj");
+	SpaceshipModel* sm = new SpaceshipModel("humbird.obj");
 	sm->Initialize(device);
 	rom->InsertRenderObject(sm);
 

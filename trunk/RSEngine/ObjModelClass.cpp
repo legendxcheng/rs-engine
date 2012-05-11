@@ -10,6 +10,8 @@
 
 ObjModelClass::ObjModelClass(char* objFileName)
 {
+		m_psList.clear();
+	m_vsList.clear();
 	m_objFileName = objFileName;
 	D3DXMatrixIdentity(&m_worldMatrix);
 }
@@ -69,6 +71,7 @@ bool ObjModelClass::InitializeBuffers(ID3D11Device* device)
 {
 	// Load the models from the file.
 	ObjLoader objModel;
+	subsetTextureFileName.clear();
 
 	if( objModel.LoadRSObjModel(m_objFileName, m_isRHCoorSys, m_computeNormals,
 		subsetIndexStart, subsetTextureFileName) == false )
@@ -86,6 +89,7 @@ bool ObjModelClass::InitializeBuffers(ID3D11Device* device)
 			tm->CreateAndInsertTexture(subsetTextureFileName[i].c_str());
 	}
 
+
 	objModel.GetObjInfo(&m_triangleCount, &m_totalVerts, &m_meshTriangles, &m_subsetCount);
 
 	D3D11_BUFFER_DESC vertexDesc;
@@ -97,7 +101,8 @@ bool ObjModelClass::InitializeBuffers(ID3D11Device* device)
 	D3D11_SUBRESOURCE_DATA resourceData;
 	ZeroMemory( &resourceData, sizeof( resourceData ) );
 
-	resourceData.pSysMem = objModel.GetVetexes();
+	void* tmp = objModel.GetVetexes();
+	resourceData.pSysMem = tmp;
 
 	HRESULT result;
 	result = device->CreateBuffer( &vertexDesc, &resourceData, &m_vertexBuffer );
@@ -184,6 +189,9 @@ void ObjModelClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMa
 	VertexShaderClass* tvs;
 	TextureManager* textureMgr = TextureManager::GetInstance();
 	ShaderManager* shaderMgr = ShaderManager::GetInstance();
+
+	RenderBuffers(deviceContext);
+
 	for (int i = 0; i < m_subsetCount; ++i)
 	{
 		// set ps para
@@ -194,15 +202,15 @@ void ObjModelClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMa
 		tvs = shaderMgr->GetVS(shaderName);
 
 		tvs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projectionMatrix);
+	
 		std::string tstr = subsetTextureFileName[i];
 		TextureClass* ttc = textureMgr->GetTexture(tstr.c_str());
 		tps->SetRenderParameters(deviceContext, ttc->GetTexture());
-		// set vs para
+			// set vs para
 		int indexStart = subsetIndexStart[i];
 		int indexDrawAmount =  subsetIndexStart[i+1] - subsetIndexStart[i];
 		deviceContext->DrawIndexed( indexDrawAmount, indexStart, 0 );
 		// draw indexed
 	}
-
 	return;
 }
