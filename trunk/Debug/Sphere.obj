@@ -1,6 +1,5 @@
 # Wavefront OBJ exported by MilkShape 3D
 
-mtllib Sphere.mtl
 
 v 0.000000 2.933333 -0.000000
 v 0.000000 -2.933333 -0.000000
@@ -1739,9 +1738,9 @@ vn 0.224129 0.965931 -0.129401
 vn 0.249983 0.965931 -0.066983
 # 554 normals
 
-g Sphere02
-usemtl Material01
-s 1
+g ddd
+texture decal.dds
+
 f 2/1/1 3/2/2 4/3/3
 f 1/4/4 532/5/5 531/6/6
 f 2/7/1 4/3/3 5/8/7
