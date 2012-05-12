@@ -7,11 +7,13 @@ RSObjPS::RSObjPS(std::string tag) : PixelShaderClass(tag)
 
 RSObjPS::RSObjPS(void)
 {
+
 }
 
 
 RSObjPS::~RSObjPS(void)
 {
+
 }
 
 bool RSObjPS::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHAR* entryFuncName)
@@ -26,6 +28,7 @@ bool RSObjPS::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHA
 
 	return true;
 }
+
 bool RSObjPS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilename, CHAR* entryFuncName)
 {
 	HRESULT result;
@@ -94,21 +97,25 @@ bool RSObjPS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilenam
 
 	return true;
 }
+
 bool RSObjPS::InitializeConstantBuffer(ID3D11Device*)
 {
 	return true;
 }
+
 bool RSObjPS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* texture)
 {
 	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
-	deviceContext->PSSetShaderResources( 0, 1, &texture);
+	deviceContext->PSSetShaderResources( 0, 1, &texture); 
 	deviceContext->PSSetSamplers( 0, 1, &m_samplerState);
 	return true;
 }
+
 void RSObjPS::Shutdown()
 {
 
 }
+
 void RSObjPS::ShutdownShader()
 {
 
