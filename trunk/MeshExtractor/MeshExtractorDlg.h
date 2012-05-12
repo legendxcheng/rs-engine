@@ -51,4 +51,7 @@ public:
 	CString m_objFileDir;
 
 	std::vector<Vertex> m_vList;
+//	BOOL m_isAll;
+//	CButton m_isAll;
+	CButton m_isAll;
 };

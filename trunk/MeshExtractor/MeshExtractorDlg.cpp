@@ -34,7 +34,9 @@ void CMeshExtractorDlg::DoDataExchange(CDataExchange* pDX)
 	//  DDX_Text(pDX, IDC_BSIADDR, m_bsiAddr);
 	DDX_Control(pDX, IDC_BSIADDR, m_bsiAddr);
 	DDX_Control(pDX, IDC_OBJADDR, m_objAddr);
-	DDX_Check(pDX, IDC_PROCESSALL, m_isAll);
+	//  DDX_Check(pDX, IDC_PROCESSALL, m_isAll);
+	//  DDX_Control(pDX, IDC_PROCESSALL, m_isAll);
+	DDX_Control(pDX, IDC_PROCESSALL, m_isAll);
 }
 
 BEGIN_MESSAGE_MAP(CMeshExtractorDlg, CDialogEx)
@@ -150,7 +152,8 @@ void CMeshExtractorDlg::OnBnClickedButton2()
 {
 	// TODO: Add your control notification handler code here
 
-	if (!m_isAll)
+	
+	if (!m_isAll.GetCheck())
 	{
 		CString tmp;
 		//open file get all the vertices
@@ -173,25 +176,44 @@ void CMeshExtractorDlg::OnBnClickedButton2()
 	{
 		CString dirStr;
 		CString tmp;
+		int kk;
 		//open file get all the vertices
 		m_objAddr.GetWindowTextW(tmp);
-
-
+		kk = tmp.ReverseFind('\\');
+		tmp = tmp.Left(kk + 1);
+		tmp += L"*.obj";
 
 		CFileFind ff;
-		CString szDir = strDir,strPath; 
-		if(szDir.Right(1) != "\\") //保证目录是以\结尾的 
-			szDir += "\\"; 
-		szDir += "*.*"; 
-		BOOL res = ff.FindFile(szDir); 
+		CString strPath;
+		BOOL res = ff.FindFile(tmp); 
 		while( res ) 
 		{ 
 			res = ff.FindNextFile(); 
 			strPath = ff.GetFilePath(); 
 			if(ff.IsDirectory() && !ff.IsDots()) 
-				BrowseDir(strPath); //如果目标是个文件夹，则利用嵌套来遍历 
-			else if(!ff.IsDirectory() && !ff.IsDots()) 
-				DoSth(strPath); //如果目标是个文件，则对它进行处理 
+				;
+			else if(!ff.IsDirectory() && !ff.IsDots())
+			{
+				//int l = strPath.GetLength();
+				
+	
+					// this is an obj file
+				LoadObjectModel(strPath);
+					//normalize
+				NormalizeVertex();
+					//output
+
+				m_bsiAddr.GetWindowTextW(tmp);
+				int tmpos = strPath.ReverseFind('\\');
+				CString m_bsiFileName = strPath.Right(strPath.GetLength() - tmpos - 1);
+				int l = m_bsiFileName.GetLength();
+				m_bsiFileName.SetAt(l - 1, 'i'); 
+				m_bsiFileName.SetAt(l - 2, 's');
+				m_bsiFileName.SetAt(l - 3, 'b');
+
+				WriteBsiFile(tmp + L"\\" + m_bsiFileName);
+
+			} //如果目标是个文件，则对它进行处理 
 		} 
 		ff.Close(); 
 	}
