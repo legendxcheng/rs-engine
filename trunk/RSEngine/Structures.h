@@ -68,3 +68,46 @@ struct ObjVertex
 	D3DXVECTOR2 texCoord;
 	D3DXVECTOR3 normal;
 };
+
+// Geometric properties of a single bolt
+// this one matches the constant buffer layout in the Lightning.fx file
+struct LightningStructure 
+{
+	// for ZigZag pattern
+	D3DXVECTOR2 ZigZagFraction;
+	D3DXVECTOR2 ZigZagDeviationRight;		
+
+	D3DXVECTOR2 ZigZagDeviationUp;
+	float		ZigZagDeviationDecay;
+	float Dummy0;						// dummy to match HLSL padding
+
+	// for Fork pattern
+	D3DXVECTOR2 ForkFraction;
+	D3DXVECTOR2 ForkZigZagDeviationRight;
+
+	D3DXVECTOR2 ForkZigZagDeviationUp;
+	float		ForkZigZagDeviationDecay;
+	float Dummy1;						// dummy to match HLSL padding
+
+	D3DXVECTOR2 ForkDeviationRight;
+	D3DXVECTOR2 ForkDeviationUp;
+
+	D3DXVECTOR2 ForkDeviationForward;
+	float		ForkDeviationDecay;
+	float Dummy2;						// dummy to match HLSL padding
+
+	D3DXVECTOR2	ForkLength;
+	float		ForkLengthDecay; 
+};
+
+struct LightningAppearance
+{
+	D3DXVECTOR3 ColorInside;
+	float		ColorFallOffExponent;		// to match HLSL packing rules
+
+	D3DXVECTOR3 ColorOutside;
+	float		Dummy1;						// dummy to match HLSL padding
+
+	D3DXVECTOR2 BoltWidth;
+
+};
