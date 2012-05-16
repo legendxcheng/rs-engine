@@ -95,6 +95,4 @@ void LightningTest::CreateLightning()
 		m_fenceColor.ColorOutside = D3DXVECTOR3(1,0,0);
 		m_fenceColor.ColorFallOffExponent = 5.0f;
 	}
-
-
 }
