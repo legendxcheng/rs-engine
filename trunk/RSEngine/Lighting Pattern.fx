@@ -1,3 +1,17 @@
+// note that the order of the variables HAS to match the C++ struct/
+
+cbuffer LightningAppearance
+{
+	float3 ColorInside;					// color of the inside of the beam
+	float ColorFallOffExponent;			// determines how quickly the color changes from
+										// inside to outside
+	
+	float3 ColorOutside;				// color of the outside of the beam
+	float2 BoltWidth;					// size in world space of the beam
+	
+
+};
+
 cbuffer LightningStructure
 {
 	// for ZigZag pattern
@@ -21,6 +35,28 @@ cbuffer LightningStructure
 	float	ForkLengthDecay;			// decay of length
 };
 
+#define MaxTargets 8
+cbuffer LightningChain
+{
+
+	float3	ChainSource;
+
+	float4 ChainTargetPositions[MaxTargets];
+	
+	int			NumTargets;
+};
+
+cbuffer PerSubdivision
+{
+	bool	Fork;
+	uint	SubdivisionLevel;
+};
+
+cbuffer Lightning
+{
+	float	AnimationSpeed;
+};
+
 // decay based on global subdivision level
 float Decay(float amount)
 {
@@ -32,21 +68,6 @@ float Decay(float2 amount, uint level)
 {
 	return  amount.x * exp(-amount.y * level);
 }
-
-// Subdivision
-struct SubdivideVertex
-{
-	float3	Start		: Start;		// start of segment
-	float3	End			: End;			// end of segment
-	float3	Up			: Up;			// up vector, specifying frame of orientation for deviation parameters
-	uint	Level		: Level;		// n + 1 for forked segment, n for jittered segments
-};
-
-void SubdivideVS( in SubdivideVertex input, out SubdivideVertex output)
-{
-	output = input;
-}
-
 
 // Random number generation
 // found in numerical recipes
@@ -97,6 +118,40 @@ float3 Random(float3 low, float3 high)
 	return low * (1.0f - v) + high * v;
 }
 
+// little debug helpers
+float3 colors[] =
+{
+	float3(1.0f,0.0f,0.0f),
+	float3(0.0f,1.0f,0.0f),
+	float3(0.0f,0.0f,1.0f),
+	float3(0.0f,1.0f,1.0f),
+	float3(1.0f,0.0f,1.0f),
+	float3(1.0f,1.0f,0.0f),
+	float3(0.0f,0.0f,0.0f),
+	float3(1.0f,1.0f,1.0f),
+
+	0.5f * float3(1.0f,0.0f,0.0f),
+	0.5f * float3(0.0f,1.0f,0.0f),
+	0.5f * float3(0.0f,0.0f,1.0f),
+	0.5f * float3(0.0f,1.0f,1.0f),
+	0.5f * float3(1.0f,0.0f,1.0f),
+	0.5f * float3(1.0f,1.0f,0.0f),
+	0.5f * float3(1.0f,1.0f,1.0f),
+};
+
+// Subdivision
+struct SubdivideVertex
+{
+	float3	Start		: Start;		// start of segment
+	float3	End			: End;			// end of segment
+	float3	Up			: Up;			// up vector, specifying frame of orientation for deviation parameters
+	uint	Level		: Level;		// n + 1 for forked segment, n for jittered segments
+};
+
+void SubdivideVS( in SubdivideVertex input, out SubdivideVertex output)
+{
+	output = input;
+}
 
 // helper data structure for passing stuff around
 struct Segment
@@ -134,7 +189,6 @@ void DrawLineRight
 	output.Append(v);
 }
 
-
 // subdivision by splitting segment into two and randomly moving split point
 void PatternZigZag(in Segment segment , inout PointStream<SubdivideVertex> output)
 {
@@ -147,7 +201,6 @@ void PatternZigZag(in Segment segment , inout PointStream<SubdivideVertex> outpu
 	DrawLineRight(jittered, segment.End, segment.Right, segment.Level,  output);
 
 }
-
 
 // subdivision by splitting segment into two and randomly moving split point
 // and adding a branch segment between the split position and the random end point
@@ -172,7 +225,6 @@ void PatternFork(in Segment segment , inout PointStream<SubdivideVertex> output)
 	DrawLineRight(jittered, f_jittered, segment.Forward,  segment.Level + 1, output);
 	
 }
-
 
 // decides whether to fork or to jitter bases upon uniform parameter
 [MaxVertexCount(3)]
@@ -213,6 +265,16 @@ void SubdivideGS
 
 }
 
+GeometryShader gs_subdivide = ConstructGSWithSO
+( 
+	CompileShader
+	( 
+		gs_4_0, 
+		SubdivideGS() 
+	),
+	"Start.xyz; End.xyz; Up.xyz; Level.x" 
+);
+
 technique10 Subdivide
 {
     pass P0
@@ -222,5 +284,161 @@ technique10 Subdivide
         SetPixelShader(0);
         
         SetDepthStencilState(DisableDepth,0);
+    }
+}
+
+// for debugging
+struct LinesOutVertexGS2PS
+{
+	float4	Position : SV_Position;
+	uint    Level : Level;
+};
+
+void LinesOutVS( in SubdivideVertex input, in uint id: SV_VertexID,out SubdivideVertex output)
+{
+	output = input;
+}
+
+[MaxVertexCount(3)]
+void LinesOutGS
+(
+	in point SubdivideVertex input[1],
+	in uint primitive_id : SV_PrimitiveID,
+	
+	inout LineStream<LinesOutVertexGS2PS> output
+)
+{
+	LinesOutVertexGS2PS v1 = { mul(float4(input[0].Start,1.0f), world_view_projection), input[0].Level };
+	output.Append(v1);
+	
+	LinesOutVertexGS2PS v2 = { mul(float4(input[0].End,1.0f), world_view_projection), input[0].Level };
+	output.Append(v2);
+	
+	output.RestartStrip();
+
+}
+void LinesOutPS( in LinesOutVertexGS2PS input, out float4 output : SV_Target) 
+{
+	output = float4(colors[input.Level], 1.0f);
+}
+
+technique10 LinesOut
+{
+    pass P0
+    {       
+		SetVertexShader  (CompileShader(vs_4_0, LinesOutVS()));
+        SetGeometryShader(CompileShader(gs_4_0, LinesOutGS()));
+        SetPixelShader   (CompileShader(ps_4_0, LinesOutPS()));
+        SetDepthStencilState(EnableDepth, 0);
+        SetBlendState(NoBlending, float4(1.0f, 1.0f, 1.0f, 1.0f), ~0);
+    }
+}
+ 
+struct BoltOutVertexGS2PS
+{
+	float4	Position : SV_Position;
+	float2	Gradient : Gradient;
+	int		Level	: Level;
+};
+
+void BoltOutVS( in SubdivideVertex input, in uint id: SV_VertexID,out SubdivideVertex output)
+{
+	output = input;
+}
+
+
+// generate camera and segment aligned quads with inter segment gaps filled
+[MaxVertexCount(8)]
+void BoltOutGS
+(
+	in point SubdivideVertex input[1],
+	in uint primitive_id : SV_PrimitiveID,
+	
+	inout TriangleStream<BoltOutVertexGS2PS> output
+)
+{
+	// vs stands for view space
+	float3 vs_start = mul(float4(input[0].Start, 1.0f), world_view);
+	float3 vs_end = mul(float4(input[0].End, 1.0f), world_view);
+	float3 vs_forward = normalize(vs_end - vs_start);
+	
+	float width =  Decay(BoltWidth, input[0].Level);
+	
+	float3 right = width * normalize(cross(vs_forward,float3(0,0,1)));
+	
+	float x = 1;
+	float y = 1;
+
+	static const bool close_gaps = true;
+
+
+	if(close_gaps)
+	{
+		BoltOutVertexGS2PS v0 = { mul(float4(vs_start - right - width * vs_forward, 1.0f), projection), float2(-x,1), input[0].Level};
+		output.Append(v0);
+	
+		BoltOutVertexGS2PS v1 = { mul(float4(vs_start + right - width * vs_forward, 1.0f), projection), float2(x,1), input[0].Level};
+		output.Append(v1);
+	
+	}
+
+	BoltOutVertexGS2PS v2 = { mul(float4(vs_start - right, 1.0f), projection), float2(-x,0), input[0].Level };
+	output.Append(v2);
+	
+	BoltOutVertexGS2PS v3 = { mul(float4(vs_start + right, 1.0f), projection), float2(x,0), input[0].Level};
+	output.Append(v3);
+
+	BoltOutVertexGS2PS v4 = { mul(float4(vs_end - right, 1.0f), projection), float2(-x,0), input[0].Level};
+	output.Append(v4);
+	
+	BoltOutVertexGS2PS v5 = { mul(float4(vs_end + right, 1.0f), projection), float2(x,0), input[0].Level};
+	output.Append(v5);
+	
+
+	if(close_gaps)
+	{	
+		BoltOutVertexGS2PS v6 = { mul(float4(vs_end - right + width * vs_forward, 1.0f), projection), float2(-x,1), input[0].Level };
+		output.Append(v6);
+	
+		BoltOutVertexGS2PS v7 = { mul(float4(vs_end + right + width * vs_forward, 1.0f), projection), float2(x,1), input[0].Level};
+		output.Append(v7);
+	 }
+	 
+	output.RestartStrip();
+}
+
+
+void BoltOutPS(in BoltOutVertexGS2PS input, out float4 output : SV_Target) 
+{
+	float f = saturate(length(input.Gradient));
+	float brightness = 1-f;
+	float color_shift = saturate(pow(1-f, ColorFallOffExponent));
+	output = brightness * float4(lerp(ColorOutside,ColorInside,color_shift), 1.0f);
+}
+
+technique10 BoltOut
+{
+    pass P0
+    {       
+		SetVertexShader  (CompileShader(vs_4_0, BoltOutVS()));
+        SetGeometryShader(CompileShader(gs_4_0, BoltOutGS()));
+        SetPixelShader   (CompileShader(ps_4_0, BoltOutPS()));
+     
+        SetDepthStencilState(DisableDepthWrite, 0);
+        SetRasterizerState(NoCull);
+        
+        SetBlendState(AdditiveBlending, float4(1.0f, 1.0f, 1.0f, 1.0f), ~0);
+    }
+}
+
+technique10 ShowLines
+{
+    pass P0
+    {       
+		SetVertexShader  (CompileShader(vs_4_0, BoltOutVS()));
+        SetGeometryShader(CompileShader(gs_4_0, LinesOutGS()));
+        SetPixelShader   (CompileShader(ps_4_0, LinesOutPS()));
+        SetDepthStencilState(EnableDepth, 0);
+        SetBlendState(NoBlending, float4(1.0f, 1.0f, 1.0f, 1.0f), ~0);
     }
 }

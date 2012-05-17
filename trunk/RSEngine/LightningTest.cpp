@@ -34,11 +34,12 @@ bool LightningTest::InitializeBuffers(ID3D11Device* device)
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
 	int i;
+	return true;
 } 
 
 bool LightningTest::InitializeShaders(ID3D11Device* device)
 {
-
+	return true;
 }
 
 void LightningTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix, D3DXMATRIX projMatrix)
@@ -48,7 +49,7 @@ void LightningTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMa
 
 bool LightningTest::Update()
 {
-
+	return true;
 }
 
 void LightningTest::ShutdownBuffers()

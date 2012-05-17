@@ -1,11 +1,10 @@
 #include "LightningTestGS.h"
 
 
-LightningTestGS::LightningTestGS(void)
+LightningTestGS::LightningTestGS(string tag)
+	: GeometryShaderClass(tag)
 {
 }
-
-
 LightningTestGS::~LightningTestGS(void)
 {
 }
