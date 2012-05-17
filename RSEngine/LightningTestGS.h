@@ -4,7 +4,7 @@ class LightningTestGS :
 	public GeometryShaderClass
 {
 public:
-	LightningTestGS(void);
+	LightningTestGS(string tag);
 	~LightningTestGS(void);
 };
 

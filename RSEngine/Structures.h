@@ -3,6 +3,7 @@
 #include <d3d11.h>
 #include <d3dx10math.h>
 #include <string>
+#include <vector>
 
 struct MatrixBufferType
 {
@@ -69,6 +70,33 @@ struct ObjVertex
 	D3DXVECTOR3 normal;
 };
 
+namespace LightningUtility
+{
+	inline D3D11_INPUT_ELEMENT_DESC LightningInputElementDesc
+		(
+		LPCSTR SemanticName,
+		UINT SemanticIndex,
+		DXGI_FORMAT Format,
+		UINT InputSlot,
+		UINT AlignedByteOffset,
+		D3D11_INPUT_CLASSIFICATION InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA,
+		UINT InstanceDataStepRate = 0
+		)
+	{
+		D3D11_INPUT_ELEMENT_DESC r;
+
+		r.SemanticName = SemanticName;
+		r.SemanticIndex = SemanticIndex;
+		r.Format = Format;
+		r.InputSlot = InputSlot;
+		r.AlignedByteOffset = AlignedByteOffset;
+		r.InputSlotClass = InputSlotClass;
+		r.InstanceDataStepRate=InstanceDataStepRate;
+		return r;
+	}
+}
+
+
 // Geometric properties of a single bolt
 // this one matches the constant buffer layout in the Lightning.fx file
 struct LightningStructure 
@@ -111,3 +139,84 @@ struct LightningAppearance
 	D3DXVECTOR2 BoltWidth;
 
 };
+
+
+
+struct SubdivideVertex
+{
+	D3DXVECTOR3 Start;
+	D3DXVECTOR3 End;
+	D3DXVECTOR3 Up;
+	UINT Level;
+
+	SubdivideVertex(): 
+		Start(D3DXVECTOR3(0,0,0)),
+		End(D3DXVECTOR3(0,0,0)),
+		Up(D3DXVECTOR3(0,0,0)),
+		Level(0)
+		{
+		}
+		SubdivideVertex(const D3DXVECTOR3& start, const D3DXVECTOR3& end, const D3DXVECTOR3& up):
+			Start(start),
+			End(end),
+			Up(up),
+			Level(0)
+			{
+			}
+		static std::vector<D3D11_INPUT_ELEMENT_DESC> GetLayout()
+		{
+			std::vector<D3D11_INPUT_ELEMENT_DESC> r;
+
+			r.push_back
+			(
+				LightningUtility::LightningInputElementDesc
+				(
+				"Start",
+				0,
+				DXGI_FORMAT_R32G32B32_FLOAT,
+				0,0,
+				D3D11_INPUT_PER_VERTEX_DATA,
+				0
+				)
+			);
+			r.push_back
+			(
+				LightningUtility::LightningInputElementDesc
+				(
+					"End",
+					0,
+					DXGI_FORMAT_R32G32B32_FLOAT,
+					0,12,
+					D3D11_INPUT_PER_VERTEX_DATA,
+					0
+				)
+			);
+			r.push_back
+			(
+				LightningUtility::LightningInputElementDesc
+				(
+					"Up",
+					0,
+					DXGI_FORMAT_R32G32B32_FLOAT,
+					0,12+12,
+					D3D11_INPUT_PER_VERTEX_DATA,
+					0
+				)
+			);
+			r.push_back
+			(
+				LightningUtility::LightningInputElementDesc
+				(
+					"Level",
+					0,
+					DXGI_FORMAT_R32_UINT,
+					0,12+12+12,
+					D3D11_INPUT_PER_VERTEX_DATA,
+					0
+				)
+			);
+			return r;
+		}
+
+};
+
