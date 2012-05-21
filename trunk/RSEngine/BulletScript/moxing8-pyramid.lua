@@ -102,9 +102,9 @@ function updateFrame()
 			elseif(i <= 120) then
 				vetx[tmpt] = 280 
 			elseif(i <= 140) then
-				vetx[tmpt] = -200 - (i - 140) * 5
+				vetx[tmpt] = -280 + currentFrame - 70 * (i - 140)
 			elseif(i <= 160) then
-				vetx[tmpt] = -200 - (i - 140) * 5
+				vetx[tmpt] = -280 + currentFrame - 70 * (i - 140)
 			elseif(i <= 180) then
 				vetx[tmpt] = 220 + (i - 160) * 3
 			elseif(i <= 200) then
@@ -238,9 +238,9 @@ function updateInterpolation(intp)
 			elseif(i <= 120) then
 				vetx[tmpt] = 280 
 			elseif(i <= 140) then
-				vetx[tmpt] = -250
+				vetx[tmpt] = -280 + currentFrame - 70 * (i - 140)
 			elseif(i <= 160) then
-				vetx[tmpt] = -250 
+				vetx[tmpt] = -280 + currentFrame - 70 * (i - 140)
 			elseif(i <= 180) then
 				vetx[tmpt] = 220 + (i - 160) * 3
 			elseif(i <= 200) then
