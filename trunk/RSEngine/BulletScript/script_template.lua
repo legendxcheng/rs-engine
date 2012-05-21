@@ -22,39 +22,236 @@ function initialize()
 	lineCount = 0 -- line count
 	line = {} -- stotre line index in vetx
 	lineUpdated = 0 -- 0 for not updated since last call 1 for updated since last call
-
 	stripCount = 1
-	vetxCount[1] = 500
+	vetxCount[1] = 320
 end
 
 function updateFrame()
-	currentFrame = currentFrame + 1
+	currentFrame = currentFrame + 1/2
 	local tmpt = 1
-	for i=1, 500 do
-		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-		vetx[tmpt] = 400 - currentFrame / 5 + i
-		tmpt = tmpt + 1
-		vetx[tmpt] = 300 * math.sin(currentFrame / 200 - i)
-		tmpt = tmpt + 1
-		vetx[tmpt] = 300 * math.cos(currentFrame / 200 - i)
-		tmpt = tmpt + 1
-
-	end
+	local xgap = 200
+		for i=1, 320 do 
+			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
+			--Êú±ß
+			if (i <= 10) then
+				vetx[tmpt] = 400 - currentFrame 
+			elseif(i <= 20) then
+			    vetx[tmpt] = 400 - currentFrame + xgap 
+			elseif(i <= 30) then
+			    vetx[tmpt] = 400 - currentFrame + 2 * xgap
+			elseif(i <= 40) then
+			    vetx[tmpt] = 400 - currentFrame + 3 * xgap
+			--ÖÐ¼äºá±ß	
+			elseif(i <= 60) then
+				vetx[tmpt] = 400 - currentFrame + 20 * (i - 40)
+			elseif(i <= 80) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 60) + xgap
+			--ÉÏÏÂºá±ß
+			elseif (i <= 100) then
+				vetx[tmpt] = 400 - currentFrame + 20 * (i - 80)
+			elseif(i <= 120) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 100) + xgap
+			elseif(i <= 140) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 120)
+			elseif(i <= 160) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 140) + xgap
+			--×óÓÒºá±ß
+			elseif (i <= 180) then
+				vetx[tmpt] = 400 - currentFrame + 10 * (i - 160)
+			elseif(i <= 200) then
+			    vetx[tmpt] = 400 - currentFrame + 10 * (i - 180) + 2 * xgap
+			elseif(i <= 220) then
+			    vetx[tmpt] = 400 - currentFrame + 10 * (i - 200)
+			elseif(i <= 240) then
+			    vetx[tmpt] = 400 - currentFrame + 10 * (i - 220) + 2 * xgap
+			--ÖÐ¼ä×óÓÒºá±ß	
+			elseif (i <= 250) then
+				vetx[tmpt] = 400 - currentFrame + 20 * (i - 240)
+			elseif(i <= 260) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 250) + 2 * xgap
+            end				
+			tmpt = tmpt + 1
+			if (i <= 10) then
+				vetx[tmpt] = 220 - i * 50
+			elseif(i <= 20) then
+				vetx[tmpt] = 280 - (i - 10 ) * 50
+			elseif(i <= 30) then
+				vetx[tmpt] = 220 - (i - 20) * 50
+			elseif(i <= 40) then
+				vetx[tmpt] = 280 - (i - 30) * 50
+			elseif(i <= 60) then
+				vetx[tmpt] = -30 
+			elseif(i <= 80) then
+				vetx[tmpt] = 30
+			elseif(i <= 100) then
+				vetx[tmpt] = 220 
+			elseif(i <= 120) then
+				vetx[tmpt] = 280 
+			elseif(i <= 140) then
+				vetx[tmpt] = -280
+			elseif(i <= 160) then
+				vetx[tmpt] = -220 
+			elseif(i <= 180) then
+				vetx[tmpt] = 220 + (i - 160) * 3
+			elseif(i <= 200) then
+				vetx[tmpt] = 220 + (i - 180) * 3 
+			elseif(i <= 220) then
+				vetx[tmpt] = -280 + (i - 200) * 3
+			elseif(i <= 240) then
+				vetx[tmpt] = -280 + (i - 220) * 3
+			elseif(i <= 250) then
+				vetx[tmpt] = -30 + (i - 240) * 6
+			elseif(i <= 260) then
+				vetx[tmpt] = -30 + (i - 250) * 6
+			end			
+			tmpt = tmpt + 1
+			if (i <= 10) then
+				vetx[tmpt] = 220
+			elseif(i <= 20) then
+				vetx[tmpt] = -220
+			elseif(i <= 30) then
+				vetx[tmpt] = 220
+			elseif(i <= 40) then
+				vetx[tmpt] = -220
+			elseif(i <= 60) then
+				vetx[tmpt] = 220 
+			elseif(i <= 80) then
+				vetx[tmpt] = -220
+			elseif(i <= 100) then
+				vetx[tmpt] = 220 
+			elseif(i <= 120) then
+				vetx[tmpt] = -220 
+			elseif(i <= 140) then
+				vetx[tmpt] = 220
+			elseif(i <= 160) then
+				vetx[tmpt] = -220 
+			elseif(i <= 180) then
+				vetx[tmpt] = 220 
+			elseif(i <= 200) then
+				vetx[tmpt] = 220 
+			elseif(i <= 220) then
+				vetx[tmpt] = -220
+			elseif(i <= 240) then
+				vetx[tmpt] = -220 
+			elseif(i <= 250) then
+				vetx[tmpt] = -220
+			elseif(i <= 260) then
+				vetx[tmpt] = -220
+			end	
+			tmpt = tmpt + 1
+		end
 end
 
 function updateInterpolation(intp)
 	--vetx = {} -- empty array
+	currentFrame = currentFrame + 1/2
 	local tmpt = 1
-	for i=1, 500 do
-		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-		vetx[tmpt] = 400 - (currentFrame + intp) / 5 + i 
-		tmpt = tmpt + 1
-		vetx[tmpt] = 300 * math.sin(currentFrame / 200 - i + intp / 200)
-		tmpt = tmpt + 1
-		vetx[tmpt] = 300 * math.cos(currentFrame / 200 - i + intp / 200)
-		tmpt = tmpt + 1
-
-	end
+	local xgap = 200
+		for i=1, 320 do 
+			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
+			if (i <= 10) then
+				vetx[tmpt] = 400 - currentFrame - intp
+			elseif(i <= 20) then
+			    vetx[tmpt] = 400 - currentFrame + xgap - intp
+			elseif(i <= 30) then
+			    vetx[tmpt] = 400 - currentFrame + 2 * xgap - intp
+			elseif(i <= 40) then
+			    vetx[tmpt] = 400 - currentFrame + 3 * xgap - intp
+			elseif(i <= 60) then
+				vetx[tmpt] = 400 - currentFrame + 20 * (i - 40) - intp
+			elseif(i <= 80) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 60) + xgap - intp
+			elseif (i <= 100) then
+				vetx[tmpt] = 400 - currentFrame + 20 * (i - 80) - intp
+			elseif(i <= 120) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 100) + xgap - intp
+			elseif(i <= 140) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 120) - intp
+			elseif(i <= 160) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 140) + xgap - intp
+			elseif (i <= 180) then
+				vetx[tmpt] = 400 - currentFrame + 10 * (i - 160) - intp
+			elseif(i <= 200) then
+			    vetx[tmpt] = 400 - currentFrame + 10 * (i - 180) + 2 * xgap - intp
+			elseif(i <= 220) then
+			    vetx[tmpt] = 400 - currentFrame + 10 * (i - 200) - intp
+			elseif(i <= 240) then
+			    vetx[tmpt] = 400 - currentFrame + 10 * (i - 220) + 2 * xgap - intp
+            elseif (i <= 250) then
+				vetx[tmpt] = 400 - currentFrame + 20 * (i - 240) - intp
+			elseif(i <= 260) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 250) + 2 * xgap - intp
+            end				
+			tmpt = tmpt + 1
+			if (i <= 10) then
+				vetx[tmpt] = 220 - i * 50
+			elseif(i <= 20) then
+				vetx[tmpt] = 280 - (i - 10 ) * 50
+			elseif(i <= 30) then
+				vetx[tmpt] = 220 - (i - 20) * 50
+			elseif(i <= 40) then
+				vetx[tmpt] = 280 - (i - 30) * 50
+			elseif(i <= 60) then
+				vetx[tmpt] = -30 
+			elseif(i <= 80) then
+				vetx[tmpt] = 30
+			elseif(i <= 100) then
+				vetx[tmpt] = 220 
+			elseif(i <= 120) then
+				vetx[tmpt] = 280 
+			elseif(i <= 140) then
+				vetx[tmpt] = -280
+			elseif(i <= 160) then
+				vetx[tmpt] = -220 
+			elseif(i <= 180) then
+				vetx[tmpt] = 220 + (i - 160) * 3
+			elseif(i <= 200) then
+				vetx[tmpt] = 220 + (i - 180) * 3 
+			elseif(i <= 220) then
+				vetx[tmpt] = -280 + (i - 200) * 3
+			elseif(i <= 240) then
+				vetx[tmpt] = -280 + (i - 220) * 3
+			elseif(i <= 250) then
+				vetx[tmpt] = -30 + (i - 240) * 6
+			elseif(i <= 260) then
+				vetx[tmpt] = -30 + (i - 250) * 6
+			end			
+			tmpt = tmpt + 1
+			if (i <= 10) then
+				vetx[tmpt] = 220
+			elseif(i <= 20) then
+				vetx[tmpt] = -220
+			elseif(i <= 30) then
+				vetx[tmpt] = 220
+			elseif(i <= 40) then
+				vetx[tmpt] = -220
+			elseif(i <= 60) then
+				vetx[tmpt] = 220 
+			elseif(i <= 80) then
+				vetx[tmpt] = -220
+			elseif(i <= 100) then
+				vetx[tmpt] = 220 
+			elseif(i <= 120) then
+				vetx[tmpt] = -220 
+			elseif(i <= 140) then
+				vetx[tmpt] = 220
+			elseif(i <= 160) then
+				vetx[tmpt] = -220 
+			elseif(i <= 180) then
+				vetx[tmpt] = 220 
+			elseif(i <= 200) then
+				vetx[tmpt] = 220 
+			elseif(i <= 220) then
+				vetx[tmpt] = -220
+			elseif(i <= 240) then
+				vetx[tmpt] = -220 
+			elseif(i <= 250) then
+				vetx[tmpt] = -220
+			elseif(i <= 260) then
+				vetx[tmpt] = -220
+			end	
+			tmpt = tmpt + 1
+		end
 end
 
 function isDone()
