@@ -42,6 +42,7 @@ GameLogic* GameLogic::GetInstance()
 	return m_instance;
 }
 
+
 void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 {
 	// TODO: fill
@@ -52,23 +53,46 @@ void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 	
 
 	//test input mgr
+	HandleInput();
+}
+
+void GameLogic::HandleInput()
+{
 	if (m_inputMgr->IsKeyDown(DIK_Z))
 	{
 		if (m_inputMgr->IsKeyDown(DIK_LCONTROL))
-			m_cameraAngle += 0.008;
-		m_cameraAngle += 0.008;
+			m_cameraAngle += 0.008f;
+		m_cameraAngle += 0.008f;
 		RotateCamera(m_cameraAngle);
 	}
 
 	if (m_inputMgr->IsKeyDown(DIK_X))
 	{
 		if (m_inputMgr->IsKeyDown(DIK_LCONTROL))
-			m_cameraAngle -= 0.008;
-		m_cameraAngle -= 0.008;
+			m_cameraAngle -= 0.008f;
+		m_cameraAngle -= 0.008f;
 		RotateCamera(m_cameraAngle);
 	}
 
+	if (m_inputMgr->IsKeyDown(DIK_UP))
+	{
+		m_spaceship->Move(MOVE_UP_CODE);
+	}
 
+	if (m_inputMgr->IsKeyDown(DIK_DOWN))
+	{
+		m_spaceship->Move(MOVE_DOWN_CODE);
+	}
+
+	if (m_inputMgr->IsKeyDown(DIK_LEFT))
+	{
+		m_spaceship->Move(MOVE_LEFT_CODE);
+	}
+
+	if (m_inputMgr->IsKeyDown(DIK_RIGHT))
+	{
+		m_spaceship->Move(MOVE_RIGHT_CODE);
+	}
 }
 
 void GameLogic::UpdateInterpolate(float interpoloate)
@@ -101,4 +125,15 @@ void GameLogic::InitCamera(CameraClass* cc)
 void GameLogic::FillBulletBuffer(void* vb)
 {
 	m_bulletSys->FillVertexBuffer(vb);
+}
+
+float GameLogic::GetCameraAngle()
+{
+
+	return m_cameraAngle;
+}
+
+void GameLogic::GetSpaceshipXYZ(float*x, float* y, float* z)
+{
+	m_spaceship->GetXYZ(x, y, z);
 }
