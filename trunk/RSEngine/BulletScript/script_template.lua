@@ -27,7 +27,7 @@ function initialize()
 end
 
 function updateFrame()
-	currentFrame = currentFrame + 1/2
+	currentFrame = currentFrame + 1 / 2
 	local tmpt = 1
 	local xgap = 200
 		for i=1, 320 do 
@@ -42,10 +42,15 @@ function updateFrame()
 			elseif(i <= 40) then
 			    vetx[tmpt] = 400 - currentFrame + 3 * xgap
 			--中间横边	
+			elseif(i <= 50) then
+				vetx[tmpt] = 400 - currentFrame + 40 * (i - 40)
 			elseif(i <= 60) then
-				vetx[tmpt] = 400 - currentFrame + 20 * (i - 40)
+			    vetx[tmpt] = 400 - currentFrame + 40 * (i - 50) + xgap
+			--上中间横边
+			elseif(i <= 70) then
+				vetx[tmpt] = 400 - currentFrame + 40 * (i - 60)
 			elseif(i <= 80) then
-			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 60) + xgap
+			    vetx[tmpt] = 400 - currentFrame + 40 * (i - 70) + xgap
 			--上下横边
 			elseif (i <= 100) then
 				vetx[tmpt] = 400 - currentFrame + 20 * (i - 80)
@@ -69,7 +74,13 @@ function updateFrame()
 				vetx[tmpt] = 400 - currentFrame + 20 * (i - 240)
 			elseif(i <= 260) then
 			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 250) + 2 * xgap
-            end				
+			--上中间左右横边	
+			elseif (i <= 270) then
+				vetx[tmpt] = 400 - currentFrame + 20 * (i - 260)
+			elseif(i <= 280) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 270) + 2 * xgap
+            end			
+			
 			tmpt = tmpt + 1
 			if (i <= 10) then
 				vetx[tmpt] = 220 - i * 50
@@ -79,10 +90,14 @@ function updateFrame()
 				vetx[tmpt] = 220 - (i - 20) * 50
 			elseif(i <= 40) then
 				vetx[tmpt] = 280 - (i - 30) * 50
+			elseif(i <= 50) then
+				vetx[tmpt] = -130 
 			elseif(i <= 60) then
-				vetx[tmpt] = -30 
+				vetx[tmpt] = -70
+			elseif(i <= 70) then
+				vetx[tmpt] = 70 
 			elseif(i <= 80) then
-				vetx[tmpt] = 30
+				vetx[tmpt] = 130	
 			elseif(i <= 100) then
 				vetx[tmpt] = 220 
 			elseif(i <= 120) then
@@ -100,9 +115,13 @@ function updateFrame()
 			elseif(i <= 240) then
 				vetx[tmpt] = -280 + (i - 220) * 3
 			elseif(i <= 250) then
-				vetx[tmpt] = -30 + (i - 240) * 6
+				vetx[tmpt] = -130 + (i - 240) * 6
 			elseif(i <= 260) then
-				vetx[tmpt] = -30 + (i - 250) * 6
+				vetx[tmpt] = -130 + (i - 250) * 6
+			elseif(i <= 270) then
+				vetx[tmpt] = 70 + (i - 260) * 6
+			elseif(i <= 280) then
+				vetx[tmpt] = 70 + (i - 270) * 6
 			end			
 			tmpt = tmpt + 1
 			if (i <= 10) then
@@ -113,7 +132,11 @@ function updateFrame()
 				vetx[tmpt] = 220
 			elseif(i <= 40) then
 				vetx[tmpt] = -220
+			elseif(i <= 50) then
+				vetx[tmpt] = 220 
 			elseif(i <= 60) then
+				vetx[tmpt] = -220
+			elseif(i <= 70) then
 				vetx[tmpt] = 220 
 			elseif(i <= 80) then
 				vetx[tmpt] = -220
@@ -137,6 +160,10 @@ function updateFrame()
 				vetx[tmpt] = -220
 			elseif(i <= 260) then
 				vetx[tmpt] = -220
+			elseif(i <= 270) then
+				vetx[tmpt] = -220
+			elseif(i <= 280) then
+				vetx[tmpt] = -220
 			end	
 			tmpt = tmpt + 1
 		end
@@ -144,7 +171,7 @@ end
 
 function updateInterpolation(intp)
 	--vetx = {} -- empty array
-	currentFrame = currentFrame + 1/2
+	currentFrame = currentFrame + 1 / 2
 	local tmpt = 1
 	local xgap = 200
 		for i=1, 320 do 
@@ -157,10 +184,14 @@ function updateInterpolation(intp)
 			    vetx[tmpt] = 400 - currentFrame + 2 * xgap - intp
 			elseif(i <= 40) then
 			    vetx[tmpt] = 400 - currentFrame + 3 * xgap - intp
+			elseif(i <= 50) then
+				vetx[tmpt] = 400 - currentFrame + 40 * (i - 40) - intp
 			elseif(i <= 60) then
-				vetx[tmpt] = 400 - currentFrame + 20 * (i - 40) - intp
+			    vetx[tmpt] = 400 - currentFrame + 40 * (i - 50) + xgap - intp
+			elseif(i <= 70) then
+				vetx[tmpt] = 400 - currentFrame + 40 * (i - 60) - intp
 			elseif(i <= 80) then
-			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 60) + xgap - intp
+			    vetx[tmpt] = 400 - currentFrame + 40 * (i - 70) + xgap - intp
 			elseif (i <= 100) then
 				vetx[tmpt] = 400 - currentFrame + 20 * (i - 80) - intp
 			elseif(i <= 120) then
@@ -181,6 +212,10 @@ function updateInterpolation(intp)
 				vetx[tmpt] = 400 - currentFrame + 20 * (i - 240) - intp
 			elseif(i <= 260) then
 			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 250) + 2 * xgap - intp
+			elseif (i <= 270) then
+				vetx[tmpt] = 400 - currentFrame + 20 * (i - 260) - intp
+			elseif(i <= 280) then
+			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 270) + 2 * xgap - intp
             end				
 			tmpt = tmpt + 1
 			if (i <= 10) then
@@ -191,10 +226,14 @@ function updateInterpolation(intp)
 				vetx[tmpt] = 220 - (i - 20) * 50
 			elseif(i <= 40) then
 				vetx[tmpt] = 280 - (i - 30) * 50
+			elseif(i <= 50) then
+				vetx[tmpt] = -130 
 			elseif(i <= 60) then
-				vetx[tmpt] = -30 
+				vetx[tmpt] = -70
+			elseif(i <= 70) then
+				vetx[tmpt] = 70 
 			elseif(i <= 80) then
-				vetx[tmpt] = 30
+				vetx[tmpt] = 130
 			elseif(i <= 100) then
 				vetx[tmpt] = 220 
 			elseif(i <= 120) then
@@ -212,9 +251,13 @@ function updateInterpolation(intp)
 			elseif(i <= 240) then
 				vetx[tmpt] = -280 + (i - 220) * 3
 			elseif(i <= 250) then
-				vetx[tmpt] = -30 + (i - 240) * 6
+				vetx[tmpt] = -130 + (i - 240) * 6
 			elseif(i <= 260) then
-				vetx[tmpt] = -30 + (i - 250) * 6
+				vetx[tmpt] = -130 + (i - 250) * 6
+			elseif(i <= 270) then
+				vetx[tmpt] = 70 + (i - 260) * 6
+			elseif(i <= 280) then
+				vetx[tmpt] = 70 + (i - 270) * 6
 			end			
 			tmpt = tmpt + 1
 			if (i <= 10) then
@@ -225,7 +268,11 @@ function updateInterpolation(intp)
 				vetx[tmpt] = 220
 			elseif(i <= 40) then
 				vetx[tmpt] = -220
+			elseif(i <= 50) then
+				vetx[tmpt] = 220 
 			elseif(i <= 60) then
+				vetx[tmpt] = -220
+			elseif(i <= 70) then
 				vetx[tmpt] = 220 
 			elseif(i <= 80) then
 				vetx[tmpt] = -220
@@ -248,6 +295,10 @@ function updateInterpolation(intp)
 			elseif(i <= 250) then
 				vetx[tmpt] = -220
 			elseif(i <= 260) then
+				vetx[tmpt] = -220
+			elseif(i <= 270) then
+				vetx[tmpt] = -220
+			elseif(i <= 280) then
 				vetx[tmpt] = -220
 			end	
 			tmpt = tmpt + 1
