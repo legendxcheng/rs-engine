@@ -17,9 +17,13 @@ public:
 	static GameLogic* GetInstance();
 	// clac the next key frame
 	void UpdateFrame(unsigned int, unsigned int);
+
+	void HandleInput();
+	
+
 	// update interpolate
 	void UpdateInterpolate(float interpoloate);
-
+	float GetCameraAngle();
 	void RotateCamera(float angle);
 
 private:
@@ -52,7 +56,11 @@ public:
 
 
 
+
 // game data
+public:
+	// for outer class getting data
+	void GetSpaceshipXYZ(float*x, float* y, float* z);
 private:
 	float m_totTime;
 	unsigned int m_score;
