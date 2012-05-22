@@ -1,6 +1,9 @@
 #pragma once
 #include "lua_head.h"
+
 #include <vector>
+
+struct D3DXVECTOR3;
 //#include "Structures.h"
 class BulletStrip;
 struct BulletType;
@@ -21,7 +24,7 @@ public:
 	void ShutDown();
 	bool IsDone();
 	// must be called after FetchBullets()
-	bool IsCollided(float cameraAngle, float shipx, float shipy, float shipz);
+	bool IsCollided(D3DXVECTOR3 norm, float shipx, float shipy);
 
 protected:
 	unsigned int m_frameCount;

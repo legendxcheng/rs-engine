@@ -422,7 +422,7 @@ bool TextClass::RenderSentence(ID3D11DeviceContext* deviceContext, SentenceType*
 	return true;
 }
 
-bool TextClass::AddText(std::string tag, unsigned int positionX, unsigned int positionY, unsigned int red, unsigned int green, unsigned int blue)
+bool TextClass::AddText(std::string tag, unsigned int positionX, unsigned int positionY, float red, float green, float blue)
 {
 	SentenceType* newSt;
 	InitializeSentence(&newSt, tag, 200, m_device);

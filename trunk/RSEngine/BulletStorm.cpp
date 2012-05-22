@@ -22,15 +22,8 @@ BulletStorm::~BulletStorm(void)
 int BulletStorm::GetVertexes(void* dest)
 {
 	int bytesCopy = 0;
-	//memcpy(dest, m_vertexList, sizeof(VertexType) * m_vertexCount);
-	for (std::vector<BulletType>::iterator iter = m_vertexList.begin();
-			iter != m_vertexList.end(); ++iter)
-	{
-		memcpy(dest, &(*iter), sizeof(BulletType));
-		dest = (void*)((char*)dest + sizeof(BulletType));
-		bytesCopy += sizeof(BulletType);
-	}
-	
+	memcpy(dest, &(*m_vertexList.begin()), sizeof(BulletType) * m_vertexList.size());
+	bytesCopy += sizeof(BulletType) * m_vertexList.size();
 	return bytesCopy;
 }
 
@@ -167,7 +160,29 @@ bool BulletStorm::IsDone()
 }
 
 
-bool BulletStorm::IsCollided(float cameraAngle, float shipx, float shipy, float shipz)
+bool BulletStorm::IsCollided(D3DXVECTOR3 norm, float shipx, float shipy)
 {
-	return true;
+	// prerequisite: bullets are already fetched from lua script
+	// scan all points
+	for (std::vector<BulletType>::iterator iter = m_vertexList.begin(); iter != m_vertexList.end(); ++iter)
+	{
+		float bx, by;
+		bx = (*iter).position.x;
+		float tmp = D3DXVec3Dot(&norm, &((*iter).position));
+		D3DXVECTOR3 tnorm = -tmp * norm;
+		D3DXVECTOR3 persP;
+		D3DXVec3Add(&persP, &(*iter).position, &tnorm);
+		D3DXVECTOR3 yvec;
+		D3DXVec3Cross(&yvec, &D3DXVECTOR3(1, 0, 0), &norm);
+		if (abs(yvec.y) > abs(yvec.z))
+			by = persP.y / yvec.y;
+		else by = persP.z / yvec.z;
+
+		float dis = (sqrt((by - shipy) * (by - shipy) + (bx - shipx) * (bx - shipx)));
+		if (dis < 5.0f)
+		{
+			return true;
+		}
+	}
+	return false;
 }

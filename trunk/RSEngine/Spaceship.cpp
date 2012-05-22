@@ -42,3 +42,9 @@ void Spaceship::GetXYZ(float* x, float* y, float*z)
 	*y = -m_bby * cos(cameraAngle);
 	*z = m_bby * sin(cameraAngle);
 }
+
+void Spaceship::GetScrXY(float* x, float* y)
+{
+	*x = m_bbx;
+	*y = m_bby;
+}

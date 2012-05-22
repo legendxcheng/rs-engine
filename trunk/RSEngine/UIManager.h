@@ -18,6 +18,7 @@ public:
 	void Initialize(TextClass* tc);
 	void InitText();
 	void UpdateFrameCount(unsigned int fps, unsigned int frameCount);
+	void UpdateHitCondition(bool hit);
 	void UpdateKeyboardInput(std::string keyboardState);// maybe another kind of input structure
 
 private:

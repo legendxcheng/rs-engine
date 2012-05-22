@@ -16,7 +16,7 @@ public:
 	void UpdateInterpolate(float interpoloate);
 	//TODO
 	// a function to fill all the vertexes in a render object
-	bool IsCollided(float cameraAngle, float shipx, float shipy, float shipz);
+	bool IsCollided(float cameraAngle, float shipx, float shipy);
 	bool FillVertexBuffer(void* vb);
 private:
 	std::vector<BulletStorm*> m_bulletStorms;

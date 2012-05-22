@@ -23,7 +23,7 @@ GameLogic::GameLogic(void)
 	// test
 	// add bulletstorm into bulletsystem
 	BulletStorm* bs = new BulletStorm();
-	bs->LoadBulletStorm("BulletScript\\script_template.lua");
+	bs->LoadBulletStorm("BulletScript\\moxing7-Cube2.lua");
 
 	m_bulletSys->InsertBulletStorm(bs);
 
@@ -46,14 +46,20 @@ GameLogic* GameLogic::GetInstance()
 void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 {
 	// TODO: fill
-	m_uiMgr->UpdateFrameCount(fps, totFrame);
-	m_uiMgr->UpdateKeyboardInput(m_inputMgr->GetKeyBoardState());
+	
 	m_bulletSys->UpdateFrame();
-
+	float sx, sy;
+	m_spaceship->GetScrXY(&sx, &sy);
+	float ishit = m_bulletSys->IsCollided(m_cameraAngle, sx, sy);
 	
 
 	//test input mgr
 	HandleInput();
+
+	// update ui
+	m_uiMgr->UpdateFrameCount(fps, totFrame);
+	m_uiMgr->UpdateKeyboardInput(m_inputMgr->GetKeyBoardState());
+	m_uiMgr->UpdateHitCondition(ishit);
 }
 
 void GameLogic::HandleInput()
