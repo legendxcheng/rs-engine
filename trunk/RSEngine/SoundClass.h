@@ -1,53 +1,25 @@
-///////////////////////////////////////////////////////////////////////////////
-// Filename: soundclass.h
-///////////////////////////////////////////////////////////////////////////////
-#ifndef _SOUNDCLASS_H_
-#define _SOUNDCLASS_H_
-/////////////
-// LINKING //
-/////////////
-
-
-
-//////////////
-// INCLUDES //
-//////////////
-#include <windows.h>
-///////////////////////////////////////////////////////////////////////////////
-// Class name: SoundClass
-// This is a wrapper for FMOD, an outstanding 3rd party Audio Library
-///////////////////////////////////////////////////////////////////////////////
-
+#pragma once
+// a wrapper for FMOD::Sound
+// attach a tag into the sound
+#include <string>
 #include "fmod.hpp"
 #include "fmod_errors.h"
-#include <vector>
 
-#define MAX_CHANNEL_NUM 32
 
 class SoundClass
 {
-private:
+public:
+	SoundClass(void);
+	~SoundClass(void);
 
 public:
-	SoundClass();
-	SoundClass(const SoundClass&);
-	~SoundClass();
-	bool Initialize(HWND);
-	void Shutdown();
-	void UpdateFrame();// call every frame
+	void Initialize(FMOD::Sound* asnd, std::string tag);
+	bool NameEqual(std::string tname);
+	void Release();
+	FMOD::Sound* GetSound();
 
 private:
-	void InitializeResource();
-	void ERRCHECK(FMOD_RESULT result);
-	
-// data
-private:
-	FMOD::System* m_system;
-	std::vector<FMOD::Channel*> m_channelList;
-	std::vector<FMOD::Sound*> m_soundList;
-	
-
-
+	std::string m_tag;
+	FMOD::Sound* m_sound;
 };
 
-#endif

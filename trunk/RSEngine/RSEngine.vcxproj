@@ -91,6 +91,7 @@
     <ClCompile Include="RSObjPS.cpp" />
     <ClCompile Include="RSObjVS.cpp" />
     <ClCompile Include="RSTimer.cpp" />
+    <ClCompile Include="SoundClass.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spaceship.cpp" />
     <ClCompile Include="SpaceshipModel.cpp" />
@@ -111,7 +112,7 @@
     <ClCompile Include="InputClass.cpp" />
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
-    <ClCompile Include="SoundClass.cpp" />
+    <ClCompile Include="AudioClass.cpp" />
     <ClCompile Include="SpherePS.cpp" />
     <ClCompile Include="SphereTexture.cpp" />
     <ClCompile Include="SphereVS.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="RSObjPS.h" />
     <ClInclude Include="RSObjVS.h" />
     <ClInclude Include="RSTimer.h" />
+    <ClInclude Include="SoundClass.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spaceship.h" />
     <ClInclude Include="SpaceshipModel.h" />
@@ -160,7 +162,7 @@
     <ClInclude Include="InputClass.h" />
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ShaderManager.h" />
-    <ClInclude Include="SoundClass.h" />
+    <ClInclude Include="AudioClass.h" />
     <ClInclude Include="SpherePS.h" />
     <ClInclude Include="SphereTexture.h" />
     <ClInclude Include="SphereVS.h" />

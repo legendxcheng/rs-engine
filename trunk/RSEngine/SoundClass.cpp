@@ -1,59 +1,34 @@
-///////////////////////////////////////////////////////////////////////////////
-// Filename: soundclass.cpp
-///////////////////////////////////////////////////////////////////////////////
-#include "soundclass.h"
-SoundClass::SoundClass()
-{
+#include "SoundClass.h"
 
-}
-SoundClass::SoundClass(const SoundClass& other)
+
+SoundClass::SoundClass(void)
 {
 }
 
 
-SoundClass::~SoundClass()
+SoundClass::~SoundClass(void)
 {
 }
 
-void SoundClass::UpdateFrame()
+void SoundClass::Release()
 {
-	m_system->update();
+	m_sound->release();
 }
 
-bool SoundClass::Initialize(HWND hwnd)
+bool SoundClass::NameEqual(std::string tname)
 {
-	FMOD_RESULT result;
-	result = FMOD::System_Create(&m_system);
-	ERRCHECK(result);
-
-	result = m_system->init(MAX_CHANNEL_NUM, FMOD_INIT_NORMAL, 0);
-	ERRCHECK(result);
-
-
-	return true;
+	if (tname.compare(m_tag) == 0)
+		return true;
+	return false;
 }
 
-void SoundClass::Shutdown()
+FMOD::Sound* SoundClass::GetSound()
 {
-	// We do not have to care about channels, FMOD will care about it for us.
-	for (std::vector<FMOD::Sound*>::iterator iter = m_soundList.begin(); iter != m_soundList.end(); ++iter)
-	{
-		(*iter)->release();
-	}
-
-	return;
+	return m_sound;
 }
 
-void SoundClass::ERRCHECK(FMOD_RESULT result)
+void SoundClass::Initialize(FMOD::Sound* asnd, std::string tag)
 {
-	if (result != FMOD_OK)
-	{
-		printf("FMOD error! (%d) %s\n", result, FMOD_ErrorString(result));
-		exit(-1);
-	}
-}
-
-void SoundClass::InitializeResource()
-{
-
+	m_tag = tag;
+	m_sound = asnd;
 }

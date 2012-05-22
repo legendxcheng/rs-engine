@@ -16,9 +16,6 @@
     <ClCompile Include="RenderObjectManager.cpp">
       <Filter>Low Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="SoundClass.cpp">
-      <Filter>Low Engine\Core</Filter>
-    </ClCompile>
     <ClCompile Include="SystemClass.cpp">
       <Filter>Low Engine\Core</Filter>
     </ClCompile>
@@ -142,6 +139,12 @@
     <ClCompile Include="SpaceshipModel.cpp">
       <Filter>Low Engine\RShooterObj</Filter>
     </ClCompile>
+    <ClCompile Include="SoundClass.cpp">
+      <Filter>Low Engine\Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioClass.cpp">
+      <Filter>Low Engine\Core\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -154,9 +157,6 @@
       <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="RenderObjectManager.h">
-      <Filter>Low Engine\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundClass.h">
       <Filter>Low Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="SystemClass.h">
@@ -291,6 +291,12 @@
     <ClInclude Include="Utils.h">
       <Filter>Misc</Filter>
     </ClInclude>
+    <ClInclude Include="AudioClass.h">
+      <Filter>Low Engine\Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClass.h">
+      <Filter>Low Engine\Core\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bstest.hlsl">
@@ -363,6 +369,9 @@
     </Filter>
     <Filter Include="Misc">
       <UniqueIdentifier>{92788405-0ead-4271-989e-730ce9e50edf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Low Engine\Core\Audio">
+      <UniqueIdentifier>{7abdf5d5-fe4d-42bd-aeda-fe5cdd805fda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

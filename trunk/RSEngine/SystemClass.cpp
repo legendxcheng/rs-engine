@@ -83,11 +83,12 @@ bool SystemClass::Initialize()
 
 
 	// Create the sound object.
-	m_Sound = new SoundClass;
+	m_Sound = new AudioClass;
 	if(!m_Sound)
 	{
 		return false;
 	}
+	m_Sound->Initialize(m_hwnd);
 
 	m_timer = new RSTimer();
 	if (!m_timer)
