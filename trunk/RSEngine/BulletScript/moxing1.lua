@@ -27,26 +27,47 @@ function initialize()
 end
 
 function updateFrame()
-	currentFrame = currentFrame + 1
+	currentFrame = currentFrame + 1 /2
 	local tmpt = 1
-		for i=1, 600 do 
+		for i=1, 300 do 
 			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-			vetx[tmpt] = 400 - currentFrame  + i * 6
+			vetx[tmpt] = 400 - currentFrame  + i * 13
 			tmpt = tmpt + 1
-			if (i <= 200) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 50)*0.02 * 2 * 3.1415926)
-			elseif(i <= 400) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 50)*0.02 * 2 * 3.1415926) + 100
-			elseif(i <= 600) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 50)*0.02 * 2 * 3.1415926) - 100
+			if (i <= 100) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926)
+			elseif(i <= 200) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) + 100
+			elseif(i <= 300) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) - 100
 			end			
 			tmpt = tmpt + 1
-			if (i <= 200) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 50)*0.02 * 2 * 3.1415926)
-			elseif(i <= 400) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 50)*0.02 * 2 * 3.1415926) + 100
-			elseif(i <= 600) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 50)*0.02 * 2 * 3.1415926) - 100
+			if (i <= 100) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926)
+			elseif(i <= 200) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) + 100
+			elseif(i <= 300) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) - 100
+			end	
+			tmpt = tmpt + 1
+		end
+		for i=1, 300 do 
+			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
+			vetx[tmpt] = 400 - currentFrame  + i * 13
+			tmpt = tmpt + 1
+			if (i <= 100) then
+				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) + i * 0.3
+			elseif(i <= 200) then
+				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) + 30 - i * 0.3
+			elseif(i <= 300) then
+				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) - i * 0.3
+			end			
+			tmpt = tmpt + 1
+			if (i <= 100) then
+				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926)
+			elseif(i <= 200) then
+				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926) + 100
+			elseif(i <= 300) then
+				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926) - 100
 			end	
 
 			tmpt = tmpt + 1
@@ -55,25 +76,47 @@ end
 
 function updateInterpolation(intp)
 	--vetx = {} -- empty array
+	currentFrame = currentFrame + 1 / 2
 	local tmpt = 1
-		for i=1, 600 do
+		for i=1, 300 do
 			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-			vetx[tmpt] = 400 - currentFrame - intp + i * 6
+			vetx[tmpt] = 400 - currentFrame - intp + i * 13
 			tmpt = tmpt + 1
-			if (i <= 200) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 50)*0.02 * 2 * 3.1415926)
-			elseif(i <= 400) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 50)*0.02 * 2 * 3.1415926) + 100
-			elseif(i <= 600) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 50)*0.02 * 2 * 3.1415926) - 100
+			if (i <= 100) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926)
+			elseif(i <= 200) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) + 100
+			elseif(i <= 300) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) - 100
 			end
 			tmpt = tmpt + 1
-			if (i <= 200) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 50)*0.02 * 2 * 3.1415926)
-			elseif(i <= 400) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 50)*0.02 * 2 * 3.1415926) + 100
-			elseif(i <= 600) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 50)*0.02 * 2 * 3.1415926) - 100
+			if (i <= 100) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926)
+			elseif(i <= 200) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) + 100
+			elseif(i <= 300) then
+				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) - 100
+			end	
+			tmpt = tmpt + 1
+		end
+		for i=1, 300 do
+			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
+			vetx[tmpt] = 400 - currentFrame - intp + i * 13
+			tmpt = tmpt + 1
+			if (i <= 100) then
+				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) + i * 0.3
+			elseif(i <= 200) then
+				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) + 30 - i * 0.3
+			elseif(i <= 300) then
+				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) - i * 0.3
+			end
+			tmpt = tmpt + 1
+			if (i <= 100) then
+				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926)
+			elseif(i <= 200) then
+				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926) + 100
+			elseif(i <= 300) then
+				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926) - 100
 			end	
 			tmpt = tmpt + 1
 		end
