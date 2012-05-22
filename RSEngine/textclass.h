@@ -37,8 +37,8 @@ private:
 // for high engine invoke
 public:
 
-	bool AddText(std::string tag, unsigned int positionX, unsigned int positionY, unsigned int red,
-		unsigned int green, unsigned int blue);
+	bool AddText(std::string tag, unsigned int positionX, unsigned int positionY, float red,
+		float green, float blue);
 	bool DeleteText(std::string tag);
 	// can only change the text content
 	bool EditText(std::string tag, std::string newText, unsigned int positionX, unsigned int positionY, float red,

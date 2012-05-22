@@ -1,5 +1,6 @@
 #include "BulletSystem.h"
 #include "BulletStorm.h"
+#include "d3dx10math.h"
 
 BulletSystem::BulletSystem(void)
 {
@@ -62,13 +63,21 @@ void BulletSystem::UpdateInterpolate(float interpoloate)
 	{
 		(*iter)->UpdateInterpolation(interpoloate);
 	}
+	for (std::vector<BulletStorm*>::iterator iter = m_bulletStorms.begin(); iter < m_bulletStorms.end(); ++iter)
+	{
+		(*iter)->FetchBullets();
+	}
 }
 
-bool BulletSystem::IsCollided(float cameraAngle, float shipx, float shipy, float shipz)
+bool BulletSystem::IsCollided(float cameraAngle, float shipx, float shipy)
 {
 	for (std::vector<BulletStorm*>::iterator iter = m_bulletStorms.begin(); iter < m_bulletStorms.end(); ++iter)
 	{
-		if ((*iter)->IsCollided(cameraAngle, shipx, shipy, shipz))
+		D3DXVECTOR3 norm;
+		norm.x = 0;
+		norm.y = sin(cameraAngle);
+		norm.z = cos(cameraAngle);
+		if ((*iter)->IsCollided(norm, shipx, shipy))
 			return true;
 	}
 	return false;
