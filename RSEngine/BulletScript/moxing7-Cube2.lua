@@ -27,7 +27,7 @@ function initialize()
 end
 
 function updateFrame()
-	currentFrame = currentFrame + 1
+	currentFrame = currentFrame + 1/4
 	local tmpt = 1
 	local xgap = 200
 		for i=1, 320 do 
@@ -41,7 +41,7 @@ function updateFrame()
 			    vetx[tmpt] = 400 - currentFrame + 2 * xgap
 			elseif(i <= 40) then
 			    vetx[tmpt] = 400 - currentFrame + 3 * xgap
-			--中间横边	
+			--下中间横边	
 			elseif(i <= 50) then
 				vetx[tmpt] = 400 - currentFrame + 40 * (i - 40)
 			elseif(i <= 60) then
@@ -79,8 +79,12 @@ function updateFrame()
 				vetx[tmpt] = 400 - currentFrame + 20 * (i - 260)
 			elseif(i <= 280) then
 			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 270) + 2 * xgap
-            end			
-			
+			--对角线飞行	
+			elseif (i <= 300) then
+				vetx[tmpt] = 400 - currentFrame + 30 * (i - 280)
+			elseif(i <= 320) then
+			    vetx[tmpt] = 400 - currentFrame + 10 * (i - 300)+ xgap
+            end						
 			tmpt = tmpt + 1
 			if (i <= 10) then
 				vetx[tmpt] = 220 - i * 50
@@ -122,48 +126,56 @@ function updateFrame()
 				vetx[tmpt] = 70 + (i - 260) * 6
 			elseif(i <= 280) then
 				vetx[tmpt] = 70 + (i - 270) * 6
+			elseif(i <= 300) then
+				vetx[tmpt] = 220 - 22*(i - 280)
+			elseif(i <= 320) then
+				vetx[tmpt] = 280 - 28*(i - 300)
 			end			
 			tmpt = tmpt + 1
 			if (i <= 10) then
-				vetx[tmpt] = 220
+				vetx[tmpt] = 280
 			elseif(i <= 20) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = -280
 			elseif(i <= 30) then
-				vetx[tmpt] = 220
+				vetx[tmpt] = 280
 			elseif(i <= 40) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = -280
 			elseif(i <= 50) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 
 			elseif(i <= 60) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = -280
 			elseif(i <= 70) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 
 			elseif(i <= 80) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = -280
 			elseif(i <= 100) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 
 			elseif(i <= 120) then
-				vetx[tmpt] = -220 
+				vetx[tmpt] = -280 
 			elseif(i <= 140) then
-				vetx[tmpt] = 220
+				vetx[tmpt] = 280
 			elseif(i <= 160) then
-				vetx[tmpt] = -220 
+				vetx[tmpt] = -280 
 			elseif(i <= 180) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 -  28 * (i - 160) 
 			elseif(i <= 200) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 -  28 * (i - 180)  
 			elseif(i <= 220) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  28 * (i - 200) 
 			elseif(i <= 240) then
-				vetx[tmpt] = -220 
+				vetx[tmpt] = 280 -  28 * (i - 220)  
 			elseif(i <= 250) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  56 * (i - 240) 
 			elseif(i <= 260) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  56 * (i - 250) 
 			elseif(i <= 270) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  56 * (i - 260) 
 			elseif(i <= 280) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  56 * (i - 270) 
+			elseif(i <= 300) then
+				vetx[tmpt] = 280 -  28 * (i - 280)
+			elseif(i <= 320) then
+				vetx[tmpt] = -280 +  28 * (i - 300) 
 			end	
 			tmpt = tmpt + 1
 		end
@@ -171,7 +183,7 @@ end
 
 function updateInterpolation(intp)
 	--vetx = {} -- empty array
-	currentFrame = currentFrame + 1
+	currentFrame = currentFrame + 1/ 4
 	local tmpt = 1
 	local xgap = 200
 		for i=1, 320 do 
@@ -216,6 +228,11 @@ function updateInterpolation(intp)
 				vetx[tmpt] = 400 - currentFrame + 20 * (i - 260) - intp
 			elseif(i <= 280) then
 			    vetx[tmpt] = 400 - currentFrame + 20 * (i - 270) + 2 * xgap - intp
+			--对角线飞行	
+			elseif (i <= 300) then
+				vetx[tmpt] = 400 - currentFrame + 30 * (i - 280)
+			elseif(i <= 320) then
+			    vetx[tmpt] = 400 - currentFrame + 10 * (i - 300)+  xgap 
             end				
 			tmpt = tmpt + 1
 			if (i <= 10) then
@@ -258,48 +275,56 @@ function updateInterpolation(intp)
 				vetx[tmpt] = 70 + (i - 260) * 6
 			elseif(i <= 280) then
 				vetx[tmpt] = 70 + (i - 270) * 6
+			elseif(i <= 300) then
+				vetx[tmpt] = 220 - 22*(i - 280)
+			elseif(i <= 320) then
+				vetx[tmpt] = 280 - 28*(i - 300)
 			end			
 			tmpt = tmpt + 1
 			if (i <= 10) then
-				vetx[tmpt] = 220
+				vetx[tmpt] = 280
 			elseif(i <= 20) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = -280
 			elseif(i <= 30) then
-				vetx[tmpt] = 220
+				vetx[tmpt] = 280
 			elseif(i <= 40) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = -280
 			elseif(i <= 50) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 
 			elseif(i <= 60) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = -280
 			elseif(i <= 70) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 
 			elseif(i <= 80) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = -280
 			elseif(i <= 100) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 
 			elseif(i <= 120) then
-				vetx[tmpt] = -220 
+				vetx[tmpt] = -280 
 			elseif(i <= 140) then
-				vetx[tmpt] = 220
+				vetx[tmpt] = 280
 			elseif(i <= 160) then
-				vetx[tmpt] = -220 
+				vetx[tmpt] = -280 
 			elseif(i <= 180) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 -  28 * (i - 160) 
 			elseif(i <= 200) then
-				vetx[tmpt] = 220 
+				vetx[tmpt] = 280 -  28 * (i - 180)  
 			elseif(i <= 220) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  28 * (i - 200) 
 			elseif(i <= 240) then
-				vetx[tmpt] = -220 
+				vetx[tmpt] = 280 -  28 * (i - 220)  
 			elseif(i <= 250) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  56 * (i - 240) 
 			elseif(i <= 260) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  56 * (i - 250) 
 			elseif(i <= 270) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  56 * (i - 260) 
 			elseif(i <= 280) then
-				vetx[tmpt] = -220
+				vetx[tmpt] = 280 -  56 * (i - 270) 
+			elseif(i <= 300) then
+				vetx[tmpt] = 280 -  28 * (i - 280) 
+			elseif(i <= 320) then
+				vetx[tmpt] = -280 +  28 * (i - 300) 
 			end	
 			tmpt = tmpt + 1
 		end

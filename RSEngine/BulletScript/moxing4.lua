@@ -23,29 +23,29 @@ function initialize()
 	line = {} -- stotre line index in vetx
 	lineUpdated = 0 -- 0 for not updated since last call 1 for updated since last call
 	stripCount = 1
-	vetxCount[1] = 600
+	vetxCount[1] = 300
 end
 
 function updateFrame()
 	currentFrame = currentFrame + 1
 	local tmpt = 1
-		for i=1, 600 do 
+		for i=1, 300 do 
 			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-			vetx[tmpt] = 400 - currentFrame  + i * 6
+			vetx[tmpt] = 400 - currentFrame  + i * 10
 			tmpt = tmpt + 1
-			if (i <= 200) then
+			if (i <= 100) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926)
-			elseif(i <= 400) then
+			elseif(i <= 200) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) + 100
-			elseif(i <= 600) then
+			elseif(i <= 300) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) - 100
 			end			
 			tmpt = tmpt + 1
-			if (i <= 200) then
+			if (i <= 100) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926)
-			elseif(i <= 400) then
+			elseif(i <= 200) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) + 100
-			elseif(i <= 600) then
+			elseif(i <= 300) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) - 100
 			end	
 
@@ -56,23 +56,23 @@ end
 function updateInterpolation(intp)
 	--vetx = {} -- empty array
 	local tmpt = 1
-		for i=1, 600 do
+		for i=1, 300 do
 			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-			vetx[tmpt] = 400 - currentFrame - intp + i * 6
+			vetx[tmpt] = 400 - currentFrame - intp + i * 10
 			tmpt = tmpt + 1
-			if (i <= 200) then
+			if (i <= 100) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926)
-			elseif(i <= 400) then
+			elseif(i <= 200) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) + 100
-			elseif(i <= 600) then
+			elseif(i <= 300) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) - 100
 			end
 			tmpt = tmpt + 1
-			if (i <= 200) then
+			if (i <= 100) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926)
-			elseif(i <= 400) then
+			elseif(i <= 200) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) + 100
-			elseif(i <= 600) then
+			elseif(i <= 300) then
 				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) - 100
 			end	
 			tmpt = tmpt + 1
