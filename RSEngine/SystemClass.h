@@ -8,7 +8,7 @@
 #include <windows.h>
 #include "InputClass.h"
 #include "GraphicsClass.h"
-#include "SoundClass.h"
+#include "audioClass.h"
 
 class RSTimer;
 
@@ -50,7 +50,7 @@ private:
 	static HWND m_hwnd;
 	InputClass* m_Input;
 	GraphicsClass* m_Graphics;
-	SoundClass* m_Sound;
+	AudioClass* m_Sound;
 	RSTimer* m_timer;
 };
 
