@@ -157,7 +157,7 @@ bool GraphicsClass::Frame()
 bool GraphicsClass::Render()
 {
 	D3DXMATRIX viewMatrix, projectionMatrix, orthoMatrix;
-	bool result;
+	//bool result;
 	static float xr = 0.0f;
 
 	// Clear the buffers to begin the scene.

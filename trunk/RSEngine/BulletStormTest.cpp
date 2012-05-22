@@ -86,9 +86,9 @@ int BulletStormTest::GetIndexCount()
 
 bool BulletStormTest::InitializeBuffers(ID3D11Device* device)
 {
-	unsigned long* indices;
-	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
-	D3D11_SUBRESOURCE_DATA vertexData, indexData;
+	//unsigned long* indices;
+	D3D11_BUFFER_DESC vertexBufferDesc;//, indexBufferDesc;
+	//D3D11_SUBRESOURCE_DATA indexData;
 	HRESULT result;
 
 	// Set up the description of the static vertex buffer.

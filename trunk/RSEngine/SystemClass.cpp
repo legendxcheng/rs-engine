@@ -200,6 +200,7 @@ void SystemClass::Run()
 			/*
 				calc next frame
 			*/
+			m_Sound->UpdateFrame();
 			result = Update();
 			if (!result)
 			{
@@ -359,7 +360,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 bool SystemClass::Update()
 {
 	bool result;
-	int mouseX, mouseY;
+	//int mouseX, mouseY;
 	/*
 		get new input state
 	*/

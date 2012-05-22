@@ -6,22 +6,24 @@
 /////////////
 // LINKING //
 /////////////
-#pragma comment(lib, "dsound.lib")
-#pragma comment(lib, "dxguid.lib")
-#pragma comment(lib, "winmm.lib")
+
 
 
 //////////////
 // INCLUDES //
 //////////////
 #include <windows.h>
-#include <mmsystem.h>
-#include <dsound.h>
-#include <stdio.h>
 ///////////////////////////////////////////////////////////////////////////////
 // Class name: SoundClass
 // This is a wrapper for FMOD, an outstanding 3rd party Audio Library
 ///////////////////////////////////////////////////////////////////////////////
+
+#include "fmod.hpp"
+#include "fmod_errors.h"
+#include <vector>
+
+#define MAX_CHANNEL_NUM 32
+
 class SoundClass
 {
 private:
@@ -32,10 +34,19 @@ public:
 	~SoundClass();
 	bool Initialize(HWND);
 	void Shutdown();
+	void UpdateFrame();// call every frame
 
 private:
-
+	void InitializeResource();
+	void ERRCHECK(FMOD_RESULT result);
+	
+// data
 private:
+	FMOD::System* m_system;
+	std::vector<FMOD::Channel*> m_channelList;
+	std::vector<FMOD::Sound*> m_soundList;
+	
+
 
 };
 

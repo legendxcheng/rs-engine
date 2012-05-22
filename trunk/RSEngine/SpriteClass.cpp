@@ -164,6 +164,7 @@ bool SpriteClass::Update(ID3D11DeviceContext* deviceContext, int positionX, int 
 
 
 	}
+	return true;
 
 }
 
@@ -294,7 +295,7 @@ void SpriteClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatr
 		we just use the m_posx and m_posy to render directly on screen
 		but for the ubiquitous reason, we reserve the matrix attributes
 	*/
-	bool result;
+	//bool result;
 	D3DClass::GetInstance()->TurnZBufferOff();
 	RenderBuffers(deviceContext);
 	m_vs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projMatrix);
