@@ -17,8 +17,10 @@ public:
 	bool NameEqual(std::string tname);
 	void Release();
 	FMOD::Sound* GetSound();
+	bool IsStream();
 
 private:
+	bool m_isStream;
 	std::string m_tag;
 	FMOD::Sound* m_sound;
 };
