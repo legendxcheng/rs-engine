@@ -32,3 +32,8 @@ void SoundClass::Initialize(FMOD::Sound* asnd, std::string tag)
 	m_tag = tag;
 	m_sound = asnd;
 }
+
+bool SoundClass::IsStream()
+{
+	return m_isStream;
+}

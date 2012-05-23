@@ -30,23 +30,28 @@ class AudioClass
 private:
 
 public:
-	AudioClass();
+	
 	AudioClass(const AudioClass&);
 	~AudioClass();
+	static AudioClass* GetInstance();
 	bool Initialize(HWND);
 	void Shutdown();
 	void UpdateFrame();// call every frame
-
+	void PlaySound(std::string tag);// called by upper level
+	void PlayBGM(std::string tag);
 private:
 	void InitializeResource();
 	void ERRCHECK(FMOD_RESULT result);
-	
+	AudioClass();
+
 // data
 private:
+	static AudioClass* m_instance;
+
 	FMOD::System* m_system;
 	std::vector<FMOD::Channel*> m_channelList;
 	std::vector<SoundClass*> m_soundList;
-	
+	FMOD::Channel* m_bgmChannel;
 
 
 };

@@ -83,7 +83,7 @@ bool SystemClass::Initialize()
 
 
 	// Create the sound object.
-	m_Sound = new AudioClass;
+	m_Sound = AudioClass::GetInstance();
 	if(!m_Sound)
 	{
 		return false;
@@ -96,18 +96,6 @@ bool SystemClass::Initialize()
 		return false;
 	}
 	m_timer->SetGameSpeed(60);
-	// Initialize the sound object.
-// 	result = m_Sound->Initialize(m_hwnd);
-// 	if(!result)
-// 	{
-// 		MessageBox(m_hwnd, L"Could not initialize Direct Sound.", L"Error", MB_OK);
-// 		return false;
-// 	}
-
-	/*
-		Initialize of GameLogic
-		Initialize each component of GameLogic
-	*/
 
 	// Create the graphics object.  This object will handle rendering all the graphics for this application.
 	m_Graphics = new GraphicsClass;
