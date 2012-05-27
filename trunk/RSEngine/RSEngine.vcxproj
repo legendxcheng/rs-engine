@@ -56,7 +56,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>external/fmod/lib/fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>external/fmod/lib/fmodex_vc.lib;lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -86,6 +86,7 @@
     <ClCompile Include="fontshaderclass.cpp" />
     <ClCompile Include="GameGlobalData.cpp" />
     <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="gaussian_main.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="BulletSystem.cpp" />
     <ClCompile Include="RSObjPS.cpp" />
@@ -185,7 +186,10 @@
     <None Include="Color.vs" />
     <None Include="font.ps" />
     <None Include="font.vs" />
-    <None Include="rsobjtest.fx" />
+    <None Include="FurShellsAndFins.hlsl" />
+    <None Include="gaussian_color_cs.hlsl" />
+    <None Include="gaussian_vs_ps.hlsl" />
+    <None Include="rsobjtest.hlsl" />
     <None Include="Sphere.fx" />
     <None Include="Sprite.fx" />
   </ItemGroup>

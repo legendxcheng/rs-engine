@@ -23,7 +23,7 @@ GameLogic::GameLogic(void)
 	// test
 	// add bulletstorm into bulletsystem
 	BulletStorm* bs = new BulletStorm();
-	bs->LoadBulletStorm("BulletScript\\moxing8-pyramid.lua");
+	bs->LoadBulletStorm("BulletScript\\script_template.lua");
 
 	m_bulletSys->InsertBulletStorm(bs);
 

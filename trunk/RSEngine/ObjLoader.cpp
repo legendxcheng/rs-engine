@@ -684,7 +684,7 @@ bool ObjLoader::LoadRSObjModel(std::string fileName, bool isRHCoordSys, bool com
 			D3DXVec3Normalize(&T, &TP);
 			D3DXVec3Normalize(&U, &UP);
 			tempBinormal.push_back(U);
-			tempBinormal.push_back(T);
+			tempTangent.push_back(T);
 		}
 
 		//Compute vertex normals (normal Averaging)
