@@ -145,6 +145,9 @@
     <ClCompile Include="AudioClass.cpp">
       <Filter>Low Engine\Core\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="gaussian_main.cpp">
+      <Filter>Shader Engine\GaussianBlur</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -323,8 +326,17 @@
     <None Include="Sphere.fx">
       <Filter>Low Engine\Core\HLSL</Filter>
     </None>
-    <None Include="rsobjtest.fx">
+    <None Include="FurShellsAndFins.hlsl">
       <Filter>Low Engine\Core\HLSL</Filter>
+    </None>
+    <None Include="rsobjtest.hlsl">
+      <Filter>Low Engine\Core\HLSL</Filter>
+    </None>
+    <None Include="gaussian_color_cs.hlsl">
+      <Filter>Shader Engine\GaussianBlur</Filter>
+    </None>
+    <None Include="gaussian_vs_ps.hlsl">
+      <Filter>Shader Engine\GaussianBlur</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -372,6 +384,12 @@
     </Filter>
     <Filter Include="Low Engine\Core\Audio">
       <UniqueIdentifier>{7abdf5d5-fe4d-42bd-aeda-fe5cdd805fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Engine">
+      <UniqueIdentifier>{91cb4a00-cc6a-4e69-b83a-6eb647b52067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Engine\GaussianBlur">
+      <UniqueIdentifier>{6d1fea59-3131-4a71-981f-2f9abe931cd9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

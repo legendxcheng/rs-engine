@@ -10,7 +10,7 @@
 
 ObjModelClass::ObjModelClass(char* objFileName)
 {
-		m_psList.clear();
+	m_psList.clear();
 	m_vsList.clear();
 	m_objFileName = objFileName;
 	D3DXMatrixIdentity(&m_worldMatrix);

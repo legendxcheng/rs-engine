@@ -2,7 +2,7 @@
 #include "Structures.h"
 
 
-#pragma comment(lib,"lua.lib")
+//#pragma comment(lib,"lua.lib")
 
 /*
 	load lua script

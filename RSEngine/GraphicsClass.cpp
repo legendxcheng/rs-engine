@@ -250,11 +250,11 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	//////////////////////////////////////////////////////////////////////////
 	// rsobj shader ps vs
 	RSObjPS* rsps = new RSObjPS("RSObjPS");
-	rsps->Initialize(device, SystemClass::GetWindowHandler(), L"rsobjtest.fx", "PS");
+	rsps->Initialize(device, SystemClass::GetWindowHandler(), L"rsobjtest.hlsl", "PS");
 	shaderMgr->InsertShader(SHADER_TYPE_PS, rsps);
 
 	RSObjVS* rsvs = new RSObjVS("RSObjVS");
-	rsvs->Initialize(device, SystemClass::GetWindowHandler(), L"rsobjtest.fx", "VS");
+	rsvs->Initialize(device, SystemClass::GetWindowHandler(), L"rsobjtest.hlsl", "VS");
 	shaderMgr->InsertShader(SHADER_TYPE_VS, rsvs);
 
 	// Initialize RenderObject

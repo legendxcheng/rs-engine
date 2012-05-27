@@ -60,7 +60,7 @@ void AudioClass::InitializeResource()
 {
 	FMOD_RESULT result;
 	FMOD::Sound* snd;
-
+	/*
 	result = m_system->createSound("Resource\\22.mp3", FMOD_HARDWARE, 0, &snd);
 	ERRCHECK(result);
 	snd->setMode(FMOD_LOOP_OFF);
@@ -69,7 +69,7 @@ void AudioClass::InitializeResource()
 	m_soundList.push_back(sc);
 
 	PlayBGM("bgm");
-
+	*/
 
 }
 
