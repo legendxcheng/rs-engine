@@ -68,6 +68,8 @@ struct ObjVertex
 	D3DXVECTOR3 pos;
 	D3DXVECTOR2 texCoord;
 	D3DXVECTOR3 normal;
+	D3DXVECTOR3 binormal;
+	D3DXVECTOR3 tangent;
 };
 
 namespace LightningUtility
