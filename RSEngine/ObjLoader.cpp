@@ -634,7 +634,7 @@ bool ObjLoader::LoadRSObjModel(std::string fileName, bool isRHCoordSys, bool com
 	//normals, if it was set to false we will use the obj files normals
 	if(computeNormals)
 	{
-		std::vector<D3DXVECTOR3> tempNormal;
+		std::vector<D3DXVECTOR3> tempNormal, tempTangent, tempBinormal;
 
 		//normalized and unnormalized normals
 		D3DXVECTOR3 unnormalized = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -647,6 +647,8 @@ bool ObjLoader::LoadRSObjModel(std::string fileName, bool isRHCoordSys, bool com
 		D3DXVECTOR3 edge2 = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 		//Compute face normals	
+		//	face binormal
+		//	face tangent
 		for(int i = 0; i < meshTriangles; ++i)
 		{
 			//Get the vector describing one edge of our triangle (edge 0,2)
@@ -662,13 +664,33 @@ bool ObjLoader::LoadRSObjModel(std::string fileName, bool isRHCoordSys, bool com
 			edge2 = D3DXVECTOR3(vecX, vecY, vecZ);	//Create our second edge
 
 			//Cross multiply the two edge vectors to get the un-normalized face normal
-			D3DXVECTOR3 tmp;
-			D3DXVec3Cross(&tmp, &edge1, &edge2);
-			tempNormal.push_back(tmp);			//Save unormalized normal (for normal averaging)
+			D3DXVECTOR3 N;
+			D3DXVec3Cross(&N, &edge1, &edge2);
+			tempNormal.push_back(N);			//Save unormalized normal (for normal averaging)
+
+			D3DXVECTOR2 F, G;
+			D3DXVECTOR3 D, E;
+			F = vertices[indices[i * 3 + 1]].texCoord - vertices[indices[i * 3]].texCoord;
+			G = vertices[indices[i * 3 + 2]].texCoord - vertices[indices[i * 3]].texCoord;
+			D = vertices[indices[i * 3 + 1]].pos - vertices[indices[i * 3]].pos;
+			E = vertices[indices[i * 3 + 2]].pos - vertices[indices[i * 3]].pos;
+
+			D3DXVECTOR3 T, U, TP, UP;
+			T = D / (F.x * G.y - F.y * G.x);
+			U = D / (F.x * G.y - F.y * G.x);
+
+			TP = T - D3DXVec3Dot(&N, &T) * N;
+			UP = U - D3DXVec3Dot(&N, &U) * N - D3DXVec3Dot(&TP, &U) * TP;
+			D3DXVec3Normalize(&T, &TP);
+			D3DXVec3Normalize(&U, &UP);
+			tempBinormal.push_back(U);
+			tempBinormal.push_back(T);
 		}
 
 		//Compute vertex normals (normal Averaging)
 		D3DXVECTOR3 normalSum = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		D3DXVECTOR3 tangentSum = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		D3DXVECTOR3 binormalSum = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		int facesUsing = 0;
 		float tX;
 		float tY;
@@ -687,14 +709,26 @@ bool ObjLoader::LoadRSObjModel(std::string fileName, bool isRHCoordSys, bool com
 					tX = normalSum.x + tempNormal[j].x;
 					tY = normalSum.y + tempNormal[j].y;
 					tZ = normalSum.z + tempNormal[j].z;
-
 					normalSum = D3DXVECTOR3(tX, tY, tZ);	//If a face is using the vertex, add the unormalized face normal to the normalSum
+					
+					tX = tangentSum.x + tempTangent[j].x;
+					tY = tangentSum.y + tempTangent[j].y;
+					tZ = tangentSum.z + tempTangent[j].z;
+					tangentSum = D3DXVECTOR3(tX, tY, tZ);
+					
+					tX = binormalSum.x + tempBinormal[j].x;
+					tY = binormalSum.y + tempBinormal[j].y;
+					tZ = binormalSum.z + tempBinormal[j].z;
+					binormalSum = D3DXVECTOR3(tX, tY, tZ);
+
 					facesUsing++;
 				}
 			}
 
 			//Get the actual normal by dividing the normalSum by the number of faces sharing the vertex
 			normalSum = normalSum / facesUsing;
+			binormalSum = binormalSum / facesUsing;
+			tangentSum = tangentSum / facesUsing;
 
 			//Normalize the normalSum vector
 			D3DXVECTOR3 nout;
@@ -707,6 +741,27 @@ bool ObjLoader::LoadRSObjModel(std::string fileName, bool isRHCoordSys, bool com
 
 			//Clear normalSum and facesUsing for next vertex
 			normalSum = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
+			D3DXVec3Normalize(&nout, &binormalSum);
+
+			//Store the normal in our current vertex
+			vertices[i].binormal.x = nout.x;
+			vertices[i].binormal.y = nout.y;
+			vertices[i].binormal.z = nout.z;
+
+			//Clear normalSum and facesUsing for next vertex
+			binormalSum = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
+			D3DXVec3Normalize(&nout, &tangentSum);
+
+			//Store the normal in our current vertex
+			vertices[i].tangent.x = nout.x;
+			vertices[i].tangent.y = nout.y;
+			vertices[i].tangent.z = nout.z;
+
+			//Clear normalSum and facesUsing for next vertex
+			tangentSum = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
 			facesUsing = 0;
 
 		}
