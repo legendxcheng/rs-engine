@@ -1,7 +1,7 @@
 #include "BulletStormTest.h"
 #include "Structures.h"
-#include "BSTestPS.h";
-#include "BSTestVS.h";
+#include "BSTestPS.h"
+#include "BSTestVS.h"
 #include "SystemClass.h"
 #include "ShaderManager.h"
 #include "GameLogic.h"

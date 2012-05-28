@@ -145,7 +145,7 @@
     <ClCompile Include="AudioClass.cpp">
       <Filter>Low Engine\Core\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="gaussian_main.cpp">
+    <ClCompile Include="GaussianMain.cpp">
       <Filter>Shader Engine\GaussianBlur</Filter>
     </ClCompile>
   </ItemGroup>
@@ -299,6 +299,9 @@
     </ClInclude>
     <ClInclude Include="SoundClass.h">
       <Filter>Low Engine\Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianMain.h">
+      <Filter>Shader Engine\GaussianBlur</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

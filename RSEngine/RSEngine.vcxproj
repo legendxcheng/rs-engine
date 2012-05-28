@@ -39,8 +39,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -86,7 +86,7 @@
     <ClCompile Include="fontshaderclass.cpp" />
     <ClCompile Include="GameGlobalData.cpp" />
     <ClCompile Include="GameLogic.cpp" />
-    <ClCompile Include="gaussian_main.cpp" />
+    <ClCompile Include="GaussianMain.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="BulletSystem.cpp" />
     <ClCompile Include="RSObjPS.cpp" />
@@ -137,6 +137,7 @@
     <ClInclude Include="fontshaderclass.h" />
     <ClInclude Include="GameGlobalData.h" />
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="GaussianMain.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="lua_head.h" />
     <ClInclude Include="BulletSystem.h" />
