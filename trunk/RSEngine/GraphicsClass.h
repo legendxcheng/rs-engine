@@ -14,6 +14,7 @@
 #include "shaderclass.h"
 #include "spriteclass.h"
 
+#include "GaussianMain.h"
 /////////////
 // GLOBALS //
 /////////////
@@ -50,6 +51,8 @@ private:
 	TextureManager* m_textrueMgr;
 	ShaderManager* m_shaderMgr;
 	
+	GaussianMain* m_gaussianMain;
+
 /*
 	for communication with class GameLogic
 */

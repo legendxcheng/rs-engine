@@ -29,6 +29,7 @@ GraphicsClass::GraphicsClass()
 	m_shaderMgr = 0;
 	m_renderObjMgr = 0;
 	m_textrueMgr = 0;
+	m_gaussianMain = false;
 }
 
 
@@ -91,9 +92,12 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	{
 		return false;
 	}
-
+	
 	InitializeResource(m_D3D->GetDevice());
 	//m_Camera->SetRotation(30, 0, 0);
+
+	
+
 	return true;
 }
 
@@ -133,6 +137,12 @@ void GraphicsClass::Shutdown()
 		m_renderObjMgr->Shutdown();
 		delete m_renderObjMgr;
 		m_renderObjMgr = 0;
+	}
+
+	if(m_gaussianMain)
+	{
+		delete m_gaussianMain;
+		m_gaussianMain = 0;
 	}
 	return;
 }
@@ -175,8 +185,10 @@ bool GraphicsClass::Render()
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
 
+	m_gaussianMain->OnD3D11FrameRender1(m_D3D->GetDeviceContext());
 	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix, orthoMatrix);
-	
+	m_gaussianMain->OnD3D11FrameRender2(m_D3D->GetDeviceContext());
+
 	m_D3D->EndScene();
 
 	return true;
@@ -263,5 +275,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	sm->Initialize(device);
 	rom->InsertRenderObject(sm);
 
+	m_gaussianMain = new GaussianMain();
+	m_gaussianMain->OnD3D11CreateDevice(device);
 
 }
