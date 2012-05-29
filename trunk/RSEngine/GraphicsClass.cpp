@@ -30,6 +30,8 @@ GraphicsClass::GraphicsClass()
 	m_renderObjMgr = 0;
 	m_textrueMgr = 0;
 	m_gaussianMain = false;
+
+	m_gaussianMain = new GaussianMain();
 }
 
 
@@ -185,9 +187,9 @@ bool GraphicsClass::Render()
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
 
-	m_gaussianMain->OnD3D11FrameRender1(m_D3D->GetDeviceContext());
+	//m_gaussianMain->OnD3D11FrameRender1(m_D3D->GetDeviceContext());
 	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix, orthoMatrix);
-	m_gaussianMain->OnD3D11FrameRender2(m_D3D->GetDeviceContext());
+	//m_gaussianMain->OnD3D11FrameRender2(m_D3D->GetDeviceContext());
 
 	m_D3D->EndScene();
 
@@ -275,7 +277,6 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	sm->Initialize(device);
 	rom->InsertRenderObject(sm);
 
-	m_gaussianMain = new GaussianMain();
-	m_gaussianMain->OnD3D11CreateDevice(device);
+	//m_gaussianMain->OnD3D11CreateDevice(device);
 
 }

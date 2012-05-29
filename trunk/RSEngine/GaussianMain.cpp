@@ -1,6 +1,9 @@
 #include "GaussianMain.h"
 
-GaussianMain::GaussianMain(){}
+GaussianMain::GaussianMain()
+{
+	SetVariables();
+}
 
 GaussianMain::~GaussianMain()
 {
@@ -202,8 +205,6 @@ HRESULT GaussianMain::CompileGaussianFilterEffects(ID3D11Device* pd3dDevice, con
 HRESULT GaussianMain::OnD3D11CreateDevice( ID3D11Device* pd3dDevice)
 {
 	//HRESULT hr;
-
-	SetVariables();
 
 	ID3D11DeviceContext* pd3dImmediateContext;
 	pd3dDevice->GetImmediateContext(&pd3dImmediateContext);
