@@ -32,6 +32,16 @@ void SpaceshipModel::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewM
 	m_furMain->OnD3D11FrameRender1(deviceContext,m_worldMatrix,viewMatrix,projectionMatrix);
 	RenderMesh(deviceContext);
 
+	m_furMain->g_pTechniqueRenderFinsLineAdj->GetPassByIndex(0)->Apply(0,deviceContext);
+	RenderMesh(deviceContext);
+
+	for(int i=1;i<=m_furMain->g_numShells;i++)
+	{
+		m_furMain->g_pShellNumberShaderVariable->SetInt(i);
+		m_furMain->g_pTechniqueRenderShells->GetPassByIndex(0)->Apply(0,deviceContext);
+		RenderMesh(deviceContext);
+	}
+
 	return;
 }
 
