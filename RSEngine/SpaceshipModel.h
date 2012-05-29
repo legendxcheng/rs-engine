@@ -13,6 +13,7 @@
 #include <string>
 #include <d3dx11effect.h>
 #include <D3Dcompiler.h>
+#include "FurMain.h"
 
 #ifndef SAFE_RELEASE
 #define SAFE_RELEASE(p)      { if (p) { (p)->Release(); (p)=NULL; } }
@@ -30,15 +31,12 @@ public:
 	virtual bool Update();
 	void UpdatePosition(float x, float y, float z);// use x, y, z to update world matrix
 
+	void RenderMesh(ID3D11DeviceContext*);
 private:
 	virtual bool InitializeShaders(ID3D11Device* device);
 	D3DXMATRIX m_backWorldMatrix;// already done scaling and rotation, only need to be transformed
-	HRESULT LoadTextureArray( ID3D11Device*, LPCTSTR* , int, ID3D11Texture2D**, ID3D11ShaderResourceView**);
+	//
 	ID3D11BlendState* m_pAlphaBlendState;
-	HRESULT CompileShaderFromFile( WCHAR*, DWORD, LPCSTR, LPCSTR, ID3DBlob**);
-	ID3DX11Effect* m_pEffect;
-	ID3DX11EffectTechnique* m_pTechnique;
-	ID3D11ShaderResourceView* loadTextureFromFile(LPCWSTR, ID3D11Device*);
-	ID3D11ShaderResourceView* m_colorTextureSRV;
+	FurMain* m_furMain;
 };
 

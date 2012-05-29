@@ -148,6 +148,9 @@
     <ClCompile Include="GaussianMain.cpp">
       <Filter>Shader Engine\GaussianBlur</Filter>
     </ClCompile>
+    <ClCompile Include="FurMain.cpp">
+      <Filter>Shader Engine\FurShells</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -303,6 +306,9 @@
     <ClInclude Include="GaussianMain.h">
       <Filter>Shader Engine\GaussianBlur</Filter>
     </ClInclude>
+    <ClInclude Include="FurMain.h">
+      <Filter>Shader Engine\FurShells</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bstest.hlsl">
@@ -329,9 +335,6 @@
     <None Include="Sphere.fx">
       <Filter>Low Engine\Core\HLSL</Filter>
     </None>
-    <None Include="FurShellsAndFins.hlsl">
-      <Filter>Low Engine\Core\HLSL</Filter>
-    </None>
     <None Include="rsobjtest.hlsl">
       <Filter>Low Engine\Core\HLSL</Filter>
     </None>
@@ -340,6 +343,9 @@
     </None>
     <None Include="gaussian_vs_ps.hlsl">
       <Filter>Shader Engine\GaussianBlur</Filter>
+    </None>
+    <None Include="FurShellsAndFins.hlsl">
+      <Filter>Shader Engine\FurShells</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -393,6 +399,9 @@
     </Filter>
     <Filter Include="Shader Engine\GaussianBlur">
       <UniqueIdentifier>{6d1fea59-3131-4a71-981f-2f9abe931cd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Engine\FurShells">
+      <UniqueIdentifier>{d777a875-9ff0-4406-a669-71f0056b987a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

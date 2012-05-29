@@ -39,8 +39,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\Effects11\Inc;D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\Effects11;D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -84,6 +84,7 @@
     <ClCompile Include="BulletStrip.cpp" />
     <ClCompile Include="fontclass.cpp" />
     <ClCompile Include="fontshaderclass.cpp" />
+    <ClCompile Include="FurMain.cpp" />
     <ClCompile Include="GameGlobalData.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GaussianMain.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="BulletStrip.h" />
     <ClInclude Include="fontclass.h" />
     <ClInclude Include="fontshaderclass.h" />
+    <ClInclude Include="FurMain.h" />
     <ClInclude Include="GameGlobalData.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GaussianMain.h" />

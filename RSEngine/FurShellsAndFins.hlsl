@@ -144,6 +144,10 @@ VS_OUTPUT_FINS VSFins( VS_INPUT_SCENE input )
     return output;
 }
 
+void Resize(inout VS_INPUT_SCENE input )
+{
+	input.Position.xyz *= 6.0f;
+}
 
 //vertex shader for the shells and mesh
 //extrude the vertices along an extrusion vector by an amount proportional to
@@ -151,7 +155,9 @@ VS_OUTPUT_FINS VSFins( VS_INPUT_SCENE input )
 //the extrusion vector is an average of the normal and the comb vector, weighted by the comb strength
 VS_OUTPUT_SCENE VS( VS_INPUT_SCENE input )
 {
-     VS_OUTPUT_SCENE output = (VS_OUTPUT_SCENE)0;
+     Resize(input);
+
+	 VS_OUTPUT_SCENE output = (VS_OUTPUT_SCENE)0;
      
      float4 color = colorTexture.SampleLevel(samLinear,input.Texture,0);
      // the alpha channel specifies the length of hair 
