@@ -12,7 +12,8 @@
 #include "GameLogic.h"
 #include "BulletStormTest.h"
 #include <DxErr.h>
-
+#include "CameraManager.h"
+#include "CameraClass.h"
 
 #include "SpaceshipModel.h"
 #include "RSObjPS.h"
@@ -25,7 +26,7 @@ D3DClass* GraphicsClass::m_D3D = 0;
 GraphicsClass::GraphicsClass()
 {
 	m_D3D = 0;
-	m_Camera = 0;
+	m_cameraManager = 0;
 	m_shaderMgr = 0;
 	m_renderObjMgr = 0;
 	m_textrueMgr = 0;
@@ -66,15 +67,16 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Create the camera object.
-	m_Camera = new CameraClass;
-	if(!m_Camera)
+	m_camera = new CameraClass("mainCamera");
+	CameraManager::getInstance()->insertCamera(m_camera);
+	if(!m_camera)
 	{
 		return false;
 	}
-	GameLogic::GetInstance()->InitCamera(m_Camera);
+	GameLogic::GetInstance()->InitCamera(m_camera);
 
 	// Set the initial position of the camera.
-	m_Camera->SetPosition(0.0f, 0.0f, -500.0f);
+	m_camera->SetPosition(0.0f, 0.0f, -500.0f);
 
 
 	m_renderObjMgr = RenderObjectManager::GetInstance();
@@ -96,7 +98,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 	
 	InitializeResource(m_D3D->GetDevice());
-	//m_Camera->SetRotation(30, 0, 0);
+	//m_camera->SetRotation(30, 0, 0);
 
 	
 
@@ -107,10 +109,11 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 void GraphicsClass::Shutdown()
 {
 	// Release the camera object.
-	if(m_Camera)
+	if(m_cameraManager)
 	{
-		delete m_Camera;
-		m_Camera = 0;
+		m_cameraManager->Shutdown();
+		delete m_cameraManager;
+		m_cameraManager = 0;
 	}
 
 	if(m_D3D)
@@ -174,15 +177,15 @@ bool GraphicsClass::Render()
 
 	// Clear the buffers to begin the scene.
 	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 0.0f);
-// 	m_Camera->SetRotation(-xr / 3.1415926f * 180, 0, 0);
-// 	m_Camera->SetPosition(0,  -100.0f * sin(xr), -100.0f * cos(xr));
+// 	m_camera->SetRotation(-xr / 3.1415926f * 180, 0, 0);
+// 	m_camera->SetPosition(0,  -100.0f * sin(xr), -100.0f * cos(xr));
 // 	xr += 0.0000001f;
 // 	// Generate the view matrix based on the camera's position.
-	m_Camera->Render();
+	m_camera->Render();
 
 	// Get the world, view, and projection matrices from the camera and d3d objects.
-	m_Camera->GetViewMatrix(viewMatrix);
-	//m_Camera->SetRotation(0, 0, xr);
+	m_camera->GetViewMatrix(viewMatrix);
+	//m_camera->SetRotation(0, 0, xr);
 	xr += 0.1f;
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
@@ -244,8 +247,8 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 
 	
 	D3DXMATRIX baseViewMatrix;
-	m_Camera->Render();
-	m_Camera->GetViewMatrix(baseViewMatrix);
+	m_camera->Render();
+	m_camera->GetViewMatrix(baseViewMatrix);
 	m_textClass->SetAttributes(800, 600, baseViewMatrix);
 	m_textClass->Initialize(device);
 	GameLogic::GetInstance()->InitUIMgr(m_textClass);

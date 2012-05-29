@@ -39,8 +39,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\Effects11\Inc;D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\Effects11;D:\d3d\RSEngine\rs-engine\trunk\RSEngine\External\FMOD\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>External\Effects11\Inc;External\FMOD\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>External\Effects11;External\FMOD\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -56,7 +56,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>external/fmod/lib/fmodex_vc.lib;lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>external/fmod/lib/fmodex_vc.lib;lua.lib;External/Effects11/D3DX11Effects.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

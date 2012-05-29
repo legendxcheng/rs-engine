@@ -1,9 +1,10 @@
 // Filename: cameraclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "cameraclass.h"
-
-CameraClass::CameraClass()
+#include <string>
+CameraClass::CameraClass(std::string tag)
 {
+	m_tag = tag;
 	m_positionX = 0.5f;
 	m_positionY = 0.2f;
 	m_positionZ = 0.0f;
@@ -98,4 +99,11 @@ void CameraClass::GetViewMatrix(D3DXMATRIX& viewMatrix)
 {
 	viewMatrix = m_viewMatrix;
 	return;
+}
+
+bool CameraClass::NameEqual(std::string nn)
+{
+	if (nn.compare(m_tag) == 0)
+		return true;
+	return false;
 }
