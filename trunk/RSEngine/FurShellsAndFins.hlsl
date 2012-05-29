@@ -132,21 +132,22 @@ struct VS_OUTPUT_ARROW
     float2 Texture           : TEXCOORD1;
 };
 
+void Resize(inout VS_INPUT_SCENE input )
+{
+	input.Position.xyz *= 15.0f;
+}
 
 //pass through vertex shader for the fins
 VS_OUTPUT_FINS VSFins( VS_INPUT_SCENE input )
 {
-    VS_OUTPUT_FINS output = (VS_OUTPUT_FINS)0;
+    Resize(input);
+	
+	VS_OUTPUT_FINS output = (VS_OUTPUT_FINS)0;
     output.Position = float4(input.Position,1);
     output.Normal   = input.Normal;
     output.Texture  = input.Texture;
     
     return output;
-}
-
-void Resize(inout VS_INPUT_SCENE input )
-{
-	input.Position.xyz *= 6.0f;
 }
 
 //vertex shader for the shells and mesh
@@ -162,10 +163,10 @@ VS_OUTPUT_SCENE VS( VS_INPUT_SCENE input )
      float4 color = colorTexture.SampleLevel(samLinear,input.Texture,0);
      // the alpha channel specifies the length of hair 
      float lengthFraction = color.a;
-     if(lengthFraction < 0.2) lengthFraction = 0.2;  
+     //if(lengthFraction < 0.2) 
+		 lengthFraction = 1.0f;  
      float3 CombVector = combStrength*combVector;
-     float3 pos = input.Position.xyz + 
-         (input.Normal + CombVector)*shellIncrement*shell*lengthFraction;
+     float3 pos = input.Position.xyz + (input.Normal + CombVector)*shellIncrement*shell*lengthFraction;
      output.Position = mul( float4(pos,1) , WorldViewProj );
      output.Normal = normalize(mul( input.Normal, World ));
      output.Texture = input.Texture;
@@ -188,17 +189,6 @@ VS_OUTPUT_SCENE VS( VS_INPUT_SCENE input )
      output.shellNumber = shell-1;
      
      return output;
-} 
-
-//vertex shader for rendering the arrow 
-VS_OUTPUT_ARROW VSArrow( VS_INPUT_ARROW input )
-{
-    VS_OUTPUT_ARROW output = (VS_OUTPUT_ARROW)0;
-    output.Position =  mul( float4(input.Position, 1), WorldViewProj );
-    output.Normal = input.Normal; 
-    output.Texture = input.Texture;
-    output.LightVec = normalize(Light.xyz - input.Position.xyz);
-    return output;
 }
 
 //--------------------------------------------------------------------------------------
@@ -214,98 +204,75 @@ struct GS_OUTPUT_FINS
 };
 
 //extrude an edge into two triangles if we determine that its a silhouette edge or almost a silhouette edge
-void makeFin( 
-                                 VS_OUTPUT_FINS v1,    // Shared vertex
-                                 VS_OUTPUT_FINS v2,    // Shared vertex
-                                 float eyeDotN1,
-                                 float eyeDotN2,
-                                 inout TriangleStream<GS_OUTPUT_FINS> TriStream 
-                                 )
+void makeFin(VS_OUTPUT_FINS v1, VS_OUTPUT_FINS v2, inout TriangleStream<GS_OUTPUT_FINS> TriStream)
 {    
        
-    float opacity = maxOpacity;    
-    bool makeFin = false;
-    
-    //if its a silhouette edge
-    if( eyeDotN1 * eyeDotN2 < 0 )
-    {   makeFin = true;
-        opacity = maxOpacity;
-    }    
-    else if( abs(eyeDotN1)<finThreshold )
-    {   
-        //if its almost a silhouette edge (render these to avoid popping during animation)
-        makeFin = true;
-        opacity = (finThreshold - abs(eyeDotN1))*(maxOpacity/finThreshold);  
-    }
-    else if( abs(eyeDotN2)<finThreshold )
-    {   
-        //if its almost a silhouette edge (render these to avoid popping during animation)
-        makeFin = true;
-        opacity = (finThreshold - abs(eyeDotN2))*(maxOpacity/finThreshold);  
-    }
-    
-    
-    //if this edge has to be expanded to a fin create the four vertices
-    //for the two triangles in the triangle strip and append them to the
-    //triangle stream
-    if( makeFin )
-    {
-      
-        float texcoord[2] = {1,0.1};
-        float furLengths[2];
-        float4 color = colorTexture.SampleLevel(samLinear,v1.Texture,0);
-        furLengths[0] = color.a;
-        color = colorTexture.SampleLevel(samLinear,v2.Texture,0);
-        furLengths[1] = color.a;
+    float opacity = maxOpacity;   
+    float texcoord[2] = {1,0.1};
+    float furLengths[2];
+    float4 color = colorTexture.SampleLevel(samLinear,v1.Texture,0);
+    furLengths[0] = 1.0f;//color.a;
+    color = colorTexture.SampleLevel(samLinear,v2.Texture,0);
+    furLengths[1] = 1.0f;//color.a;
  
-        // Extrude silhouette to create two new triangles for the fin
-        GS_OUTPUT_FINS Out = (GS_OUTPUT_FINS)0;
+    // Extrude silhouette to create two new triangles for the fin
+    GS_OUTPUT_FINS Out = (GS_OUTPUT_FINS)0;
         
-        Out.TextureMesh = v1.Texture;
-        Out.Opacity = opacity;
-        for(int v=0; v<2; v++)
-        {
-            Out.Position = mul(v1.Position + v*float4(normalize(v1.Normal) +
-                combStrength*combVector,0)*numShells*shellIncrement*furLengths[0], WorldViewProj );
-            Out.TextureFin = float2(0,texcoord[v]);
-            TriStream.Append(Out);
-        }
-
-        Out.TextureMesh = v2.Texture;
-        Out.Opacity = opacity;
-        for(int w=0; w<2; w++)
-        {
-            Out.Position = mul(v2.Position + w*float4(normalize(v2.Normal) +
-                combStrength*combVector,0)*numShells*shellIncrement*furLengths[1], WorldViewProj );
-            Out.TextureFin = float2(1,texcoord[w]);
-            TriStream.Append(Out);
-        }
-        
-        TriStream.RestartStrip();
-              
+    Out.TextureMesh = v1.Texture;
+    Out.Opacity = opacity;
+    for(int v=0; v<2; v++)
+    {
+        Out.Position = mul(v1.Position + v*float4(normalize(v1.Normal) +
+            combStrength*combVector,0)*numShells*shellIncrement*furLengths[0], WorldViewProj );
+        Out.TextureFin = float2(0,texcoord[v]);
+        TriStream.Append(Out);
     }
+
+    Out.TextureMesh = v2.Texture;
+    Out.Opacity = opacity;
+    for(int w=0; w<2; w++)
+    {
+        Out.Position = mul(v2.Position + w*float4(normalize(v2.Normal) +
+            combStrength*combVector,0)*numShells*shellIncrement*furLengths[1], WorldViewProj );
+        Out.TextureFin = float2(1,texcoord[w]);
+        TriStream.Append(Out);
+    }
+        
+    TriStream.RestartStrip();
 }
 
 
 //GS shader for the fins
 [maxvertexcount(4)]
-void GSFinsLineAdj( lineadj VS_OUTPUT_FINS input[4], inout TriangleStream<GS_OUTPUT_FINS> TriStream )
-{     
-
+void GSFinsLineAdj( triangle VS_OUTPUT_FINS input[3], inout TriangleStream<GS_OUTPUT_FINS> TriStream )
+{
      //output some fins if necessary
- 
-     float3 eyeVec = normalize( Eye - input[0].Position );
+     float3 eyeVec = normalize( Eye - (input[0].Position+input[1].Position+input[2].Position)/3 );
 
-     //compute the triangles' normals, all of these calculations are in object space 
-     float3 triNormal1 = normalize( cross( input[0].Position - input[1].Position,
-                                           input[3].Position - input[1].Position ));
-     float eyeDotN1 = dot(triNormal1, eyeVec);
-     float3 triNormal2 = normalize(cross( input[1].Position - input[0].Position, 
-                                          input[2].Position - input[0].Position ));
-     float eyeDotN2 = dot( triNormal2, eyeVec);
+     if(abs(dot(eyeVec,input[0].Normal)) > finThreshold)
+	 {
+		 return;
+	 }
 
-     makeFin(input[1],input[0],eyeDotN1,eyeDotN2,TriStream);
-     
+	 float dot01 = abs(dot(eyeVec,normalize(input[0].Position-input[1].Position)));
+	 float dot02 = abs(dot(eyeVec,normalize(input[0].Position-input[2].Position)));
+	 float dot21 = abs(dot(eyeVec,normalize(input[2].Position-input[1].Position)));
+
+	 if(dot01 <= dot02 && dot01 <= dot21)
+	 {
+		makeFin(input[0],input[1], TriStream);
+		return;
+	 }
+     if(dot02 <= dot01 && dot02 <= dot21)
+	 {
+		makeFin(input[0],input[2], TriStream);
+		return;
+	 }
+	 if(dot21 <= dot02 && dot21 <= dot01)
+	 {
+		makeFin(input[2],input[1], TriStream);
+		return;
+	 }
 }
 
 
@@ -331,7 +298,6 @@ float4 PSFins(GS_OUTPUT_FINS In) : SV_Target
     //calculate the opacity
     outputColor.a = finOpacity.a * In.Opacity;
     return outputColor;
-    
 }
 
 float4 PSMesh(VS_OUTPUT_SCENE In) : SV_Target
@@ -399,12 +365,6 @@ float4 PSShells(VS_OUTPUT_SCENE In) : SV_Target
     return outputColor;
 }
 
-//pixel shader for arrow
-float4 PSArrow(VS_OUTPUT_ARROW In) : SV_Target
-{  
-    return (0.5 + dot(In.Normal, In.LightVec)) * float4(0.635,1,0,1); 
-}
-
 //--------------------------------------------------------------------------------------
 //techniques
 //--------------------------------------------------------------------------------------
@@ -447,18 +407,5 @@ technique10 RenderFinsLineAdj
         
         SetBlendState( AlphaBlending, float4( 0.0f, 0.0f, 0.0f, 0.0f ), 0xFFFFFFFF );
         SetDepthStencilState( EnableDepthTestingOnly, 0 );
-    }
-}
-
-technique10 RenderArrow
-{
-    pass P0
-    {
-        SetVertexShader(    CompileShader( vs_4_0,VSArrow()      ) ); 
-        SetGeometryShader(  NULL                                   );
-        SetPixelShader(     CompileShader( ps_4_0,PSArrow()      ) );
-        
-        SetBlendState( NoBlending, float4( 0.0f, 0.0f, 0.0f, 0.0f ), 0xFFFFFFFF );
-        SetDepthStencilState( EnableDepth, 1 );
     }
 }
