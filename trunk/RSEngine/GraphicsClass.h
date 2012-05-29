@@ -9,12 +9,13 @@
 // INCLUDES //
 //////////////
 #include "D3DClass.h"
-#include "cameraclass.h"
 #include "modelclass.h"
 #include "shaderclass.h"
 #include "spriteclass.h"
-
 #include "GaussianMain.h"
+
+class CameraManager;
+class CameraClass;
 /////////////
 // GLOBALS //
 /////////////
@@ -45,8 +46,8 @@ private:
 	void InitializeResource(ID3D11Device*);
 
 private:
-	
-	CameraClass* m_Camera; 
+	CameraClass* m_camera;
+	CameraManager* m_cameraManager; 
 	RenderObjectManager* m_renderObjMgr;
 	TextureManager* m_textrueMgr;
 	ShaderManager* m_shaderMgr;

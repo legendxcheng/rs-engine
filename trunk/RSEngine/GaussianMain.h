@@ -6,7 +6,7 @@
 #include <D3DX11core.h>
 #include <D3DX11async.h>
 #include <D3DX10math.h>
-#include <d3dx11effect.h>
+#include <D3Dx11effect.h>
 #include <stdio.h>
 
 #ifndef SAFE_RELEASE
