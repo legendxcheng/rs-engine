@@ -52,6 +52,9 @@ HRESULT FurMain::OnD3D11CreateDevice( ID3D11Device* pd3dDevice)
 	desc.SampleDesc.Count = 1;
 	desc.SampleDesc.Quality = 0;
 	
+	//unsigned int num_quality_levels = 0;
+	//pd3dDevice->CheckMultisampleQualityLevels(desc.Format, desc.SampleDesc.Count,&num_quality_levels);
+
 	HRESULT hr = S_OK;
 
 	ID3D11DeviceContext* pd3dImmediateContext;

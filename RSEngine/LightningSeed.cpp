@@ -4,7 +4,7 @@ using namespace std;
 namespace LightningDemo
 {
 
-LightningSeed::LightningSeed(ID3D10Effect* effect, ID3D10EffectTechnique* first_pass, ID3D10EffectTechnique* subdivide, int pattern_mask, unsigned int subdivisions):
+LightningSeed::LightningSeed(ID3DX11Effect* effect, ID3DX11EffectTechnique* first_pass, ID3DX11EffectTechnique* subdivide, int pattern_mask, unsigned int subdivisions):
 	m_device(0),
 	m_effect(effect),
 

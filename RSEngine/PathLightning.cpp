@@ -3,7 +3,7 @@ using namespace std;
 
 namespace LightningDemo
 {
-PathLightning::PathLightning(ID3D10Effect* effect,int pattern_mask, unsigned int subdivisions):
+PathLightning::PathLightning(ID3DX11Effect* effect,int pattern_mask, unsigned int subdivisions):
 	LightningSeed
 	(
 		effect,
@@ -45,7 +45,7 @@ void PathLightning::UpdateSegments()
 	}
 	std::copy(segments2.begin(), segments2.end(), back_inserter(vertices));
 	m_path_segments = new Geometry::SimpleVertexBuffer<SubdivideVertex>(m_device,vertices);
-	m_destAngle+=0.01;
+	m_destAngle += 0.01f;
 }
 
 }

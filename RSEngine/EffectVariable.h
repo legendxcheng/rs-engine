@@ -9,7 +9,7 @@ class IntVariable
 {
 public:
 	
-	IntVariable(ID3D10Effect* effect, const std::string& name)
+	IntVariable(ID3DX11Effect* effect, const std::string& name)
 	{
 		m_variable =  effect->GetVariableByName(name.c_str())->AsScalar();
 	}
@@ -20,7 +20,7 @@ public:
 		return *this;
 	}
 private:
-	ID3D10EffectScalarVariable*  m_variable;
+	ID3DX11EffectScalarVariable*  m_variable;
 };
 
 
@@ -28,7 +28,7 @@ class FloatVariable
 {
 public:
 	
-	FloatVariable(ID3D10Effect* effect, const std::string& name)
+	FloatVariable(ID3DX11Effect* effect, const std::string& name)
 	{
 		m_variable =  effect->GetVariableByName(name.c_str())->AsScalar();
 	}
@@ -46,14 +46,14 @@ public:
 		return result;
 	}
 private:
-	ID3D10EffectScalarVariable*  m_variable;
+	ID3DX11EffectScalarVariable*  m_variable;
 };
 
 class BoolVariable 
 {
 public:
 	
-	BoolVariable(ID3D10Effect* effect, const std::string& name)
+	BoolVariable(ID3DX11Effect* effect, const std::string& name)
 	{
 		m_variable =  effect->GetVariableByName(name.c_str())->AsScalar();
 	}
@@ -64,13 +64,13 @@ public:
 		return *this;
 	}
 private:
-	ID3D10EffectScalarVariable*  m_variable;
+	ID3DX11EffectScalarVariable*  m_variable;
 };
 class MatrixVariable 
 {
 public:
 	
-	MatrixVariable(ID3D10Effect* effect, const std::string& name)
+	MatrixVariable(ID3DX11Effect* effect, const std::string& name)
 	{
 		m_variable =  effect->GetVariableByName(name.c_str())->AsMatrix();
 	}
@@ -88,7 +88,7 @@ public:
 		return result;
 	}
 private:
-	ID3D10EffectMatrixVariable*  m_variable;
+	ID3DX11EffectMatrixVariable*  m_variable;
 };
 
 
@@ -96,22 +96,22 @@ class ShaderResourceVariable
 {
 public:
 	
-	ShaderResourceVariable(ID3D10Effect* effect, const std::string& name)
+	ShaderResourceVariable(ID3DX11Effect* effect, const std::string& name)
 	{
 		m_variable =  effect->GetVariableByName(name.c_str())->AsShaderResource();
 	}
-	ShaderResourceVariable& operator = ( const   ID3D10ShaderResourceView * shader_resource)
+	ShaderResourceVariable& operator = ( const   ID3D11ShaderResourceView * shader_resource)
 	{
-		m_variable->SetResource(const_cast< ID3D10ShaderResourceView *>(shader_resource));
+		m_variable->SetResource(const_cast< ID3D11ShaderResourceView *>(shader_resource));
 		return *this;
 	}
 
-	operator ID3D10EffectShaderResourceVariable*()
+	operator ID3DX11EffectShaderResourceVariable*()
 	{
 		return m_variable;
 	}
 private:
-	ID3D10EffectShaderResourceVariable*  m_variable;
+	ID3DX11EffectShaderResourceVariable*  m_variable;
 };
 
 
@@ -119,7 +119,7 @@ class Vector2Variable
 {
 public:
 	
-	Vector2Variable(ID3D10Effect* effect, const std::string& name)
+	Vector2Variable(ID3DX11Effect* effect, const std::string& name)
 	{
 		m_variable =  effect->GetVariableByName(name.c_str())->AsVector();
 	}
@@ -130,7 +130,7 @@ public:
 		return *this;
 	}
 private:
-	ID3D10EffectVectorVariable*  m_variable;
+	ID3DX11EffectVectorVariable*  m_variable;
 };
 
 
@@ -138,7 +138,7 @@ class Vector3Variable
 {
 public:
 	
-	Vector3Variable(ID3D10Effect* effect, const std::string& name)
+	Vector3Variable(ID3DX11Effect* effect, const std::string& name)
 	{
 		m_variable =  effect->GetVariableByName(name.c_str())->AsVector();
 	}
@@ -149,7 +149,7 @@ public:
 		return *this;
 	}
 private:
-	ID3D10EffectVectorVariable*  m_variable;
+	ID3DX11EffectVectorVariable*  m_variable;
 };
 
 
@@ -157,7 +157,7 @@ class Vector4Variable
 {
 public:
 	
-	Vector4Variable(ID3D10Effect* effect, const std::string& name)
+	Vector4Variable(ID3DX11Effect* effect, const std::string& name)
 	{
 		m_variable =  effect->GetVariableByName(name.c_str())->AsVector();
 	}
@@ -168,14 +168,14 @@ public:
 		return *this;
 	}
 private:
-	ID3D10EffectVectorVariable*  m_variable;
+	ID3DX11EffectVectorVariable*  m_variable;
 };
 
 class ConstantBuffer
 {
 public:
 	
-	ConstantBuffer(ID3D10Effect* effect, const std::string& name)
+	ConstantBuffer(ID3DX11Effect* effect, const std::string& name)
 	{
 		m_buffer = effect->GetConstantBufferByName(name.c_str());
 	}
@@ -187,12 +187,12 @@ public:
 		return *this;
 	}
 
-	operator ID3D10EffectConstantBuffer*()
+	operator ID3DX11EffectConstantBuffer*()
 	{
 		return m_buffer;
 	}
 private:
-	ID3D10EffectConstantBuffer*  m_buffer;
+	ID3DX11EffectConstantBuffer*  m_buffer;
 };
 } // Effect
 } // Utility

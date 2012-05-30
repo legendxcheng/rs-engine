@@ -407,6 +407,7 @@
     <None Include="MainEffect.hlsl">
       <Filter>Shader Engine\Lightning</Filter>
     </None>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Low Engine">

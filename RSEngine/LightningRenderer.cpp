@@ -5,7 +5,7 @@ namespace LightningDemo
 {
 	DXGI_FORMAT LightningRenderer::BackBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
 
-	LightningRenderer::LightningRenderer(ID3D10Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc ):
+	LightningRenderer::LightningRenderer(ID3D11Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc ):
 	m_device(device),
 	m_effect(Utility::LoadEffect(device,L"MainEffect.fx")),
 	m_back_buffer_sample_desc (back_buffer_sample_desc),
@@ -103,7 +103,7 @@ LightningRenderer::~LightningRenderer()
 }
 
 
-PathLightning*		LightningRenderer::CreatePathLightning(int pattern_mask, unsigned int subdivisions)
+PathLightning* LightningRenderer::CreatePathLightning(int pattern_mask, unsigned int subdivisions)
 {
 	PathLightning* result = new PathLightning(m_effect, pattern_mask, subdivisions);
 	AddLightningSeed(result);
@@ -142,7 +142,7 @@ void LightningRenderer::SetMatrices(const D3DXMATRIX& world, const D3DXMATRIX& v
 
 }
 
-void LightningRenderer::OnRenderTargetResize(unsigned width, unsigned height, ID3D10RenderTargetView* scene_render_target_view, ID3D10DepthStencilView* scene_depth_stencil_view)
+void LightningRenderer::OnRenderTargetResize(unsigned width, unsigned height, ID3D11RenderTargetView* scene_render_target_view, ID3D11DepthStencilView* scene_depth_stencil_view)
 {
 	m_lightning_buffer0.Resize(width, height);
 	m_lightning_buffer1.Resize(width, height);
@@ -163,8 +163,11 @@ Geometry::SimpleVertexBuffer<SubdivideVertex>* LightningRenderer::Subdivide(Ligh
 	Geometry::SimpleVertexBuffer<SubdivideVertex>* target = m_subdivide_buffer1;
 	Geometry::SimpleVertexBuffer<SubdivideVertex>* last_target = target;
 
-	m_device->IASetInputLayout(m_subdivide_layout);
-	m_device->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_POINTLIST);
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
+
+	context->IASetInputLayout(m_subdivide_layout);
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	
 	target->BindToStreamOut();
 
@@ -177,8 +180,8 @@ Geometry::SimpleVertexBuffer<SubdivideVertex>* LightningRenderer::Subdivide(Ligh
 	seed->RenderFirstPass();
 	{
 		UINT offset[1] = {0};
-		ID3D10Buffer* zero[1] = {0};
-		m_device->SOSetTargets(1,zero,offset);
+		ID3D11Buffer* zero[1] = {0};
+		context->SOSetTargets(1,zero,offset);
 	}
 
 	last_target = target;
@@ -192,12 +195,12 @@ Geometry::SimpleVertexBuffer<SubdivideVertex>* LightningRenderer::Subdivide(Ligh
 		m_subdivision_level = i;
 		m_fork = (seed->GetPatternMask() & (1 << i)) ;
 
-		seed->GetSubdivideTechnique()->GetPassByIndex(0)->Apply(0);
-		m_device->Draw( seed->GetNumVertices(i),0);
+		seed->GetSubdivideTechnique()->GetPassByIndex(0)->Apply(0,context);
+		context->Draw( seed->GetNumVertices(i),0);
 		{
 			UINT offset[1] = {0};
-			ID3D10Buffer* zero[1] = {0};
-			m_device->SOSetTargets(1,zero,offset);
+			ID3D11Buffer* zero[1] = {0};
+			context->SOSetTargets(1,zero,offset);
 		}
 	
 		last_target = target;
@@ -206,9 +209,9 @@ Geometry::SimpleVertexBuffer<SubdivideVertex>* LightningRenderer::Subdivide(Ligh
 
 	{
 		UINT offset[1] = {0};
-		ID3D10Buffer* zero[1] = {0};
-		m_device->SOSetTargets(1,zero,offset);
-		m_device->IASetVertexBuffers(0,1,zero,offset,offset);
+		ID3D11Buffer* zero[1] = {0};
+		context->SOSetTargets(1,zero,offset);
+		context->IASetVertexBuffers(0,1,zero,offset,offset);
 
 	}
 	return last_target;
@@ -216,20 +219,24 @@ Geometry::SimpleVertexBuffer<SubdivideVertex>* LightningRenderer::Subdivide(Ligh
 
 void LightningRenderer::Begin()
 {
-	m_device->ClearRenderTargetView(m_lightning_buffer0.RenderTargetView(),D3DXVECTOR4(0,0,0,0));
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
+	
+	context->ClearRenderTargetView(m_lightning_buffer0.RenderTargetView(),D3DXVECTOR4(0,0,0,0));
 	{
-		ID3D10RenderTargetView* views[] = {m_lightning_buffer0.RenderTargetView()};
-		m_device->OMSetRenderTargets(1, views, m_scene_depth_stencil_view);
+		ID3D11RenderTargetView* views[] = {m_lightning_buffer0.RenderTargetView()};
+		context->OMSetRenderTargets(1, views, m_scene_depth_stencil_view);
 	}
 	BuildSubdivisionBuffers();
 }
 void LightningRenderer::Render(LightningSeed* seed, const LightningAppearance& appearance, float charge, float animation_speed, bool as_lines)
 {
-	{
-		UINT offset[1] = {0};
-		ID3D10Buffer* zero[1] = {0};
-		m_device->SOSetTargets(1,zero,offset);
-	}
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
+		
+	UINT offset[1] = {0};
+	ID3D11Buffer* zero[1] = {0};
+	context->SOSetTargets(1,zero,offset);
 
 	m_charge = charge;
 	m_animation_speed = animation_speed;
@@ -242,20 +249,23 @@ void LightningRenderer::Render(LightningSeed* seed, const LightningAppearance& a
 	subdivided->BindToInputAssembler();
 	m_subdivision_level = 0;
 	
-	m_device->IASetInputLayout(m_subdivide_layout);
-	m_device->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_POINTLIST);
+	context->IASetInputLayout(m_subdivide_layout);
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 
 	if(as_lines)
-		m_tech_lines_out->GetPassByIndex(0)->Apply(0);
+		m_tech_lines_out->GetPassByIndex(0)->Apply(0,context);
 	else
-		m_tech_bolt_out->GetPassByIndex(0)->Apply(0);
+		m_tech_bolt_out->GetPassByIndex(0)->Apply(0,context);
 	
-	m_device->Draw(seed->GetNumVertices(seed->GetSubdivisions()),0);
+	context->Draw(seed->GetNumVertices(seed->GetSubdivisions()),0);
 }
 
 void LightningRenderer::End(bool glow, D3DXVECTOR3 blur_sigma)
 {
-	m_device->ResolveSubresource(m_original_lightning_buffer.Texture(),0,m_lightning_buffer0.Texture(),0,BackBufferFormat);
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
+	
+	context->ResolveSubresource(m_original_lightning_buffer.Texture(),0,m_lightning_buffer0.Texture(),0,BackBufferFormat);
 
 	if(glow)
 	{
@@ -271,13 +281,13 @@ void LightningRenderer::End(bool glow, D3DXVECTOR3 blur_sigma)
 		
 		RestoreViewports();
 
-		m_device->OMSetRenderTargets(1, &m_scene_render_target_view, m_scene_depth_stencil_view);
+		context->OMSetRenderTargets(1, &m_scene_render_target_view, m_scene_depth_stencil_view);
 		m_buffer = ping_pong.LastTarget()->ShaderResourceView();
 		DrawQuad(m_tech_add_buffer);
 	}
 	else
 	{
-		m_device->OMSetRenderTargets(1, &m_scene_render_target_view, m_scene_depth_stencil_view);
+		context->OMSetRenderTargets(1, &m_scene_render_target_view, m_scene_depth_stencil_view);
 	}
 
 	m_buffer = m_original_lightning_buffer.ShaderResourceView();
@@ -302,48 +312,57 @@ void LightningRenderer::BuildSubdivisionBuffers()
 
 	vector<SubdivideVertex> init_data(max_segments, SubdivideVertex());
 
-	D3D10_USAGE usage =  D3D10_USAGE_DEFAULT;
-	UINT flags = D3D10_BIND_VERTEX_BUFFER |  D3D10_BIND_STREAM_OUTPUT ;
+	D3D11_USAGE usage =  D3D11_USAGE_DEFAULT;
+	UINT flags = D3D11_BIND_VERTEX_BUFFER |  D3D11_BIND_STREAM_OUTPUT ;
 	
 	m_subdivide_buffer0 = new Geometry::SimpleVertexBuffer<SubdivideVertex>(m_device,init_data,usage,flags);
 	m_subdivide_buffer1 = new Geometry::SimpleVertexBuffer<SubdivideVertex>(m_device,init_data,usage,flags);
 	
 }
 
-void	LightningRenderer::SaveViewports()
+void LightningRenderer::SaveViewports()
 {
-	m_device->RSGetViewports(&m_num_viewports, 0);
-	m_device->RSGetViewports(&m_num_viewports, m_viewports);
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
+	
+	context->RSGetViewports(&m_num_viewports, 0);
+	context->RSGetViewports(&m_num_viewports, m_viewports);
 
-	m_device->RSGetScissorRects(&m_num_scissor_rects, 0);
+	context->RSGetScissorRects(&m_num_scissor_rects, 0);
 	
 	if( 0 != m_num_scissor_rects)
-		m_device->RSGetScissorRects(&m_num_scissor_rects, m_scissor_rects);
+		context->RSGetScissorRects(&m_num_scissor_rects, m_scissor_rects);
 
 }
-void	LightningRenderer::ResizeViewport(unsigned int w, unsigned int h)
+void LightningRenderer::ResizeViewport(unsigned int w, unsigned int h)
 {
-	D3D10_VIEWPORT viewport = {0, 0, w, h, 0.0f, 1.0f};
-	D3D10_RECT	   scissor_rect = {0, 0, w, h};
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
 
-	m_device->RSSetViewports(1, &viewport);
-	m_device->RSSetScissorRects(1, &scissor_rect);
+	D3D11_VIEWPORT viewport = {0.0, 0.0, (float)w, (float)h, 0.0f, 1.0f};
+	D3D11_RECT	   scissor_rect = {(LONG)0, (LONG)0, (LONG)w, (LONG)h};
 
-	
+	context->RSSetViewports(1, &viewport);
+	context->RSSetScissorRects(1, &scissor_rect);
 }
-void	LightningRenderer::RestoreViewports()
+void LightningRenderer::RestoreViewports()
 {
-	m_device->RSSetViewports(m_num_viewports, m_viewports);
-	m_device->RSSetScissorRects(m_num_scissor_rects, m_scissor_rects);
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
 
+	context->RSSetViewports(m_num_viewports, m_viewports);
+	context->RSSetScissorRects(m_num_scissor_rects, m_scissor_rects);
 }
 
 void LightningRenderer::BuildGradientTexture()
 {
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
+	
 	unsigned int w = 512;
 	unsigned int h = 512;
 	const unsigned int mip_levels = 4;
-	D3D10_TEXTURE2D_DESC tex_desc = Utility::Texture2DDesc
+	D3D11_TEXTURE2D_DESC tex_desc = Utility::Texture2DDesc
 	(
 		w,
 		h,
@@ -351,10 +370,10 @@ void LightningRenderer::BuildGradientTexture()
 		1,
 		DXGI_FORMAT_R8G8B8A8_UNORM,
 		Utility::SampleDesc(1,0),
-		D3D10_USAGE_DEFAULT,
-		D3D10_BIND_RENDER_TARGET | D3D10_BIND_SHADER_RESOURCE,
+		D3D11_USAGE_DEFAULT,
+		D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE,
 		0,
-		D3D10_RESOURCE_MISC_GENERATE_MIPS
+		D3D11_RESOURCE_MISC_GENERATE_MIPS
 	);
 
 	std::vector<unsigned char> data(4 * w * h);
@@ -383,7 +402,7 @@ void LightningRenderer::BuildGradientTexture()
 
 	}
 
-	D3D10_SUBRESOURCE_DATA sr[mip_levels];
+	D3D11_SUBRESOURCE_DATA sr[mip_levels];
 	for(unsigned int i = 0; i < mip_levels; ++i)
 	{
 		sr[i].pSysMem = &data[0];
@@ -395,12 +414,12 @@ void LightningRenderer::BuildGradientTexture()
 	(m_device->CreateTexture2D(&tex_desc,sr,&m_gradient_texture));
 	(m_device->CreateShaderResourceView(m_gradient_texture,0,&m_gradient_texture_srv));
 	
-	m_device->GenerateMips(m_gradient_texture_srv);
-	D3D10_TEXTURE2D_DESC result;
+	context->GenerateMips(m_gradient_texture_srv);
+	D3D11_TEXTURE2D_DESC result;
 	m_gradient_texture->GetDesc(&result);
 }
 
-void	LightningRenderer::BuildDownSampleBuffers(unsigned int w, unsigned int h)
+void LightningRenderer::BuildDownSampleBuffers(unsigned int w, unsigned int h)
 {
 	int width = w;
 	int height = h;
@@ -426,8 +445,11 @@ void	LightningRenderer::BuildDownSampleBuffers(unsigned int w, unsigned int h)
 
 }
 
-void	LightningRenderer::DownSample(Utility::ColorRenderBuffer* buffer)
+void LightningRenderer::DownSample(Utility::ColorRenderBuffer* buffer)
 {
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
+
 	vector<Utility::ColorRenderBuffer*> sources;
 	vector<Utility::ColorRenderBuffer*> targets;
 	sources.push_back(buffer);
@@ -439,8 +461,8 @@ void	LightningRenderer::DownSample(Utility::ColorRenderBuffer* buffer)
 
 	for(size_t i = 0; i < sources.size(); ++i)
 	{
-		ID3D10RenderTargetView* view[] = { targets[i]->RenderTargetView()};
-		m_device->OMSetRenderTargets(1, const_cast<ID3D10RenderTargetView**> (view), 0);
+		ID3D11RenderTargetView* view[] = { targets[i]->RenderTargetView()};
+		context->OMSetRenderTargets(1, const_cast<ID3D11RenderTargetView**> (view), 0);
 		ResizeViewport(m_down_sample_buffer_sizes[i].cx, m_down_sample_buffer_sizes[i].cy );
 
 		m_buffer = sources[i]->ShaderResourceView();
@@ -448,19 +470,22 @@ void	LightningRenderer::DownSample(Utility::ColorRenderBuffer* buffer)
 	}
 }
 
-void LightningRenderer::DrawQuad(ID3D10EffectTechnique* technique)
+void LightningRenderer::DrawQuad(ID3DX11EffectTechnique* technique)
 {
-	ID3D10Buffer* zero = 0;
+	ID3D11DeviceContext* context;
+	m_device->GetImmediateContext(&context);
+	
+	ID3D11Buffer* zero = 0;
 	UINT nought = 0;
 
-	m_device->IASetVertexBuffers(0,1,&zero,&nought,&nought);
-	m_device->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-	m_device->IASetInputLayout(0);
+	context->IASetVertexBuffers(0,1,&zero,&nought,&nought);
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	context->IASetInputLayout(0);
 
 	for(UINT n = 0; n < Effect::NumPasses(technique); ++n)
 	{
-		technique->GetPassByIndex(n)->Apply(0);
-		m_device->Draw(4,0);
+		technique->GetPassByIndex(n)->Apply(0,context);
+		context->Draw(4,0);
 	}
 }
 

@@ -38,7 +38,7 @@ public:
 	};
 	static DXGI_FORMAT BackBufferFormat;
 
-	LightningRenderer(ID3D10Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc );
+	LightningRenderer(ID3D11Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc );
 	~LightningRenderer();
 
 
@@ -48,7 +48,7 @@ public:
 	
 	void SetTime(float time);
 	void SetMatrices(const D3DXMATRIX& world, const D3DXMATRIX& view,const D3DXMATRIX& projection);
-	void OnRenderTargetResize(unsigned width, unsigned height, ID3D10RenderTargetView* render_target_view, ID3D10DepthStencilView* depth_stencil_view);
+	void OnRenderTargetResize(unsigned width, unsigned height, ID3D11RenderTargetView* render_target_view, ID3D11DepthStencilView* depth_stencil_view);
 
 	void Begin();
 	void Render(LightningSeed* seed, const LightningAppearance& appearance, float charge, float animation_speed, bool as_lines);
@@ -71,32 +71,32 @@ private:
 	void	AddLightningSeed(LightningSeed* seed);
 	void	RemoveLightningSeed(LightningSeed* seed);
 
-	void DrawQuad(ID3D10EffectTechnique* technique) ;
+	void DrawQuad(ID3DX11EffectTechnique* technique) ;
 	
-	D3D10_VIEWPORT  m_viewports[D3D10_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE];
-	D3D10_RECT		m_scissor_rects[D3D10_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE];
+	D3D11_VIEWPORT  m_viewports[D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE];
+	D3D11_RECT		m_scissor_rects[D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE];
 	UINT m_num_viewports;
 	UINT m_num_scissor_rects;
 
 
-	ID3D10Device*	m_device;
-	ID3D10Effect*	m_effect;
+	ID3D11Device*	m_device;
+	ID3DX11Effect*	m_effect;
 	DXGI_SAMPLE_DESC m_back_buffer_sample_desc;
 
-	ID3D10EffectTechnique*	m_tech_bolt_out;
-	ID3D10EffectTechnique*	m_tech_lines_out;
+	ID3DX11EffectTechnique*	m_tech_bolt_out;
+	ID3DX11EffectTechnique*	m_tech_lines_out;
 	
-	ID3D10EffectTechnique*	m_tech_add_buffer;
+	ID3DX11EffectTechnique*	m_tech_add_buffer;
 	
-	ID3D10EffectTechnique*	m_tech_blur_buffer_horizontal;
-	ID3D10EffectTechnique*	m_tech_blur_buffer_vertical;
+	ID3DX11EffectTechnique*	m_tech_blur_buffer_horizontal;
+	ID3DX11EffectTechnique*	m_tech_blur_buffer_vertical;
 	
 		
 	
 	Effect::ConstantBuffer  m_constants_lightning_appearance;
 	Effect::ConstantBuffer  m_constants_lightning_structure;
 
-	ID3D10EffectTechnique*	m_tech_down_sample_2x2;
+	ID3DX11EffectTechnique*	m_tech_down_sample_2x2;
 
 	std::set<LightningSeed*>	m_lightning_seeds;
 	unsigned int				m_max_vertices;
@@ -124,8 +124,8 @@ private:
 
 	Effect::Vector3Variable		m_blur_sigma;
 
-	ID3D10Texture2D*			m_gradient_texture;
-	ID3D10ShaderResourceView*	m_gradient_texture_srv;
+	ID3D11Texture2D*			m_gradient_texture;
+	ID3D11ShaderResourceView*	m_gradient_texture_srv;
 
 	Utility::ColorRenderBuffer		m_original_lightning_buffer;
 
@@ -136,12 +136,12 @@ private:
 	Utility::ColorRenderBuffer		m_small_lightning_buffer1;
 
 
-	ID3D10DepthStencilView*			m_scene_depth_stencil_view;
-	ID3D10RenderTargetView*			m_scene_render_target_view;
+	ID3D11DepthStencilView*			m_scene_depth_stencil_view;
+	ID3D11RenderTargetView*			m_scene_render_target_view;
 
 	Geometry::SimpleVertexBuffer<SubdivideVertex>*	m_subdivide_buffer0;
 	Geometry::SimpleVertexBuffer<SubdivideVertex>*	m_subdivide_buffer1;
-	ID3D10InputLayout* m_subdivide_layout;
+	ID3D11InputLayout* m_subdivide_layout;
 };
 
 }

@@ -5,36 +5,47 @@ namespace Utility
 {
 	using namespace std;
 
+	HRESULT LoadEffectFromFile( ID3D11Device* pd3dDevice, WCHAR* szFileName, ID3DX11Effect** ppEffect )
+	{
+		HRESULT hr = S_OK;
+
+		// Compile the effect file
+		ID3DBlob* pBlobFX = NULL;
+		ID3DBlob* pErrorBlob = NULL;
+		hr = D3DX11CompileFromFile(szFileName, NULL, NULL, NULL, "fx_5_0", NULL, NULL, NULL, &pBlobFX, &pErrorBlob, NULL);
+		if (FAILED(hr))
+		{
+			char* err = (char*)pErrorBlob->GetBufferPointer();
+			SAFE_RELEASE(pErrorBlob);
+			return hr;
+		}
+
+		// Create the effect
+		hr = D3DX11CreateEffectFromMemory(pBlobFX->GetBufferPointer(), pBlobFX->GetBufferSize(), 0, pd3dDevice, ppEffect);
+		if( FAILED(hr) )
+		{
+			OutputDebugString( TEXT("Failed to load effect file.") );
+			return hr;
+		}
+
+		SAFE_RELEASE(pBlobFX);
+		SAFE_RELEASE(pErrorBlob);
+
+		return S_OK;
+	}
 
 	float Random(float lower, float upper)
 	{
 		return lower  + (upper - lower) * std::rand() / RAND_MAX;
 	}
 
-ID3D10Effect* LoadEffect(ID3D10Device* device, const wchar_t* filename)
+ID3DX11Effect* LoadEffect(ID3D11Device* device, wchar_t* filename)
 { 
 	HRESULT hr;
-	ID3D10Effect* effect;
+	ID3DX11Effect* effect;
 
-	ID3D10Blob* errors = 0;
-    hr = D3DX10CreateEffectFromFile
-	( 
-		filename, 
-		NULL,
-		NULL,
-		"fx_4_0",
-#ifdef _DEBUG
-		D3D10_SHADER_DEBUG |
-#endif
-		D3D10_SHADER_ENABLE_BACKWARDS_COMPATIBILITY, 
-		0, 
-		device, 
-		NULL, 
-		NULL, 
-		&effect, 
-		&errors,
-		NULL
-	) ;
+	ID3DBlob* errors = 0;
+    hr = LoadEffectFromFile(device,filename,&effect);
 
 	if( FAILED( hr ) )
     {
@@ -50,7 +61,7 @@ ID3D10Effect* LoadEffect(ID3D10Device* device, const wchar_t* filename)
 			MessageBoxA
 			(
 				0, 
-				"error from D3DX10CreateEffectFromFile == 0" , 
+				"error from D3DX11CreateEffectFromFile == 0" , 
 				"Error", 
 				MB_OK 
 			);
@@ -67,9 +78,9 @@ ID3D10Effect* LoadEffect(ID3D10Device* device, const wchar_t* filename)
 
 namespace Effect
 {
-	UINT NumPasses(ID3D10EffectTechnique* technique)
+	UINT NumPasses(ID3DX11EffectTechnique* technique)
 	{
-		D3D10_TECHNIQUE_DESC td;
+		D3DX11_TECHNIQUE_DESC td;
 		technique->GetDesc(&td);
 		return td.Passes;
 	}

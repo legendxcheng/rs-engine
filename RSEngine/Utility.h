@@ -2,8 +2,12 @@
 #pragma warning (disable: 4995)
 #include <cstdlib>
 #include <cstdarg>
-#include <d3d10.h>
-#include <d3dx10.h>
+#include <D3DX11tex.h>
+#include <D3DX11.h>
+#include <D3DX11core.h>
+#include <D3DX11async.h>
+#include <D3DX10math.h>
+#include <D3Dx11effect.h>
 #include <string>
 #include <iterator>
 
@@ -18,7 +22,6 @@
 #endif
 
 #define CHECK_R(a) { HRESULT hr = (a);  if(FAILED(hr)) OutputDebugString("failed: "#a); }
-#define DX_ASSERT(x)           { if( !(x) ) { DXUTTrace( __FILE__, (DWORD)__LINE__, 0, L#x, true ); } }
 
 namespace Utility
 {
@@ -40,22 +43,22 @@ namespace Utility
 
 	namespace Effect
 	{
-		UINT NumPasses(ID3D10EffectTechnique* technique);
+		UINT NumPasses(ID3DX11EffectTechnique* technique);
 	}
 
 	// Pseudo constructors 
-	inline D3D10_INPUT_ELEMENT_DESC InputElementDesc
+	inline D3D11_INPUT_ELEMENT_DESC InputElementDesc
 	(
 		LPCSTR SemanticName,
 		UINT SemanticIndex,
 		DXGI_FORMAT Format,
 		UINT InputSlot,
 		UINT AlignedByteOffset,
-		D3D10_INPUT_CLASSIFICATION InputSlotClass = D3D10_INPUT_PER_VERTEX_DATA,
+		D3D11_INPUT_CLASSIFICATION InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA,
 		UINT InstanceDataStepRate = 0
 	)
 	{
-		D3D10_INPUT_ELEMENT_DESC r;
+		D3D11_INPUT_ELEMENT_DESC r;
 		
 		r.SemanticName = SemanticName;
 		r.SemanticIndex = SemanticIndex;
@@ -67,7 +70,7 @@ namespace Utility
 		return r;
 	}
 
-	inline D3D10_TEXTURE2D_DESC Texture2DDesc
+	inline D3D11_TEXTURE2D_DESC Texture2DDesc
 	(
 		UINT Width,
 		UINT Height,
@@ -75,13 +78,13 @@ namespace Utility
 		UINT ArraySize,
 		DXGI_FORMAT Format,
 		DXGI_SAMPLE_DESC SampleDesc,
-		D3D10_USAGE Usage,
+		D3D11_USAGE Usage,
 		UINT BindFlags,
 		UINT CPUAccessFlags,
 		UINT MiscFlags
 	)
 	{
-		 D3D10_TEXTURE2D_DESC r;
+		 D3D11_TEXTURE2D_DESC r;
 		 r.Width = Width;
 		 r.Height = Height;
 		 r.MipLevels = MipLevels;
@@ -108,5 +111,5 @@ namespace Utility
 		return r;
 	}
 
-	ID3D10Effect* LoadEffect(ID3D10Device* device, const wchar_t* filename);
+	ID3DX11Effect* LoadEffect(ID3D11Device* device, wchar_t* filename);
 }
