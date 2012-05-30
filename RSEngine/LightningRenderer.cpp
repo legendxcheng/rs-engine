@@ -7,7 +7,7 @@ namespace LightningDemo
 
 	LightningRenderer::LightningRenderer(ID3D11Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc ):
 	m_device(device),
-	m_effect(Utility::LoadEffect(device,L"MainEffect.fx")),
+	m_effect(Utility::LoadEffect(device,L"MainEffect.hlsl")),
 	m_back_buffer_sample_desc (back_buffer_sample_desc),
 	m_tech_bolt_out(m_effect->GetTechniqueByName("BoltOut")),	
 	m_tech_lines_out(m_effect->GetTechniqueByName("ShowLines")),
@@ -142,7 +142,7 @@ void LightningRenderer::SetMatrices(const D3DXMATRIX& world, const D3DXMATRIX& v
 
 }
 
-void LightningRenderer::OnRenderTargetResize(unsigned width, unsigned height, ID3D11RenderTargetView* scene_render_target_view, ID3D11DepthStencilView* scene_depth_stencil_view)
+void LightningRenderer::OnRenderTargetResize(unsigned width, unsigned height)
 {
 	m_lightning_buffer0.Resize(width, height);
 	m_lightning_buffer1.Resize(width, height);
@@ -150,9 +150,6 @@ void LightningRenderer::OnRenderTargetResize(unsigned width, unsigned height, ID
 	m_original_lightning_buffer.Resize(width, height);
 
 	BuildDownSampleBuffers(width, height);
-
-	m_scene_depth_stencil_view = scene_depth_stencil_view;
-	m_scene_render_target_view = scene_render_target_view;
 
 	m_buffer_texel_size =  D3DXVECTOR2(1.0f /width, 1.0f /height);
 }
@@ -256,7 +253,12 @@ void LightningRenderer::Render(LightningSeed* seed, const LightningAppearance& a
 		m_tech_lines_out->GetPassByIndex(0)->Apply(0,context);
 	else
 		m_tech_bolt_out->GetPassByIndex(0)->Apply(0,context);
-	
+
+	ID3D11DepthStencilView*	scene_depth_stencil_view = NULL;
+	ID3D11RenderTargetView*	scene_render_target_view = NULL;
+	context->OMGetRenderTargets(1,&scene_render_target_view,&scene_depth_stencil_view);
+	context->OMSetRenderTargets(1,&m_scene_render_target_view,m_scene_depth_stencil_view);
+
 	context->Draw(seed->GetNumVertices(seed->GetSubdivisions()),0);
 }
 
@@ -267,7 +269,7 @@ void LightningRenderer::End(bool glow, D3DXVECTOR3 blur_sigma)
 	
 	context->ResolveSubresource(m_original_lightning_buffer.Texture(),0,m_lightning_buffer0.Texture(),0,BackBufferFormat);
 
-	if(glow)
+	if(false)//glow
 	{
 		m_blur_sigma = blur_sigma;
 		SaveViewports();
@@ -309,7 +311,6 @@ void LightningRenderer::BuildSubdivisionBuffers()
 	delete m_subdivide_buffer0;
 	delete m_subdivide_buffer1;
 
-
 	vector<SubdivideVertex> init_data(max_segments, SubdivideVertex());
 
 	D3D11_USAGE usage =  D3D11_USAGE_DEFAULT;
@@ -317,7 +318,6 @@ void LightningRenderer::BuildSubdivisionBuffers()
 	
 	m_subdivide_buffer0 = new Geometry::SimpleVertexBuffer<SubdivideVertex>(m_device,init_data,usage,flags);
 	m_subdivide_buffer1 = new Geometry::SimpleVertexBuffer<SubdivideVertex>(m_device,init_data,usage,flags);
-	
 }
 
 void LightningRenderer::SaveViewports()
@@ -442,7 +442,6 @@ void LightningRenderer::BuildDownSampleBuffers(unsigned int w, unsigned int h)
 
 	m_small_lightning_buffer0.Resize(m_down_sample_buffer_sizes.back().cx, m_down_sample_buffer_sizes.back().cy);
 	m_small_lightning_buffer1.Resize(m_down_sample_buffer_sizes.back().cx, m_down_sample_buffer_sizes.back().cy);
-
 }
 
 void LightningRenderer::DownSample(Utility::ColorRenderBuffer* buffer)

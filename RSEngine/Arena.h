@@ -17,8 +17,8 @@ public:
 
 	void Matrices(const D3DXMATRIX& view, const D3DXMATRIX& projection);
 	void Time(float time, float delta_time);
-	void RenderTargetResize(unsigned width, unsigned height, ID3D11RenderTargetView* render_target_view, ID3D11DepthStencilView* depth_stencil_view);
-
+	void RenderTargetResize(unsigned width, unsigned height);
+	
 	void Render();
 
 	struct ArenaSettings
@@ -35,6 +35,8 @@ public:
 
 	} Settings;
 
+	LightningRenderer	m_lightning_renderer;
+
 private:
 
 	void ReadSeeds();
@@ -44,11 +46,8 @@ private:
 	
 	ID3D11Device*		m_device;
 
-	LightningRenderer	m_lightning_renderer;
-
 	PathLightning*		m_inter_coil_lightning;
 	PathLightning*		m_fence_lightning;
-
 
 	LightningAppearance m_red_beam;
 	LightningAppearance m_blue_beam;

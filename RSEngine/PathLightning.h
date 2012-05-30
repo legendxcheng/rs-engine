@@ -66,7 +66,7 @@ namespace LightningDemo
 			context->IASetInputLayout(m_subdivide_layout);
 
 			m_tech_first_pass->GetPassByIndex(0)->Apply(0,context);
-			context->Draw(GetNumVertices(0),0);//
+			context->Draw(GetNumVertices(0),0);
 		}
 
 		virtual unsigned int GetNumVertices(unsigned int level)

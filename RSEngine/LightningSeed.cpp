@@ -22,7 +22,6 @@ LightningSeed::LightningSeed(ID3DX11Effect* effect, ID3DX11EffectTechnique* firs
 	m_effect->AddRef();
 
 	effect->GetDevice(&m_device);
-
 }
 
 

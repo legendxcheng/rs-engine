@@ -26,7 +26,6 @@ struct LightningAppearance
 	float		Dummy1;						// dummy to match HLSL padding
 
 	D3DXVECTOR2 BoltWidth;
-
 };
 
 class LightningRenderer
@@ -41,23 +40,25 @@ public:
 	LightningRenderer(ID3D11Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc );
 	~LightningRenderer();
 
-
 	PathLightning*		CreatePathLightning(int pattern_mask, unsigned int subdivisions);
 	
 	void DestroyLightning(LightningSeed* seed);
 	
 	void SetTime(float time);
 	void SetMatrices(const D3DXMATRIX& world, const D3DXMATRIX& view,const D3DXMATRIX& projection);
-	void OnRenderTargetResize(unsigned width, unsigned height, ID3D11RenderTargetView* render_target_view, ID3D11DepthStencilView* depth_stencil_view);
+	void OnRenderTargetResize(unsigned width, unsigned height);
 
 	void Begin();
 	void Render(LightningSeed* seed, const LightningAppearance& appearance, float charge, float animation_speed, bool as_lines);
 	void End(bool glow, D3DXVECTOR3 blur_sigma);
+
+	ID3D11DepthStencilView*			m_scene_depth_stencil_view;
+	ID3D11RenderTargetView*			m_scene_render_target_view;
+
 private:
 
 	void	BuildSubdivisionBuffers();
 	Geometry::SimpleVertexBuffer<SubdivideVertex>*		Subdivide(LightningSeed* seed) ;
-
 
 	void	BuildDownSampleBuffers(unsigned int w, unsigned int h);
 	void	DownSample(Utility::ColorRenderBuffer* buffer);
@@ -66,7 +67,6 @@ private:
 	void	SaveViewports();
 	void	ResizeViewport(unsigned int w, unsigned int h);
 	void	RestoreViewports();
-
 
 	void	AddLightningSeed(LightningSeed* seed);
 	void	RemoveLightningSeed(LightningSeed* seed);
@@ -77,7 +77,6 @@ private:
 	D3D11_RECT		m_scissor_rects[D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE];
 	UINT m_num_viewports;
 	UINT m_num_scissor_rects;
-
 
 	ID3D11Device*	m_device;
 	ID3DX11Effect*	m_effect;
@@ -90,8 +89,6 @@ private:
 	
 	ID3DX11EffectTechnique*	m_tech_blur_buffer_horizontal;
 	ID3DX11EffectTechnique*	m_tech_blur_buffer_vertical;
-	
-		
 	
 	Effect::ConstantBuffer  m_constants_lightning_appearance;
 	Effect::ConstantBuffer  m_constants_lightning_structure;
@@ -121,7 +118,6 @@ private:
 	Effect::ShaderResourceVariable m_gradient;
 	Effect::Vector2Variable	m_buffer_texel_size;
 	
-
 	Effect::Vector3Variable		m_blur_sigma;
 
 	ID3D11Texture2D*			m_gradient_texture;
@@ -134,10 +130,6 @@ private:
 
 	Utility::ColorRenderBuffer		m_small_lightning_buffer0;
 	Utility::ColorRenderBuffer		m_small_lightning_buffer1;
-
-
-	ID3D11DepthStencilView*			m_scene_depth_stencil_view;
-	ID3D11RenderTargetView*			m_scene_render_target_view;
 
 	Geometry::SimpleVertexBuffer<SubdivideVertex>*	m_subdivide_buffer0;
 	Geometry::SimpleVertexBuffer<SubdivideVertex>*	m_subdivide_buffer1;

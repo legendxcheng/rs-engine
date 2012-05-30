@@ -35,10 +35,6 @@ void AddBufferPS (in QuadVS2PS input, out float4 output : SV_Target)
 cbuffer BlurParameters
 {
 	float3 BlurSigma;
-	
-	
-	
-	
 };
 static const int blur_search_width = 8;
 
@@ -69,6 +65,7 @@ float3 Gaussian(float d, float3 sigma)
 
 void BlurBufferPS (in QuadVS2PS input, out float4 output : SV_Target, uniform bool horizontal) 
 {
+
 	float4 sum =  float4(0,0,0,0);
 	
 

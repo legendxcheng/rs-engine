@@ -65,7 +65,7 @@ float Decay(float2 amount, uint level)
 // http://www.library.cornell.edu/nr/bookcpdf/c7-1.pdf
 
 // per shader global variable to keep track of the last random number 
-int random_x;
+static int random_x;
 
 #define RANDOM_IA 16807
 #define RANDOM_IM 2147483647
