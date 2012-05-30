@@ -16,28 +16,28 @@ void MainLighting::SetVariables()
 }
 
 //--------------------------------------------------------------------------------------
-// Create any D3D10 resources that aren't dependent on the back buffer
+// Create any D3D11 resources that aren't dependent on the back buffer
 //--------------------------------------------------------------------------------------
-HRESULT MainLighting::OnD3D11CreateDevice( ID3D10Device* pd3dDevice)
+HRESULT MainLighting::OnD3D11CreateDevice( ID3D11Device* pd3dDevice)
 {
 	DXGI_SAMPLE_DESC desc;
-	desc.Count = 4;
-	desc.Quality = 16;
+	desc.Count = 1;
+	desc.Quality = 1;
 	
 	g_arena = new Arena(pd3dDevice,desc);
 
 	//------------------------------------
 	// Resized Swap Chain
 	//------------------------------------
-	//g_arena->RenderTargetResize(pBackBufferSurfaceDesc->Width, pBackBufferSurfaceDesc->Height,  DXUTGetD3D10RenderTargetView(), DXUTGetD3D10DepthStencilView());
+	//g_arena->RenderTargetResize(800, 600,  , DXUTGetD3D10DepthStencilView());
 
     return S_OK;
 }
 
 //--------------------------------------------------------------------------------------
-// Render the scene using the D3D10 device
+// Render the scene using the D3D11 device
 //--------------------------------------------------------------------------------------
-void MainLighting::OnD3D11FrameRender( ID3D10Device* pd3dDevice,D3DXMATRIX worldMa,D3DXMATRIX viewMa,D3DXMATRIX projMa)
+void MainLighting::OnD3D11FrameRender( ID3D11Device* pd3dDevice,D3DXMATRIX worldMa,D3DXMATRIX viewMa,D3DXMATRIX projMa)
 {
 	float  t = 0;//float(fTime);
 	float dt = 0;//float(fElapsedTime);
@@ -63,7 +63,7 @@ void MainLighting::OnD3D11FrameRender( ID3D10Device* pd3dDevice,D3DXMATRIX world
 }
 
 //--------------------------------------------------------------------------------------
-// Release D3D10 resources created in OnD3D10CreateDevice 
+// Release D3D10 resources created in OnD3D11CreateDevice 
 //--------------------------------------------------------------------------------------
 void MainLighting::OnD3D11DestroyDevice()
 {

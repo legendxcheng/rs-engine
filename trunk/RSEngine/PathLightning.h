@@ -58,11 +58,15 @@ namespace LightningDemo
 		{
 
 			m_path_segments->BindToInputAssembler();
-			m_device->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_POINTLIST);
-			m_device->IASetInputLayout(m_subdivide_layout);
 
-			m_tech_first_pass->GetPassByIndex(0)->Apply(0);
-			m_device->Draw(GetNumVertices(0),0);//
+			ID3D11DeviceContext* context;
+			m_device->GetImmediateContext(&context);
+
+			context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+			context->IASetInputLayout(m_subdivide_layout);
+
+			m_tech_first_pass->GetPassByIndex(0)->Apply(0,context);
+			context->Draw(GetNumVertices(0),0);//
 		}
 
 		virtual unsigned int GetNumVertices(unsigned int level)
@@ -70,7 +74,7 @@ namespace LightningDemo
 			return m_path_segments->NumVertices() * GetNumBoltVertices(level);
 		}
 
-		PathLightning(ID3D10Effect* effect, int pattern_mask, unsigned int subdivisions);
+		PathLightning(ID3DX11Effect* effect, int pattern_mask, unsigned int subdivisions);
 		~PathLightning();
 
 		Geometry::SimpleVertexBuffer<SubdivideVertex>* m_path_segments;
@@ -78,7 +82,7 @@ namespace LightningDemo
 		void UpdateSegments();
 
 	private:
-		ID3D10InputLayout* m_subdivide_layout;
+		ID3D11InputLayout* m_subdivide_layout;
 		float m_destAngle;
 	};
 

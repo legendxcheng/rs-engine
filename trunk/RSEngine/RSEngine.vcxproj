@@ -202,6 +202,7 @@
   <ItemGroup>
     <None Include="bstest.hlsl" />
     <None Include="BulletStorm.hlsl" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Color.ps" />
     <None Include="Color.vs" />
     <None Include="font.ps" />

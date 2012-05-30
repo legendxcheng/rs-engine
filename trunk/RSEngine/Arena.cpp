@@ -11,7 +11,7 @@
 namespace LightningDemo
 {
 
-Arena::Arena(ID3D10Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc):
+Arena::Arena(ID3D11Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc):
 	m_device(device),
 	m_lightning_renderer(device,back_buffer_sample_desc),
 	m_back_buffer_sample_desc(back_buffer_sample_desc)
@@ -123,7 +123,7 @@ void Arena::Time(float time, float delta_time)
 	m_lightning_renderer.SetTime(time);
 }
 
-void Arena::RenderTargetResize(unsigned width, unsigned height, ID3D10RenderTargetView* render_target_view, ID3D10DepthStencilView* depth_stencil_view)
+void Arena::RenderTargetResize(unsigned width, unsigned height, ID3D11RenderTargetView* render_target_view, ID3D11DepthStencilView* depth_stencil_view)
 {
 	m_lightning_renderer.OnRenderTargetResize(width, height, render_target_view, depth_stencil_view);
 }
@@ -132,12 +132,12 @@ void Arena::Render()
 {
 	m_lightning_renderer.Begin();
 
-		if(false){
-			m_lightning_renderer.Render(m_fence_lightning,m_red_beam,1.0f,Settings.AnimationSpeed, false);
-		}
-		if(true){
-			m_lightning_renderer.Render(m_inter_coil_lightning,m_blue_beam,1.0f,Settings.AnimationSpeed, false);
-		}
+	if(false){
+		m_lightning_renderer.Render(m_fence_lightning,m_red_beam,1.0f,Settings.AnimationSpeed, false);
+	}
+	if(true){
+		m_lightning_renderer.Render(m_inter_coil_lightning,m_blue_beam,1.0f,Settings.AnimationSpeed, false);
+	}
 			
 	m_lightning_renderer.End(Settings.Glow, Settings.BlurSigma);
 }

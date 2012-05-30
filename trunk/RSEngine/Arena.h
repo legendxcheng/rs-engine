@@ -12,12 +12,12 @@ namespace LightningDemo
 class Arena
 {
 public:
-	Arena(ID3D10Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc);
+	Arena(ID3D11Device* device,DXGI_SAMPLE_DESC back_buffer_sample_desc);
 	~Arena();
 
 	void Matrices(const D3DXMATRIX& view, const D3DXMATRIX& projection);
 	void Time(float time, float delta_time);
-	void RenderTargetResize(unsigned width, unsigned height, ID3D10RenderTargetView* render_target_view, ID3D10DepthStencilView* depth_stencil_view);
+	void RenderTargetResize(unsigned width, unsigned height, ID3D11RenderTargetView* render_target_view, ID3D11DepthStencilView* depth_stencil_view);
 
 	void Render();
 
@@ -35,8 +35,6 @@ public:
 
 	} Settings;
 
-
-
 private:
 
 	void ReadSeeds();
@@ -44,7 +42,7 @@ private:
 
 	DXGI_SAMPLE_DESC m_back_buffer_sample_desc;
 	
-	ID3D10Device*		m_device;
+	ID3D11Device*		m_device;
 
 	LightningRenderer	m_lightning_renderer;
 

@@ -38,9 +38,9 @@ namespace LightningDemo
 		UINT		Level;
 
 
-		static std::vector<D3D10_INPUT_ELEMENT_DESC> GetLayout()
+		static std::vector<D3D11_INPUT_ELEMENT_DESC> GetLayout()
 		{
-			std::vector<D3D10_INPUT_ELEMENT_DESC> r;
+			std::vector<D3D11_INPUT_ELEMENT_DESC> r;
 
 			r.push_back
 			(
@@ -51,7 +51,7 @@ namespace LightningDemo
 					DXGI_FORMAT_R32G32B32_FLOAT,
 					0,
 					0, 
-					D3D10_INPUT_PER_VERTEX_DATA, 
+					D3D11_INPUT_PER_VERTEX_DATA, 
 					0 
 				)
 			);
@@ -64,7 +64,7 @@ namespace LightningDemo
 					DXGI_FORMAT_R32G32B32_FLOAT,
 					0,
 					12, 
-					D3D10_INPUT_PER_VERTEX_DATA, 
+					D3D11_INPUT_PER_VERTEX_DATA, 
 					0 
 				)
 			);
@@ -77,7 +77,7 @@ namespace LightningDemo
 					DXGI_FORMAT_R32G32B32_FLOAT,
 					0,
 					12 + 12, 
-					D3D10_INPUT_PER_VERTEX_DATA, 
+					D3D11_INPUT_PER_VERTEX_DATA, 
 					0 
 				)
 			);
@@ -91,7 +91,7 @@ namespace LightningDemo
 					DXGI_FORMAT_R32_UINT,
 					0,
 					12 + 12 + 12, 
-					D3D10_INPUT_PER_VERTEX_DATA, 
+					D3D11_INPUT_PER_VERTEX_DATA, 
 					0 
 				)
 			);
@@ -189,22 +189,25 @@ namespace LightningDemo
 
 		virtual void RenderFirstPass()
 		{
-			ID3D10Buffer* zero = 0;
+			ID3D11Buffer* zero = 0;
 			UINT nought = 0;
-			m_device->IASetVertexBuffers(0,1,&zero,&nought,&nought);
-			m_device->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_POINTLIST);
-			m_device->IASetInputLayout(0);
+			ID3D11DeviceContext* context;
+			m_device->GetImmediateContext(&context);
 
-			m_tech_first_pass->GetPassByIndex(0)->Apply(0);
-			m_device->Draw(GetNumVertices(0),0);
+			context->IASetVertexBuffers(0,1,&zero,&nought,&nought);
+			context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+			context->IASetInputLayout(0);
+
+			m_tech_first_pass->GetPassByIndex(0)->Apply(0,context);
+			context->Draw(GetNumVertices(0),0);
 		}
 
-		ID3D10EffectTechnique*		GetFirstPassTechnique()
+		ID3DX11EffectTechnique*		GetFirstPassTechnique()
 		{
 			return m_tech_first_pass;
 		}
 		
-		ID3D10EffectTechnique*		GetSubdivideTechnique()
+		ID3DX11EffectTechnique*		GetSubdivideTechnique()
 		{
 			return m_tech_subdivide;
 		}
@@ -217,11 +220,11 @@ namespace LightningDemo
 		int		m_pattern_mask;
 		unsigned int m_subdivisions;
 
-		ID3D10Device*	m_device;
+		ID3D11Device*	m_device;
 
-		ID3D10Effect*			m_effect;
-		ID3D10EffectTechnique*	m_tech_first_pass;
-		ID3D10EffectTechnique*	m_tech_subdivide;
+		ID3DX11Effect*			m_effect;
+		ID3DX11EffectTechnique*	m_tech_first_pass;
+		ID3DX11EffectTechnique*	m_tech_subdivide;
 
 		Effect::ConstantBuffer  m_constants_lightning_structure;
 		
@@ -229,14 +232,11 @@ namespace LightningDemo
 			m_constants_lightning_structure(0,"LightningStructure")
 		{
 		}
-		LightningSeed(ID3D10Effect* effect, ID3D10EffectTechnique* first_pass, ID3D10EffectTechnique* subdivide_pass,  int pattern_mask, unsigned int subdivisions);
+		LightningSeed(ID3DX11Effect* effect, ID3DX11EffectTechnique* first_pass, ID3DX11EffectTechnique* subdivide_pass,  int pattern_mask, unsigned int subdivisions);
 		virtual ~LightningSeed();
 
 	private:
 
-
-
 	};
 
-	
 }
