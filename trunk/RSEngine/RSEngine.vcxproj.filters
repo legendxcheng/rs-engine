@@ -151,6 +151,30 @@
     <ClCompile Include="FurMain.cpp">
       <Filter>Shader Engine\FurShells</Filter>
     </ClCompile>
+    <ClCompile Include="Arena.cpp">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorRenderBuffer.cpp">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="LightningRenderer.cpp">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="LightningSeed.cpp">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="MainLightning.cpp">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="PathLightning.cpp">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -309,6 +333,33 @@
     <ClInclude Include="FurMain.h">
       <Filter>Shader Engine\FurShells</Filter>
     </ClInclude>
+    <ClInclude Include="Arena.h">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorRenderBuffer.h">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectVariable.h">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="LightningRenderer.h">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="LightningSeed.h">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="PathLightning.h">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLightning.h">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bstest.hlsl">
@@ -346,6 +397,15 @@
     </None>
     <None Include="FurShellsAndFins.hlsl">
       <Filter>Shader Engine\FurShells</Filter>
+    </None>
+    <None Include="Imaging.hlsl">
+      <Filter>Shader Engine\Lightning</Filter>
+    </None>
+    <None Include="Lightning.hlsl">
+      <Filter>Shader Engine\Lightning</Filter>
+    </None>
+    <None Include="MainEffect.hlsl">
+      <Filter>Shader Engine\Lightning</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +462,9 @@
     </Filter>
     <Filter Include="Shader Engine\FurShells">
       <UniqueIdentifier>{d777a875-9ff0-4406-a669-71f0056b987a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Engine\Lightning">
+      <UniqueIdentifier>{04555e30-5bb5-4429-abbd-71dce75d1134}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

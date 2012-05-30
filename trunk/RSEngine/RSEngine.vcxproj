@@ -56,7 +56,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>external/fmod/lib/fmodex_vc.lib;lua.lib;External/Effects11/D3DX11Effects.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fmodex_vc.lib;lua.lib;D3DX11Effects.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,19 +77,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arena.cpp" />
     <ClCompile Include="BSTestPS.cpp" />
     <ClCompile Include="BSTestVS.cpp" />
     <ClCompile Include="BulletStorm.cpp" />
     <ClCompile Include="BulletStormTest.cpp" />
     <ClCompile Include="BulletStrip.cpp" />
+    <ClCompile Include="ColorRenderBuffer.cpp" />
     <ClCompile Include="fontclass.cpp" />
     <ClCompile Include="fontshaderclass.cpp" />
     <ClCompile Include="FurMain.cpp" />
     <ClCompile Include="GameGlobalData.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GaussianMain.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="BulletSystem.cpp" />
+    <ClCompile Include="LightningRenderer.cpp" />
+    <ClCompile Include="LightningSeed.cpp" />
+    <ClCompile Include="MainLightning.cpp" />
+    <ClCompile Include="PathLightning.cpp" />
     <ClCompile Include="RSObjPS.cpp" />
     <ClCompile Include="RSObjVS.cpp" />
     <ClCompile Include="RSTimer.cpp" />
@@ -126,23 +133,32 @@
     <ClCompile Include="TextureClass.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="VertexShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arena.h" />
     <ClInclude Include="BSTestPS.h" />
     <ClInclude Include="BSTestVS.h" />
     <ClInclude Include="BulletStorm.h" />
     <ClInclude Include="BulletStormTest.h" />
     <ClInclude Include="BulletStrip.h" />
+    <ClInclude Include="ColorRenderBuffer.h" />
+    <ClInclude Include="EffectVariable.h" />
     <ClInclude Include="fontclass.h" />
     <ClInclude Include="fontshaderclass.h" />
     <ClInclude Include="FurMain.h" />
     <ClInclude Include="GameGlobalData.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GaussianMain.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LightningRenderer.h" />
+    <ClInclude Include="LightningSeed.h" />
     <ClInclude Include="lua_head.h" />
     <ClInclude Include="BulletSystem.h" />
+    <ClInclude Include="MainLightning.h" />
+    <ClInclude Include="PathLightning.h" />
     <ClInclude Include="RSObjPS.h" />
     <ClInclude Include="RSObjVS.h" />
     <ClInclude Include="RSTimer.h" />
@@ -179,6 +195,7 @@
     <ClInclude Include="TextureClass.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="VertexShaderClass.h" />
   </ItemGroup>
@@ -192,6 +209,9 @@
     <None Include="FurShellsAndFins.hlsl" />
     <None Include="gaussian_color_cs.hlsl" />
     <None Include="gaussian_vs_ps.hlsl" />
+    <None Include="Imaging.hlsl" />
+    <None Include="Lightning.hlsl" />
+    <None Include="MainEffect.hlsl" />
     <None Include="rsobjtest.hlsl" />
     <None Include="Sphere.fx" />
     <None Include="Sprite.fx" />
