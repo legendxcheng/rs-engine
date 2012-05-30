@@ -93,9 +93,9 @@
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="BulletSystem.cpp" />
+    <ClCompile Include="LightningMain.cpp" />
     <ClCompile Include="LightningRenderer.cpp" />
     <ClCompile Include="LightningSeed.cpp" />
-    <ClCompile Include="MainLightning.cpp" />
     <ClCompile Include="PathLightning.cpp" />
     <ClCompile Include="RSObjPS.cpp" />
     <ClCompile Include="RSObjVS.cpp" />
@@ -153,11 +153,11 @@
     <ClInclude Include="GaussianMain.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LightningMain.h" />
     <ClInclude Include="LightningRenderer.h" />
     <ClInclude Include="LightningSeed.h" />
     <ClInclude Include="lua_head.h" />
     <ClInclude Include="BulletSystem.h" />
-    <ClInclude Include="MainLightning.h" />
     <ClInclude Include="PathLightning.h" />
     <ClInclude Include="RSObjPS.h" />
     <ClInclude Include="RSObjVS.h" />

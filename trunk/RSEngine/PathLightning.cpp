@@ -33,7 +33,7 @@ void PathLightning::UpdateSegments()
 
 	std::vector<SubdivideVertex> vertices;
 	std::vector<LightningPathSegment> segments2;
-	const float r = 20.0f;
+	const float r = 50.0001f;
 	const float angle = 0.02f;
 	for(int i=0;i<100;i++)
 	{
@@ -45,7 +45,7 @@ void PathLightning::UpdateSegments()
 	}
 	std::copy(segments2.begin(), segments2.end(), back_inserter(vertices));
 	m_path_segments = new Geometry::SimpleVertexBuffer<SubdivideVertex>(m_device,vertices);
-	m_destAngle += 0.01f;
+	m_destAngle += 0.001f;
 }
 
 }

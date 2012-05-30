@@ -166,13 +166,13 @@
     <ClCompile Include="LightningSeed.cpp">
       <Filter>Shader Engine\Lightning</Filter>
     </ClCompile>
-    <ClCompile Include="MainLightning.cpp">
-      <Filter>Shader Engine\Lightning</Filter>
-    </ClCompile>
     <ClCompile Include="PathLightning.cpp">
       <Filter>Shader Engine\Lightning</Filter>
     </ClCompile>
     <ClCompile Include="Utility.cpp">
+      <Filter>Shader Engine\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="LightningMain.cpp">
       <Filter>Shader Engine\Lightning</Filter>
     </ClCompile>
   </ItemGroup>
@@ -357,7 +357,7 @@
     <ClInclude Include="Utility.h">
       <Filter>Shader Engine\Lightning</Filter>
     </ClInclude>
-    <ClInclude Include="MainLightning.h">
+    <ClInclude Include="LightningMain.h">
       <Filter>Shader Engine\Lightning</Filter>
     </ClInclude>
   </ItemGroup>

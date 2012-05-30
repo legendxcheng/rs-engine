@@ -33,6 +33,7 @@ GraphicsClass::GraphicsClass()
 	m_gaussianMain = false;
 
 	m_gaussianMain = new GaussianMain();
+	m_lightingMain = new LightingMain();
 }
 
 
@@ -49,7 +50,6 @@ GraphicsClass::~GraphicsClass()
 bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
 	bool result;
-
 
 	// Create the Direct3D object.
 	m_D3D = D3DClass::GetInstance();
@@ -100,8 +100,6 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	InitializeResource(m_D3D->GetDevice());
 	//m_camera->SetRotation(30, 0, 0);
 
-	
-
 	return true;
 }
 
@@ -149,6 +147,12 @@ void GraphicsClass::Shutdown()
 		delete m_gaussianMain;
 		m_gaussianMain = 0;
 	}
+
+	if(m_lightingMain)
+	{
+		delete m_lightingMain;
+		m_lightingMain = 0;
+	}
 	return;
 }
 
@@ -191,6 +195,14 @@ bool GraphicsClass::Render()
 	m_D3D->GetOrthoMatrix(orthoMatrix);
 
 	//m_gaussianMain->OnD3D11FrameRender1(m_D3D->GetDeviceContext());
+
+	ID3D11DeviceContext *context = m_D3D->GetDeviceContext();
+	ID3D11DepthStencilView*	m_scene_depth_stencil_view;
+	ID3D11RenderTargetView*	m_scene_render_target_view;
+	context->OMGetRenderTargets(1,&m_scene_render_target_view,&m_scene_depth_stencil_view);
+	m_lightingMain->SetLightningRendererRTV_DSV(m_scene_depth_stencil_view,m_scene_render_target_view);
+	m_lightingMain->OnD3D11FrameRender(viewMatrix, projectionMatrix);
+
 	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix, orthoMatrix);
 	//m_gaussianMain->OnD3D11FrameRender2(m_D3D->GetDeviceContext());
 
@@ -221,7 +233,6 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	BulletStormTest* bst = new BulletStormTest();
 	bst->Initialize(device);
 	rom->InsertRenderObject((RenderObject*)bst);
-
 
 	/*
 		Sphere Example
@@ -280,6 +291,10 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	sm->Initialize(device);
 	rom->InsertRenderObject(sm);
 
-	//m_gaussianMain->OnD3D11CreateDevice(device);
+	//////////////////////////////////////////////////////////////////////////
+	// Effect Classes
+	//////////////////////////////////////////////////////////////////////////
 
+	//m_gaussianMain->OnD3D11CreateDevice(device);
+	m_lightingMain->OnD3D11CreateDevice(device);
 }

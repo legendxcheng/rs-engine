@@ -99,6 +99,7 @@ void Arena::CreateLightning()
 	}
 
 }
+
 Arena::~Arena()
 {
 	m_lightning_renderer.DestroyLightning(m_fence_lightning);
@@ -106,8 +107,6 @@ Arena::~Arena()
 
 	m_device->Release();
 }
-
-
 
 void Arena::Matrices(const D3DXMATRIX& view, const D3DXMATRIX& projection)
 {
@@ -123,9 +122,9 @@ void Arena::Time(float time, float delta_time)
 	m_lightning_renderer.SetTime(time);
 }
 
-void Arena::RenderTargetResize(unsigned width, unsigned height, ID3D11RenderTargetView* render_target_view, ID3D11DepthStencilView* depth_stencil_view)
+void Arena::RenderTargetResize(unsigned width, unsigned height)
 {
-	m_lightning_renderer.OnRenderTargetResize(width, height, render_target_view, depth_stencil_view);
+	m_lightning_renderer.OnRenderTargetResize(width, height);
 }
 
 void Arena::Render()
@@ -138,8 +137,8 @@ void Arena::Render()
 	if(true){
 		m_lightning_renderer.Render(m_inter_coil_lightning,m_blue_beam,1.0f,Settings.AnimationSpeed, false);
 	}
-			
-	m_lightning_renderer.End(Settings.Glow, Settings.BlurSigma);
+
+	//m_lightning_renderer.End(Settings.Glow, Settings.BlurSigma);
 }
 
 struct SeedRecord

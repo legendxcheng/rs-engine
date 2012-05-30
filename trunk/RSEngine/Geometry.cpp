@@ -18,4 +18,3 @@ ID3D11InputLayout* CreateInputLayout(ID3D11Device* device, const std::vector<D3D
 	
 } // Geometry
 }// Utility
-

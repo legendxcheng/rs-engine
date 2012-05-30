@@ -86,5 +86,5 @@ SamplerState LinearSample
 static const float e = 2.71828183f;
 static const float pi = 3.14159265f;
 
-#include "Lightning.fx"
-#include "Imaging.fx"
+#include "Lightning.hlsl"
+#include "Imaging.hlsl"

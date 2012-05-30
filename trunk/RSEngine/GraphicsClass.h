@@ -4,7 +4,6 @@
 #ifndef _GRAPHICSCLASS_H_
 #define _GRAPHICSCLASS_H_
 
-
 //////////////
 // INCLUDES //
 //////////////
@@ -13,6 +12,7 @@
 #include "shaderclass.h"
 #include "spriteclass.h"
 #include "GaussianMain.h"
+#include "LightningMain.h"
 
 class CameraManager;
 class CameraClass;
@@ -53,7 +53,7 @@ private:
 	ShaderManager* m_shaderMgr;
 	
 	GaussianMain* m_gaussianMain;
-
+	LightingMain* m_lightingMain;
 /*
 	for communication with class GameLogic
 */
