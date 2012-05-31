@@ -613,3 +613,8 @@ void D3DClass::TurnOffAlphaBlending()
 
 	return;
 }
+
+void D3DClass::SetRasterState()
+{
+	m_deviceContext->RSSetState(m_rasterState);
+}

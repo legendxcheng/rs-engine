@@ -76,8 +76,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	GameLogic::GetInstance()->InitCamera(m_camera);
 
 	// Set the initial position of the camera.
-	m_camera->SetPosition(0.0f, 0.0f, -500.0f);
-
+	m_camera->SetPosition(0.0f, 0.0f, -GameLogic::GetInstance()->GetCameraRadius());
 
 	m_renderObjMgr = RenderObjectManager::GetInstance();
 	if (!m_renderObjMgr)
@@ -203,6 +202,7 @@ bool GraphicsClass::Render()
 	m_lightingMain->SetLightningRendererRTV_DSV(m_scene_depth_stencil_view,m_scene_render_target_view);
 	m_lightingMain->OnD3D11FrameRender(viewMatrix, projectionMatrix);
 
+	//m_D3D->SetRasterState();
 	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix, orthoMatrix);
 	//m_gaussianMain->OnD3D11FrameRender2(m_D3D->GetDeviceContext());
 
@@ -232,7 +232,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	*/
 	BulletStormTest* bst = new BulletStormTest();
 	bst->Initialize(device);
-	rom->InsertRenderObject((RenderObject*)bst);
+	//rom->InsertRenderObject((RenderObject*)bst);
 
 	/*
 		Sphere Example
@@ -263,7 +263,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	m_textClass->SetAttributes(800, 600, baseViewMatrix);
 	m_textClass->Initialize(device);
 	GameLogic::GetInstance()->InitUIMgr(m_textClass);
-	rom->InsertRenderObject(m_textClass);
+	//rom->InsertRenderObject(m_textClass);
 
 	//////////////////////////////////////////////////////////////////////////
 	// This is the initialization of all resources
@@ -297,4 +297,11 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 
 	//m_gaussianMain->OnD3D11CreateDevice(device);
 	m_lightingMain->OnD3D11CreateDevice(device);
+
+	//////////////////////////////////////////////////////////////////////////
+	// Strange....
+	//////////////////////////////////////////////////////////////////////////
+
+	rom->InsertRenderObject((RenderObject*)bst);
+	rom->InsertRenderObject(m_textClass);
 }

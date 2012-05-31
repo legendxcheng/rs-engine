@@ -382,7 +382,6 @@ technique10 RenderMesh
     }
 }
 
-
 technique10 RenderShells
 {
     pass P0
@@ -395,7 +394,6 @@ technique10 RenderShells
         SetDepthStencilState( EnableDepthTestingOnly, 0 );
     }
 }
-
 
 technique10 RenderFinsLineAdj
 {

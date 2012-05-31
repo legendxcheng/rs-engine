@@ -55,7 +55,7 @@ bool InputClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidth, int
 		return false;
 	}
 	// Set the cooperative level of the keyboard to not share with other programs.
-	result = m_keyboard->SetCooperativeLevel(hwnd, DISCL_BACKGROUND | DISCL_EXCLUSIVE);
+	result = m_keyboard->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
 	if(FAILED(result))
 	{
 		return false;

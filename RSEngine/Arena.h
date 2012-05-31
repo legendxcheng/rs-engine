@@ -24,8 +24,8 @@ public:
 	struct ArenaSettings
 	{
 		ArenaSettings():
-		Glow(true),
-		AnimationSpeed(15)
+		Glow(false),
+		AnimationSpeed(5),BlurSigma(1.0f,1.0f,1.0f)
 	{
 	}
 

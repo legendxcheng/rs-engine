@@ -50,6 +50,7 @@ public:
 
 public:
 	void InitCamera(CameraClass* cc);
+	float GetCameraRadius();
 //bullet
 public:
 	void FillBulletBuffer(void* vb);
@@ -66,5 +67,6 @@ private:
 	unsigned int m_score;
 	float m_cameraAngle;// along the axi
 	unsigned int m_screenBullet;// totnumber of bullets in screen
+	float m_cameraRadius;
 };
 

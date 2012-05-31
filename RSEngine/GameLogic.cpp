@@ -20,6 +20,7 @@ GameLogic::GameLogic(void)
 	m_bulletSys = new BulletSystem();
 	m_gameGD = new GameGlobalData();
 	m_cameraAngle = 0.0f;
+	m_cameraRadius = 500.0f;
 	// test
 	// add bulletstorm into bulletsystem
 	BulletStorm* bs = new BulletStorm();
@@ -120,7 +121,7 @@ void GameLogic::InitUIMgr(TextClass* tc)
 void GameLogic::RotateCamera(float angle)
 {
 	m_camera->SetRotation(-angle / 3.1415926f * 180, 0, 0);
-	m_camera->SetPosition(0,  -500.0f * sin(angle), -500.0f * cos(angle));
+	m_camera->SetPosition(0,  -m_cameraRadius * sin(angle), -m_cameraRadius * cos(angle));
 }
 
 void GameLogic::InitCamera(CameraClass* cc)
@@ -142,4 +143,9 @@ float GameLogic::GetCameraAngle()
 void GameLogic::GetSpaceshipXYZ(float*x, float* y, float* z)
 {
 	m_spaceship->GetXYZ(x, y, z);
+}
+
+float GameLogic::GetCameraRadius()
+{
+	return m_cameraRadius;
 }

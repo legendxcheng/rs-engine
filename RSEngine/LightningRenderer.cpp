@@ -269,7 +269,7 @@ void LightningRenderer::End(bool glow, D3DXVECTOR3 blur_sigma)
 	
 	context->ResolveSubresource(m_original_lightning_buffer.Texture(),0,m_lightning_buffer0.Texture(),0,BackBufferFormat);
 
-	if(false)//glow
+	if(glow)
 	{
 		m_blur_sigma = blur_sigma;
 		SaveViewports();
@@ -292,8 +292,8 @@ void LightningRenderer::End(bool glow, D3DXVECTOR3 blur_sigma)
 		context->OMSetRenderTargets(1, &m_scene_render_target_view, m_scene_depth_stencil_view);
 	}
 
-	m_buffer = m_original_lightning_buffer.ShaderResourceView();
-	DrawQuad(m_tech_add_buffer);
+	//m_buffer = m_original_lightning_buffer.ShaderResourceView();
+	//DrawQuad(m_tech_add_buffer);
 }
 
 void LightningRenderer::BuildSubdivisionBuffers() 

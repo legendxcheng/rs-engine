@@ -33,11 +33,11 @@ void PathLightning::UpdateSegments()
 
 	std::vector<SubdivideVertex> vertices;
 	std::vector<LightningPathSegment> segments2;
-	const float r = 50.0001f;
+	const float r = 50.0f;
 	const float angle = 0.02f;
-	for(int i=0;i<100;i++)
+	for(int i=0;i<20;i++)
 	{
-		float ra = i*r/10;
+		float ra = i*r/2;
 		segments2.push_back(LightningPathSegment(
 			D3DXVECTOR3(ra*cos(m_destAngle),r*sin(i*angle),ra*sin(m_destAngle)),
 			D3DXVECTOR3((ra+r)*cos(m_destAngle),r*sin(i*angle),(ra+r)*sin(m_destAngle)),
@@ -45,7 +45,7 @@ void PathLightning::UpdateSegments()
 	}
 	std::copy(segments2.begin(), segments2.end(), back_inserter(vertices));
 	m_path_segments = new Geometry::SimpleVertexBuffer<SubdivideVertex>(m_device,vertices);
-	m_destAngle += 0.001f;
+	m_destAngle += 0.01f;
 }
 
 }
