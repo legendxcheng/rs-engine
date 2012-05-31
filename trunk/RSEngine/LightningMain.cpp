@@ -43,23 +43,6 @@ void LightingMain::OnD3D11FrameRender(D3DXMATRIX viewMa, D3DXMATRIX projMa)
 	const float dt = 1.0f/60.0f;
 	m_time += dt;
 	
-	g_arena->Settings.BlurSigma = D3DXVECTOR3
-	(
-		100 / 100.0f ,
-		100 / 100.0f ,
-		100 / 100.0f 
-	);
-
-	g_arena->Settings.AnimationSpeed =  float(50);
-	
-	g_arena->Settings.Glow =  true;
-	
-	D3DXMATRIX world,view,view2;
-	D3DXMatrixIdentity(&world);
-	D3DXMatrixScaling(&view,0.1f,0.1f,0.1f);
-	D3DXMatrixTranspose(&view2,&view);
-
-	//g_arena->Matrices(world, world);
 	g_arena->Matrices(viewMa, projMa);
 	g_arena->Time(m_time,dt);
 	g_arena->Render();

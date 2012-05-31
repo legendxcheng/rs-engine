@@ -5,9 +5,12 @@ SpaceshipModel::SpaceshipModel(char* objFileName) : ObjModelClass(objFileName)
 	D3DXMatrixScaling(&m_backWorldMatrix, 500.0f, 500.0f, 500.0f);
 	//m_worldMatrix = 
 	D3DXMATRIX rotationMatrix;
-	D3DXMatrixRotationY(&rotationMatrix, D3DX_PI / 2 * 3);
+	D3DXMatrixRotationY(&rotationMatrix, (float)(D3DX_PI / 2 * 3));
 	m_backWorldMatrix = m_backWorldMatrix * rotationMatrix;
 	m_worldMatrix = m_backWorldMatrix;
+
+	m_furMain = NULL;
+	m_softParticles = NULL;
 }
 
 bool SpaceshipModel::Update()
@@ -22,9 +25,10 @@ bool SpaceshipModel::Update()
 
 void SpaceshipModel::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
 {
-	
-	PixelShaderClass* tps;
-	VertexShaderClass* tvs;
+	float x = 0.0f, y = 0.0f, z = 0.0f;
+	GameLogic::GetInstance()->GetSpaceshipXYZ(&x, &y, &z);
+	m_softParticles->OnD3D11FrameRender(deviceContext,viewMatrix,projectionMatrix,D3DXVECTOR3(x,y,z));
+
 	TextureManager* textureMgr = TextureManager::GetInstance();
 	ShaderManager* shaderMgr = ShaderManager::GetInstance();
 
@@ -57,7 +61,8 @@ void SpaceshipModel::RenderMesh(ID3D11DeviceContext* deviceContext)
 
 SpaceshipModel::SpaceshipModel(void)
 {
-	m_furMain = new FurMain();
+	m_furMain = NULL;
+	m_softParticles = NULL;
 }
 
 SpaceshipModel::~SpaceshipModel(void)
@@ -66,6 +71,12 @@ SpaceshipModel::~SpaceshipModel(void)
 	{
 		delete m_furMain;
 		m_furMain = NULL;
+	}
+
+	if(m_softParticles)
+	{
+		delete m_softParticles;
+		m_softParticles = NULL;
 	}
 }
 
@@ -124,11 +135,17 @@ bool SpaceshipModel::Initialize(ID3D11Device* device)
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 	device->CreateBlendState(&blendDesc,&m_pAlphaBlendState);
 
-	if((int)m_furMain == 0xcdcdcdcd)
+	if(!m_furMain)
 	{
 		m_furMain = new FurMain();
 	}
 	m_furMain->OnD3D11CreateDevice(device);
 	
+	if(!m_softParticles)
+	{
+		m_softParticles = new SoftParticles();
+	}
+	m_softParticles->OnD3D11CreateDevice(device);
+
 	return true;
 }

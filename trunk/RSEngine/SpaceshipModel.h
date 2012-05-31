@@ -14,6 +14,7 @@
 #include <d3dx11effect.h>
 #include <D3Dcompiler.h>
 #include "FurMain.h"
+#include "SoftParticles.h"
 
 #ifndef SAFE_RELEASE
 #define SAFE_RELEASE(p)      { if (p) { (p)->Release(); (p)=NULL; } }
@@ -38,5 +39,6 @@ private:
 	//
 	ID3D11BlendState* m_pAlphaBlendState;
 	FurMain* m_furMain;
+	SoftParticles* m_softParticles;
 };
 

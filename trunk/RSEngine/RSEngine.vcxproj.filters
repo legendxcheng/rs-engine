@@ -175,6 +175,9 @@
     <ClCompile Include="LightningMain.cpp">
       <Filter>Shader Engine\Lightning</Filter>
     </ClCompile>
+    <ClCompile Include="SoftParticles.cpp">
+      <Filter>Shader Engine\SoftParticles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -360,6 +363,9 @@
     <ClInclude Include="LightningMain.h">
       <Filter>Shader Engine\Lightning</Filter>
     </ClInclude>
+    <ClInclude Include="SoftParticles.h">
+      <Filter>Shader Engine\SoftParticles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bstest.hlsl">
@@ -408,6 +414,9 @@
       <Filter>Shader Engine\Lightning</Filter>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="SoftParticles.hlsl">
+      <Filter>Shader Engine\SoftParticles</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Low Engine">
@@ -466,6 +475,9 @@
     </Filter>
     <Filter Include="Shader Engine\Lightning">
       <UniqueIdentifier>{04555e30-5bb5-4429-abbd-71dce75d1134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Engine\SoftParticles">
+      <UniqueIdentifier>{3f0afe27-817e-4e27-bbb1-1492d8fb1f2c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

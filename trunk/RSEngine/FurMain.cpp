@@ -1,4 +1,6 @@
 #include "FurMain.h"
+#include "CameraClass.h"
+#include "CameraManager.h"
 
 FurMain::FurMain()
 {
@@ -254,7 +256,9 @@ void FurMain::OnD3D11FrameRender1(ID3D11DeviceContext* pd3dImmediateContext, D3D
 	D3DXMatrixMultiply( &mWorldViewProj, &mWorldView, &projectionMatrix );
 	g_pWorldViewProj->SetMatrix( (float*)&mWorldViewProj );
 	// Eye vec in object space
-	vecEye = D3DXVECTOR3(0.0f,0.0f,-500.0f);
+	CameraClass* cc = CameraManager::getInstance()->getCamera("mainCamera");
+	vecEye = cc->GetPosition();
+
 	D3DXMATRIX worldInverse;
 	D3DXMatrixInverse(&worldInverse,NULL,&g_World);
 	vectorMatrixMultiply(&eyeInObjectSpace,worldInverse,vecEye);
@@ -269,8 +273,6 @@ void FurMain::OnD3D11FrameRender1(ID3D11DeviceContext* pd3dImmediateContext, D3D
 	//render the mesh, shells, and the fins
 	pd3dImmediateContext->IASetInputLayout( g_pVertexLayout );
 
-	//g_numShells ++;
-	//if(g_numShells >= 150) g_numShells = 0;
 	//render the mesh
 	g_pShellNumberShaderVariable->SetInt(0);
 	g_pTechniqueRenderMesh->GetPassByIndex(0)->Apply(0,pd3dImmediateContext);

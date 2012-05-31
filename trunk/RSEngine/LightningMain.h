@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Utility.h"
 using namespace Utility;
 #include "EffectVariable.h"

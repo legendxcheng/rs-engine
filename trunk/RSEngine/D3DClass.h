@@ -60,6 +60,8 @@ public:
 	void TurnZBufferOn();
 	void TurnZBufferOff();
 
+	void SetRasterState();
+
 private:
 	bool m_vsync_enabled;
 	int m_videoCardMemory;
