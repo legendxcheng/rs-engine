@@ -65,10 +65,15 @@ float GetField (lua_State* L, const char *key)
 	return result;
 }
 
-void BulletStorm::LoadBulletStorm(char* fileName)
+void BulletStorm::LoadBulletStorm(const char* fileName)
 {
 	// now just test lua
 	int rett;
+	// TODO to make this into a log system
+// 	WCHAR   wsz[64]; 
+// 	swprintf(wsz, L"%S ",   fileName); 
+// 	LPCWSTR   p   =   wsz;
+// 	OutputDebugString(p);
 	lua_State *L = luaL_newstate();
 	m_luaState = L;
 	luaL_openlibs(L);
@@ -150,7 +155,7 @@ void BulletStorm::FetchBullets()
 
 bool BulletStorm::IsDone()
 {
-	lua_getglobal(m_luaState, "updateInterpolation");
+	lua_getglobal(m_luaState, "isDone");
 	lua_pcall(m_luaState, 0, 1, 0);
 	int ret = (int)lua_tonumber(m_luaState, -1);
 	lua_pop(m_luaState, 1);

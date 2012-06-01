@@ -17,7 +17,7 @@ public:
 	int GetVertexes(void* dest);
 	void GetLines(void* dest);
 	//load .lua file and initialize the bullet storm
-	void LoadBulletStorm(char* fileName);
+	void LoadBulletStorm(const char* fileName);
 	void UpdateFrame();
 	void UpdateInterpolation(float delta);
 	void FetchBullets();

@@ -18,15 +18,13 @@ GameLogic::GameLogic(void)
 	m_inputMgr = new InputManager();
 	m_spaceship = new Spaceship();
 	m_bulletSys = new BulletSystem();
+	m_bulletSys->Initialize();
 	m_gameGD = new GameGlobalData();
 	m_cameraAngle = 0.0f;
 	m_cameraRadius = 500.0f;
 	// test
 	// add bulletstorm into bulletsystem
-	BulletStorm* bs = new BulletStorm();
-	bs->LoadBulletStorm("BulletScript\\moxing9-Dongfang.lua");
 
-	m_bulletSys->InsertBulletStorm(bs);
 
 }
 

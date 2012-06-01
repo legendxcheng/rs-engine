@@ -2,6 +2,7 @@
 
 class BulletStorm;
 #include <vector>
+#include "lua_head.h"
 
 class BulletSystem
 {
@@ -10,6 +11,10 @@ public:
 	~BulletSystem(void);
 
 	void Initialize();// clear m_bulletStorms
+
+	void ReadBSList();
+
+
 	void ShutDown();
 	void InsertBulletStorm(BulletStorm* bs);
 	void UpdateFrame();
@@ -20,5 +25,7 @@ public:
 	bool FillVertexBuffer(void* vb);
 private:
 	std::vector<BulletStorm*> m_bulletStorms;
+	lua_State* m_luaState;
+	std::vector<std::string> m_bslist;
 };
 
