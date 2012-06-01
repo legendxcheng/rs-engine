@@ -41,23 +41,10 @@ bool SpherePS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilena
 	pixelShaderBuffer = 0;
 
 	// Compile the pixel shader code.
-	result = D3DX11CompileFromFile(psFilename, NULL, NULL, entryFuncName, "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL, 
-		&pixelShaderBuffer, &errorMessage, NULL);
-	if(FAILED(result))
-	{
-		// If the shader failed to compile it should have writen something to the error message.
-		if(errorMessage)
-		{
-			OutputShaderErrorMessage(errorMessage, hwnd, psFilename);
-		}
-		// If there was  nothing in the error message then it simply could not find the file itself.
-		else
-		{
-			MessageBox(hwnd, psFilename, L"Missing Shader File", MB_OK);
-		}
-
+	// Compile the vertex shader code.
+	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_PS, hwnd, psFilename, entryFuncName, &pixelShaderBuffer, &errorMessage);
+	if (!xresult)
 		return false;
-	}
 	// Create the vertex shader from the buffer.
 
 	// Create the pixel shader from the buffer.

@@ -102,23 +102,9 @@ bool BSTestVS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFileNa
 	vertexShaderBuffer = 0;
 	
 	// Compile the vertex shader code.
-	result = D3DX11CompileFromFile(vsFileName, NULL, NULL, entryFuncName, "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL, 
-		&vertexShaderBuffer, &errorMessage, NULL);
-	if(FAILED(result))
-	{
-		// If the shader failed to compile it should have writen something to the error message.
-		if(errorMessage)
-		{
-			OutputShaderErrorMessage(errorMessage, hwnd, vsFileName);
-		}
-		// If there was nothing in the error message then it simply could not find the shader file itself.
-		else
-		{
-			MessageBox(hwnd, vsFileName, L"Missing Shader File", MB_OK);
-		}
-
+	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_VS, hwnd, vsFileName, entryFuncName, &vertexShaderBuffer, &errorMessage);
+	if (!xresult)
 		return false;
-	}
 
 	// Create the vertex shader from the buffer.
 	result = device->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), NULL, &m_vertexShader);
