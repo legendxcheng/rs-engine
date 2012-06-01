@@ -181,6 +181,9 @@
     <ClCompile Include="D3DXUtils.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+    <ClCompile Include="LuaUtils.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -370,6 +373,9 @@
       <Filter>Shader Engine\SoftParticles</Filter>
     </ClInclude>
     <ClInclude Include="D3DXUtils.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaUtils.h">
       <Filter>Misc</Filter>
     </ClInclude>
   </ItemGroup>

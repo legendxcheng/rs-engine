@@ -4,7 +4,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
-
+#include "LuaUtils.h"
 BulletSystem::BulletSystem(void)
 {
 }
@@ -29,15 +29,6 @@ void BulletSystem::InsertBulletStorm(BulletStorm* bs)
 	m_bulletStorms.push_back(bs);
 }
 
-std::string lua_getString(lua_State* L, const lua_Number num) 
-{
-	std::string result;
-	lua_pushnumber(L, num);
-	lua_gettable(L, -2);
-	result = (std::string)lua_tostring(L, -1);
-	lua_pop(L, 1);
-	return result;
-}
 
 void BulletSystem::Initialize()
 {
@@ -73,7 +64,7 @@ void BulletSystem::ReadBSList()
 	for (int i = 1; i <= fileCount; ++i)
 	{
 		lua_getglobal(m_luaState, "lines");
-		m_bslist.push_back(lua_getString(m_luaState, i));
+		m_bslist.push_back(LuaUtils::lua_getString(m_luaState, i));
 	}
 	lua_close(m_luaState);
 }

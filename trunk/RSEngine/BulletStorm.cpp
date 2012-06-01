@@ -1,6 +1,6 @@
 #include "BulletStorm.h"
 #include "Structures.h"
-
+#include "LuaUtils.h"
 
 //#pragma comment(lib,"lua.lib")
 
@@ -70,10 +70,10 @@ void BulletStorm::LoadBulletStorm(const char* fileName)
 	// now just test lua
 	int rett;
 	// TODO to make this into a log system
-// 	WCHAR   wsz[64]; 
-// 	swprintf(wsz, L"%S ",   fileName); 
-// 	LPCWSTR   p   =   wsz;
-// 	OutputDebugString(p);
+	WCHAR   wsz[64]; 
+	swprintf(wsz, L"%S ",   fileName); 
+	LPCWSTR   p   =   wsz;
+	OutputDebugString(p);
 	lua_State *L = luaL_newstate();
 	m_luaState = L;
 	luaL_openlibs(L);
@@ -87,15 +87,7 @@ void BulletStorm::LoadBulletStorm(const char* fileName)
 // 	int outputd = (int)GetField(L, "b");
 }
 
-float getNumber(lua_State* L, const lua_Number num) 
-{
-	float result = 0.0f;
-	lua_pushnumber(L, num);
-	lua_gettable(L, -2);
-	result = (float)lua_tonumber(L, -1);
-	lua_pop(L, 1);
-	return result;
-}
+
 
 void BulletStorm::FetchBullets()
 {
@@ -113,8 +105,8 @@ void BulletStorm::FetchBullets()
 		for (int i = 0 ; i < m_lineCount; ++i)
 		{
 			std::pair<unsigned int, unsigned int> tpair;
-			tpair.first = (int)getNumber(m_luaState, i * 2 + 1) - 1;
-			tpair.second = (int)getNumber(m_luaState, i * 2 + 2) - 1;
+			tpair.first = (int)LuaUtils::lua_getNumber(m_luaState, i * 2 + 1) - 1;
+			tpair.second = (int)LuaUtils::lua_getNumber(m_luaState, i * 2 + 2) - 1;
 			m_lineList.push_back(tpair);
 		}
 		lua_pop(m_luaState,1);// pop the table
@@ -130,7 +122,7 @@ void BulletStorm::FetchBullets()
 	for (int i = 0; i < stripCount; ++i)
 	{
 		lua_getglobal(m_luaState, "vetxCount");	
-		int stripSize = (int)getNumber(m_luaState, i + 1);
+		int stripSize = (int)LuaUtils::lua_getNumber(m_luaState, i + 1);
 		lua_pop(m_luaState, 1);
 
 		lua_getglobal(m_luaState, "vetx");
@@ -138,11 +130,11 @@ void BulletStorm::FetchBullets()
 		while (tcount < stripSize)
 		{
 			BulletType tmp;
-			tmp.position.x = getNumber(m_luaState, totId);
+			tmp.position.x = LuaUtils::lua_getNumber(m_luaState, totId);
 			++totId;
-			tmp.position.y = getNumber(m_luaState, totId);
+			tmp.position.y = LuaUtils::lua_getNumber(m_luaState, totId);
 			++totId;
-			tmp.position.z = getNumber(m_luaState, totId);
+			tmp.position.z = LuaUtils::lua_getNumber(m_luaState, totId);
 			++totId;
 
 			m_vertexList.push_back(tmp);
