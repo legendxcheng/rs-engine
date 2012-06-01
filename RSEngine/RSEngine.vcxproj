@@ -97,6 +97,7 @@
     <ClCompile Include="LightningMain.cpp" />
     <ClCompile Include="LightningRenderer.cpp" />
     <ClCompile Include="LightningSeed.cpp" />
+    <ClCompile Include="LuaUtils.cpp" />
     <ClCompile Include="PathLightning.cpp" />
     <ClCompile Include="RSObjPS.cpp" />
     <ClCompile Include="RSObjVS.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="LightningMain.h" />
     <ClInclude Include="LightningRenderer.h" />
     <ClInclude Include="LightningSeed.h" />
+    <ClInclude Include="LuaUtils.h" />
     <ClInclude Include="lua_head.h" />
     <ClInclude Include="BulletSystem.h" />
     <ClInclude Include="PathLightning.h" />
