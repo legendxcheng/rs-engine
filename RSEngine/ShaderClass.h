@@ -12,6 +12,8 @@
 #include <d3dx10math.h>
 #include <d3dx11async.h>
 #include <fstream>
+
+#include "D3DXUtils.h"
 using namespace std;
 
 
@@ -50,7 +52,7 @@ protected:
 	//void RenderShader(ID3D11DeviceContext*, int);
 
 protected:
-	void OutputShaderErrorMessage(ID3D10Blob*, HWND, WCHAR*);
+	
 	string m_tag;
 
 private:

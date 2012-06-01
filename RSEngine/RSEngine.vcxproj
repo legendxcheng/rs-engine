@@ -84,6 +84,7 @@
     <ClCompile Include="BulletStormTest.cpp" />
     <ClCompile Include="BulletStrip.cpp" />
     <ClCompile Include="ColorRenderBuffer.cpp" />
+    <ClCompile Include="D3DXUtils.cpp" />
     <ClCompile Include="fontclass.cpp" />
     <ClCompile Include="fontshaderclass.cpp" />
     <ClCompile Include="FurMain.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="BulletStormTest.h" />
     <ClInclude Include="BulletStrip.h" />
     <ClInclude Include="ColorRenderBuffer.h" />
+    <ClInclude Include="D3DXUtils.h" />
     <ClInclude Include="EffectVariable.h" />
     <ClInclude Include="fontclass.h" />
     <ClInclude Include="fontshaderclass.h" />

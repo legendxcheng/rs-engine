@@ -178,6 +178,9 @@
     <ClCompile Include="SoftParticles.cpp">
       <Filter>Shader Engine\SoftParticles</Filter>
     </ClCompile>
+    <ClCompile Include="D3DXUtils.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -365,6 +368,9 @@
     </ClInclude>
     <ClInclude Include="SoftParticles.h">
       <Filter>Shader Engine\SoftParticles</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DXUtils.h">
+      <Filter>Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
