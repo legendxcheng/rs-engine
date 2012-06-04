@@ -99,6 +99,7 @@
     <ClCompile Include="LightningSeed.cpp" />
     <ClCompile Include="LuaUtils.cpp" />
     <ClCompile Include="PathLightning.cpp" />
+    <ClCompile Include="PerlinFire.cpp" />
     <ClCompile Include="RSObjPS.cpp" />
     <ClCompile Include="RSObjVS.cpp" />
     <ClCompile Include="RSTimer.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="lua_head.h" />
     <ClInclude Include="BulletSystem.h" />
     <ClInclude Include="PathLightning.h" />
+    <ClInclude Include="PerlinFire.h" />
     <ClInclude Include="RSObjPS.h" />
     <ClInclude Include="RSObjVS.h" />
     <ClInclude Include="RSTimer.h" />
@@ -208,7 +210,6 @@
   <ItemGroup>
     <None Include="bstest.hlsl" />
     <None Include="BulletStorm.hlsl" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Color.ps" />
     <None Include="Color.vs" />
     <None Include="font.ps" />
@@ -219,6 +220,7 @@
     <None Include="Imaging.hlsl" />
     <None Include="Lightning.hlsl" />
     <None Include="MainEffect.hlsl" />
+    <None Include="PerlinFire.hlsl" />
     <None Include="rsobjtest.hlsl" />
     <None Include="SoftParticles.hlsl" />
     <None Include="Sphere.fx" />

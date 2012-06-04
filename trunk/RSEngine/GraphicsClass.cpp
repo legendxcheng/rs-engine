@@ -34,6 +34,7 @@ GraphicsClass::GraphicsClass()
 
 	m_gaussianMain = new GaussianMain();
 	m_lightingMain = new LightingMain();
+	m_perlinFire = new PerlinFire();
 }
 
 
@@ -152,6 +153,12 @@ void GraphicsClass::Shutdown()
 		delete m_lightingMain;
 		m_lightingMain = 0;
 	}
+
+	if(m_perlinFire)
+	{
+		delete m_perlinFire;
+		m_perlinFire = 0;
+	}
 	return;
 }
 
@@ -201,6 +208,8 @@ bool GraphicsClass::Render()
 	context->OMGetRenderTargets(1,&m_scene_render_target_view,&m_scene_depth_stencil_view);
 	m_lightingMain->SetLightningRendererRTV_DSV(m_scene_depth_stencil_view,m_scene_render_target_view);
 	m_lightingMain->OnD3D11FrameRender(viewMatrix, projectionMatrix);
+
+	m_perlinFire->OnD3D11FrameRender(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix);
 
 	//m_D3D->SetRasterState();
 	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix, orthoMatrix);
@@ -297,6 +306,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 
 	//m_gaussianMain->OnD3D11CreateDevice(device);
 	m_lightingMain->OnD3D11CreateDevice(device);
+	m_perlinFire->OnD3D11CreateDevice(device);
 
 	//////////////////////////////////////////////////////////////////////////
 	// Strange....

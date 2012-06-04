@@ -21,7 +21,7 @@ GameLogic::GameLogic(void)
 	m_bulletSys->Initialize();
 	m_gameGD = new GameGlobalData();
 	m_cameraAngle = 0.0f;
-	m_cameraRadius = 500.0f;
+	m_cameraRadius = 50.0f;
 	// test
 	// add bulletstorm into bulletsystem
 

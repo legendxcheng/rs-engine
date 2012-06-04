@@ -13,6 +13,7 @@
 #include "spriteclass.h"
 #include "GaussianMain.h"
 #include "LightningMain.h"
+#include "PerlinFire.h"
 
 class CameraManager;
 class CameraClass;
@@ -54,6 +55,7 @@ private:
 	
 	GaussianMain* m_gaussianMain;
 	LightingMain* m_lightingMain;
+	PerlinFire* m_perlinFire;
 /*
 	for communication with class GameLogic
 */
