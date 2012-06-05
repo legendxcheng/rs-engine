@@ -2,9 +2,11 @@
 #include "Structures.h"
 #include "BSTestPS.h"
 #include "BSTestVS.h"
+#include "BSTestGS.h"
 #include "SystemClass.h"
 #include "ShaderManager.h"
 #include "GameLogic.h"
+#include "TextureManager.h"
 
 BulletStormTest::BulletStormTest(void)
 {
@@ -12,6 +14,7 @@ BulletStormTest::BulletStormTest(void)
 	
 	m_indexBuffer = 0;
 	m_vertexBuffer = 0;
+	m_isOrtho = true;
 }
 
 
@@ -74,7 +77,9 @@ void BulletStormTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX view
 	RenderBuffers(deviceContext);
 	// Render the model using the color shader.
 	m_vs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projectionMatrix);
-	m_ps->SetRenderParameters(deviceContext, NULL);
+	m_gs->SetRenderParameters(deviceContext, NULL);
+	TextureClass* tc = TextureManager::GetInstance()->GetTexture("Resource\\blt.png");
+	m_ps->SetRenderParameters(deviceContext, tc->GetTexture());
 	// TODO: Change
 	deviceContext->Draw(500, 0);
 }
@@ -177,11 +182,16 @@ void  BulletStormTest::ReleaseTexture()
 
 bool BulletStormTest::InitializeShaders(ID3D11Device* device)
 {
+	m_gs = new BSTestGS();
+	m_gs->Initialize(device, SystemClass::GetWindowHandler(), L"bstest.hlsl", "GS");
+	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_GS, m_gs);
 	m_vs = new BSTestVS("BulletStormTestVS");
 	m_vs->Initialize(device, SystemClass::GetWindowHandler(), L"bstest.hlsl", "ColorVertexShader");
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_VS, m_vs);
 	m_ps = new BSTestPS();
 	m_ps->Initialize(device, SystemClass::GetWindowHandler(), L"bstest.hlsl", "ColorPixelShader");
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_PS, m_ps);
+
+	
 	return true;
 }

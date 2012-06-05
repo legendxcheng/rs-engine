@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arena.cpp" />
+    <ClCompile Include="BSTestGS.cpp" />
     <ClCompile Include="BSTestPS.cpp" />
     <ClCompile Include="BSTestVS.cpp" />
     <ClCompile Include="BulletStorm.cpp" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.h" />
+    <ClInclude Include="BSTestGS.h" />
     <ClInclude Include="BSTestPS.h" />
     <ClInclude Include="BSTestVS.h" />
     <ClInclude Include="BulletStorm.h" />

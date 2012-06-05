@@ -58,6 +58,23 @@ bool BSTestPS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilena
 	pixelShaderBuffer = 0;
 	// Setup the description of the dynamic matrix constant buffer that is in the vertex shader.
 	
+	D3D11_SAMPLER_DESC colorMapDesc;
+	ZeroMemory( &colorMapDesc, sizeof( colorMapDesc ) );
+	colorMapDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	colorMapDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	colorMapDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	colorMapDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	colorMapDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	colorMapDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	result = device->CreateSamplerState( &colorMapDesc, &m_colorState );
+
+	if( FAILED( result ) )
+	{
+		//DXTRACE_MSG( "Failed to create color map sampler state!" );
+		return false;
+	}
+
 	return true;
 
 
@@ -83,9 +100,10 @@ void BSTestPS::ShutdownShader()
 
 }
 
-bool BSTestPS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView*)
+bool BSTestPS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* texture)
 {
 	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
-
+	deviceContext->PSSetShaderResources( 0, 1, &texture);
+	deviceContext->PSSetSamplers( 0, 1, &m_colorState );
 	return true;
 }

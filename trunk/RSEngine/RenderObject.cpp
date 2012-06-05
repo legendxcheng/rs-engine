@@ -22,5 +22,5 @@ bool RenderObject::IsVisible()
 
 bool RenderObject::Is2D()
 {
-	return m_is2D;
+	return m_isOrtho;
 }

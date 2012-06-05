@@ -3,6 +3,7 @@
 
 class BSTestVS;
 class BSTestPS;
+class BSTestGS;
 
 class BulletStormTest :
 	public ModelClass
@@ -38,5 +39,6 @@ private:
 	//shaders
 	BSTestVS* m_vs;
 	BSTestPS* m_ps;
+	BSTestGS* m_gs;
 };
 
