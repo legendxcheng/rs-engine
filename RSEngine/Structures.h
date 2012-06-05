@@ -72,6 +72,11 @@ struct ObjVertex
 	D3DXVECTOR3 tangent;
 };
 
+struct MiscBufferType
+{
+	D3DXVECTOR3 cameraPos;
+};
+
 namespace LightningUtility
 {
 	inline D3D11_INPUT_ELEMENT_DESC LightningInputElementDesc

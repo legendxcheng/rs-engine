@@ -9,7 +9,7 @@ TextClass::TextClass()
 	D3DXMatrixIdentity(&m_worldMatrix);
 	m_Font = 0;
 	m_FontShader = 0;
-	
+	m_isOrtho = true;
 	m_sentenceList.clear();
 }
 

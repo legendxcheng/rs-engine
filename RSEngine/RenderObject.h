@@ -23,6 +23,6 @@ public:
 protected:
 	D3DXMATRIX m_worldMatrix;
 	bool m_visible;
-	bool m_is2D;
+	bool m_isOrtho;
 };
 

@@ -18,6 +18,6 @@ public:
 	bool Register();// register the shader in vertex shader manager
 	bool Unregister();
 protected:
-	virtual void ShutdownShader() = 0;
+	virtual void ShutdownShader() = 0; 
 };
 

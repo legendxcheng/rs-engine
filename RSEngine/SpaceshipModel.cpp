@@ -11,6 +11,7 @@ SpaceshipModel::SpaceshipModel(char* objFileName) : ObjModelClass(objFileName)
 
 	m_furMain = NULL;
 	m_softParticles = NULL;
+	m_isOrtho = true;
 }
 
 bool SpaceshipModel::Update()

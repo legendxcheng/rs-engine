@@ -8,13 +8,10 @@
 
 SpriteClass::SpriteClass(void)
 {
-
+	D3DXMatrixIdentity(&m_worldMatrix);
+	m_isOrtho = true;
 }
 
-bool SpriteClass::Is2D()
-{
-	return true;
-}
 
 SpriteClass::~SpriteClass(void)
 {
@@ -179,12 +176,14 @@ bool SpriteClass::UpdateAttributes(ID3D11DeviceContext* deviceContext, int posit
 
 }
 
-void SpriteClass::SetAttributes(int screenWidth, int screenHeight, int bitmapWidth, int bitmapHeight)
+void SpriteClass::SetAttributes(int screenWidth, int screenHeight, int bitmapWidth, int bitmapHeight,
+	D3DXMATRIX baseViewMatrix)
 {
 	m_screenWidth = screenWidth;
 	m_screenHeight = screenHeight;
 	m_bitmapWidth = bitmapWidth;
 	m_bitmapHeight = bitmapHeight;
+	m_baseViewMatrix = baseViewMatrix;
 }
 
 void SpriteClass::SetTexture(TextureClass* texture)
@@ -309,7 +308,7 @@ void SpriteClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatr
 	//bool result;
 	D3DClass::GetInstance()->TurnZBufferOff();
 	RenderBuffers(deviceContext);
-	m_vs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projMatrix);
+	m_vs->SetRenderParameters(deviceContext, m_worldMatrix, m_baseViewMatrix, projMatrix);
 	m_ps->SetRenderParameters(deviceContext, m_Texture->GetTexture());
 	deviceContext->DrawIndexed(m_indexCount, 0, 0);
 	D3DClass::GetInstance()->TurnZBufferOn();

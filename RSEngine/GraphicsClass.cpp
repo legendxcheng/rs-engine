@@ -251,24 +251,26 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 // 	omc->Initialize(device);
 // 	rom->InsertRenderObject((RenderObject*) omc);
 
+	D3DXMATRIX baseViewMatrix;
+	m_camera->Render();
+	m_camera->GetViewMatrix(baseViewMatrix);// used by objects that are always normal against camera
+	/*
 	SpriteClass* sc = new SpriteClass();
 	sc->Initialize(device);
 	sc->LoadTexture(device, "dd.jpg");
-	sc->SetAttributes(800, 600,  800, 600);
+	sc->SetAttributes(800, 600,  400, 600, baseViewMatrix);
 	ID3D11DeviceContext* dc;
 	device->GetImmediateContext(&dc);
 	sc->UpdateAttributes(dc, 0, 0);
 	rom->InsertRenderObject((RenderObject*)sc);
-
+	*/
 	/*
 		text example
 	*/
 	m_textClass = new TextClass();
 
 	
-	D3DXMATRIX baseViewMatrix;
-	m_camera->Render();
-	m_camera->GetViewMatrix(baseViewMatrix);
+	
 	m_textClass->SetAttributes(800, 600, baseViewMatrix);
 	m_textClass->Initialize(device);
 	GameLogic::GetInstance()->InitUIMgr(m_textClass);
@@ -280,12 +282,14 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	// Initialize Texture
 	//////////////////////////////////////////////////////////////////////////
 
-
+	// Insert Textures
+	TextureManager::GetInstance()->CreateAndInsertTexture("Resource\\blt.png");
 
 
 	// Initialize Shader
 	//////////////////////////////////////////////////////////////////////////
 	// rsobj shader ps vs
+	/*
 	RSObjPS* rsps = new RSObjPS("RSObjPS");
 	rsps->Initialize(device, SystemClass::GetWindowHandler(), L"rsobjtest.hlsl", "PS");
 	shaderMgr->InsertShader(SHADER_TYPE_PS, rsps);
@@ -299,7 +303,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	SpaceshipModel* sm = new SpaceshipModel("humbird.obj");
 	sm->Initialize(device);
 	rom->InsertRenderObject(sm);
-
+	*/
 	//////////////////////////////////////////////////////////////////////////
 	// Effect Classes
 	//////////////////////////////////////////////////////////////////////////
