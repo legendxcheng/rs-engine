@@ -251,14 +251,14 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 // 	omc->Initialize(device);
 // 	rom->InsertRenderObject((RenderObject*) omc);
 
-// 	SpriteClass* sc = new SpriteClass();
-// 	sc->Initialize(device);
-// 	sc->LoadTexture(device, L"dd.jpg");
-// 	sc->SetAttributes(800, 600,  800, 600);
-// 	ID3D11DeviceContext* dc;
-// 	device->GetImmediateContext(&dc);
-// 	sc->Update(dc, 0, 0);
-// 	rom->InsertRenderObject((RenderObject*)sc);
+	SpriteClass* sc = new SpriteClass();
+	sc->Initialize(device);
+	sc->LoadTexture(device, "dd.jpg");
+	sc->SetAttributes(800, 600,  800, 600);
+	ID3D11DeviceContext* dc;
+	device->GetImmediateContext(&dc);
+	sc->UpdateAttributes(dc, 0, 0);
+	rom->InsertRenderObject((RenderObject*)sc);
 
 	/*
 		text example

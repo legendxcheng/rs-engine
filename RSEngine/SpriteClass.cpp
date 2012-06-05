@@ -8,11 +8,13 @@
 
 SpriteClass::SpriteClass(void)
 {
+
 }
 
 
 SpriteClass::~SpriteClass(void)
 {
+
 }
 
 void SpriteClass::Shutdown()
@@ -67,7 +69,12 @@ bool SpriteClass::Initialize(ID3D11Device* device)
 
 }
 
-bool SpriteClass::Update(ID3D11DeviceContext* deviceContext, int positionX, int positionY, int frame)
+bool SpriteClass::Update()
+{
+	return true;
+}
+
+bool SpriteClass::UpdateAttributes(ID3D11DeviceContext* deviceContext, int positionX, int positionY, int frame)
 {
 	m_previousPosX = m_PosX;
 	m_previousPosY = m_PosY;
@@ -332,7 +339,7 @@ bool SpriteClass::LoadTexture(ID3D11Device* device, char* fileName)
 bool SpriteClass::InitializeShaders(ID3D11Device* device)
 {
 	m_vs = new SpriteVS();
-	m_vs->Initialize(device, SystemClass::GetWindowHandler(), L"Sprete.fx", "TextureVertexShader");
+	m_vs->Initialize(device, SystemClass::GetWindowHandler(), L"Sprite.fx", "TextureVertexShader");
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_VS, m_vs);
 	m_ps = new SpritePS();
 	m_ps->Initialize(device, SystemClass::GetWindowHandler(), L"sprite.fx", "TexturePixelShader");

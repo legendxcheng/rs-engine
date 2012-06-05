@@ -10,6 +10,7 @@
 #include "RSTimer.h"
 #include "BulletStorm.h"
 #include "CameraClass.h"
+#include "StateMachine.h"
 
 GameLogic::GameLogic(void)
 {
@@ -22,9 +23,8 @@ GameLogic::GameLogic(void)
 	m_gameGD = new GameGlobalData();
 	m_cameraAngle = 0.0f;
 	m_cameraRadius = 50.0f;
-	// test
-	// add bulletstorm into bulletsystem
 
+	m_stateMachine = new StateMachine();
 
 }
 

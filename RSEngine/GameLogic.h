@@ -8,7 +8,7 @@ class GameGlobalData;
 class TextClass;
 class InputClass;
 class CameraClass;
-
+class StateMachine;
 class GameLogic
 {
 public:
@@ -68,5 +68,6 @@ private:
 	float m_cameraAngle;// along the axi
 	unsigned int m_screenBullet;// totnumber of bullets in screen
 	float m_cameraRadius;
+	StateMachine* m_stateMachine;
 };
 
