@@ -107,7 +107,7 @@ void GS( point GeometryInputType input[1], inout TriangleStream<PixelInputType> 
     TriStream.Append( output );
 
 	output.position = input[0].position + xvec * len / 2 + yvec * len / 2;
-    output.tex = float2(0.0f, 1.0f);
+    output.tex = float2(1.0f, 0.0f);
 	//output.position = mul(output.position, mvp);
 	output.position.w = 1.0f;
     TriStream.Append( output );   
@@ -133,7 +133,9 @@ float4 ColorPixelShader(PixelInputType input) : SV_TARGET
 	float4 textureColor;
 
 
-    // Sample the pixel color from the texture using the sampler at this texture coordinate location.
+    // Sample the pixel color from the texture using the sampler at this texture coordinate location
     textureColor = shaderTexture.Sample(SampleType, input.tex);
+	//if (textureColor.r == 1.0f)
+	textureColor.a = 0.0f;
     return textureColor;
 }

@@ -241,7 +241,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	*/
 	BulletStormTest* bst = new BulletStormTest();
 	bst->Initialize(device);
-	//rom->InsertRenderObject((RenderObject*)bst);
+	rom->InsertRenderObject((RenderObject*)bst);
 
 	/*
 		Sphere Example
