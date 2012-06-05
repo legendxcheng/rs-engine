@@ -106,6 +106,7 @@ private:
 	float g_fFrequencyWeights [5];
 	int g_CubeMapSize;
 	float m_time;
+	D3DXVECTOR3 FirePosition;
 
 	struct SimpleVertex
 	{

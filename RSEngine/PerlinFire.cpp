@@ -110,8 +110,9 @@ HRESULT PerlinFire::OnD3D11CreateDevice( ID3D11Device * pd3dDevice)
 	HRESULT hr;
 	
 	m_time = 0.0f;
-
+	FirePosition = D3DXVECTOR3(0,0,0);
 	const float lengthOfSide = 0.5f;
+	//const float myparameter = 1.0f;
 	SimpleVertex vertices[] =
 	{
 		{ D3DXVECTOR3( -lengthOfSide, lengthOfSide, -lengthOfSide ) ,D3DXVECTOR3(0,0,0),D3DXVECTOR2(0,0)},
@@ -307,10 +308,12 @@ void PerlinFire::OnD3D11FrameRender( ID3D11DeviceContext* pd3dDevice,D3DXMATRIX 
 	// Render fire volume
 
 	D3DXMATRIX mTranslate, mScale, mWorldViewInv;
-	D3DXMatrixTranslation( &mTranslate, 0, 0, 0 );
-	D3DXMatrixScaling( &mScale, 4.0f * g_fShapeSize, 8.0f * g_fShapeSize, 4.0f * g_fShapeSize);
-
+	D3DXMatrixRotationZ(&mTranslate, -1.5708);
+	D3DXMatrixScaling( &mScale, 7.0f * g_fShapeSize, 1.0f * g_fShapeSize, 1.0f * g_fShapeSize);
+	
+	D3DXMatrixTranslation(&mWorld, FirePosition.x - m_time * 2, FirePosition.y, FirePosition.z);
 	mWorldView = mTranslate * mScale * mWorld * mView;
+	
 	mWorldViewProj = mWorldView * mProj;
 
 	D3DXMatrixInverse( &mWorldViewInv, NULL, &mWorldView );

@@ -80,7 +80,7 @@ void SoftParticles::SetVariables()
 	g_fParticleMinSize = 1.0f * scaleValue;
 	g_bAnimateParticles = true;
 
-	g_ParticleTechnique = PT_BILLBOARD_HARD;//PT_VOLUME_SOFT;
+	g_ParticleTechnique = PT_BILLBOARD_ODEPTH;//PT_BILLBOARD_HARD
 	g_vLightDir1 = D3DXVECTOR3(1.705f,5.557f,-9.380f);
 	g_vLightDir2 = D3DXVECTOR3(-5.947f,-5.342f,-5.733f);
 
