@@ -292,8 +292,8 @@ void LightningRenderer::End(bool glow, D3DXVECTOR3 blur_sigma)
 		context->OMSetRenderTargets(1, &m_scene_render_target_view, m_scene_depth_stencil_view);
 	}
 
-	//m_buffer = m_original_lightning_buffer.ShaderResourceView();
-	//DrawQuad(m_tech_add_buffer);
+	m_buffer = m_original_lightning_buffer.ShaderResourceView();
+	DrawQuad(m_tech_add_buffer);
 }
 
 void LightningRenderer::BuildSubdivisionBuffers() 
@@ -458,7 +458,7 @@ void LightningRenderer::DownSample(Utility::ColorRenderBuffer* buffer)
 
 	targets.push_back(&m_small_lightning_buffer0);
 
-	for(size_t i = 0; i < sources.size(); ++i)
+	for(size_t i = 1; i < 2; ++i)//sources.size()
 	{
 		ID3D11RenderTargetView* view[] = { targets[i]->RenderTargetView()};
 		context->OMSetRenderTargets(1, const_cast<ID3D11RenderTargetView**> (view), 0);

@@ -371,7 +371,7 @@ VolumeVertex PerlinFireVS( float3 Pos : POSITION,uint instanceId : SV_InstanceID
 	
 	Out.Pos = Pos;   // supposed to have range -0.5 ... 0.5
 
-	if(instanceId == 0) Pos.x += 1.2f;
+	//if(instanceId == 0) Pos.x += 1.2f;
 
     Out.ClipPos = mul( float4( Pos, 1 ), WorldViewProj );
 
@@ -494,7 +494,7 @@ float4 PerlinFire4DPS(VolumeVertex In) : SV_Target
 
         // Evaluate turbulence function
         float Turbulence = abs( Turbulence4D( NoiseCoord * NoiseScale ) );
-
+		//Turbulence = 0;
         float2 tc;
         tc.x = length( Pos.xz ) * 2;
         tc.y = 0.5 - Pos.y - Roughness * Turbulence * pow( ( 0.5 + Pos.y ), 0.5 );
