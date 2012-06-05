@@ -11,6 +11,10 @@ SpriteClass::SpriteClass(void)
 
 }
 
+bool SpriteClass::Is2D()
+{
+	return true;
+}
 
 SpriteClass::~SpriteClass(void)
 {

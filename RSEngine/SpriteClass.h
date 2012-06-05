@@ -11,6 +11,8 @@ class SpriteClass :
 public:
 	SpriteClass(void);
 	~SpriteClass(void);
+
+	virtual bool Is2D();
 	virtual bool Update();
 	virtual void Shutdown();
 	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX);// just one call to handle all the render related logic
