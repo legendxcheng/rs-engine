@@ -349,7 +349,7 @@ void PerlinFire::OnD3D11DestroyDevice()
 
 	for( int i = 0; i < 6; i ++ )
 	{
-		SAFE_RELEASE( g_pCubeMapDepthViewArray[i] );
+		//SAFE_RELEASE( g_pCubeMapDepthViewArray[i] );
 	}
 
 	SAFE_RELEASE( g_pGeometryVertexLayout );
