@@ -184,8 +184,10 @@
     <ClCompile Include="LuaUtils.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
-    <ClCompile Include="PerlinFire.cpp" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="PerlinFire.cpp">
+      <Filter>Shader Engine\PerlinFire</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -380,8 +382,10 @@
     <ClInclude Include="LuaUtils.h">
       <Filter>Misc</Filter>
     </ClInclude>
-    <ClInclude Include="PerlinFire.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="PerlinFire.h">
+      <Filter>Shader Engine\PerlinFire</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bstest.hlsl">
@@ -432,7 +436,9 @@
     <None Include="SoftParticles.hlsl">
       <Filter>Shader Engine\SoftParticles</Filter>
     </None>
-    <None Include="PerlinFire.hlsl" />
+    <None Include="PerlinFire.hlsl">
+      <Filter>Shader Engine\PerlinFire</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Low Engine">
@@ -494,6 +500,9 @@
     </Filter>
     <Filter Include="Shader Engine\SoftParticles">
       <UniqueIdentifier>{3f0afe27-817e-4e27-bbb1-1492d8fb1f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Engine\PerlinFire">
+      <UniqueIdentifier>{7f574ce3-7cf2-4cb2-851f-37f69dd656e0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
