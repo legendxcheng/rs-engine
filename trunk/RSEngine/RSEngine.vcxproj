@@ -131,6 +131,7 @@
     <ClCompile Include="SphereVS.cpp" />
     <ClCompile Include="SpritePS.cpp" />
     <ClCompile Include="SpriteVS.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="textclass.cpp" />
     <ClCompile Include="TokenStream.cpp" />
     <ClCompile Include="SystemClass.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="SphereVS.h" />
     <ClInclude Include="SpritePS.h" />
     <ClInclude Include="SpriteVS.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="textclass.h" />
     <ClInclude Include="TokenStream.h" />
     <ClInclude Include="Structures.h" />

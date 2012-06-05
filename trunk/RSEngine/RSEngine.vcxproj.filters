@@ -184,6 +184,8 @@
     <ClCompile Include="LuaUtils.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+    <ClCompile Include="PerlinFire.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
@@ -378,6 +380,8 @@
     <ClInclude Include="LuaUtils.h">
       <Filter>Misc</Filter>
     </ClInclude>
+    <ClInclude Include="PerlinFire.h" />
+    <ClInclude Include="StateMachine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bstest.hlsl">
@@ -425,10 +429,10 @@
     <None Include="MainEffect.hlsl">
       <Filter>Shader Engine\Lightning</Filter>
     </None>
-    <None Include="ClassDiagram1.cd" />
     <None Include="SoftParticles.hlsl">
       <Filter>Shader Engine\SoftParticles</Filter>
     </None>
+    <None Include="PerlinFire.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Low Engine">
