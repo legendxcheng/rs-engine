@@ -145,7 +145,7 @@ bool BSTestGS::SetRenderParameters(ID3D11DeviceContext* deviceContext, ID3D11Sha
 	deviceContext->GSSetConstantBuffers(1, 1, &m_miscBuffer);
 
 
-	deviceContext->GSSetShader(m_geometryShader, NULL, 0);
+	
 
 
 	return true;

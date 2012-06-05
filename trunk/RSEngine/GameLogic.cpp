@@ -127,9 +127,9 @@ void GameLogic::InitCamera(CameraClass* cc)
 	m_camera = cc;
 }
 
-void GameLogic::FillBulletBuffer(void* vb)
+int GameLogic::FillBulletBuffer(void* vb)
 {
-	m_bulletSys->FillVertexBuffer(vb);
+	return m_bulletSys->FillVertexBuffer(vb) / sizeof(BulletType);
 }
 
 float GameLogic::GetCameraAngle()

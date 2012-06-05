@@ -137,7 +137,7 @@ bool BulletSystem::IsCollided(float cameraAngle, float shipx, float shipy)
 	return false;
 }
 
-bool BulletSystem::FillVertexBuffer(void* vb)
+int BulletSystem::FillVertexBuffer(void* vb)
 {
 	int bytesCopy = 0;
 	for (std::vector<BulletStorm*>::iterator iter = m_bulletStorms.begin();
@@ -147,5 +147,5 @@ bool BulletSystem::FillVertexBuffer(void* vb)
 		bytesCopy += (*iter)->GetVertexes((void*)((char*)vb + bytesCopy));
 		vb = (void*)((char*)vb + bytesCopy);
 	}
-	return true;
+	return bytesCopy;
 }

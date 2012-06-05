@@ -53,7 +53,7 @@ public:
 	float GetCameraRadius();
 //bullet
 public:
-	void FillBulletBuffer(void* vb);
+	int FillBulletBuffer(void* vb);
 
 
 
