@@ -22,7 +22,7 @@ public:
 	//TODO
 	// a function to fill all the vertexes in a render object
 	bool IsCollided(float cameraAngle, float shipx, float shipy);
-	bool FillVertexBuffer(void* vb);
+	int FillVertexBuffer(void* vb);
 private:
 	std::vector<BulletStorm*> m_bulletStorms;
 	lua_State* m_luaState;

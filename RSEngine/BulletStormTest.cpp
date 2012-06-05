@@ -64,7 +64,7 @@ bool BulletStormTest::Update()
 	dataPtr = (BulletType*)mappedResource.pData;
 
 	// Copy the matrices into the constant buffer.
-	GameLogic::GetInstance()->FillBulletBuffer(dataPtr);
+	m_vertexCount = GameLogic::GetInstance()->FillBulletBuffer(dataPtr);
 
 	// Unlock the constant buffer.
 	m_deviceContext->Unmap(m_vertexBuffer, 0);
@@ -82,7 +82,11 @@ void BulletStormTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX view
 	TextureClass* tc = TextureManager::GetInstance()->GetTexture("Resource\\blt.png");
 	m_ps->SetRenderParameters(deviceContext, tc->GetTexture());
 	// TODO: Change
-	deviceContext->Draw(1000, 0);
+	
+	deviceContext->Draw(m_vertexCount, 0);
+	deviceContext->GSSetShader(NULL, NULL, 0);
+	//release gs
+	
 	D3DClass::GetInstance()->TurnOffAlphaBlending();
 }
 
