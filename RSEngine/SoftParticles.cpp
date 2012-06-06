@@ -69,9 +69,9 @@ void SoftParticles::SetVariables()
 	g_iHeight = 600;
 	g_iSampleCount = 1;
 
-	float scaleValue = 20.0f;
+	float scaleValue = 2.5f;
 
-	g_fFadeDistance = 1.0f * scaleValue;
+	g_fFadeDistance = 4 * 16.0f * scaleValue;
 	g_fParticleLifeSpan = 5.0f;
 	g_fEmitRate = 0.015f;
 
@@ -260,7 +260,7 @@ void SoftParticles::OnD3D11FrameRender( ID3D11DeviceContext* context, D3DXMATRIX
 	//D3DXMATRIX mScale;
 	//float mScaleValue = 1.0f;
 	//D3DXMatrixScaling(&mScale,mScaleValue,mScaleValue,mScaleValue);
-	D3DXMatrixTranslation(&mWorld,spaceshipPos.x - 125.0f,spaceshipPos.y,spaceshipPos.z);
+	D3DXMatrixTranslation(&mWorld,spaceshipPos.x - 15.0f,spaceshipPos.y + 3.5f,spaceshipPos.z);
 	//mWorld = mScale * mWorld;
 
 	mProj = projectionMatrix;

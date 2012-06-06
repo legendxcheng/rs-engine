@@ -186,7 +186,7 @@ bool GraphicsClass::Render()
 	static float xr = 0.0f;
 
 	// Clear the buffers to begin the scene.
-	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 0.0f);
+	m_D3D->BeginScene(0.1f, 0.1f, 0.1f, 1.0f);
 // 	m_camera->SetRotation(-xr / 3.1415926f * 180, 0, 0);
 // 	m_camera->SetPosition(0,  -100.0f * sin(xr), -100.0f * cos(xr));
 // 	xr += 0.0000001f;
@@ -200,8 +200,13 @@ bool GraphicsClass::Render()
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
 
-	//m_gaussianMain->OnD3D11FrameRender1(m_D3D->GetDeviceContext());
-
+	int blfc = GameLogic::GetInstance()->NeedBlur();
+	if (blfc > 0) 
+	{
+		m_gaussianMain->SetFR(180 - blfc);
+		m_gaussianMain->OnD3D11FrameRender1(m_D3D->GetDeviceContext());
+	}
+	
 	ID3D11DeviceContext *context = m_D3D->GetDeviceContext();
 	ID3D11DepthStencilView*	m_scene_depth_stencil_view;
 	ID3D11RenderTargetView*	m_scene_render_target_view;
@@ -209,11 +214,13 @@ bool GraphicsClass::Render()
 	m_lightingMain->SetLightningRendererRTV_DSV(m_scene_depth_stencil_view,m_scene_render_target_view);
 	m_lightingMain->OnD3D11FrameRender(viewMatrix, projectionMatrix);
 
+	
 	m_perlinFire->OnD3D11FrameRender(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix);
 
 	//m_D3D->SetRasterState();
 	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix, orthoMatrix);
-	//m_gaussianMain->OnD3D11FrameRender2(m_D3D->GetDeviceContext());
+	if (blfc > 0)
+		m_gaussianMain->OnD3D11FrameRender2(m_D3D->GetDeviceContext());
 
 	m_D3D->EndScene();
 
@@ -289,7 +296,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	// Initialize Shader
 	//////////////////////////////////////////////////////////////////////////
 	// rsobj shader ps vs
-	/*
+	
 	RSObjPS* rsps = new RSObjPS("RSObjPS");
 	rsps->Initialize(device, SystemClass::GetWindowHandler(), L"rsobjtest.hlsl", "PS");
 	shaderMgr->InsertShader(SHADER_TYPE_PS, rsps);
@@ -300,15 +307,15 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 
 	// Initialize RenderObject
 	//////////////////////////////////////////////////////////////////////////
-	SpaceshipModel* sm = new SpaceshipModel("humbird.obj");
+	SpaceshipModel* sm = new SpaceshipModel("tst.obj");
 	sm->Initialize(device);
 	rom->InsertRenderObject(sm);
-	*/
+	
 	//////////////////////////////////////////////////////////////////////////
 	// Effect Classes
 	//////////////////////////////////////////////////////////////////////////
 
-	//m_gaussianMain->OnD3D11CreateDevice(device);
+	m_gaussianMain->OnD3D11CreateDevice(device);
 	m_lightingMain->OnD3D11CreateDevice(device);
 	m_perlinFire->OnD3D11CreateDevice(device);
 

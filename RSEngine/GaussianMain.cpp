@@ -454,6 +454,11 @@ void GaussianMain::ShowImage(ID3D11DeviceContext* pd3dImmediateContext)
 	pd3dImmediateContext->Draw( 4, 0 );
 }
 
+void GaussianMain::SetFR(int fr)
+{
+	g_FilterRadius = (float)(fr);	
+}
+
 void GaussianMain::OnD3D11FrameRender1(ID3D11DeviceContext* pd3dImmediateContext)
 {	
 	// Clear render targets
@@ -467,8 +472,8 @@ void GaussianMain::OnD3D11FrameRender1(ID3D11DeviceContext* pd3dImmediateContext
 	pd3dImmediateContext->OMSetRenderTargets(1, rtv_array, g_pDSV_Default);
 	pd3dImmediateContext->ClearRenderTargetView(g_pRTV_Scene, ClearColor);
 
-	g_FilterRadius += 1.0f;
-	if(g_FilterRadius >= 50.0f) g_FilterRadius = 0.0f;
+// 	g_FilterRadius += 1.0f;
+// 	if(g_FilterRadius >= 180.0f) g_FilterRadius = 0.0f;
 
 }
 

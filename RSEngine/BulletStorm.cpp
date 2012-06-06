@@ -176,7 +176,7 @@ bool BulletStorm::IsCollided(D3DXVECTOR3 norm, float shipx, float shipy)
 		else by = persP.z / yvec.z;
 
 		float dis = (sqrt((by - shipy) * (by - shipy) + (bx - shipx) * (bx - shipx)));
-		if (dis < 5.0f)
+		if (dis < 7.0f)
 		{
 			return true;
 		}

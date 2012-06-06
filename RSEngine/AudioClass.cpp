@@ -60,16 +60,15 @@ void AudioClass::InitializeResource()
 {
 	FMOD_RESULT result;
 	FMOD::Sound* snd;
-	/*
-	result = m_system->createSound("Resource\\22.mp3", FMOD_HARDWARE, 0, &snd);
+	
+	result = m_system->createSound("Resource\\explode.wav", FMOD_HARDWARE, 0, &snd);
 	ERRCHECK(result);
 	snd->setMode(FMOD_LOOP_OFF);
 	SoundClass* sc = new SoundClass();
-	sc->Initialize(snd, "bgm");
+	sc->Initialize(snd, "explode");
 	m_soundList.push_back(sc);
 
-	PlayBGM("bgm");
-	*/
+	
 
 }
 

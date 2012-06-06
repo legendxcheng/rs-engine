@@ -2,11 +2,12 @@
 
 SpaceshipModel::SpaceshipModel(char* objFileName) : ObjModelClass(objFileName)
 {
-	D3DXMatrixScaling(&m_backWorldMatrix, 500.0f, 500.0f, 500.0f);
+	D3DXMatrixScaling(&m_backWorldMatrix, 0.2f, 0.2f, 0.2f);
 	//m_worldMatrix = 
-	D3DXMATRIX rotationMatrix;
-	D3DXMatrixRotationY(&rotationMatrix, (float)(D3DX_PI / 2 * 3));
-	m_backWorldMatrix = m_backWorldMatrix * rotationMatrix;
+	D3DXMATRIX translationMatrix;
+	//D3DXMatrixRotationY(&rotationMatrix, (float)(D3DX_PI / 2 * 3));
+	D3DXMatrixTranslation(&translationMatrix, 0.0f, -1.0f, 0.0f);
+	m_backWorldMatrix = m_backWorldMatrix * translationMatrix;
 	m_worldMatrix = m_backWorldMatrix;
 
 	m_furMain = NULL;

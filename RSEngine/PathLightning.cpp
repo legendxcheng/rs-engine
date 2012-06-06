@@ -35,7 +35,7 @@ void PathLightning::UpdateSegments()
 	std::vector<LightningPathSegment> segments2;
 	const float r = 50.0f;
 	const float angle = 0.02f;
-	for(int i=0;i<20;i++)
+	for(int i=0; i<40; i++)
 	{
 		float ra = i*r/2;
 		segments2.push_back(LightningPathSegment(

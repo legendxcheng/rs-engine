@@ -11,6 +11,11 @@ Spaceship::Spaceship(void)
 	m_bby = 0;
 }
 
+void Spaceship::Reset()
+{
+	m_bbx = -150;
+	m_bby = 0;
+}
 
 Spaceship::~Spaceship(void)
 {
@@ -33,6 +38,16 @@ void Spaceship::Move(int moveCode)
 		m_bby += yStep;
 		break;
 	}
+
+	//saturation
+	if (m_bbx < - 385)
+		m_bbx = -385;
+	if (m_bbx > 385)
+		m_bbx = 385;
+	if (m_bby < - 285)
+		m_bby = -285;
+	if (m_bby > 290)
+		m_bby = 290;
 }
 
 void Spaceship::GetXYZ(float* x, float* y, float*z)

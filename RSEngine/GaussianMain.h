@@ -101,5 +101,7 @@ public:
 	void ReleaseResources();
 
 	void OnD3D11DestroyDevice();
+
+	void SetFR(int fr);
 };
 #endif
