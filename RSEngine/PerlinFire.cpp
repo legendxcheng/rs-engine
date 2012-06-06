@@ -309,9 +309,9 @@ void PerlinFire::OnD3D11FrameRender( ID3D11DeviceContext* pd3dDevice,D3DXMATRIX 
 
 	D3DXMATRIX mTranslate, mScale, mWorldViewInv;
 	D3DXMatrixRotationZ(&mTranslate, -1.5708);
-	D3DXMatrixScaling( &mScale, 7.0f * g_fShapeSize, 1.0f * g_fShapeSize, 1.0f * g_fShapeSize);
+	D3DXMatrixScaling( &mScale, 10.0f * g_fShapeSize, 10.0f * g_fShapeSize, 10.0f * g_fShapeSize);
 	
-	D3DXMatrixTranslation(&mWorld, FirePosition.x - m_time * 2, FirePosition.y, FirePosition.z);
+	D3DXMatrixTranslation(&mWorld, FirePosition.x, FirePosition.y, FirePosition.z);
 	mWorldView = mTranslate * mScale * mWorld * mView;
 	
 	mWorldViewProj = mWorldView * mProj;
