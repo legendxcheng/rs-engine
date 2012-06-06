@@ -11,6 +11,7 @@
 #include "BulletStorm.h"
 #include "CameraClass.h"
 #include "StateMachine.h"
+#include "AudioClass.h"
 
 GameLogic::GameLogic(void)
 {
@@ -23,8 +24,13 @@ GameLogic::GameLogic(void)
 	m_gameGD = new GameGlobalData();
 	m_cameraAngle = 0.0f;
 	m_cameraRadius = 500.0f;
-
+	m_totFrame = 0;
 	m_stateMachine = new StateMachine();
+	m_lastFrame = 0;
+	m_isDead = false;
+	m_score = 0;
+	m_niceMove = 0;
+	m_deadLastFrameCountDown = 0;
 
 }
 
@@ -41,16 +47,48 @@ GameLogic* GameLogic::GetInstance()
 	return m_instance;
 }
 
+int GameLogic::NeedBlur()
+{
+	return (m_deadLastFrameCountDown);
+}
+
+void GameLogic::ResetGame()
+{
+
+	m_spaceship->Reset();
+	//m_isDead = false;
+	m_score = 0;
+	m_lastFrame = m_totFrame;
+	m_niceMove = 0;
+	m_deadLastFrameCountDown = 0;
+}
 
 void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 {
 	// TODO: fill
-	
+	m_totFrame = totFrame;	
 	m_bulletSys->UpdateFrame();
 	float sx, sy;
 	m_spaceship->GetScrXY(&sx, &sy);
 	float ishit = m_bulletSys->IsCollided(m_cameraAngle, sx, sy);
-	
+	if (!m_isDead && ishit)
+	{
+		m_isDead = true;
+		//AudioClass::GetInstance()->PlaySound("explode");
+		m_deadLastFrameCountDown = 180;
+				
+	}
+
+	if (m_deadLastFrameCountDown > 0)
+	{
+		m_deadLastFrameCountDown -= 1;
+	}
+	else if (m_isDead)
+	{
+		m_isDead = false;
+		ResetGame();
+	}
+	m_score = m_totFrame - m_lastFrame + m_niceMove * 100;
 
 	//test input mgr
 	HandleInput();
@@ -59,6 +97,8 @@ void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 	m_uiMgr->UpdateFrameCount(fps, totFrame);
 	m_uiMgr->UpdateKeyboardInput(m_inputMgr->GetKeyBoardState());
 	m_uiMgr->UpdateHitCondition(ishit);
+	m_uiMgr->UpdateSurviveTime((float)(m_totFrame - m_lastFrame) / 60);
+	m_uiMgr->UpdateScore(m_score);
 }
 
 void GameLogic::HandleInput()

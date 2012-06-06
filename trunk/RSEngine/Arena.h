@@ -25,7 +25,7 @@ public:
 	{
 		ArenaSettings():
 		Glow(false),
-		AnimationSpeed(5),BlurSigma(1.0f,1.0f,1.0f)
+		AnimationSpeed(10),BlurSigma(1.0f,1.0f,1.0f)
 	{
 	}
 

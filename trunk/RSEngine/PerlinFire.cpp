@@ -333,7 +333,7 @@ void PerlinFire::OnD3D11FrameRender( ID3D11DeviceContext* pd3dDevice,D3DXMATRIX 
 	pd3dDevice->IASetVertexBuffers( 0, 1, &g_pBuffer, &stride, &offset );
 	pd3dDevice->IASetIndexBuffer( g_pIndex, DXGI_FORMAT_R16_UINT, 0 );
 	pd3dDevice->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
-	pd3dDevice->DrawIndexedInstanced(36,2,0,0,0);
+	pd3dDevice->DrawIndexedInstanced(36,1,0,0,0);
 }
 
 //--------------------------------------------------------------------------------------
