@@ -353,7 +353,7 @@ void BoltOutGS
 	float3 vs_end = mul(float4(input[0].End, 1.0f), world_view);
 	float3 vs_forward = normalize(vs_end - vs_start);
 	
-	float width =  Decay(BoltWidth, input[0].Level);
+	float width =  5.0f * Decay(BoltWidth, input[0].Level);
 	
 	float3 right = width * normalize(cross(vs_forward,float3(0,0,1)));
 	

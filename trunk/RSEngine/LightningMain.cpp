@@ -43,6 +43,10 @@ void LightingMain::OnD3D11FrameRender(D3DXMATRIX viewMa, D3DXMATRIX projMa)
 	const float dt = 1.0f/60.0f;
 	m_time += dt;
 	
+	D3DXMATRIX SCALE;
+	D3DXMatrixScaling(&SCALE, 3.0f, 3.0f, 3.0f);
+	viewMa = SCALE * viewMa;
+
 	g_arena->Matrices(viewMa, projMa);
 	g_arena->Time(m_time,dt);
 	g_arena->Render();

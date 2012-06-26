@@ -1,9 +1,20 @@
 
 #include "D3DXUtils.h"
+#include <d3d10misc.h>
+#include "Utils.h"
+/*
+	if RS_COMPILE_HLSL exists, compile from file and then set it to [shaderBuffer]
+	else just load compiled version of hlsl into [shaderBuffer]
+*/
+//#define RS_COMPLILE_HLSL
 
 bool D3DXUtils::CompileShaderFromFile(int compileType, HWND hwnd, WCHAR* shaderFileName, CHAR* entryFuncName, 
 	ID3D10Blob** shaderBuffer, ID3D10Blob** errorMessage)
 {
+	
+
+
+#ifdef RS_COMPLILE_HLSL
 	HRESULT result;
 	char* cot;
 	switch (compileType)
@@ -25,7 +36,7 @@ bool D3DXUtils::CompileShaderFromFile(int compileType, HWND hwnd, WCHAR* shaderF
 		shaderBuffer, errorMessage, NULL);
 	if(FAILED(result))
 	{
-		// If the shader failed to compile it should have writen something to the error message.
+		// If the shader failed to compile it should have written something to the error message.
 		if(errorMessage)
 		{
 			OutputShaderErrorMessage(*errorMessage, hwnd, shaderFileName);
@@ -38,6 +49,43 @@ bool D3DXUtils::CompileShaderFromFile(int compileType, HWND hwnd, WCHAR* shaderF
 
 		return false;
 	}
+	// write shaderBuffer into a file
+	void* sbc;
+	int sbs;
+	sbc = (*shaderBuffer)->GetBufferPointer();
+	sbs = (*shaderBuffer)->GetBufferSize();
+
+	char fn[200];
+	ZeroMemory(fn, 200);
+	w2c(fn, shaderFileName, 200);
+	strcat(fn, entryFuncName);
+	FILE* fout;
+	fout = fopen(fn, "w");
+	fwrite(sbc, 1, sbs, fout);
+	fclose(fout);
+#else
+	
+	void* bptr;
+	char tbuf[1024 * 10];//5 MB
+	char fn[200];
+	bptr = tbuf;
+	ZeroMemory(fn, 200);
+	w2c(fn, shaderFileName, 200);
+	strcat(fn, entryFuncName);
+	FILE* fout;
+	fout = fopen(fn, "r");
+	
+	
+	//int bufSize;
+	int rSize;//real size
+	rSize = fread(tbuf, 1, 1024 * 10, fout);
+	
+	D3D10CreateBlob(rSize, shaderBuffer);
+	memcpy((*shaderBuffer)->GetBufferPointer(), tbuf, rSize);
+	fclose(fout);
+#endif
+
+
 	return true;
 }
 

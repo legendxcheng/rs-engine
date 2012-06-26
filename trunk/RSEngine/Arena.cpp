@@ -79,7 +79,7 @@ void Arena::CreateLightning()
 	}
 
 	{
-		m_blue_beam.BoltWidth = D3DXVECTOR2(0.125f,0.5f);
+		m_blue_beam.BoltWidth = 5.0f * D3DXVECTOR2(0.125f,0.5f);
 		m_blue_beam.ColorInside = D3DXVECTOR3(1,1,1);
 		m_blue_beam.ColorOutside = D3DXVECTOR3(0,0,1);
 		m_blue_beam.ColorFallOffExponent = 2.0f;

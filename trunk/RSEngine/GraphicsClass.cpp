@@ -185,7 +185,7 @@ bool GraphicsClass::Render()
 	//bool result;
 	static float xr = 0.0f;
 
-	// Clear the buffers to begin the scene.
+	// Clear the buffers to begin the scene.-
 	m_D3D->BeginScene(0.1f, 0.1f, 0.1f, 1.0f);
 // 	m_camera->SetRotation(-xr / 3.1415926f * 180, 0, 0);
 // 	m_camera->SetPosition(0,  -100.0f * sin(xr), -100.0f * cos(xr));
