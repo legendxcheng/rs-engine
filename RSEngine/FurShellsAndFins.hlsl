@@ -330,8 +330,8 @@ float4 PSShells(VS_OUTPUT_SCENE In) : SV_Target
     float4 outputColor;
     
     float2 Texture  = In.Texture * textureTilingFactor;
-    float4 tangentAndAlpha  = furTextureArray.SampleLevel( samLinear, float3(Texture, In.shellNumber),0 );
-    float4 offset   =  furOffsetArray.SampleLevel( samLinear, float3(Texture, In.shellNumber),0 );
+    float4 tangentAndAlpha  = 1.0f;//furTextureArray.SampleLevel( samLinear, float3(Texture, In.shellNumber),0 );
+    float4 offset   =  1.0f;//furOffsetArray.SampleLevel( samLinear, float3(Texture, In.shellNumber),0 );
 
     //get the fur color and local fur density
     Texture -= ( offset.xy - 0.5f )*2.0f;

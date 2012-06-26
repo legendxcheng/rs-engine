@@ -34,10 +34,10 @@ void PathLightning::UpdateSegments()
 	std::vector<SubdivideVertex> vertices;
 	std::vector<LightningPathSegment> segments2;
 	const float r = 50.0f;
-	const float angle = 0.02f;
-	for(int i=0; i<40; i++)
+	const float angle = 0.01f;
+	for(int i=0; i<20; i++)
 	{
-		float ra = i*r/2;
+		float ra = i*r/5;
 		segments2.push_back(LightningPathSegment(
 			D3DXVECTOR3(ra*cos(m_destAngle),r*sin(i*angle),ra*sin(m_destAngle)),
 			D3DXVECTOR3((ra+r)*cos(m_destAngle),r*sin(i*angle),(ra+r)*sin(m_destAngle)),

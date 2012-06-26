@@ -191,6 +191,9 @@
     <ClCompile Include="BSTestGS.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DClass.h">
