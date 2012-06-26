@@ -1,4 +1,5 @@
 #include "GaussianMain.h"
+#include "D3DXUtils.h"
 
 GaussianMain::GaussianMain()
 {
@@ -152,7 +153,9 @@ HRESULT GaussianMain::CompileGaussianFilterEffects(ID3D11Device* pd3dDevice, con
 	// Compile the effect file
 	ID3DBlob* pBlobFX = NULL;
 	ID3DBlob* pErrorBlob = NULL;
-	hr = D3DX11CompileFromFile(str, defines, NULL, NULL, "fx_5_0", NULL, NULL, NULL, &pBlobFX, &pErrorBlob, NULL);
+	HWND hwnd = 0;
+	hr = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_FX, defines, hwnd,  str, NULL, &pBlobFX, &pErrorBlob, "gaussian2.bhlsl");
+	//hr = D3DX11CompileFromFile(str, defines, NULL, NULL, "fx_5_0", NULL, NULL, NULL, &pBlobFX, &pErrorBlob, NULL);
 	if (FAILED(hr))
 	{
 		if(pErrorBlob != NULL)
@@ -162,6 +165,8 @@ HRESULT GaussianMain::CompileGaussianFilterEffects(ID3D11Device* pd3dDevice, con
 	}
 
 	// Create the effect for column Gaussian filtering
+	int tmp = pBlobFX->GetBufferSize();
+	void* tmp2 = pBlobFX->GetBufferPointer();
 	D3DX11CreateEffectFromMemory(pBlobFX->GetBufferPointer(), pBlobFX->GetBufferSize(), 0, pd3dDevice, &g_pFX_GaussianCol);
 
 	SAFE_RELEASE(pBlobFX);
@@ -183,7 +188,7 @@ HRESULT GaussianMain::CompileGaussianFilterEffects(ID3D11Device* pd3dDevice, con
 	defines[5].Name = "TEXELS_PER_THREAD";
 	defines[5].Definition = str_texels_per_thread;
 
-	hr = D3DX11CompileFromFile(str, defines, NULL, NULL, "fx_5_0", NULL, NULL, NULL, &pBlobFX, &pErrorBlob, NULL);
+	/*hr = D3DX11CompileFromFile(str, defines, NULL, NULL, "fx_5_0", NULL, NULL, NULL, &pBlobFX, &pErrorBlob, NULL);
 	if (FAILED(hr))
 	{
 		if(pErrorBlob != NULL)
@@ -193,7 +198,10 @@ HRESULT GaussianMain::CompileGaussianFilterEffects(ID3D11Device* pd3dDevice, con
 	}
 
 	// Create the effect for row Gaussian filtering
-	D3DX11CreateEffectFromMemory(pBlobFX->GetBufferPointer(), pBlobFX->GetBufferSize(), 0, pd3dDevice, &g_pFX_GaussianRow);
+	*/
+	D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_FX, defines, hwnd,  str, NULL, &pBlobFX, &pErrorBlob, "gaussian1.bhlsl");
+	D3DX11CreateEffectFromMemory(pBlobFX->GetBufferPointer(), pBlobFX->GetBufferSize(), 0, pd3dDevice,
+		&g_pFX_GaussianRow);
 
 	SAFE_RELEASE(pBlobFX);
 	SAFE_RELEASE(pErrorBlob);

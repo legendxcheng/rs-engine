@@ -56,7 +56,7 @@ bool BSTestGS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* gsFilena
 	geometryShaderBuffer = 0;
 
 	// Compile the pixel shader code.
-	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_GS, hwnd, gsFilename, entryFuncName, &geometryShaderBuffer, &errorMessage);
+	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_GS, NULL, hwnd, gsFilename, entryFuncName, &geometryShaderBuffer, &errorMessage);
 	if (!xresult)
 		return false;
 

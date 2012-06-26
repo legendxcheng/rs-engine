@@ -48,7 +48,7 @@ bool SpriteVS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFileNa
 
 	// Compile the vertex shader code.
 	// Compile the vertex shader code.
-	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_VS, hwnd, vsFileName, entryFuncName, &vertexShaderBuffer, &errorMessage);
+	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_VS, NULL, hwnd, vsFileName, entryFuncName, &vertexShaderBuffer, &errorMessage);
 	if (!xresult)
 		return false;
 

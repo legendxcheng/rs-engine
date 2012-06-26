@@ -8,11 +8,12 @@
 */
 //#define RS_COMPLILE_HLSL
 
-bool D3DXUtils::CompileShaderFromFile(int compileType, HWND hwnd, WCHAR* shaderFileName, CHAR* entryFuncName, 
-	ID3D10Blob** shaderBuffer, ID3D10Blob** errorMessage)
+bool D3DXUtils::CompileShaderFromFile(int compileType, D3D10_SHADER_MACRO* define, HWND hwnd, WCHAR* shaderFileName, CHAR* entryFuncName, 
+	ID3D10Blob** shaderBuffer, ID3D10Blob** errorMessage, char* binaryFileName)
 {
 	
-
+	if (!entryFuncName)
+		entryFuncName = "_fx";
 
 #ifdef RS_COMPLILE_HLSL
 	HRESULT result;
@@ -31,8 +32,11 @@ bool D3DXUtils::CompileShaderFromFile(int compileType, HWND hwnd, WCHAR* shaderF
 	case COMPILE_TYPE_PS:
 		cot = "ps_5_0";
 		break;
+	case COMPILE_TYPE_FX:
+		cot = "fx_5_0";
+		break;
 	}
-	result = D3DX11CompileFromFile(shaderFileName, NULL, NULL, entryFuncName, cot, D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL, 
+	result = D3DX11CompileFromFile(shaderFileName, define, NULL, entryFuncName, cot, D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL, 
 		shaderBuffer, errorMessage, NULL);
 	if(FAILED(result))
 	{
@@ -56,11 +60,19 @@ bool D3DXUtils::CompileShaderFromFile(int compileType, HWND hwnd, WCHAR* shaderF
 	sbs = (*shaderBuffer)->GetBufferSize();
 
 	char fn[200];
-	ZeroMemory(fn, 200);
-	w2c(fn, shaderFileName, 200);
-	strcat(fn, entryFuncName);
+	if (!binaryFileName)
+	{
+		ZeroMemory(fn, 200);
+		w2c(fn, shaderFileName, 200);
+		strcat(fn, entryFuncName);
+	}
+	else
+	{
+		ZeroMemory(fn, 200);
+		memcpy(fn, binaryFileName, strlen(binaryFileName));
+	}
 	FILE* fout;
-	fout = fopen(fn, "w");
+	fout = fopen(fn, "wb");
 	fwrite(sbc, 1, sbs, fout);
 	fclose(fout);
 #else
@@ -69,16 +81,29 @@ bool D3DXUtils::CompileShaderFromFile(int compileType, HWND hwnd, WCHAR* shaderF
 	char tbuf[1024 * 10];//5 MB
 	char fn[200];
 	bptr = tbuf;
-	ZeroMemory(fn, 200);
-	w2c(fn, shaderFileName, 200);
-	strcat(fn, entryFuncName);
+	if (!binaryFileName)
+	{
+		ZeroMemory(fn, 200);
+		w2c(fn, shaderFileName, 200);
+
+		strcat(fn, entryFuncName);
+	}
+	else
+	{
+		ZeroMemory(fn, 200);
+		memcpy(fn, binaryFileName, strlen(binaryFileName));
+	}
 	FILE* fout;
-	fout = fopen(fn, "r");
+	fout = fopen(fn, "rb");
 	
 	
 	//int bufSize;
-	int rSize;//real size
-	rSize = fread(tbuf, 1, 1024 * 10, fout);
+	int rSize, tsize;//real size
+	rSize = 0;
+	while (tsize = fread(tbuf + rSize, 1, 1024 * 10, fout))
+	{
+		rSize += tsize;
+	}
 	
 	D3D10CreateBlob(rSize, shaderBuffer);
 	memcpy((*shaderBuffer)->GetBufferPointer(), tbuf, rSize);

@@ -43,7 +43,7 @@ bool BSTestPS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilena
 	pixelShaderBuffer = 0;
 
 	// Compile the pixel shader code.
-	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_PS, hwnd, psFilename, entryFuncName, &pixelShaderBuffer, &errorMessage);
+	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_PS, NULL, hwnd, psFilename, entryFuncName, &pixelShaderBuffer, &errorMessage);
 	if (!xresult)
 		return false;
 
