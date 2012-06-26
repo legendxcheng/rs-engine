@@ -42,7 +42,7 @@ bool SpherePS::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* psFilena
 
 	// Compile the pixel shader code.
 	// Compile the vertex shader code.
-	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_PS, hwnd, psFilename, entryFuncName, &pixelShaderBuffer, &errorMessage);
+	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_PS, NULL, hwnd, psFilename, entryFuncName, &pixelShaderBuffer, &errorMessage);
 	if (!xresult)
 		return false;
 	// Create the vertex shader from the buffer.

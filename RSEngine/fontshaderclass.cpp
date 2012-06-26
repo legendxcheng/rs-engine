@@ -89,14 +89,14 @@ bool FontShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* v
 	pixelShaderBuffer = 0;
 
     // Compile the vertex shader code.
-	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_VS, hwnd, vsFilename, "FontVertexShader", &vertexShaderBuffer, &errorMessage);
+	bool xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_VS, NULL, hwnd, vsFilename, "FontVertexShader", &vertexShaderBuffer, &errorMessage);
 	if (!xresult)
 		return false;
 
 
 
     // Compile the pixel shader code.
-	xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_PS, hwnd, psFilename, "FontPixelShader", &pixelShaderBuffer, &errorMessage);
+	xresult = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_PS, NULL, hwnd, psFilename, "FontPixelShader", &pixelShaderBuffer, &errorMessage);
 	if (!xresult)
 		return false;
 
