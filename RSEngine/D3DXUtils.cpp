@@ -78,7 +78,7 @@ bool D3DXUtils::CompileShaderFromFile(int compileType, D3D10_SHADER_MACRO* defin
 #else
 	
 	void* bptr;
-	char tbuf[1024 * 10];//5 MB
+	char tbuf[1024 * 200];//5 MB
 	char fn[200];
 	bptr = tbuf;
 	if (!binaryFileName)
