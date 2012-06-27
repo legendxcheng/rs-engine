@@ -1,4 +1,5 @@
 #include "PerlinFire.h"
+#include "D3DXUtils.h"
 
 PerlinFire::PerlinFire()
 {
@@ -380,13 +381,15 @@ HRESULT PerlinFire::LoadEffectFromFile( ID3D11Device* pd3dDevice, WCHAR* szFileN
 	// Compile the effect file
 	ID3DBlob* pBlobFX = NULL;
 	ID3DBlob* pErrorBlob = NULL;
-	hr = D3DX11CompileFromFile(szFileName, NULL, NULL, NULL, "fx_5_0", NULL, NULL, NULL, &pBlobFX, &pErrorBlob, NULL);
-	if (FAILED(hr))
+	HWND hwnd = 0;
+	hr = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_FX, NULL, hwnd,  szFileName, NULL, &pBlobFX, &pErrorBlob, "perlinfile.bhlsl");
+	//hr = D3DX11CompileFromFile(szFileName, NULL, NULL, NULL, "fx_5_0", NULL, NULL, NULL, &pBlobFX, &pErrorBlob, NULL);
+	/*if (FAILED(hr))
 	{
 		char* err = (char*)pErrorBlob->GetBufferPointer();
 		SAFE_RELEASE(pErrorBlob);
 		return hr;
-	}
+	}*/
 
 	// Create the effect
 	hr = D3DX11CreateEffectFromMemory(pBlobFX->GetBufferPointer(), pBlobFX->GetBufferSize(), 0, pd3dDevice, ppEffect);
