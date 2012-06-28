@@ -1,23 +1,4 @@
-//----------------------------------------------------------------------------------
-// File:   PerlinFire.fx
-// Author: Andrew Tatarinov
-// Email:  sdkfeedback@nvidia.com
-// 
-// Copyright (c) 2007 NVIDIA Corporation. All rights reserved.
-//
-// TO  THE MAXIMUM  EXTENT PERMITTED  BY APPLICABLE  LAW, THIS SOFTWARE  IS PROVIDED
-// *AS IS*  AND NVIDIA AND  ITS SUPPLIERS DISCLAIM  ALL WARRANTIES,  EITHER  EXPRESS
-// OR IMPLIED, INCLUDING, BUT NOT LIMITED  TO, IMPLIED WARRANTIES OF MERCHANTABILITY
-// AND FITNESS FOR A PARTICULAR PURPOSE.  IN NO EVENT SHALL  NVIDIA OR ITS SUPPLIERS
-// BE  LIABLE  FOR  ANY  SPECIAL,  INCIDENTAL,  INDIRECT,  OR  CONSEQUENTIAL DAMAGES
-// WHATSOEVER (INCLUDING, WITHOUT LIMITATION,  DAMAGES FOR LOSS OF BUSINESS PROFITS,
-// BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, OR ANY OTHER PECUNIARY LOSS)
-// ARISING OUT OF THE  USE OF OR INABILITY  TO USE THIS SOFTWARE, EVEN IF NVIDIA HAS
-// BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-//
-//
-//----------------------------------------------------------------------------------
-
+#include "PerlinFireDef.h"
 // Textures
 
 Texture2D   SceneTexture;
@@ -72,6 +53,8 @@ SamplerState SamplerRepeat
 row_major float4x4 WorldViewProj;
 matrix CubeViewMatrices[6];
 matrix CubeProjectionMatrix;
+
+float3 Positions[POSITIONSMAX];
 
 int CubeMapFace;
 
@@ -367,16 +350,16 @@ float Turbulence4D( float4 p )
 
 VolumeVertex PerlinFireVS( float3 Pos : POSITION,uint instanceId : SV_InstanceID )
 {
-    VolumeVertex Out;
+
+	VolumeVertex Out;
 	
 	Out.Pos = Pos;   // supposed to have range -0.5 ... 0.5
 
-	//if(instanceId == 0) Pos.x += 1.2f;
-
     Out.ClipPos = mul( float4( Pos, 1 ), WorldViewProj );
 
-    Out.RayDir = Pos - EyePos;
+	Out.ClipPos.xyz += Positions[instanceId] * Out.ClipPos.w;
 
+    Out.RayDir = Pos - EyePos;
 
     return Out;
 }

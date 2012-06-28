@@ -81,8 +81,9 @@ void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 			{
 				m_isDead = true;
 				//AudioClass::GetInstance()->PlaySound("explode");
-				m_deadLastFrameCountDown = 180;
+				m_deadLastFrameCountDown = 60;
 				m_surviveTime = (float)(m_totFrame - m_lastFrame) / 60;
+				
 
 			}
 
@@ -187,6 +188,8 @@ void GameLogic::HandleInput()
 		if (m_inputMgr->IsKeyDown(DIK_RETURN))
 		{
 			SetGameState(true);
+			m_bulletSys->ResetBulletStorm();
+
 		}
 		break;
 	}

@@ -229,6 +229,7 @@
     <None Include="Lightning.hlsl" />
     <None Include="MainEffect.hlsl" />
     <None Include="PerlinFire.hlsl" />
+    <None Include="PerlinFireDef.h" />
     <None Include="rsobjtest.hlsl" />
     <None Include="SoftParticles.hlsl" />
     <None Include="Sphere.fx" />

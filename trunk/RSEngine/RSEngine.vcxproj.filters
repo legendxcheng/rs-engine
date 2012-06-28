@@ -448,6 +448,9 @@
     <None Include="PerlinFire.hlsl">
       <Filter>Shader Engine\PerlinFire</Filter>
     </None>
+    <None Include="PerlinFireDef.h">
+      <Filter>Shader Engine\PerlinFire</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Low Engine">

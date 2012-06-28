@@ -20,6 +20,7 @@ public:
 	void RenderTargetResize(unsigned width, unsigned height);
 	
 	void Render();
+	void Positions(D3DXVECTOR3 * positions, int count);
 
 	struct ArenaSettings
 	{
