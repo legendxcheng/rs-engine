@@ -18,48 +18,65 @@ function initialize()
 	stripCount = 1 -- modify here
 	vetxCount = {} -- empty array to store vertex count for each strip
 	currentFrame = 0 -- current frame
-	maxFrame = 1600 -- max frame count, if current frame is bigger than maxFrame, then the bulletstorm will be removed from system
+	maxFrame = 600 -- max frame count, if current frame is bigger than maxFrame, then the bulletstorm will be removed from system
 	lineCount = 0 -- line count
 	line = {} -- stotre line index in vetx
 	lineUpdated = 0 -- 0 for not updated since last call 1 for updated since last call
 	stripCount = 1
-	vetxCount[1] = 400
+	vetxCount[1] = 200
 end
 
 function updateFrame()
 	currentFrame = currentFrame + 1
 	local tmpt = 1
-	for i=1, 400 do
+	for j = 1, 4 do
+		local phy = 3.1415926 / 4 * j
+		for i=1, 60 do
 		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
 		--x
+			local theta = 3.1415926 / 3 * i
+			local tx = 200 * math.sin(theta)
+			local ty = 200 * math.cos(theta) * math.sin(phy)
+			local tz = 200 * math.cos(theta) * math.cos(phy)
 
-		vetx[tmpt] = 400 - currentFrame + i * 2
-		local rr = calcRadius(vetx[tmpt] / 2 + currentFrame)
-		tmpt = tmpt + 1
-		--y
-		vetx[tmpt] = rr * 300 * math.sin(currentFrame / 400 - i / 5)
-		tmpt = tmpt + 1
-		--z
-		vetx[tmpt] = rr * 300 * math.cos(currentFrame / 400 - i / 5)
-		tmpt = tmpt + 1
+			vetx[tmpt] = 500 - currentFrame * 2 + i * 2 + tx
+			
+			tmpt = tmpt + 1
+			--y
+			vetx[tmpt] = ty
+			tmpt = tmpt + 1
+			--z
+			vetx[tmpt] = tz
+			tmpt = tmpt + 1
 
+		end
 	end
 end
 
 function updateInterpolation(intp)
 	--vetx = {} -- empty array
 	local tmpt = 1
-	for i=1, 400 do
-			--x
-		vetx[tmpt] = 400 - currentFrame - intp + i * 2
-		local rr = calcRadius(vetx[tmpt] / 2 + currentFrame)
-		tmpt = tmpt + 1
-		--y
-		vetx[tmpt] = rr * 300 * math.sin((currentFrame + intp)/ 400 - i / 5)
-		tmpt = tmpt + 1
-		--z
-		vetx[tmpt] = rr * 300 * math.cos((currentFrame + intp)/ 400 - i / 5)
-		tmpt = tmpt + 1
+	for j = 1, 4 do
+		local phy = 3.1415926 / 4 * j
+		for i=1, 60 do
+		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
+		--x
+			local theta = 3.1415926 / 3 * i
+			local tx = 200 * math.sin(theta)
+			local ty = 200 * math.cos(theta) * math.sin(phy)
+			local tz = 200 * math.cos(theta) * math.cos(phy)
+
+			vetx[tmpt] = 500 - currentFrame * 2 - intp + i * 2 + tx
+			
+			tmpt = tmpt + 1
+			--y
+			vetx[tmpt] = ty
+			tmpt = tmpt + 1
+			--z
+			vetx[tmpt] = tz
+			tmpt = tmpt + 1
+
+		end
 	end
 end
 

@@ -157,8 +157,8 @@ struct SeedRecord
 
 void Arena::ReadSeeds()
 {
-	m_fence_lightning =   m_lightning_renderer.CreatePathLightning(0x00,5);
-	m_inter_coil_lightning =  m_lightning_renderer.CreatePathLightning(0x08,5);
+	m_fence_lightning =   m_lightning_renderer.CreatePathLightning(0x00,4);
+	m_inter_coil_lightning =  m_lightning_renderer.CreatePathLightning(0x08,4);
 }
 
 void Arena::Positions(D3DXVECTOR3 * positions, int count)

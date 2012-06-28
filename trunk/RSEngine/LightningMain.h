@@ -29,4 +29,5 @@ public:
 
 	void SetLightningRendererRTV_DSV(ID3D11DepthStencilView* m_scene_depth_stencil_view,ID3D11RenderTargetView*	m_scene_render_target_view);
 
+	Arena* GetArena();
 };

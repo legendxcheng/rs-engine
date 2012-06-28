@@ -32,13 +32,15 @@ function updateFrame()
 	for i=1, 400 do
 		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
 		--x
+
 		vetx[tmpt] = 400 - currentFrame + i * 2
+		local rr = calcRadius(vetx[tmpt] / 2 + currentFrame)
 		tmpt = tmpt + 1
 		--y
-		vetx[tmpt] = math.abs(math.sin(vetx[tmpt-1])) * 300 * math.sin(currentFrame / 200 - i)
+		vetx[tmpt] = rr * 300 * math.sin(currentFrame / 400 - i / 5)
 		tmpt = tmpt + 1
 		--z
-		vetx[tmpt] = math.abs(math.sin(vetx[tmpt-2])) * 300 * math.cos(currentFrame / 200 - i)
+		vetx[tmpt] = rr * 300 * math.cos(currentFrame / 400 - i / 5)
 		tmpt = tmpt + 1
 
 	end
@@ -50,12 +52,13 @@ function updateInterpolation(intp)
 	for i=1, 400 do
 			--x
 		vetx[tmpt] = 400 - currentFrame - intp + i * 2
+		local rr = calcRadius(vetx[tmpt] / 2 + currentFrame)
 		tmpt = tmpt + 1
 		--y
-		vetx[tmpt] = math.abs(math.sin(vetx[tmpt-1])) * 300 * math.sin((currentFrame + intp)/ 200 - i)
+		vetx[tmpt] = rr * 300 * math.sin((currentFrame + intp)/ 400 - i / 5)
 		tmpt = tmpt + 1
 		--z
-		vetx[tmpt] = math.abs(math.sin(vetx[tmpt-2])) * 300 * math.cos((currentFrame + intp)/ 200 - i)
+		vetx[tmpt] = rr * 300 * math.cos((currentFrame + intp)/ 400 - i / 5)
 		tmpt = tmpt + 1
 	end
 end
@@ -65,4 +68,16 @@ function isDone()
 		return 1
 	end;
 	return 0
+end
+
+function calcRadius(para)
+	para = math.abs(para)
+	local tk1 = math.floor(para / 100)
+	local tk2 = math.floor(math.fmod(tk1, 2))
+	local tk3 = math.fmod(para, 100)
+	if (tk2 == 0) then
+		return math.sqrt(math.sqrt(tk3 / 100));
+	elseif (tk2 == 1) then
+		return 1 - math.sqrt(math.sqrt(tk3 / 100));
+	end
 end

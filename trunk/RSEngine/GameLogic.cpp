@@ -218,6 +218,11 @@ void GameLogic::RotateCamera(float angle)
 	m_camera->SetPosition(0,  -m_cameraRadius * sin(angle), -m_cameraRadius * cos(angle));
 }
 
+int GameLogic::GetBulletType()
+{
+	return m_bulletSys->GetBulletType();
+}
+
 void GameLogic::InitCamera(CameraClass* cc)
 {
 	m_camera = cc;

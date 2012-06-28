@@ -1,3 +1,3 @@
 #ifndef POSITIONSMAX
-#define POSITIONSMAX 128
+#define POSITIONSMAX 1024
 #endif
