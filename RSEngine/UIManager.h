@@ -22,6 +22,10 @@ public:
 	void UpdateKeyboardInput(std::string keyboardState);// maybe another kind of input structure
 	void UpdateSurviveTime(float stime);
 	void UpdateScore(int score);
+	void UpdateSurviveTime2(float stime);
+	void UpdateScore2(int score);
+	void SetGameState(bool isGame);
+
 
 private:
 

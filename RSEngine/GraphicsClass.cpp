@@ -199,13 +199,21 @@ bool GraphicsClass::Render()
 	xr += 0.1f;
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 	m_D3D->GetOrthoMatrix(orthoMatrix);
-
+	static int lblfc = 0;
 	int blfc = GameLogic::GetInstance()->NeedBlur();
 	if (blfc > 0) 
 	{
 		m_gaussianMain->SetFR(180 - blfc);
 		m_gaussianMain->OnD3D11FrameRender1(m_D3D->GetDeviceContext());
 	}
+	else
+	{
+		if (lblfc > 0)
+		// blfc count down to 0
+		//if (GameLogic::GetInstance()->)
+			GameLogic::GetInstance()->SetGameState(false);
+	}
+	lblfc = blfc;
 	
 	ID3D11DeviceContext *context = m_D3D->GetDeviceContext();
 	ID3D11DepthStencilView*	m_scene_depth_stencil_view;

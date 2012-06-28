@@ -12,6 +12,30 @@ UIManager::~UIManager(void)
 {
 }
 
+void UIManager::SetGameState(bool isGame)
+{
+	if (isGame)
+	{
+		m_textClass->GetSentenceByTag("FrameCount")->visible = true;
+		m_textClass->GetSentenceByTag("KeyBoard")->visible = true;
+		m_textClass->GetSentenceByTag("HitCondition")->visible = true;
+		m_textClass->GetSentenceByTag("SurviveTime")->visible = true;
+		m_textClass->GetSentenceByTag("Score")->visible = true;
+		m_textClass->GetSentenceByTag("SurviveTime2")->visible = false;
+		m_textClass->GetSentenceByTag("Score2")->visible = false;
+		
+	}
+	else
+	{
+		m_textClass->GetSentenceByTag("FrameCount")->visible = false;
+		m_textClass->GetSentenceByTag("KeyBoard")->visible = false;
+		m_textClass->GetSentenceByTag("HitCondition")->visible = false;
+		m_textClass->GetSentenceByTag("SurviveTime")->visible = false;
+		m_textClass->GetSentenceByTag("Score")->visible = false;
+		m_textClass->GetSentenceByTag("SurviveTime2")->visible = true;
+		m_textClass->GetSentenceByTag("Score2")->visible = true;
+	}
+}
 
 void UIManager::InitText()
 {
@@ -21,6 +45,8 @@ void UIManager::InitText()
 	m_textClass->AddText("HitCondition", 500, 5, 1.0f, 1.0f, 1.0f);
 	m_textClass->AddText("SurviveTime", 10, 20, 1.0f, 0.0f, 0.0f);
 	m_textClass->AddText("Score", 300, 20, 0.0f, 1.0f, 0.0f);
+	m_textClass->AddText("SurviveTime2", 360, 200, 1.0f, 0.0f, 0.0f);
+	m_textClass->AddText("Score2", 380, 230, 0.0f, 1.0f, 0.0f);
 
 }
 
@@ -38,6 +64,7 @@ void UIManager::UpdateKeyboardInput(string keyBoardState)
 	m_textClass->EditText("KeyBoard", keyBoardState);
 }
 
+
 void UIManager::UpdateScore(int score)
 {
 	char cstr[200] = {0};
@@ -47,6 +74,15 @@ void UIManager::UpdateScore(int score)
 	m_textClass->EditText("Score", sstr);
 }
 
+void UIManager::UpdateScore2(int score)
+{
+	char cstr[200] = {0};
+	sprintf(cstr, "Score: %d", score);
+	std::string sstr;
+	sstr.assign(cstr, strlen(cstr));
+	m_textClass->EditText("Score2", sstr);
+}
+
 void UIManager::UpdateSurviveTime(float stime)
 {
 	char cstr[200] = {0};
@@ -54,6 +90,15 @@ void UIManager::UpdateSurviveTime(float stime)
 	std::string sstr;
 	sstr.assign(cstr, strlen(cstr));
 	m_textClass->EditText("SurviveTime", sstr);
+}
+
+void UIManager::UpdateSurviveTime2(float stime)
+{
+	char cstr[200] = {0};
+	sprintf(cstr, "Survive Time: %.2fs", stime);
+	std::string sstr;
+	sstr.assign(cstr, strlen(cstr));
+	m_textClass->EditText("SurviveTime2", sstr);
 }
 
 void UIManager::Initialize(TextClass* tc)

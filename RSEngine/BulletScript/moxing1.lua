@@ -18,108 +18,49 @@ function initialize()
 	stripCount = 1 -- modify here
 	vetxCount = {} -- empty array to store vertex count for each strip
 	currentFrame = 0 -- current frame
-	maxFrame = 1200 -- max frame count, if current frame is bigger than maxFrame, then the bulletstorm will be removed from system
+	maxFrame = 1600 -- max frame count, if current frame is bigger than maxFrame, then the bulletstorm will be removed from system
 	lineCount = 0 -- line count
 	line = {} -- stotre line index in vetx
 	lineUpdated = 0 -- 0 for not updated since last call 1 for updated since last call
 	stripCount = 1
-	vetxCount[1] = 600
+	vetxCount[1] = 400
 end
 
 function updateFrame()
-	currentFrame = currentFrame + 1 /2
+	currentFrame = currentFrame + 1
 	local tmpt = 1
-		for i=1, 300 do 
-			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-			vetx[tmpt] = 400 - currentFrame  + i * 13
-			tmpt = tmpt + 1
-			if (i <= 100) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926)
-			elseif(i <= 200) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) + 100
-			elseif(i <= 300) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) - 100
-			end			
-			tmpt = tmpt + 1
-			if (i <= 100) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926)
-			elseif(i <= 200) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) + 100
-			elseif(i <= 300) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) - 100
-			end	
-			tmpt = tmpt + 1
-		end
-		for i=1, 300 do 
-			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-			vetx[tmpt] = 400 - currentFrame  + i * 13
-			tmpt = tmpt + 1
-			if (i <= 100) then
-				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) + i * 0.3
-			elseif(i <= 200) then
-				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) + 30 - i * 0.3
-			elseif(i <= 300) then
-				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) - i * 0.3
-			end			
-			tmpt = tmpt + 1
-			if (i <= 100) then
-				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926)
-			elseif(i <= 200) then
-				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926) + 100
-			elseif(i <= 300) then
-				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926) - 100
-			end	
+	for i=1, 400 do
+		--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
+		--x
 
-			tmpt = tmpt + 1
-		end
+		vetx[tmpt] = 400 - currentFrame + i * 2
+		local rr = calcRadius(vetx[tmpt] / 2 + currentFrame)
+		tmpt = tmpt + 1
+		--y
+		vetx[tmpt] = rr * 300 * math.sin(currentFrame / 400 - i / 5)
+		tmpt = tmpt + 1
+		--z
+		vetx[tmpt] = rr * 300 * math.cos(currentFrame / 400 - i / 5)
+		tmpt = tmpt + 1
+
+	end
 end
 
 function updateInterpolation(intp)
 	--vetx = {} -- empty array
-	currentFrame = currentFrame + 1 / 2
 	local tmpt = 1
-		for i=1, 300 do
-			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-			vetx[tmpt] = 400 - currentFrame - intp + i * 13
-			tmpt = tmpt + 1
-			if (i <= 100) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926)
-			elseif(i <= 200) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) + 100
-			elseif(i <= 300) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.sin((i % 5)*0.2 * 2 * 3.1415926) - 100
-			end
-			tmpt = tmpt + 1
-			if (i <= 100) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926)
-			elseif(i <= 200) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) + 100
-			elseif(i <= 300) then
-				vetx[tmpt] = ((i+currentFrame) % 300) * math.cos((i % 5)*0.2 * 2 * 3.1415926) - 100
-			end	
-			tmpt = tmpt + 1
-		end
-		for i=1, 300 do
-			--vetx[(i - 1) * 3 + 1] = math.sin(currentFrame - i)
-			vetx[tmpt] = 400 - currentFrame - intp + i * 13
-			tmpt = tmpt + 1
-			if (i <= 100) then
-				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) + i * 0.3
-			elseif(i <= 200) then
-				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) + 30 - i * 0.3
-			elseif(i <= 300) then
-				vetx[tmpt] = 300 * math.sin((i % 5)*0.2* 2 * 3.1415926) - i * 0.3
-			end
-			tmpt = tmpt + 1
-			if (i <= 100) then
-				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926)
-			elseif(i <= 200) then
-				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926) + 100
-			elseif(i <= 300) then
-				vetx[tmpt] = 300 * math.cos((i % 5)*0.2* 2 * 3.1415926) - 100
-			end	
-			tmpt = tmpt + 1
-		end
+	for i=1, 400 do
+			--x
+		vetx[tmpt] = 400 - currentFrame - intp + i * 2
+		local rr = calcRadius(vetx[tmpt] / 2 + currentFrame)
+		tmpt = tmpt + 1
+		--y
+		vetx[tmpt] = rr * 300 * math.sin((currentFrame + intp)/ 400 - i / 5)
+		tmpt = tmpt + 1
+		--z
+		vetx[tmpt] = rr * 300 * math.cos((currentFrame + intp)/ 400 - i / 5)
+		tmpt = tmpt + 1
+	end
 end
 
 function isDone()
@@ -127,4 +68,16 @@ function isDone()
 		return 1
 	end;
 	return 0
+end
+
+function calcRadius(para)
+	para = math.abs(para)
+	local tk1 = math.floor(para / 100)
+	local tk2 = math.floor(math.fmod(tk1, 2))
+	local tk3 = math.fmod(para, 100)
+	if (tk2 == 0) then
+		return math.sqrt(math.sqrt(tk3 / 100));
+	elseif (tk2 == 1) then
+		return 1 - math.sqrt(math.sqrt(tk3 / 100));
+	end
 end

@@ -25,14 +25,14 @@ public:
 	virtual void Shutdown();
 	virtual void Render(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX);
 	virtual bool Update();
-
+	SentenceType* GetSentenceByTag(std::string tag);
 private:
 	bool InitializeSentence(SentenceType**, std::string, unsigned int, ID3D11Device*);
 	bool UpdateSentence(SentenceType*, char*, int, int, float, float, float, ID3D11DeviceContext*);
 	bool UpdateSentence(SentenceType*, char*, ID3D11DeviceContext*);
 	void ReleaseSentence(SentenceType**);
 	bool RenderSentence(ID3D11DeviceContext*, SentenceType*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX);
-
+	
 
 // for high engine invoke
 public:
