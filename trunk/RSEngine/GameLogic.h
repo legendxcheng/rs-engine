@@ -12,6 +12,8 @@ class StateMachine;
 class GameLogic
 {
 public:
+#define GAME_STATE_GAME 0X100
+#define GAME_STATE_STAT 0X101
 
 	~GameLogic(void);
 	static GameLogic* GetInstance();
@@ -64,6 +66,7 @@ public:
 public:
 	// for outer class getting data
 	void GetSpaceshipXYZ(float*x, float* y, float* z);
+	void SetGameState(bool isGameState);
 private:
 	int m_totFrame;
 	float m_totTime;
@@ -78,4 +81,5 @@ private:
 	int m_niceMoveFrameCountDown;
 	int m_noUseFrameCountDown;
 	int m_deadLastFrameCountDown;
+	int m_gameState;
 };

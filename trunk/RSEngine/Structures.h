@@ -56,6 +56,7 @@ struct SentenceType
 	float red, green, blue;
 	std::string tag;// string for search
 	int positionX, positionY;
+	bool visible;
 };
 
 struct BulletType

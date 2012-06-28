@@ -117,7 +117,8 @@ void TextClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix
 	for (std::vector<SentenceType*>::iterator iter = m_sentenceList.begin(); iter != m_sentenceList.end();
 		++iter)
 	{
-		result = RenderSentence(deviceContext, *iter, m_worldMatrix, m_baseViewMatrix, orthoMatrix);
+		if ((*iter)->visible)
+			result = RenderSentence(deviceContext, *iter, m_worldMatrix, m_baseViewMatrix, orthoMatrix);
 	}
 	
 
@@ -431,6 +432,7 @@ bool TextClass::AddText(std::string tag, unsigned int positionX, unsigned int po
 	newSt->red = red;
 	newSt->green = green;
 	newSt->blue = blue;
+	newSt->visible = true;
 	m_sentenceList.push_back(newSt);
 	return true;
 }
@@ -492,6 +494,18 @@ bool TextClass::EditText(std::string tag, std::string newText)
 	return false;
 }
 
+SentenceType* TextClass::GetSentenceByTag(std::string tag)
+{
+	for (std::vector<SentenceType*>::iterator iter = m_sentenceList.begin(); iter != m_sentenceList.end();
+		++iter)
+	{
+		if ((*iter)->tag.compare(tag) == 0)
+		{
+			return (*iter);
+		}
+	}
+	return NULL;
+}
 
 bool TextClass::Update()
 {
