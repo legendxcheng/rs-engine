@@ -82,6 +82,7 @@ void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 				m_isDead = true;
 				//AudioClass::GetInstance()->PlaySound("explode");
 				m_deadLastFrameCountDown = 180;
+				m_surviveTime = (float)(m_totFrame - m_lastFrame) / 60;
 
 			}
 
@@ -110,7 +111,7 @@ void GameLogic::UpdateFrame(unsigned int totFrame, unsigned int fps)
 		case GAME_STATE_STAT:
 			HandleInput();
 
-			m_uiMgr->UpdateSurviveTime2((float)(m_totFrame - m_lastFrame) / 60);
+			m_uiMgr->UpdateSurviveTime2(m_surviveTime);
 			m_uiMgr->UpdateScore2(m_score);
 			
 			break;
