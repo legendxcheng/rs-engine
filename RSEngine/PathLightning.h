@@ -5,7 +5,6 @@
 #include "ColorRenderBuffer.h"
 #include <vector>
 #include <map>
-
 #include "LightningSeed.h"
 
 namespace LightningDemo
@@ -80,10 +79,13 @@ namespace LightningDemo
 		Geometry::SimpleVertexBuffer<SubdivideVertex>* m_path_segments;
 
 		void UpdateSegments();
+		void Positions(D3DXVECTOR3 * positions, int count);
 
 	private:
 		ID3D11InputLayout* m_subdivide_layout;
 		float m_destAngle;
+		D3DXVECTOR3* m_positions;
+		int m_positionCount;
 	};
 
 }

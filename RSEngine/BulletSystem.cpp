@@ -149,3 +149,16 @@ int BulletSystem::FillVertexBuffer(void* vb)
 	}
 	return bytesCopy;
 }
+
+bool BulletSystem::ResetBulletStorm()
+{
+	for (std::vector<BulletStorm*>::iterator iter = m_bulletStorms.begin(); iter < m_bulletStorms.end(); ++iter)
+	{
+		(*iter)->ShutDown();
+	}
+	m_bulletStorms.clear();
+	BulletStorm* bs = new BulletStorm();
+	bs->LoadBulletStorm("BulletScript\\moxing1.lua");
+	InsertBulletStorm(bs);
+	return true;
+}

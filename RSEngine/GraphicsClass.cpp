@@ -222,7 +222,14 @@ bool GraphicsClass::Render()
 	m_lightingMain->SetLightningRendererRTV_DSV(m_scene_depth_stencil_view,m_scene_render_target_view);
 	m_lightingMain->OnD3D11FrameRender(viewMatrix, projectionMatrix);
 
-	
+	const int ii = 64;
+	D3DXVECTOR3 vectors[ii];
+	for(int i=0;i<ii;i++)
+	{
+		vectors[i].x = 400*i/ii;
+		vectors[i].y = 300*i/ii;
+	}
+	m_perlinFire->SetPositionMatrix(vectors,ii);
 	m_perlinFire->OnD3D11FrameRender(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix);
 
 	//m_D3D->SetRasterState();

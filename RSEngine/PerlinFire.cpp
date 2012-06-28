@@ -20,6 +20,7 @@ void PerlinFire::SetVariables()
 	g_pmCubeViewMatrixVariable = NULL;
 	g_pmCubeProjMatrixVariable = NULL;
 	g_pmWorldViewProj = NULL;
+	g_pmPositionVariable = NULL;
 	g_pvEyePos = NULL;
 	g_pvLightPos = NULL;
 	g_pfLightIntensity = NULL;
@@ -76,6 +77,8 @@ void PerlinFire::SetVariables()
 	g_fFrequencyWeights[3] = DEFAULT_FREQUENCY4;
 	g_fFrequencyWeights[4] = DEFAULT_FREQUENCY5;
 	g_CubeMapSize = 800;
+	m_positionCount = 0;
+	ZeroMemory(&m_positions,sizeof(m_positions));
 }
 
 bool PerlinFire::LoadTexture2D(ID3D11Device * pd3dDevice, LPCWSTR fileName, ID3D11Texture2D ** tex, ID3D11ShaderResourceView ** texRV)
@@ -188,6 +191,7 @@ HRESULT PerlinFire::OnD3D11CreateDevice( ID3D11Device * pd3dDevice)
 	g_pmCubeViewMatrixVariable = g_pEffect->GetVariableByName( "CubeViewMatrices" )->AsMatrix();
 	g_pmCubeProjMatrixVariable = g_pEffect->GetVariableByName( "CubeProjectionMatrix" )->AsMatrix();
 	g_pmWorldViewProj = g_pEffect->GetVariableByName( "WorldViewProj" )->AsMatrix();
+	g_pmPositionVariable = g_pEffect->GetVariableByName( "Positions" )->AsVector();
 	g_pvEyePos = g_pEffect->GetVariableByName( "EyePos" )->AsVector();
 	g_pvLightPos = g_pEffect->GetVariableByName( "LightPos" )->AsVector();
 	g_pfLightIntensity = g_pEffect->GetVariableByName( "LightIntensity" )->AsScalar();
@@ -313,17 +317,10 @@ void PerlinFire::OnD3D11FrameRender( ID3D11DeviceContext* pd3dDevice,D3DXMATRIX 
 	//D3DXMatrixTranslation(&mTranslate,0,0,0)
 	D3DXMatrixScaling( &mScale, 10.0f * g_fShapeSize, 8.0f * g_fShapeSize, 10.0f * g_fShapeSize);
 	
-	if (FirePosition.x < -400 ) 
-	{
-		FirePosition.x = 400;
-		FirePosition.y = rand() * 300 / RAND_MAX - 150;
-	}
-	else
-	{
-		FirePosition.x -= 5;
-	}
+	//D3DXMatrixTranslation(&mWorld, FirePosition.x, FirePosition.y, FirePosition.z);
 
-	D3DXMatrixTranslation(&mWorld, FirePosition.x, FirePosition.y, FirePosition.z);
+	g_pmPositionVariable->SetFloatVectorArray((float *)m_positions,0,POSITIONSMAX);
+
 	mWorldView = mTranslate * mScale * mWorld * mView;
 	
 	mWorldViewProj = mWorldView * mProj;
@@ -345,7 +342,7 @@ void PerlinFire::OnD3D11FrameRender( ID3D11DeviceContext* pd3dDevice,D3DXMATRIX 
 	pd3dDevice->IASetVertexBuffers( 0, 1, &g_pBuffer, &stride, &offset );
 	pd3dDevice->IASetIndexBuffer( g_pIndex, DXGI_FORMAT_R16_UINT, 0 );
 	pd3dDevice->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
-	pd3dDevice->DrawIndexedInstanced(36,1,0,0,0);
+	pd3dDevice->DrawIndexedInstanced(36,m_positionCount,0,0,0);
 }
 
 //--------------------------------------------------------------------------------------
@@ -382,7 +379,7 @@ HRESULT PerlinFire::LoadEffectFromFile( ID3D11Device* pd3dDevice, WCHAR* szFileN
 	ID3DBlob* pBlobFX = NULL;
 	ID3DBlob* pErrorBlob = NULL;
 	HWND hwnd = 0;
-	hr = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_FX, NULL, hwnd,  szFileName, NULL, &pBlobFX, &pErrorBlob, "perlinfile.bhlsl");
+	hr = D3DXUtils::CompileShaderFromFile(COMPILE_TYPE_FX, NULL, hwnd,  szFileName, NULL, &pBlobFX, &pErrorBlob, "perlinfile.bhlsl", true);
 	//hr = D3DX11CompileFromFile(szFileName, NULL, NULL, NULL, "fx_5_0", NULL, NULL, NULL, &pBlobFX, &pErrorBlob, NULL);
 	/*if (FAILED(hr))
 	{
@@ -403,4 +400,15 @@ HRESULT PerlinFire::LoadEffectFromFile( ID3D11Device* pd3dDevice, WCHAR* szFileN
 	SAFE_RELEASE(pErrorBlob);
 
 	return S_OK;
+}
+
+void PerlinFire::SetPositionMatrix(D3DXVECTOR3 * positions, int count)
+{
+	m_positionCount = count;
+	for(int i=0;i<count;++i)
+	{
+		m_positions[i].y = -positions[i].y/300.0f;
+		m_positions[i].x = positions[i].x/400.0f;
+		if(i == POSITIONSMAX) break;
+	}
 }

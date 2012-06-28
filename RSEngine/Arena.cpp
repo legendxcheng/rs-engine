@@ -161,4 +161,9 @@ void Arena::ReadSeeds()
 	m_inter_coil_lightning =  m_lightning_renderer.CreatePathLightning(0x08,5);
 }
 
+void Arena::Positions(D3DXVECTOR3 * positions, int count)
+{
+	m_inter_coil_lightning->Positions(positions,count);
+}
+
 }

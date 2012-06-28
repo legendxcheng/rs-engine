@@ -9,16 +9,17 @@
 #include <D3Dx11effect.h>
 #include "CameraManager.h"
 #include "CameraClass.h"
+#include "PerlinFireDef.h"
 
 #define MIN_SAMPLING_RATE   4
 #define MAX_SAMPLING_RATE   64
 
 #define DEFAULT_JITTER true
-#define DEFAULT_SAMPLING_RATE 20
+#define DEFAULT_SAMPLING_RATE 10
 #define DEFAULT_SPEED 0.6f
 #define DEFAULT_NOISE_SCALE 1.35f
 #define DEFAULT_ROUGHNESS 3.20f
-#define DEFAULT_SHAPE_SIZE 5.0f
+#define DEFAULT_SHAPE_SIZE 2.0f
 #define DEFAULT_FREQUENCY1 1.0f
 #define DEFAULT_FREQUENCY2 0.5f
 #define DEFAULT_FREQUENCY3 0.25f
@@ -49,6 +50,7 @@ private:
 	ID3DX11EffectMatrixVariable * g_pmCubeViewMatrixVariable;
 	ID3DX11EffectMatrixVariable * g_pmCubeProjMatrixVariable;
 	ID3DX11EffectMatrixVariable * g_pmWorldViewProj;
+	ID3DX11EffectVectorVariable * g_pmPositionVariable;
 	ID3DX11EffectVectorVariable * g_pvEyePos;
 	ID3DX11EffectVectorVariable * g_pvLightPos;
 	ID3DX11EffectScalarVariable * g_pfLightIntensity;
@@ -105,8 +107,10 @@ private:
 	float g_fShapeSize;
 	float g_fFrequencyWeights [5];
 	int g_CubeMapSize;
+	int m_positionCount;
 	float m_time;
 	D3DXVECTOR3 FirePosition;
+	D3DXVECTOR3 m_positions [POSITIONSMAX];
 
 	struct SimpleVertex
 	{
@@ -132,6 +136,8 @@ public:
 	void OnD3D11DestroyDevice();
 
 	HRESULT LoadEffectFromFile( ID3D11Device* pd3dDevice, WCHAR* szFileName, ID3DX11Effect** ppEffect );
+
+	void SetPositionMatrix(D3DXVECTOR3 * positions, int count);
 };
 
 #endif
