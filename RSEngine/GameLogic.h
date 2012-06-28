@@ -82,4 +82,5 @@ private:
 	int m_noUseFrameCountDown;
 	int m_deadLastFrameCountDown;
 	int m_gameState;
+	float m_surviveTime;
 };
