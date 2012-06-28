@@ -7,6 +7,7 @@
 #include "ShaderManager.h"
 #include "GameLogic.h"
 #include "TextureManager.h"
+#include "BulletSystem.h"
 
 BulletStormTest::BulletStormTest(void)
 {
@@ -15,6 +16,7 @@ BulletStormTest::BulletStormTest(void)
 	m_indexBuffer = 0;
 	m_vertexBuffer = 0;
 	m_isOrtho = true;
+	m_dataPtr = (BulletType*)malloc(sizeof(BulletType) * 600);
 }
 
 
@@ -40,6 +42,8 @@ bool BulletStormTest::Initialize(ID3D11Device* device)
 	}
 	device->GetImmediateContext(&m_deviceContext);
 	return true;
+
+	
 }
 
 void BulletStormTest::Shutdown()
@@ -53,41 +57,63 @@ bool BulletStormTest::Update()
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	BulletType* dataPtr;
-
-	result = m_deviceContext->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
-	if(FAILED(result))
+	switch (GameLogic::GetInstance()->GetBulletType())
 	{
-		return false;
+	case BULLET_TYPE_DEFAULT:
+		result = m_deviceContext->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+		if(FAILED(result))
+		{
+			return false;
+		}
+
+		// Get a pointer to the data in the constant buffer.
+		dataPtr = (BulletType*)mappedResource.pData;
+
+		// Copy the matrices into the constant buffer.
+		m_vertexCount = GameLogic::GetInstance()->FillBulletBuffer(dataPtr);
+
+
+		// Unlock the constant buffer.
+		m_deviceContext->Unmap(m_vertexBuffer, 0);
+		break;
+	case BULLET_TYPE_FIRE:
+		dataPtr = m_dataPtr;
+		m_vertexCount = GameLogic::GetInstance()->FillBulletBuffer(dataPtr);
+		m_perlinFire->SetPositionMatrix((D3DXVECTOR3*)dataPtr,m_vertexCount);
+		
+		break;
 	}
-
-	// Get a pointer to the data in the constant buffer.
-	dataPtr = (BulletType*)mappedResource.pData;
-
-	// Copy the matrices into the constant buffer.
-	m_vertexCount = GameLogic::GetInstance()->FillBulletBuffer(dataPtr);
-
-	// Unlock the constant buffer.
-	m_deviceContext->Unmap(m_vertexBuffer, 0);
+	
 	return true;
 }
 
 void BulletStormTest::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix)
 {
+	TextureClass* tc;
 	// do ALL the render works
-	D3DClass::GetInstance()->TurnOnAlphaBlending();
-	RenderBuffers(deviceContext);
-	// Render the model using the color shader.
-	m_vs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projectionMatrix);
-	m_gs->SetRenderParameters(deviceContext, NULL);
-	TextureClass* tc = TextureManager::GetInstance()->GetTexture("Resource\\blt.png");
-	m_ps->SetRenderParameters(deviceContext, tc->GetTexture());
-	// TODO: Change
+	switch (GameLogic::GetInstance()->GetBulletType())
+	{
+	case BULLET_TYPE_DEFAULT:
+		D3DClass::GetInstance()->TurnOnAlphaBlending();
+		RenderBuffers(deviceContext);
+		// Render the model using the color shader.
+		m_vs->SetRenderParameters(deviceContext, m_worldMatrix, viewMatrix, projectionMatrix);
+		m_gs->SetRenderParameters(deviceContext, NULL);
+		tc = TextureManager::GetInstance()->GetTexture("Resource\\blt.png");
+		m_ps->SetRenderParameters(deviceContext, tc->GetTexture());
+		// TODO: Change
+
+		deviceContext->Draw(m_vertexCount, 0);
+		deviceContext->GSSetShader(NULL, NULL, 0);
+		//release gs
+
+		D3DClass::GetInstance()->TurnOffAlphaBlending();
+		break;
+	case BULLET_TYPE_FIRE:
+		m_perlinFire->OnD3D11FrameRender(deviceContext, viewMatrix, projectionMatrix);
+		break;
+	}
 	
-	deviceContext->Draw(m_vertexCount, 0);
-	deviceContext->GSSetShader(NULL, NULL, 0);
-	//release gs
-	
-	D3DClass::GetInstance()->TurnOffAlphaBlending();
 }
 
 int BulletStormTest::GetIndexCount()
@@ -151,6 +177,7 @@ void BulletStormTest::ShutdownBuffers()
 		m_vertexBuffer->Release();
 		m_vertexBuffer = 0;
 	}
+	free(m_dataPtr);
 	return;
 }
 
@@ -200,4 +227,9 @@ bool BulletStormTest::InitializeShaders(ID3D11Device* device)
 	ShaderManager::GetInstance()->InsertShader(SHADER_TYPE_GS, m_gs);
 	
 	return true;
+}
+
+void BulletStormTest::SetPerlinFire(PerlinFire* pf)
+{
+	m_perlinFire = pf;
 }

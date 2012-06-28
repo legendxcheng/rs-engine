@@ -56,7 +56,7 @@ public:
 //bullet
 public:
 	int FillBulletBuffer(void* vb);
-
+	int GetBulletType();
 
 public:
 	int NeedBlur();

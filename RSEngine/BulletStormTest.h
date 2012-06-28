@@ -1,9 +1,11 @@
 #pragma once
 #include "modelclass.h"
 
+class PerlinFire;
 class BSTestVS;
 class BSTestPS;
 class BSTestGS;
+struct BulletType;
 
 class BulletStormTest :
 	public ModelClass
@@ -20,6 +22,7 @@ public:
 	virtual int GetIndexCount();
 	//ID3D11ShaderResourceView* GetTexture();
 	virtual bool Update();
+	void SetPerlinFire(PerlinFire* pf);
 private:
 	virtual bool InitializeShaders(ID3D11Device*);
 	virtual bool InitializeBuffers(ID3D11Device*);
@@ -34,6 +37,8 @@ private:
 	int m_indexCount;
 	int m_vertexCount;
 	ID3D11DeviceContext* m_deviceContext;
+	PerlinFire* m_perlinFire;
+	BulletType* m_dataPtr;
 
 private:
 	//shaders

@@ -37,7 +37,7 @@ void BulletSystem::Initialize()
 	srand(unsigned(time(0)));
 	// Read from bulletslist.dat to get all the bullet file list
 	ReadBSList();
-
+	m_bulletType = BULLET_TYPE_DEFAULT;
 	BulletStorm* bs = new BulletStorm();
 	bs->LoadBulletStorm("BulletScript\\moxing1.lua");
 	InsertBulletStorm(bs);
@@ -108,6 +108,9 @@ void BulletSystem::UpdateFrame()
 		const char* fn = m_bslist[int(std::rand() * m_bslist.size() / (double)RAND_MAX)].c_str();
 		bs->LoadBulletStorm(fn);
 		InsertBulletStorm(bs);
+		if (m_bulletType == BULLET_TYPE_DEFAULT)
+			m_bulletType = BULLET_TYPE_FIRE;
+		else m_bulletType = BULLET_TYPE_DEFAULT;
 	}
 }
 
@@ -161,4 +164,9 @@ bool BulletSystem::ResetBulletStorm()
 	bs->LoadBulletStorm("BulletScript\\moxing1.lua");
 	InsertBulletStorm(bs);
 	return true;
+}
+
+int BulletSystem::GetBulletType()
+{
+	return m_bulletType;
 }

@@ -215,22 +215,23 @@ bool GraphicsClass::Render()
 	}
 	lblfc = blfc;
 	
+	const int ii = 12;
+	D3DXVECTOR3 * vecs = new D3DXVECTOR3[ii];
+	for(int i=0;i<ii;i++)
+	{
+		vecs[i].x = 10*(i-ii/2);
+		vecs[i].y = 50;
+		vecs[i].z = 0;
+	}
+
+	m_lightingMain->GetArena()->Positions(vecs,ii);
 	ID3D11DeviceContext *context = m_D3D->GetDeviceContext();
 	ID3D11DepthStencilView*	m_scene_depth_stencil_view;
 	ID3D11RenderTargetView*	m_scene_render_target_view;
 	context->OMGetRenderTargets(1,&m_scene_render_target_view,&m_scene_depth_stencil_view);
 	m_lightingMain->SetLightningRendererRTV_DSV(m_scene_depth_stencil_view,m_scene_render_target_view);
 	m_lightingMain->OnD3D11FrameRender(viewMatrix, projectionMatrix);
-
-	const int ii = 64;
-	D3DXVECTOR3 vectors[ii];
-	for(int i=0;i<ii;i++)
-	{
-		vectors[i].x = 400*i/ii;
-		vectors[i].y = 300*i/ii;
-	}
-	m_perlinFire->SetPositionMatrix(vectors,ii);
-	m_perlinFire->OnD3D11FrameRender(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix);
+	delete [] vecs;
 
 	//m_D3D->SetRasterState();
 	m_renderObjMgr->Render(m_D3D->GetDeviceContext(), viewMatrix, projectionMatrix, orthoMatrix);
@@ -333,7 +334,7 @@ void GraphicsClass::InitializeResource(ID3D11Device* device)
 	m_gaussianMain->OnD3D11CreateDevice(device);
 	m_lightingMain->OnD3D11CreateDevice(device);
 	m_perlinFire->OnD3D11CreateDevice(device);
-
+	bst->SetPerlinFire(m_perlinFire);
 	//////////////////////////////////////////////////////////////////////////
 	// Strange....
 	//////////////////////////////////////////////////////////////////////////

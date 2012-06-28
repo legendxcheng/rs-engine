@@ -183,8 +183,9 @@ Geometry::SimpleVertexBuffer<SubdivideVertex>* LightningRenderer::Subdivide(Ligh
 
 	last_target = target;
 	swap(source,target);
-	
-	for(unsigned int i = 0; i < seed->GetSubdivisions(); ++i)
+	int sub = seed->GetSubdivisions();
+	//sub = 3;
+	for(unsigned int i = 0; i < sub; ++i)
 	{
 		source->BindToInputAssembler();
 		target->BindToStreamOut();		
@@ -193,7 +194,7 @@ Geometry::SimpleVertexBuffer<SubdivideVertex>* LightningRenderer::Subdivide(Ligh
 		m_fork = (seed->GetPatternMask() & (1 << i)) ;
 
 		seed->GetSubdivideTechnique()->GetPassByIndex(0)->Apply(0,context);
-		context->Draw( seed->GetNumVertices(i),0);
+		context->Draw(2 * seed->GetNumVertices(i),0);
 		{
 			UINT offset[1] = {0};
 			ID3D11Buffer* zero[1] = {0};
@@ -259,7 +260,7 @@ void LightningRenderer::Render(LightningSeed* seed, const LightningAppearance& a
 	context->OMGetRenderTargets(1,&scene_render_target_view,&scene_depth_stencil_view);
 	context->OMSetRenderTargets(1,&m_scene_render_target_view,m_scene_depth_stencil_view);
 
-	context->Draw(seed->GetNumVertices(seed->GetSubdivisions()),0);
+	context->Draw(2 * seed->GetNumVertices(seed->GetSubdivisions()),0);
 }
 
 void LightningRenderer::End(bool glow, D3DXVECTOR3 blur_sigma)
@@ -311,7 +312,7 @@ void LightningRenderer::BuildSubdivisionBuffers()
 	delete m_subdivide_buffer0;
 	delete m_subdivide_buffer1;
 
-	vector<SubdivideVertex> init_data(max_segments, SubdivideVertex());
+	vector<SubdivideVertex> init_data(2 * max_segments, SubdivideVertex());
 
 	D3D11_USAGE usage =  D3D11_USAGE_DEFAULT;
 	UINT flags = D3D11_BIND_VERTEX_BUFFER |  D3D11_BIND_STREAM_OUTPUT ;

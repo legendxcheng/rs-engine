@@ -50,6 +50,7 @@ private:
 	ID3DX11EffectMatrixVariable * g_pmCubeViewMatrixVariable;
 	ID3DX11EffectMatrixVariable * g_pmCubeProjMatrixVariable;
 	ID3DX11EffectMatrixVariable * g_pmWorldViewProj;
+	ID3DX11EffectMatrixVariable * g_pmWVP;
 	ID3DX11EffectVectorVariable * g_pmPositionVariable;
 	ID3DX11EffectVectorVariable * g_pvEyePos;
 	ID3DX11EffectVectorVariable * g_pvLightPos;
@@ -110,7 +111,7 @@ private:
 	int m_positionCount;
 	float m_time;
 	D3DXVECTOR3 FirePosition;
-	D3DXVECTOR3 m_positions [POSITIONSMAX];
+	D3DXVECTOR3 * m_positions;
 
 	struct SimpleVertex
 	{

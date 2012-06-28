@@ -18,7 +18,7 @@ function initialize()
 	stripCount = 1 -- modify here
 	vetxCount = {} -- empty array to store vertex count for each strip
 	currentFrame = 0 -- current frame
-	maxFrame = 1600 -- max frame count, if current frame is bigger than maxFrame, then the bulletstorm will be removed from system
+	maxFrame = 10 -- max frame count, if current frame is bigger than maxFrame, then the bulletstorm will be removed from system
 	lineCount = 0 -- line count
 	line = {} -- stotre line index in vetx
 	lineUpdated = 0 -- 0 for not updated since last call 1 for updated since last call

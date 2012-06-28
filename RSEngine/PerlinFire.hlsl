@@ -53,6 +53,7 @@ SamplerState SamplerRepeat
 row_major float4x4 WorldViewProj;
 matrix CubeViewMatrices[6];
 matrix CubeProjectionMatrix;
+matrix WVP;
 
 float3 Positions[POSITIONSMAX];
 
@@ -63,6 +64,7 @@ struct VolumeVertex
     float4   ClipPos      : SV_Position;
     float3   Pos         : TEXCOORD0;      // vertex position in model space
     float3   RayDir      : TEXCOORD1;   // ray direction in model space
+	float ID				: INSTANCEID;
 };
 
 // Find which simplex we are in by magnitude sorting
@@ -350,6 +352,9 @@ float Turbulence4D( float4 p )
 
 VolumeVertex PerlinFireVS( float3 Pos : POSITION,uint instanceId : SV_InstanceID )
 {
+	float4 test = float4(Positions[instanceId],1.0f);
+	test = mul(test,WVP);
+	test.xy /= test.w;
 
 	VolumeVertex Out;
 	
@@ -357,10 +362,11 @@ VolumeVertex PerlinFireVS( float3 Pos : POSITION,uint instanceId : SV_InstanceID
 
     Out.ClipPos = mul( float4( Pos, 1 ), WorldViewProj );
 
-	Out.ClipPos.xyz += Positions[instanceId] * Out.ClipPos.w;
+	Out.ClipPos.xy += test.xy * Out.ClipPos.w;
 
     Out.RayDir = Pos - EyePos;
 
+	Out.ID = (float)instanceId;
     return Out;
 }
 
@@ -472,7 +478,7 @@ float4 PerlinFire4DPS(VolumeVertex In) : SV_Target
 
         float4 NoiseCoord;
         NoiseCoord.xyz = Pos;
-        NoiseCoord.y -= Time;
+        NoiseCoord.y -= Time + In.ID;
         NoiseCoord.w = Time * 0.5;
 
         // Evaluate turbulence function

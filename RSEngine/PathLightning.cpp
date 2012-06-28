@@ -36,15 +36,28 @@ void PathLightning::UpdateSegments()
 	std::vector<SubdivideVertex> vertices;
 	std::vector<LightningPathSegment> segments2;
 
-	const int ii = 20;
-	for(int i=0; i<5; i++)
+	if(!m_positionCount)
 	{
-		segments2.push_back(LightningPathSegment(D3DXVECTOR3(i*ii,0,0),
-			D3DXVECTOR3((i+1)*ii,0,0),
-			D3DXVECTOR3(0,1,0)));
+		segments2.push_back(LightningPathSegment(D3DXVECTOR3(0,0,0),D3DXVECTOR3(0,0,0),D3DXVECTOR3(0,1,0)));
 	}
+	else
+	{
+		for(int i=0; i<m_positionCount-1; i+=2)
+		{
+			segments2.push_back(LightningPathSegment(m_positions[i],m_positions[i+1],D3DXVECTOR3(0,1,0)));
+		}
+	}
+	//for(int i=0; i<20; i++)
+	//{
+	//	float ra = i*r/5;
+	//	segments2.push_back(LightningPathSegment(
+	//		D3DXVECTOR3(-ra*cos(m_destAngle),r*sin(i*angle),ra*sin(m_destAngle)),
+	//		D3DXVECTOR3(-(ra+r)*cos(m_destAngle),r*sin(i*angle),(ra+r)*sin(m_destAngle)),
+	//		D3DXVECTOR3(0,1,0)));
+	//}
 	std::copy(segments2.begin(), segments2.end(), back_inserter(vertices));
 	m_path_segments = new Geometry::SimpleVertexBuffer<SubdivideVertex>(m_device,vertices);
+	//m_destAngle += 0.01f;
 }
 
 void PathLightning::Positions(D3DXVECTOR3 * positions, int count)

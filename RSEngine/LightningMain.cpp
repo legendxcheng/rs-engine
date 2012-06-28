@@ -67,3 +67,8 @@ void LightingMain::SetLightningRendererRTV_DSV(ID3D11DepthStencilView* m_scene_d
 	g_arena->m_lightning_renderer.m_scene_depth_stencil_view = m_scene_depth_stencil_view;
 	g_arena->m_lightning_renderer.m_scene_render_target_view = m_scene_render_target_view;
 }
+
+Arena* LightingMain::GetArena()
+{
+	return g_arena;
+}
