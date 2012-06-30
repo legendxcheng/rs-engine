@@ -215,7 +215,7 @@ bool GraphicsClass::Render()
 	}
 	lblfc = blfc;
 	
-	const int ii = 12;
+	const int ii = 60;
 	D3DXVECTOR3 * vecs = new D3DXVECTOR3[ii];
 	for(int i=0;i<ii;i++)
 	{
